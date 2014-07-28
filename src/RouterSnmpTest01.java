@@ -12,6 +12,7 @@ import org.snmp4j.util.TreeEvent;
 import org.snmp4j.util.TreeUtils;
 
 
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,8 +26,13 @@ public class RouterSnmpTest01 {
 		System.out.println("Host name is " + router.System.getHostName());
 		
 		try {
-			
-			SRSNMPTarget targetHost = new SRSNMPTarget("udp:69.235.125.10/161", "w7R_cS_lsp");
+			if (args.length < 2){
+				System.out.println("Error you must supply ip and community");
+				return;
+			}
+			String ip = args[0];
+			String comm = args[1];
+			SRSNMPTarget targetHost = new SRSNMPTarget("udp:" + ip + "/161", comm);
 			targetHost.start();
 			String sysDesc = targetHost.getAsString(new OID(".1.3.6.1.2.1.1.5.0"));
 			System.out.println(sysDesc);
