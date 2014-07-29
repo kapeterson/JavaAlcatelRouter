@@ -20,8 +20,8 @@ public class RouterSnmpTest02 {
 		
 		// TODO Auto-generated method stub
 		SRChassisObject router = new SRChassisObject();
-		router.System.setHostName("LIO1");
-		System.out.println("Host name is " + router.System.getHostName());
+		//router.System.setHostName("LIO1");
+		//System.out.println("Host name is " + router.System.getHostName());
 		
 		try {
 			if (args.length < 2){
@@ -37,20 +37,33 @@ public class RouterSnmpTest02 {
 			
 			long start = System.nanoTime();
 			Hashtable<String, String> thash = getCardTypeHash(targetHost);
+			router.Cards.setCardTypes(thash);
+
 			long elapsedTime = ( System.nanoTime() - start );
 			
 			System.out.println("Total time = " + elapsedTime + " nanosecs");
 			elapsedTime = elapsedTime / 1000000;
 			System.out.println("Total time = " + elapsedTime + "ms to read card types");
+			
 			Hashtable<Integer, String> equippedHash = getEquippedCards(targetHost);
 			
 			for ( Integer key : equippedHash.keySet()){
 				String typeIndex = equippedHash.get(key);
-				String typeName = thash.get(typeIndex);
+				String typeName = router.Cards.getCardTypeByIndex(typeIndex);
+				
 				if ( typeName == null)
 					typeName = "EMPTY";
 				
-				System.out.println("Card " + key + " CardType= " + typeName );
+				SRCardObject tcard = new SRCardObject(key, typeName);
+				router.Cards.addCard(key, tcard);
+			
+			}
+			
+			for ( Integer key : router.Cards.getCards().keySet()){
+				
+				SRCardObject card = router.Cards.getCard(key);
+				
+				System.out.println("Card " + card.getSlotNumber() + " CardType= " + card.getCardType() );
 			}
 			
 			
@@ -174,4 +187,7 @@ public class RouterSnmpTest02 {
 		
 	}
 
+	public static void populateHardwareData(SRChassisObject router){
+		
+	}
 }

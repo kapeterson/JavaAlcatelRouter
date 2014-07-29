@@ -4,13 +4,16 @@ import java.util.Hashtable;
 public class SRCardConfiguration {
 	
 	protected TreeMap<Integer, SRCardObject> cards = null;
-    protected Hashtable<Integer, String> cardTypes = null;
+    protected Hashtable<String, String> cardTypes = null;
 	public SRCardConfiguration(){
 		cards = new TreeMap<Integer, SRCardObject>();
-		cardTypes = new Hashtable<Integer, String>();
+		cardTypes = new Hashtable<String, String>();
 	}
 	
-	public void setCardTypes(Hashtable<Integer, String> cardtypes){
+	public String getCardTypeByIndex(String indx){
+		return cardTypes.get(indx);
+	}
+	public void setCardTypes(Hashtable<String, String> cardtypes){
 		cardTypes = cardtypes;
 	}
 	

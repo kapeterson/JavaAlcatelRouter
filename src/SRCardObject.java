@@ -7,7 +7,7 @@ public class SRCardObject extends AlcatelHardwareObject{
 	public SRCardObject(int cardNumber, String ctype){
 		slot = cardNumber;
 		cardType = ctype; 
-		this.setObjectName("Card " + String.valueOf(cardNumber));
+		//this.setObjectName("Card " + String.valueOf(cardNumber));
 	}
 	
 	public void setSlotNumber(byte slt){
