@@ -4,11 +4,13 @@ public class AlcatelHardwareObject extends AlcatelObject{
 	String serialNumber;
 	String manufactureDate;
 	String partNumber;
-	
+	String snmpIndex;
 	public AlcatelHardwareObject(){
 		serialNumber = "";
 		manufactureDate = "";
 		partNumber = "";
+		snmpIndex = null;
+		
 		this.setObjectType(AlcatelObjectType.NONE);
 	}
 	
@@ -39,5 +41,13 @@ public class AlcatelHardwareObject extends AlcatelObject{
 	
 	public String getManufactureDate(){
 		return manufactureDate;
+	}
+	
+	public void setSNMPIndex(String indx){
+		this.snmpIndex = indx;
+	}
+	
+	public String getSNMPIndex(){
+		return this.snmpIndex;
 	}
 }

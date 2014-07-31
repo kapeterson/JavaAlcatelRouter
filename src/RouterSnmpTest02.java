@@ -25,7 +25,7 @@ public class RouterSnmpTest02 {
 		
 		try {
 			if (args.length < 2){
-				System.out.println("Error you must supply ip and community");
+				System.out.println("Error you must supply ip /and community");
 				return;
 			}
 			String ip = args[0];
@@ -59,18 +59,78 @@ public class RouterSnmpTest02 {
 			
 			}
 			
+			populateIOMIndex(targetHost, router);
+			populateHardwareData(targetHost, router);
+
 			for ( Integer key : router.Cards.getCards().keySet()){
 				
 				SRCardObject card = router.Cards.getCard(key);
 				
-				System.out.println("Card " + card.getSlotNumber() + " CardType= " + card.getCardType() );
+				System.out.println("Card " + card.getSlotNumber() + " CardType= " + card.getCardType() + " SN: " + card.getSerialNumber() + " PN: " + card.getPartNumber());
 			}
 			
+			long totalTime = ( System.nanoTime() - start );
+			
+			System.out.println("Total time = " + totalTime + " nanosecs");
+			totalTime = totalTime / 1000000;
+			System.out.println("Total time = " + totalTime + "ms to read card types");
 			
 		} catch (  IOException e){
 			System.out.println("There was an exeption " + e.getMessage() );
 		}
 		
+	}
+	
+	public static void populateIOMIndex(SRSNMPTarget host, SRChassisObject router){
+		OID[] oids = new OID[1];
+		try {
+			
+			oids[0] = new OID(".1.3.6.1.4.1.6527.3.1.2.2.3.2.1.6") ;
+		
+		} catch ( RuntimeException ex ){
+		      System.out.println("OID is not specified correctly.");
+		      System.exit(1);
+		}
+		
+	    TreeUtils treeUtils = new TreeUtils(host.getSNMP(), new DefaultPDUFactory());      
+	    List<TreeEvent> events = treeUtils.walk(host.getTarget(), oids);
+	    if(events == null || events.size() == 0){
+	      System.out.println("No result returned.");
+	      System.exit(1);
+	    }
+	    
+	    // Get snmpwalk result.
+	    for (TreeEvent event : events) {
+		    if(events == null || events.size() == 0){
+			      System.out.println("No result returned.");
+			      System.exit(1);
+			 }
+		    
+	        VariableBinding[] varBindings = event.getVariableBindings();
+	        if(varBindings == null || varBindings.length == 0){
+	          //System.out.println("No result returned.");
+	        }
+	        
+	        for (VariableBinding varBinding : varBindings) {
+	        	
+	        	String fullOID = varBinding.getOid().toString();
+	        	String indx = varBinding.getVariable().toString();
+	        
+	        	String ptrn = "\\.([0-9]+)$";
+	        	Pattern p = Pattern.compile(ptrn);
+	        	Matcher m = p.matcher(fullOID);
+	        	
+	        	String thisCard = fullOID;
+	        	if ( m.find()){
+	        		thisCard = m.group(1);
+	        	}
+	        	//System.out.println("CARD= " + thisCard + " indx= " + indx);
+	        	SRCardObject card = router.Cards.getCard(Integer.parseInt(thisCard));
+	        	card.setSNMPIndex(indx);
+	        	router.Cards.addIndexMap(indx, card);
+	        }
+	      
+	    }
 	}
 	
 	public static Hashtable<Integer, String> getEquippedCards(SRSNMPTarget host){
@@ -165,6 +225,7 @@ public class RouterSnmpTest02 {
 	        if(varBindings == null || varBindings.length == 0){
 	          System.out.println("No result returned.");
 	        }
+	        
 	        for (VariableBinding varBinding : varBindings) {
 	        	String fullOID = varBinding.getOid().toString();
 	        	String thisType = varBinding.getVariable().toString();
@@ -187,7 +248,94 @@ public class RouterSnmpTest02 {
 		
 	}
 
-	public static void populateHardwareData(SRChassisObject router){
+	public static void populateHardwareData(SRSNMPTarget host, SRChassisObject router){
+		OID oid = null;
+		OID[] oids = new OID[3];
 		
+		String pnOID = "1.3.6.1.4.1.6527.3.1.2.2.1.8.1.4";  // Part number
+		String snOID = "1.3.6.1.4.1.6527.3.1.2.2.1.8.1.5";  // serial number
+		String mdOID = "1.3.6.1.4.1.6527.3.1.2.2.1.8.1.6";  // Manufacture DAte
+	    try{
+	    	// card types
+	    	oids[0] = new OID(pnOID); // Board Number AKA Part Number
+	    	oids[1] = new OID(snOID); // Serial Number
+	    	oids[2] = new OID(mdOID); // Manufacture Date
+	    	
+	    	
+	    }
+	    catch(RuntimeException ex){
+	      System.out.println("OID is not specified correctly.");
+	      System.exit(1);
+	    }
+	    
+	    //OID[] oids = { oid };
+	    
+	    TreeUtils treeUtils = new TreeUtils(host.getSNMP(), new DefaultPDUFactory());      
+	    List<TreeEvent> events = treeUtils.walk(host.getTarget(), oids);
+	    if(events == null || events.size() == 0){
+	      System.out.println("No result returned.");
+	      System.exit(1);
+	    }
+	    
+
+	    
+	    for (TreeEvent event : events) {
+	      if(event != null){
+	        if (event.isError()) {
+	            System.err.println("oid [" + oid + "] " + event.getErrorMessage());
+	          }
+	            
+	        VariableBinding[] varBindings = event.getVariableBindings();
+	        if(varBindings == null || varBindings.length == 0){
+	         // System.out.println("No result returned.");
+	        }
+	        
+	        for (VariableBinding varBinding : varBindings) {
+	        	String fullOID = varBinding.getOid().toString();
+	        	String val = varBinding.getVariable().toString();
+
+	        	String ptrn = "(.*)\\.([0-9]+)\\.([0-9]+)$";
+	        	Pattern p = Pattern.compile(ptrn);
+	        	Matcher m = p.matcher(fullOID);
+	        	
+	        	String thisIndex = fullOID;
+	        	String oidval = fullOID;
+	        	if ( m.find()){
+	        		thisIndex = m.group(3);
+	        		oidval = m.group(1);
+	        	}
+	        	
+	        	
+	        	
+	        	AlcatelHardwareObject hw = null;
+	        	
+	        	// continue if router doesn't have the index in the map
+				if ( !router.Cards.hasHardwareIndex(thisIndex)){
+
+					continue;
+    			} 
+				
+				hw = router.Cards.getHardwareByIndex(thisIndex);
+				
+				if ( hw == null)
+					continue;
+
+
+	        	if ( oidval.equals(pnOID) ) {
+	        		hw.setPartNumber(val);
+	        	} else if ( oidval.equals(snOID)){
+	        		hw.setSerialNumber(val);
+	        	} else if ( oidval.equals(mdOID)){
+	        		hw.setManufactureDate(val);
+	        	}
+
+	        	
+	        }
+	      }
+	    }
+	    		
+	    		
+		
+		return;
 	}
 }
