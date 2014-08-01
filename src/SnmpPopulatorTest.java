@@ -12,6 +12,7 @@ public class SnmpPopulatorTest {
 		String ip = args[0];
 		String comm = args[1];
 		
+		System.out.println("IP = " + ip);
 		SRSnmpPopulator populator = new SRSnmpPopulator(ip, comm);
 		populator.populateHardware();
 		

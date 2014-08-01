@@ -27,7 +27,7 @@ public class SRSnmpPopulator {
 		
 		router = new SRChassisObject();
 		try {
-		targetHost = new SRSNMPTarget("udp:" + hostIP + "/161", community);
+		targetHost = new SRSNMPTarget("udp:" + hostIP + "/161", snmpCommunity);
 		targetHost.start();
 		} catch ( IOException e){
 			System.out.println("There was an exeption " + e.getMessage() );
@@ -242,7 +242,6 @@ public class SRSnmpPopulator {
 	    return equippedHash;
 	    		
 	}
-
 
 	public static void populateHardwareData(SRSNMPTarget host, SRChassisObject router){
 		OID oid = null;
