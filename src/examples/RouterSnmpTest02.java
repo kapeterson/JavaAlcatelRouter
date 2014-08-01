@@ -1,3 +1,4 @@
+package examples;
 import java.io.IOException;
 
 import org.snmp4j.smi.OID;
@@ -10,6 +11,11 @@ import java.util.regex.Pattern;
 import org.snmp4j.util.DefaultPDUFactory;
 import org.snmp4j.util.TreeEvent;
 import org.snmp4j.util.TreeUtils;
+
+import alcatel.router.AlcatelHardwareObject;
+import alcatel.router.SRCardObject;
+import alcatel.router.SRChassisObject;
+import alcatel.router.SRSNMPTarget;
 
 import java.util.regex.Matcher;
 

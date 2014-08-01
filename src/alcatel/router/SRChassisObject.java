@@ -1,3 +1,4 @@
+package alcatel.router;
 
 public class SRChassisObject extends AlcatelHardwareObject {
 

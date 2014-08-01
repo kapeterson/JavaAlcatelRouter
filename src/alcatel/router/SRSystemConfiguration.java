@@ -1,3 +1,4 @@
+package alcatel.router;
 
 public class SRSystemConfiguration {
 	private String hostName = "";

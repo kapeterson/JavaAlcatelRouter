@@ -1,3 +1,4 @@
+package alcatel.router;
 
 // object types
 // HARDWARE

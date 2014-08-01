@@ -1,3 +1,6 @@
+package alcatel.router;
+
+
 
 public class AlcatelHardwareObject extends AlcatelObject{
 	
