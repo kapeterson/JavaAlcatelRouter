@@ -25,12 +25,15 @@ public class SnmpPopulatorTest {
 		
 		System.out.println("System name is " + router.System.getHostName());
 		
-		
+		System.out.format("%-8s %-20s %-15s %-15s %n", "CARD", "TYPE", "SN", "PN");
+		System.out.format("%-8s %-20s %-15s %-15s %n", "--------", "---------------", "---------------", "---------------");
+
 		for ( Integer key : router.Cards.getCards().keySet()){
 			
 			SRCardObject card = router.Cards.getCard(key);
 			
-			System.out.println("Card " + card.getSlotNumber() + " CardType= " + card.getCardType() + " SN: " + card.getSerialNumber() + " PN: " + card.getPartNumber());
+			//System.out.println("Card " + card.getSlotNumber() + " CardType= " + card.getCardType() + " SN: " + card.getSerialNumber() + " PN: " + card.getPartNumber());
+			System.out.format("%-8d %-20s %-15s %-15s%n", card.getSlotNumber(), card.getCardType(), card.getSerialNumber(), card.getPartNumber());
 		}
 		
 		
