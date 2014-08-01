@@ -5,7 +5,14 @@ public class SnmpPopulatorTest {
 		// TODO Auto-generated method stub
 		//System.out.println("We are starting");
 		
-		SRSnmpPopulator populator = new SRSnmpPopulator("69.235.125.10", "w7R_cS_lsp");
+		if (args.length < 2){
+			System.out.println("Error you must supply ip /and community");
+			return;
+		}
+		String ip = args[0];
+		String comm = args[1];
+		
+		SRSnmpPopulator populator = new SRSnmpPopulator(ip, comm);
 		populator.populateHardware();
 		
 		SRChassisObject router = populator.getRouter();
