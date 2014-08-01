@@ -12,7 +12,6 @@ import org.snmp4j.util.TreeEvent;
 import org.snmp4j.util.TreeUtils;
 
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RouterSnmpTest02 {
 
@@ -81,6 +80,7 @@ public class RouterSnmpTest02 {
 		
 	}
 	
+
 	public static void populateIOMIndex(SRSNMPTarget host, SRChassisObject router){
 		OID[] oids = new OID[1];
 		try {
