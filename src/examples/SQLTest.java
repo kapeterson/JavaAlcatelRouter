@@ -12,7 +12,6 @@ public class SQLTest {
 
 			connectionProps.put("user", "kp109p");
 			connectionProps.put("password", "uv3rs3");
-
 			
 			Connection conn = DriverManager.getConnection("jdbc:mysql://68.253.91.179:3306/kp109p", connectionProps);
 			
