@@ -57,7 +57,6 @@ public class SRSNMPTarget {
 		
 	}
 	
-	
 	public Snmp getSNMP(){
 		return snmp;
 	}

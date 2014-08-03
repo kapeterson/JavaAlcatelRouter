@@ -21,10 +21,12 @@ public class SRSnmpPopulator {
 	private String snmpCommunity;
 	private SRSNMPTarget targetHost;
 	SRChassisObject router;
+	private boolean connectionError;
 	
 	public SRSnmpPopulator(String ip, String community){
 		hostIP = ip;
 		snmpCommunity = community;
+		connectionError = false;
 		
 		router = new SRChassisObject();
 		try {
@@ -37,11 +39,12 @@ public class SRSnmpPopulator {
 
 	}
 	
-	public void populateHardware(){
+	public boolean hadConnectionError(){
+		return this.connectionError;
+	}
+	
+	public void populateHostName(){
 		try {
-			
-			
-
 			String sysDesc = targetHost.getAsString(new OID(".1.3.6.1.2.1.1.5.0"));
 			//System.out.println(sysDesc);
 			router.System.setHostName(sysDesc);
@@ -49,6 +52,16 @@ public class SRSnmpPopulator {
 
 			
 			
+		} catch ( Exception err){
+			System.out.println("Error populating host" + targetHost.address );
+			connectionError = true;
+		}
+	}
+	public void populateHardware(){
+		try {
+	
+
+
 			Hashtable<Integer, String> equippedHash = getEquippedCards(targetHost);
 			
 			for ( Integer key : equippedHash.keySet()){
@@ -67,7 +80,7 @@ public class SRSnmpPopulator {
 			populateHardwareData(targetHost, router);
 
 			
-		} catch (  IOException e){
+		} catch (  Exception e){
 			System.out.println("There was an exeption " + e.getMessage() );
 		}		
 	}

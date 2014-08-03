@@ -23,12 +23,14 @@ public class ThreadedMySqlPopulatorTest {
 		ResultSet rSet;
 		String comm;
 		long startTime;
+		SRChassisObject router;
+		SRSnmpPopulator pop;
 		
-
 		public MessageLoop(ResultSet rs,  String community){
 			rSet = rs;
 			comm = community;
 			startTime = System.nanoTime();
+			router = new SRChassisObject();
 		}
 		public void run(){
 		    String tname = Thread.currentThread().getName();
@@ -40,10 +42,14 @@ public class ThreadedMySqlPopulatorTest {
 					//System.out.println("Thread " + tname + " host=" + hn);
 					//Thread.sleep(1000);
 					String host = rSet.getString("ip");
-					SRSnmpPopulator pop = new SRSnmpPopulator(host, comm);
-					pop.populateHardware();
-					SRChassisObject router = pop.getRouter();
-					System.out.println("System name = " + router.System.getHostName() + " in thread " + tname);
+					pop = new SRSnmpPopulator(host, comm);
+					//pop.populateHardware();
+					pop.populateHostName();
+					router = pop.getRouter();
+					if ( pop.hadConnectionError())
+						System.out.println("Had connection error to " + hn + " ip =" + host);
+					else
+						System.out.println("System name = " + router.System.getHostName() + " in thread " + tname);
 				}
 
 				long totalTime = ( System.nanoTime() - startTime );
@@ -75,16 +81,15 @@ public class ThreadedMySqlPopulatorTest {
 			
 			Connection conn = DriverManager.getConnection("jdbc:mysql://68.253.91.179:3306/kp109p", connectionProps);
 			
-			String query = "select * from nodes where ip REGEXP '[0-9]+.[0-9]+.[0-9]+.[0-9]+' and hostname like '%LVH11'";
+			String query = "select * from nodes where ip REGEXP '[0-9]+.[0-9]+.[0-9]+.[0-9]+' order by hostname";
 			System.out.println("query = " + query);
 			Statement stmt = conn.createStatement();
-			long start = System.nanoTime();
 
 			ResultSet rs;
 			rs = stmt.executeQuery(query);
 			//Thread t = new Thread(new MessageLoop(rs));
 			//t.start();
-			int tcount = 3;
+			int tcount = 10;
 			Thread[] tlist = new Thread[tcount];
 			
 			
