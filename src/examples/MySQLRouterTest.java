@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 
-import alcatel.router.SRCardObject;
 import alcatel.router.SRChassisObject;
 import alcatel.router.SRSnmpPopulator;
 
@@ -40,10 +39,14 @@ public class MySQLRouterTest {
 				String hostname = rs.getString("hostname");
 				String ip = rs.getString("ip");
 				System.out.println("Populating: " + hostname + ", " + ip);
+				try {
 				SRSnmpPopulator pop = new SRSnmpPopulator(ip, comm);
 				pop.populateHardware();
 				SRChassisObject router = pop.getRouter();
 				System.out.println("System name = " + router.System.getHostName());
+				} catch ( Exception e){
+					System.out.println("ERROR: Could not populate host " + hostname);
+				}
 				
 			}
 			rs.close();

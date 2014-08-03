@@ -208,7 +208,7 @@ public class SRSnmpPopulator {
 	    TreeUtils treeUtils = new TreeUtils(host.getSNMP(), new DefaultPDUFactory());      
 	    List<TreeEvent> events = treeUtils.getSubtree(host.getTarget(), oid);
 	    if(events == null || events.size() == 0){
-	      System.out.println("No result returned in getting equipped cards");
+	      System.out.println("Exiting.  No result returned in getting equipped cards");
 	      System.exit(1);
 	    }
 	    
@@ -221,7 +221,7 @@ public class SRSnmpPopulator {
 	            
 	        VariableBinding[] varBindings = event.getVariableBindings();
 	        if(varBindings == null || varBindings.length == 0){
-	          System.out.println("No result returned. in getting equipped cards");
+	          //System.out.println("No result returned. in getting equipped cards");
 	        }
 	        for (VariableBinding varBinding : varBindings) {
 	        	String fullOID = varBinding.getOid().toString();
