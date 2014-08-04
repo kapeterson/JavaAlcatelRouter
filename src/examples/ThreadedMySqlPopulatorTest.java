@@ -39,13 +39,15 @@ public class ThreadedMySqlPopulatorTest {
 				while ( rSet.next()){
 					
 					String hn = rSet.getString("hostname");
-					//System.out.println("Thread " + tname + " host=" + hn);
-					//Thread.sleep(1000);
+
 					String host = rSet.getString("ip");
 					pop = new SRSnmpPopulator(host, comm);
-					//pop.populateHardware();
+					
 					pop.populateHostName();
+					pop.populateHardware();
+
 					router = pop.getRouter();
+					
 					if ( pop.hadConnectionError())
 						System.out.println("Had connection error to " + hn + " ip =" + host);
 					else
@@ -89,9 +91,8 @@ public class ThreadedMySqlPopulatorTest {
 
 			ResultSet rs;
 			rs = stmt.executeQuery(query);
-			//Thread t = new Thread(new MessageLoop(rs));
-			//t.start();
-			int tcount = 10;
+
+			int tcount = 25;
 			Thread[] tlist = new Thread[tcount];
 			
 			
