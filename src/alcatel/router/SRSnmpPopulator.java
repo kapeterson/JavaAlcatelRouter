@@ -36,9 +36,14 @@ public class SRSnmpPopulator {
 			System.out.println("There was an exeption " + e.getMessage() );
 			System.exit(1);
 		}
+		
+		//targetHost.close();
 
 	}
 	
+	public void close(){
+		targetHost.close();
+	}
 	public boolean hadConnectionError(){
 		return this.connectionError;
 	}
@@ -49,7 +54,6 @@ public class SRSnmpPopulator {
 			//System.out.println(sysDesc);
 			router.System.setHostName(sysDesc);
 			getCardTypeHash(targetHost, this.router);
-
 			
 			
 		} catch ( Exception err){

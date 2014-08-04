@@ -61,6 +61,13 @@ public class SRSNMPTarget {
 		return snmp;
 	}
 	
+	public void close(){
+		try {
+		snmp.close();
+		} catch (Exception e){
+			System.out.println("Error closing snmp");
+		}
+	}
 	public ResponseEvent get(OID oids[]) throws IOException{
 		
 		PDU pdu = new PDU();

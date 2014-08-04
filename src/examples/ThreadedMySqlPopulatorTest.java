@@ -50,6 +50,8 @@ public class ThreadedMySqlPopulatorTest {
 						System.out.println("Had connection error to " + hn + " ip =" + host);
 					else
 						System.out.println("System name = " + router.System.getHostName() + " in thread " + tname);
+					
+					pop.close();
 				}
 
 				long totalTime = ( System.nanoTime() - startTime );
