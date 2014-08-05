@@ -2,7 +2,7 @@ package examples;
 import alcatel.router.SRCardObject;
 import alcatel.router.SRChassisObject;
 import alcatel.router.SRSnmpPopulator;
-
+import alcatel.router.SRMDAObject;
 
 public class SnmpPopulatorTest {
 
@@ -34,10 +34,33 @@ public class SnmpPopulatorTest {
 			
 				SRCardObject card = router.Cards.getCard(key);
 				System.out.format("%-8d %-20s %-15s %-15s %-15s%n", card.getSlotNumber(), card.getCardType().trim(), card.getSerialNumber().trim(), card.getPartNumber().trim(), card.getManufactureDate().trim());
+				for (int j = 0; j <= 1; j++){
+					SRMDAObject tmda = card.getMDA(j+1);
+					//if ( tmda != null)
+					//	System.out.println("     We got us an mda " + tmda.getMDAType());
+				}
+			}
+			
+			System.out.println("\n\n\n");
+			System.out.format("%-8s %-7s %-25s %-15s %-15s %n", "CARD", "CMPLX", "TYPE", "PN", "SN");
+			System.out.format("%-8s %-7s %-25s %-15s %-15s %n", "--------", "-------", "-------------------------", "---------------", "---------------");
+
+			for ( Integer key : router.Cards.getCards().keySet()){
+				
+				SRCardObject card = router.Cards.getCard(key);
+				//System.out.format("%-8d %-20s %-15s %-15s %-15s%n", card.getSlotNumber(), card.getCardType().trim(), card.getSerialNumber().trim(), card.getPartNumber().trim(), card.getManufactureDate().trim());
+				for (int j = 0; j <= 1; j++){
+					SRMDAObject tmda = card.getMDA(j+1);
+					if ( tmda != null){
+						//System.out.println("     We got us an mda " + card.getSlotNumber() + "/" + (j+1) + " type=" + tmda.getMDAType());
+						System.out.format("%-8s %-7s %-25s %-15s %-15s %n", card.getSlotNumber(), (j+1), tmda.getMDAType(), tmda.getPartNumber(), tmda.getSerialNumber());
+
+					}
+				}
 			}
 		
 		} catch ( Exception e) {
-			System.out.println("We caught an exception");
+			System.out.println("We caught an exception " + e.getMessage());
 		}
 	}
 	
