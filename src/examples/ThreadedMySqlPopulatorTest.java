@@ -44,7 +44,7 @@ public class ThreadedMySqlPopulatorTest {
 					pop = new SRSnmpPopulator(host, comm);
 					
 					pop.populateHostName();
-					pop.populateHardware();
+					//pop.populateHardware();
 
 					router = pop.getRouter();
 					

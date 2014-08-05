@@ -70,6 +70,7 @@ public class SRSnmpPopulator {
 		try {
 	
 			populateHostName();
+			
 			populateCardTypes(targetHost, this.router);
 			populateMDATypes(targetHost, this.router);
 			
@@ -87,10 +88,9 @@ public class SRSnmpPopulator {
 			
 			}
 			
-			//populateEquippedMDAs(targetHost, router);
 			
 			populateIOMIndex(targetHost, router);
-			//populateMDAIndex(targetHost, router);
+			
 			populateMDA(targetHost, router);
 			populateHardwareData(targetHost, router);
 
@@ -103,52 +103,7 @@ public class SRSnmpPopulator {
 	public SRChassisObject getRouter(){
 		return router;
 	}
-	
-	
-	public static void populateEquippedMDAs(SRSNMPTarget host, SRChassisObject router){
-		OID[] oids = new OID[1];
-		try {
-			
-			// tmnxMDAQuippedType
-			oids[0] = new OID(".1.3.6.1.4.1.6527.3.1.2.2.3.8.1.5") ;
-			Hashtable<String, String> mdaHash = walkOIDS(oids, host);
-			
-        	String ptrn = "\\.([0-9]+)\\.([0-9]+)$";
-        	Pattern p = Pattern.compile(ptrn);
-			
-        	for ( String key : mdaHash.keySet()){
-				
-	        	Matcher m = p.matcher(key);
 
-	        	
-        	
-	        	if ( m.find()){
-	        		//thisTypeIndex = m.group(1);
-	        		String card = m.group(1);
-	        		String mda = m.group(2);
-	        		
-	        		SRCardObject routerCard = router.Cards.getCard(Integer.parseInt(card));
-	        		
-	        		String typeName = router.Cards.getMDATypeByIndex(mdaHash.get(key));
-	        		SRMDAObject mdaObject = new SRMDAObject(typeName);
-
-	        		routerCard.setMDA(Integer.parseInt(mda), mdaObject);
-
-	        	} else {
-	        		
-	        		System.out.println("Error couldn't parse mda type");
-	        		System.exit(1);
-	        	}
-	        	
-	        }
-			
-			
-			
-		} catch ( RuntimeException ex ){
-		      System.out.println("Exception ." + ex.getMessage());
-		      System.exit(1);
-		}
-	}
 	
 	public static boolean populateCardTypes(SRSNMPTarget host, SRChassisObject rtr) throws IOException{
 		
@@ -261,6 +216,7 @@ public class SRSnmpPopulator {
 	    }
 	}
 	
+	
 	public static void populateMDA(SRSNMPTarget host, SRChassisObject router){
 		OID[] oids = new OID[2];
 		try {
@@ -274,13 +230,11 @@ public class SRSnmpPopulator {
 			oids[0] = new OID(equippedMDAOID) ;
 			oids[1] = new OID(hwIndexOID) ;			
 			
-			Hashtable<String, String> oidMap = walkOIDS(oids, host);
+			TreeMap<String, String> oidMap = walkOIDS(oids, host);
         	String ptrn = "(.*)\\.[0-9]+\\.([0-9]+)\\.([0-9]+)$";
         	Pattern p = Pattern.compile(ptrn);
-        	String[] oidKeys = (String[])oidMap.keySet().toArray(new String[0]);
-        	Arrays.sort(oidKeys);
         	
-			for ( String key : oidKeys){
+			for ( String key : oidMap.keySet()){
 				
 	        	Matcher m = p.matcher(key);
 
@@ -316,14 +270,15 @@ public class SRSnmpPopulator {
 		      System.exit(1);
 		}
 	}
-		
+	
+	
 	public static void populateMDATypes(SRSNMPTarget host, SRChassisObject router){
 		OID[] oids = new OID[1];
 		try {
 			
 			Hashtable<String, String> typeHash = new Hashtable<String, String>();
 			oids[0] = new OID(".1.3.6.1.4.1.6527.3.1.2.2.3.10.1.2") ;
-			Hashtable<String, String> mdaHash = walkOIDS(oids, host);
+			TreeMap<String, String> mdaHash = walkOIDS(oids, host);
 			
 	    	String ptrn = "\\.([0-9]+)$";
 	    	Pattern p = Pattern.compile(ptrn);
@@ -350,39 +305,7 @@ public class SRSnmpPopulator {
 		}
 	}
 	
-	public static void populateMDAIndex(SRSNMPTarget host, SRChassisObject router){
-		
-		OID[] oids = new OID[1];
-		try {
-			
-			// tmnxMDAHwIndex
-			oids[0] = new OID(".1.3.6.1.4.1.6527.3.1.2.2.3.8.1.6") ;
-			Hashtable<String, String> mdaIndexes = walkOIDS(oids, host);
-			
-        	String ptrn = "\\.([0-9]+)\\.([0-9]+)$";
-        	Pattern p = Pattern.compile(ptrn);
-        	
-        	
-			for ( String key : mdaIndexes.keySet()){
-				//System.out.println("index oid" + key);
-				Matcher m = p.matcher(key);
-				if ( m.find()){
-					String card = m.group(1);
-					String mda = m.group(2);
-					
-					SRCardObject srcard = router.Cards.getCard(Integer.parseInt(card));
-					SRMDAObject mdaObj = srcard.getMDA(Integer.parseInt(mda));
-					if ( mdaObj != null)
-						router.Cards.addIndexMap(mdaIndexes.get(key), mdaObj);
-				}
-
-			}
-		} catch ( RuntimeException ex ){
-		      System.out.println("OID is not specified correctly.");
-		      System.exit(1);
-		}
-		
-	}
+	
 	
 	public static Hashtable<Integer, String> getEquippedCards(SRSNMPTarget host){
 		OID oid = null;
@@ -442,7 +365,7 @@ public class SRSnmpPopulator {
 	}
 
 	
-	public static TreeMap<String, String> walkOIDSTreeMap(OID[] oids, SRSNMPTarget host){
+	public static TreeMap<String, String> walkOIDS(OID[] oids, SRSNMPTarget host){
 		
 		TreeMap<String, String> walkHash = new TreeMap<String, String>();
 		
@@ -477,8 +400,8 @@ public class SRSnmpPopulator {
 	    return walkHash;	
 	
 	}
-	
-	
+		
+	/*
 	public static Hashtable<String, String> walkOIDS(OID[] oids, SRSNMPTarget host){
 		
 		Hashtable<String, String> walkHash = new Hashtable<String, String>();
@@ -514,6 +437,7 @@ public class SRSnmpPopulator {
 	    return walkHash;
 	}
 	
+	*/
 	
     public static void populateHardwareData(SRSNMPTarget host, SRChassisObject router){
 		OID[] oids = new OID[3];
@@ -527,7 +451,7 @@ public class SRSnmpPopulator {
 	    	oids[1] = new OID(snOID); // Serial Number
 	    	oids[2] = new OID(mdOID); // Manufacture Date
 	    	
-	    	Hashtable<String, String> hwData = walkOIDS(oids, host);
+	    	TreeMap<String, String> hwData = walkOIDS(oids, host);
 	    	
 	       	String ptrn = "(.*)\\.([0-9]+)\\.([0-9]+)$";
         	Pattern p = Pattern.compile(ptrn);
