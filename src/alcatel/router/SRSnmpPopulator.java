@@ -15,6 +15,7 @@ import org.snmp4j.util.TreeUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class SRSnmpPopulator {
 
 	private String hostIP;
@@ -40,6 +41,8 @@ public class SRSnmpPopulator {
 		//targetHost.close();
 
 	}
+	
+	
 	
 	public void close(){
 		targetHost.close();
@@ -204,6 +207,10 @@ public class SRSnmpPopulator {
 	    }
 	}
 	
+	public static void populateMDAIndex(SRSNMPTarget host, SRChassisObject router){
+		
+	}
+	
 	public static Hashtable<Integer, String> getEquippedCards(SRSNMPTarget host){
 		OID oid = null;
 		
@@ -261,8 +268,42 @@ public class SRSnmpPopulator {
 	    		
 	}
 
+	public static Hashtable<String, String> walkOIDS(OID[] oids, SRSNMPTarget host){
+		
+		Hashtable<String, String> walkHash = new Hashtable<String, String>();
+		
+		TreeUtils treeUtils = new TreeUtils(host.getSNMP(), new DefaultPDUFactory());      
+	    List<TreeEvent> events = treeUtils.walk(host.getTarget(), oids);
+	    if(events == null || events.size() == 0){
+	      System.out.println("No result returned in WalkOIDS.");
+	      System.exit(1);
+	    }
+	    
+	    for (TreeEvent event : events) {
+		      if(event != null){
+		        if (event.isError()) {
+		            System.err.println("Error walking OIDS " + event.getErrorMessage());
+		          }
+		            
+		        VariableBinding[] varBindings = event.getVariableBindings();
+		        if(varBindings == null || varBindings.length == 0){
+		         // System.out.println("No result returned.");
+		        }
+		        
+		        for (VariableBinding varBinding : varBindings) {
+		        	
+		        	String fullOID = varBinding.getOid().toString();
+		        	String val = varBinding.getVariable().toString();
+
+		        	walkHash.put(fullOID, val);
+		        }
+		      }
+	    }
+	    
+	    return walkHash;
+	}
+	
 	public static void populateHardwareData(SRSNMPTarget host, SRChassisObject router){
-		OID oid = null;
 		OID[] oids = new OID[3];
 		
 		String pnOID = "1.3.6.1.4.1.6527.3.1.2.2.1.8.1.4";  // Part number
@@ -274,52 +315,21 @@ public class SRSnmpPopulator {
 	    	oids[1] = new OID(snOID); // Serial Number
 	    	oids[2] = new OID(mdOID); // Manufacture Date
 	    	
+	    	Hashtable<String, String> hwData = walkOIDS(oids, host);
 	    	
-	    }
-	    catch(RuntimeException ex){
-	      System.out.println("OID is not specified correctly.");
-	      System.exit(1);
-	    }
-	    
-	    //OID[] oids = { oid };
-	    
-	    TreeUtils treeUtils = new TreeUtils(host.getSNMP(), new DefaultPDUFactory());      
-	    List<TreeEvent> events = treeUtils.walk(host.getTarget(), oids);
-	    if(events == null || events.size() == 0){
-	      System.out.println("No result returned.");
-	      System.exit(1);
-	    }
-	    
-
-	    
-	    for (TreeEvent event : events) {
-	      if(event != null){
-	        if (event.isError()) {
-	            System.err.println("oid [" + oid + "] " + event.getErrorMessage());
-	          }
-	            
-	        VariableBinding[] varBindings = event.getVariableBindings();
-	        if(varBindings == null || varBindings.length == 0){
-	         // System.out.println("No result returned.");
-	        }
-	        
-	        for (VariableBinding varBinding : varBindings) {
-	        	String fullOID = varBinding.getOid().toString();
-	        	String val = varBinding.getVariable().toString();
-
-	        	String ptrn = "(.*)\\.([0-9]+)\\.([0-9]+)$";
-	        	Pattern p = Pattern.compile(ptrn);
-	        	Matcher m = p.matcher(fullOID);
+	       	String ptrn = "(.*)\\.([0-9]+)\\.([0-9]+)$";
+        	Pattern p = Pattern.compile(ptrn);
+        	
+	    	for ( String key : hwData.keySet()){
+	    		
+        	Matcher m = p.matcher(key);
 	        	
-	        	String thisIndex = fullOID;
-	        	String oidval = fullOID;
+	        	String thisIndex = key;
+	        	String oidval = key;
 	        	if ( m.find()){
 	        		thisIndex = m.group(3);
 	        		oidval = m.group(1);
 	        	}
-	        	
-	        	
-	        	
 	        	AlcatelHardwareObject hw = null;
 	        	
 	        	// continue if router doesn't have the index in the map
@@ -332,8 +342,10 @@ public class SRSnmpPopulator {
 				
 				if ( hw == null)
 					continue;
-
-
+    	
+	        	
+	        	
+	    		String val = hwData.get(key);
 	        	if ( oidval.equals(pnOID) ) {
 	        		hw.setPartNumber(val);
 	        	} else if ( oidval.equals(snOID)){
@@ -341,14 +353,16 @@ public class SRSnmpPopulator {
 	        	} else if ( oidval.equals(mdOID)){
 	        		hw.setManufactureDate(val);
 	        	}
-
-	        	
-	        }
-	      }
+	    	}
+	    	
 	    }
-	    		
-	    		
-		
+	    catch(RuntimeException ex){
+	      System.out.println("OID is not specified correctly.");
+	      System.exit(1);
+	 
+	    }
+	    
+
 		return;
 	}
 
