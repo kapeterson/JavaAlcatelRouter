@@ -20,6 +20,7 @@ public class SnmpPopulatorTest {
 		System.out.println("IP = " + ip);
 		try {
 			SRSnmpPopulator populator = new SRSnmpPopulator(ip, comm);
+			
 			populator.populateHardware();
 		
 			SRChassisObject router = populator.getRouter();

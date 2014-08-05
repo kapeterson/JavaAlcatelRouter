@@ -56,7 +56,8 @@ public class SRSnmpPopulator {
 			String sysDesc = targetHost.getAsString(new OID(".1.3.6.1.2.1.1.5.0"));
 			//System.out.println(sysDesc);
 			router.System.setHostName(sysDesc);
-			getCardTypeHash(targetHost, this.router);
+			
+
 			
 			
 		} catch ( Exception err){
@@ -64,11 +65,14 @@ public class SRSnmpPopulator {
 			connectionError = true;
 		}
 	}
+	
 	public void populateHardware(){
 		try {
 	
-
-
+			populateHostName();
+			populateCardTypes(targetHost, this.router);
+			populateMDATypes(targetHost, this.router);
+			
 			Hashtable<Integer, String> equippedHash = getEquippedCards(targetHost);
 			
 			for ( Integer key : equippedHash.keySet()){
@@ -83,7 +87,11 @@ public class SRSnmpPopulator {
 			
 			}
 			
+			populateEquippedMDAs(targetHost, router);
+			
 			populateIOMIndex(targetHost, router);
+			
+			
 			populateHardwareData(targetHost, router);
 
 			
@@ -97,7 +105,43 @@ public class SRSnmpPopulator {
 	}
 	
 	
-	public static boolean getCardTypeHash(SRSNMPTarget host, SRChassisObject rtr) throws IOException{
+	public static void populateEquippedMDAs(SRSNMPTarget host, SRChassisObject router){
+		OID[] oids = new OID[1];
+		try {
+			
+			// tmnxMDAQuippedType
+			oids[0] = new OID(".1.3.6.1.4.1.6527.3.1.2.2.3.8.1.5") ;
+			Hashtable<String, String> mdaHash = walkOIDS(oids, host);
+        	String ptrn = "\\.([0-9]+)$";
+        	Pattern p = Pattern.compile(ptrn);
+			for ( String key : mdaHash.keySet()){
+				
+	        	Matcher m = p.matcher(key);
+
+	        	
+	        	String thisTypeIndex = key;
+	        	
+	        	if ( m.find()){
+	        		thisTypeIndex = m.group(1);
+	        		String typeName = router.Cards.getCardTypeByIndex(thisTypeIndex);
+	        		//System.out.println("Found type: " + typeName);
+	        	} else {
+	        		
+	        		System.out.println("Error couldn't parse mda type");
+	        		System.exit(1);
+	        	}
+	        	
+	        }
+			
+			
+			
+		} catch ( RuntimeException ex ){
+		      System.out.println("OID is not specified correctly.");
+		      System.exit(1);
+		}
+	}
+	
+	public static boolean populateCardTypes(SRSNMPTarget host, SRChassisObject rtr) throws IOException{
 		
 		Hashtable<String, String> typeHash = new Hashtable<String, String>();
 		OID oid = null;
@@ -159,6 +203,7 @@ public class SRSnmpPopulator {
 		OID[] oids = new OID[1];
 		try {
 			
+			// tmnxCardHwIndex
 			oids[0] = new OID(".1.3.6.1.4.1.6527.3.1.2.2.3.2.1.6") ;
 		
 		} catch ( RuntimeException ex ){
@@ -207,8 +252,50 @@ public class SRSnmpPopulator {
 	    }
 	}
 	
+	public static void populateMDATypes(SRSNMPTarget host, SRChassisObject router){
+		OID[] oids = new OID[1];
+		try {
+			
+			Hashtable<String, String> typeHash = new Hashtable<String, String>();
+			oids[0] = new OID(".1.3.6.1.4.1.6527.3.1.2.2.3.10.1.2") ;
+			Hashtable<String, String> mdaHash = walkOIDS(oids, host);
+			
+	    	String ptrn = "\\.([0-9]+)$";
+	    	Pattern p = Pattern.compile(ptrn);
+	    	
+			for ( String key : mdaHash.keySet()){
+			    //System.out.println("OID: " + key + " val = " + mdaHash.get(key));	
+				// have to extract the type from the oid, then the string as the value
+	          	Matcher m = p.matcher(key);
+	        	
+	        	String thisOID = key;
+	        	if ( m.find()){
+	        		thisOID = m.group(1);
+	        	}
+	        	
+	        	typeHash.put(thisOID, mdaHash.get(key));
+			}
+			
+			router.Cards.setMDATypes(typeHash);
+			
+		} catch ( RuntimeException ex ){
+		      System.out.println("OID is not specified correctly.");
+		      System.exit(1);
+		}
+	}
+	
 	public static void populateMDAIndex(SRSNMPTarget host, SRChassisObject router){
+		/*
+		OID[] oids = new OID[1];
+		try {
+			
+			//oids[0] = new OID(".1.3.6.1.4.1.6527.3.1.2.2.3.2.1.6") ;
 		
+		} catch ( RuntimeException ex ){
+		      System.out.println("OID is not specified correctly.");
+		      System.exit(1);
+		}
+		*/
 	}
 	
 	public static Hashtable<Integer, String> getEquippedCards(SRSNMPTarget host){
@@ -322,7 +409,7 @@ public class SRSnmpPopulator {
         	
 	    	for ( String key : hwData.keySet()){
 	    		
-        	Matcher m = p.matcher(key);
+	    		Matcher m = p.matcher(key);
 	        	
 	        	String thisIndex = key;
 	        	String oidval = key;
