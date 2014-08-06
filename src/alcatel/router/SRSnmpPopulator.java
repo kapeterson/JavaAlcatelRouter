@@ -4,7 +4,7 @@ import java.io.IOException;
 import org.snmp4j.smi.OID;
 import org.snmp4j.smi.VariableBinding;
 
-import java.util.Arrays;
+
 import java.util.Hashtable;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -14,7 +14,7 @@ import org.snmp4j.util.TreeEvent;
 import org.snmp4j.util.TreeUtils;
 
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 import java.util.TreeMap;
 public class SRSnmpPopulator {
 
@@ -74,8 +74,9 @@ public class SRSnmpPopulator {
 			populateCardTypes(targetHost, this.router);
 			populateMDATypes(targetHost, this.router);
 			
-			populateIOM(targetHost, router);
-			populateMDA(targetHost, router);
+			populateIOM(targetHost, this.router);
+			populateMDA(targetHost, this.router);
+			populateCPM(targetHost, this.router);
 			
 			populateHardwareData(targetHost, router);
 
@@ -84,6 +85,7 @@ public class SRSnmpPopulator {
 			System.out.println("There was an exeption " + e.getMessage() );
 		}		
 	}
+	
 	
 	public SRChassisObject getRouter(){
 		return router;
@@ -150,6 +152,59 @@ public class SRSnmpPopulator {
 
 
 	
+	public static void populateCPM(SRSNMPTarget host, SRChassisObject router){
+		OID[] oids = new OID[2];
+		try {
+			
+			//tmnxCpmCardEquippedType
+			String tmnxCpmCardEquippedType = "1.3.6.1.4.1.6527.3.1.2.2.3.4.1.6";;
+
+			// tmnxCpmCardHwIndex
+			String hwIndexOID = "1.3.6.1.4.1.6527.3.1.2.2.3.4.1.7";
+			
+			oids[0] = new OID(tmnxCpmCardEquippedType) ;
+			oids[1] = new OID(hwIndexOID) ;			
+			
+			TreeMap<String, String> oidMap = walkOIDS(oids, host);
+        	String ptrn = "(.*)\\.([0-9]+)\\.([0-9]+)\\.[0-9]+$";
+        	Pattern p = Pattern.compile(ptrn);
+        	
+			for ( String key : oidMap.keySet()){
+				
+				
+				
+	        	Matcher m = p.matcher(key);
+
+	        	if (m.find()){
+	        		String oid = m.group(1);
+	        		String slot = m.group(3);
+
+	        		
+	        		if ( oid.equals(tmnxCpmCardEquippedType)){
+	        			
+	        			//System.out.println("Equipped Key: " + key + " valu= " + oidMap.get(key));
+	    				SRCPMObject cpm = new SRCPMObject(Integer.parseInt(slot), router.Cards.getCardTypeByIndex(oidMap.get(key)));
+	    				router.Cards.addCard(cpm.getSlotNumber(), cpm);
+	    				
+	        		} else if ( oid.equals(hwIndexOID)){
+	        			//System.out.println("Index Key: " + key + " valu= " + oidMap.get(key));
+	        			SRCPMObject cpm = (SRCPMObject)router.Cards.getCard(Integer.parseInt(slot));
+	        			router.Cards.addIndexMap(oidMap.get(key), cpm);
+	        		}
+	        	}
+				
+	        }
+			
+			
+			
+		} catch ( RuntimeException ex ){
+		      System.out.println("Exception ." + ex.getMessage());
+		      System.exit(1);
+		}
+		return;
+		
+	}
+	
 	public static void populateIOM(SRSNMPTarget host, SRChassisObject router){
 		OID[] oids = new OID[2];
 		try {
@@ -184,7 +239,7 @@ public class SRSnmpPopulator {
 	    				if ( typeName == null)
 	    					typeName = "EMPTY";
 	    				
-	    				SRCardObject tcard = new SRCardObject(Integer.parseInt(card), typeName);
+	    				SRCardObject tcard = new SRIOMObject(Integer.parseInt(card), typeName);
 	    				router.Cards.addCard(tcard.getSlotNumber(), tcard);
 	    				
 	        		} else if ( oid.equals(hwIndexOID)){
@@ -236,7 +291,8 @@ public class SRSnmpPopulator {
 	        		
 	        		if ( oid.equals(equippedMDAOID)){
 	        			//System.out.println("Match equpped oid");
-		        		SRCardObject routerCard = router.Cards.getCard(Integer.parseInt(card));
+		        		SRIOMObject routerCard = (SRIOMObject)router.Cards.getCard(Integer.parseInt(card));
+		        		
 		        		
 		        		String typeName = router.Cards.getMDATypeByIndex(oidMap.get(key));
 		        		SRMDAObject mdaObject = new SRMDAObject(typeName);
@@ -245,7 +301,7 @@ public class SRSnmpPopulator {
 	        		} else if ( oid.equals(hwIndexOID)){
 
 						
-						SRCardObject srcard = router.Cards.getCard(Integer.parseInt(card));
+						SRIOMObject srcard = (SRIOMObject)router.Cards.getCard(Integer.parseInt(card));
 						SRMDAObject mdaObj = srcard.getMDA(Integer.parseInt(mda));
 						if ( mdaObj != null)
 							router.Cards.addIndexMap(oidMap.get(key), mdaObj);

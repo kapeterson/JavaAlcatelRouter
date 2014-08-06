@@ -3,6 +3,7 @@ import alcatel.router.SRCardObject;
 import alcatel.router.SRChassisObject;
 import alcatel.router.SRSnmpPopulator;
 import alcatel.router.SRMDAObject;
+import alcatel.router.SRIOMObject;
 
 public class SnmpPopulatorTest {
 
@@ -33,12 +34,11 @@ public class SnmpPopulatorTest {
 			for ( Integer key : router.Cards.getCards().keySet()){
 			
 				SRCardObject card = router.Cards.getCard(key);
-				System.out.format("%-8d %-20s %-15s %-15s %-15s%n", card.getSlotNumber(), card.getCardType().trim(), card.getSerialNumber().trim(), card.getPartNumber().trim(), card.getManufactureDate().trim());
-				for (int j = 0; j <= 1; j++){
-					SRMDAObject tmda = card.getMDA(j+1);
-					//if ( tmda != null)
-					//	System.out.println("     We got us an mda " + tmda.getMDAType());
-				}
+				
+				if ( card.isIOMObject() || card.isCPMObject()){
+					System.out.format("%-8d %-20s %-15s %-15s %-15s%n", card.getSlotNumber(), card.getCardType().trim(), card.getSerialNumber().trim(), card.getPartNumber().trim(), card.getManufactureDate().trim());
+
+				} 
 			}
 			
 			System.out.println("\n\n\n");
@@ -48,13 +48,15 @@ public class SnmpPopulatorTest {
 			for ( Integer key : router.Cards.getCards().keySet()){
 				
 				SRCardObject card = router.Cards.getCard(key);
-				for (int j = 0; j <= 1; j++){
-					SRMDAObject tmda = card.getMDA(j+1);
-					if ( tmda != null){
-						System.out.format("%-8s %-7s %-25s %-15s %-15s %n", card.getSlotNumber(), (j+1), tmda.getMDAType(), tmda.getPartNumber(), tmda.getSerialNumber());
+					if (card.isIOMObject()){
+						for (int j = 0; j <= 1; j++){
+							SRMDAObject tmda = ((SRIOMObject)card).getMDA(j+1);
+							if ( tmda != null){
+								System.out.format("%-8s %-7s %-25s %-15s %-15s %n", card.getSlotNumber(), (j+1), tmda.getMDAType(), tmda.getPartNumber(), tmda.getSerialNumber());
 
+							}
+						}
 					}
-				}
 			}
 		
 		} catch ( Exception e) {

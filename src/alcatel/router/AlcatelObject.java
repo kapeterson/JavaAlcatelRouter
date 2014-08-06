@@ -41,5 +41,9 @@ public class AlcatelObject {
 		return false;
 	}
 	
+	public boolean isCPMObject(){
+		return false;
+	}
+	
 	
 }

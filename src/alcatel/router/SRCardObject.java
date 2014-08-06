@@ -9,20 +9,12 @@ public class SRCardObject extends AlcatelHardwareObject{
 	public SRCardObject(int cardNumber, String ctype){
 		slot = cardNumber;
 		cardType = ctype; 
-		mdas = new SRMDAObject[2];
-		mdas[0] = null;
-		mdas[1] = null;
+
 		
 		//this.setObjectName("Card " + String.valueOf(cardNumber));
 	}
 	
-	public void setMDA(int complex, SRMDAObject mda){
-		mdas[complex-1] = mda;
-	}
-	
-	public SRMDAObject getMDA(int complex){
-		return mdas[complex-1];
-	}
+
 	
 	public void setSlotNumber(byte slt){
 		slot = slt;
