@@ -71,6 +71,8 @@ public class SRSnmpPopulator {
 	
 			populateHostName();
 			
+			populateChassis(targetHost, this.router);
+			
 			populateCardTypes(targetHost, this.router);
 			populateMDATypes(targetHost, this.router);
 			
@@ -91,6 +93,58 @@ public class SRSnmpPopulator {
 		return router;
 	}
 
+	
+	public void populateChassis(SRSNMPTarget host, SRChassisObject router){
+
+		OID[] oids = new OID[1];
+	    try{
+	    	// tmnxchassisTypeName
+	    	oids[0] = new OID("1.3.6.1.4.1.6527.3.1.2.2.1.6.1.2");
+	    	
+	    	TreeMap<String, String> chassisTypes = walkOIDS(oids, host);
+	    	Hashtable<String, String> chassisLookup = new Hashtable<String, String>();
+	    	
+        	String ptrn = ".*\\.([0-9]+)$";
+        	Pattern p = Pattern.compile(ptrn);
+        	
+			for ( String key : chassisTypes.keySet()){
+	          	Matcher m = p.matcher(key);
+	        	
+	        	
+	        	if ( m.find()){
+	        		
+	        		String thisType = m.group(1);
+	        		chassisLookup.put(thisType, chassisTypes.get(key));
+	        		//System.out.println("Added key = " + thisType);
+	        		
+	        	} else {
+	        		System.out.println("Error getting chassis type");
+	        		System.exit(1);
+	        	}
+				
+			}
+			
+			
+		    try {
+		    	
+				// tmnsChassistype
+		    	String ctype = targetHost.getAsString(new OID("1.3.6.1.4.1.6527.3.1.2.2.1.3.1.4.1"));
+		    	router.setChassisType(chassisLookup.get(ctype));
+		    	//System.out.println("Ctype = " + chassisLookup.get(ctype) + " for " + ctype);
+			
+		    } catch ( IOException e ){
+		    	System.out.println("Error getting chassis type " + e.getMessage());
+		    	
+		    }
+	    }
+	    catch(RuntimeException ex){
+	      System.out.println("OID is not specified correctly.");
+	      System.exit(1);
+	    }
+	    
+	    
+	
+	}
 	
 	public static boolean populateCardTypes(SRSNMPTarget host, SRChassisObject rtr) throws IOException{
 		

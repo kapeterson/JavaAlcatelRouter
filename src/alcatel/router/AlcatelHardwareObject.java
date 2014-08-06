@@ -8,6 +8,7 @@ public class AlcatelHardwareObject extends AlcatelObject{
 	String manufactureDate;
 	String partNumber;
 	String snmpIndex;
+	
 	public AlcatelHardwareObject(){
 		serialNumber = "";
 		manufactureDate = "";

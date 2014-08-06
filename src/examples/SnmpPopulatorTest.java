@@ -20,14 +20,19 @@ public class SnmpPopulatorTest {
 		
 		System.out.println("IP = " + ip);
 		try {
-			SRSnmpPopulator populator = new SRSnmpPopulator(ip, comm);
+			long start = System.nanoTime();
 			
+			SRSnmpPopulator populator = new SRSnmpPopulator(ip, comm);
 			populator.populateHardware();
 		
 			SRChassisObject router = populator.getRouter();
 		
+			long elapsedTime = ( System.nanoTime() - start) / 1000000;
+			System.out.println("Total time = " + elapsedTime + "ms");
+			
 			System.out.println("System name is " + router.System.getHostName());
-		
+			System.out.println("Chassis type is " + router.getChassisType());
+			
 			System.out.format("%-8s %-20s %-15s %-15s %-15s %n", "CARD", "TYPE", "SN", "PN", "MD");
 			System.out.format("%-8s %-20s %-15s %-15s %-15s %n", "--------", "---------------", "---------------", "---------------", "---------------");
 
