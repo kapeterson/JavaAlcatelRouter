@@ -133,7 +133,7 @@ public class RouterSnmpTest02 {
 	        	//System.out.println("CARD= " + thisCard + " indx= " + indx);
 	        	SRCardObject card = router.Cards.getCard(Integer.parseInt(thisCard));
 	        	card.setSNMPIndex(indx);
-	        	router.Cards.addIndexMap(indx, card);
+	        	router.addHardwareIndexMap(indx, card);
 	        }
 	      
 	    }
@@ -316,12 +316,12 @@ public class RouterSnmpTest02 {
 	        	AlcatelHardwareObject hw = null;
 	        	
 	        	// continue if router doesn't have the index in the map
-				if ( !router.Cards.hasHardwareIndex(thisIndex)){
+				if ( !router.hasHardwareIndex(thisIndex)){
 
 					continue;
     			} 
 				
-				hw = router.Cards.getHardwareByIndex(thisIndex);
+				hw = router.getHardwareByIndex(thisIndex);
 				
 				if ( hw == null)
 					continue;

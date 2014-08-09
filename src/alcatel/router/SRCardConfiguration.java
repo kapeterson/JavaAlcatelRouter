@@ -8,16 +8,17 @@ public class SRCardConfiguration {
     protected Hashtable<String, String> cardTypes = null;
     protected Hashtable<String, String> mdaTypes = null;
     
-	protected Hashtable<String, AlcatelHardwareObject> hardwareIndexMap = null;
+	//protected Hashtable<String, AlcatelHardwareObject> hardwareIndexMap = null;
 	
     public SRCardConfiguration(){
 		cards = new TreeMap<Integer, SRCardObject>();
 		cardTypes = new Hashtable<String, String>();
 		mdaTypes = new Hashtable<String, String>();
 		
-		hardwareIndexMap = new Hashtable<String, AlcatelHardwareObject>();
+		//hardwareIndexMap = new Hashtable<String, AlcatelHardwareObject>();
 	}
 	
+    /*
     public boolean hasHardwareIndex(String indx){
     	return hardwareIndexMap.containsKey(indx);
     }
@@ -28,10 +29,12 @@ public class SRCardConfiguration {
     public void addIndexMap(String indx, AlcatelHardwareObject hw){
     		hardwareIndexMap.put(indx, hw);
     }
+    */
     
 	public String getCardTypeByIndex(String indx){
 		return cardTypes.get(indx);
 	}
+	
 	public void setCardTypes(Hashtable<String, String> cardtypes){
 		cardTypes = cardtypes;
 	}

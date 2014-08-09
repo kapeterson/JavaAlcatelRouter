@@ -24,7 +24,11 @@ public class SnmpPopulatorTest {
 			
 			SRSnmpPopulator populator = new SRSnmpPopulator(ip, comm);
 			populator.populateHardware();
-		
+			
+			if ( populator.hasConnectionError()){
+				System.out.println("CONNECTION ERROR TO HOST ");
+				System.exit(1);
+			}
 			SRChassisObject router = populator.getRouter();
 		
 			long elapsedTime = ( System.nanoTime() - start) / 1000000;
@@ -32,6 +36,7 @@ public class SnmpPopulatorTest {
 			
 			System.out.println("System name is " + router.System.getHostName());
 			System.out.println("Chassis type is " + router.getChassisType());
+			System.out.println("Chassis SN is " + router.getSerialNumber());
 			
 			System.out.format("%-8s %-20s %-15s %-15s %-15s %n", "CARD", "TYPE", "SN", "PN", "MD");
 			System.out.format("%-8s %-20s %-15s %-15s %-15s %n", "--------", "---------------", "---------------", "---------------", "---------------");

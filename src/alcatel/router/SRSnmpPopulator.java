@@ -30,6 +30,7 @@ public class SRSnmpPopulator {
 		connectionError = false;
 		
 		router = new SRChassisObject();
+		
 		try {
 		targetHost = new SRSNMPTarget("udp:" + hostIP + "/161", snmpCommunity);
 		targetHost.start();
@@ -47,7 +48,7 @@ public class SRSnmpPopulator {
 		targetHost.close();
 	}
 	
-	public boolean hadConnectionError(){
+	public boolean hasConnectionError(){
 		return this.connectionError;
 	}
 	
@@ -61,8 +62,8 @@ public class SRSnmpPopulator {
 			
 			
 		} catch ( Exception err){
-			System.out.println("Error populating host" + targetHost.address );
-			connectionError = true;
+			System.out.println("Error populating host name " + targetHost.address );
+			this.connectionError = true;
 		}
 	}
 	
@@ -71,7 +72,11 @@ public class SRSnmpPopulator {
 	
 			populateHostName();
 			
+			if (this.connectionError)
+				return;
+			
 			populateChassis(targetHost, this.router);
+			readMiscChassisInfo(targetHost, this.router);
 			
 			populateCardTypes(targetHost, this.router);
 			populateMDATypes(targetHost, this.router);
@@ -94,6 +99,49 @@ public class SRSnmpPopulator {
 	}
 
 	
+	public void readMiscChassisInfo(SRSNMPTarget host, SRChassisObject router){
+		OID[] oids = new OID[1];
+		try {
+			
+			//tmnxHwName
+			String tmnxHwClass = "1.3.6.1.4.1.6527.3.1.2.2.1.8.1.8";
+
+			
+			oids[0] = new OID(tmnxHwClass) ;
+		
+			
+			TreeMap<String, String> oidMap = walkOIDS(oids, host);
+
+        	String ptrn = ".*\\.([0-9]+)$";
+        	Pattern p = Pattern.compile(ptrn);
+        	
+			for ( String key : oidMap.keySet()){
+				
+			
+	        	//System.out.println("Key: " + key + " val: " + oidMap.get(key));
+	        	Matcher m = p.matcher(key);
+	        	String val = oidMap.get(key);
+	        	if ( val.equals("chassis")){
+	        		if ( m.find()){
+	        		
+	        			String hwIndex = m.group(1);
+	        			router.addHardwareIndexMap(hwIndex,router);
+	        		
+	        		} else {
+	        			System.out.println("Error parsing chassis hw index" );
+	        			System.exit(1);
+	        		}
+	        	}
+	        }
+			
+			
+			
+		} catch ( RuntimeException ex ){
+		      System.out.println("Exception in misc chassis info ." + ex.getMessage());
+		      System.exit(1);
+		}
+		return;
+	}
 	public void populateChassis(SRSNMPTarget host, SRChassisObject router){
 
 		OID[] oids = new OID[1];
@@ -136,9 +184,9 @@ public class SRSnmpPopulator {
 		    	System.out.println("Error getting chassis type " + e.getMessage());
 		    	
 		    }
-	    }
+	    } 
 	    catch(RuntimeException ex){
-	      System.out.println("OID is not specified correctly.");
+	      System.out.println("OID is not specified correctly in populate chassis for host " + host.getAddress() + " msg= " + ex.getMessage());
 	      System.exit(1);
 	    }
 	    
@@ -155,7 +203,7 @@ public class SRSnmpPopulator {
 	    	oid = new OID(".1.3.6.1.4.1.6527.3.1.2.2.3.9.1.2");
 	    }
 	    catch(RuntimeException ex){
-	      System.out.println("OID is not specified correctly.");
+	      System.out.println("OID is not specified correctly for populatecardtypes host " + rtr.System.getHostName() + " " + host.getAddress() );
 	      System.exit(1);
 	    }
 	    
@@ -206,7 +254,7 @@ public class SRSnmpPopulator {
 
 
 	
-	public static void populateCPM(SRSNMPTarget host, SRChassisObject router){
+	public void populateCPM(SRSNMPTarget host, SRChassisObject router){
 		OID[] oids = new OID[2];
 		try {
 			
@@ -243,7 +291,7 @@ public class SRSnmpPopulator {
 	        		} else if ( oid.equals(hwIndexOID)){
 	        			//System.out.println("Index Key: " + key + " valu= " + oidMap.get(key));
 	        			SRCPMObject cpm = (SRCPMObject)router.Cards.getCard(Integer.parseInt(slot));
-	        			router.Cards.addIndexMap(oidMap.get(key), cpm);
+	        			router.addHardwareIndexMap(oidMap.get(key), cpm);
 	        		}
 	        	}
 				
@@ -259,7 +307,7 @@ public class SRSnmpPopulator {
 		
 	}
 	
-	public static void populateIOM(SRSNMPTarget host, SRChassisObject router){
+	public void populateIOM(SRSNMPTarget host, SRChassisObject router){
 		OID[] oids = new OID[2];
 		try {
 			
@@ -302,7 +350,7 @@ public class SRSnmpPopulator {
 						SRCardObject srcard = router.Cards.getCard(Integer.parseInt(card));
 						
 						if ( srcard != null)
-							router.Cards.addIndexMap(oidMap.get(key), srcard);
+							router.addHardwareIndexMap(oidMap.get(key), srcard);
 	        		}
 	        	}
 
@@ -317,7 +365,7 @@ public class SRSnmpPopulator {
 	}
 		
 	
-	public static void populateMDA(SRSNMPTarget host, SRChassisObject router){
+	public void populateMDA(SRSNMPTarget host, SRChassisObject router){
 		OID[] oids = new OID[2];
 		try {
 			
@@ -358,7 +406,7 @@ public class SRSnmpPopulator {
 						SRIOMObject srcard = (SRIOMObject)router.Cards.getCard(Integer.parseInt(card));
 						SRMDAObject mdaObj = srcard.getMDA(Integer.parseInt(mda));
 						if ( mdaObj != null)
-							router.Cards.addIndexMap(oidMap.get(key), mdaObj);
+							router.addHardwareIndexMap(oidMap.get(key), mdaObj);
 	        		}
 	        	}
 
@@ -373,7 +421,7 @@ public class SRSnmpPopulator {
 	}
 	
 	
-	public static void populateMDATypes(SRSNMPTarget host, SRChassisObject router){
+	public void populateMDATypes(SRSNMPTarget host, SRChassisObject router){
 		OID[] oids = new OID[1];
 		try {
 			
@@ -411,7 +459,7 @@ public class SRSnmpPopulator {
 	
 
 	
-	public static TreeMap<String, String> walkOIDS(OID[] oids, SRSNMPTarget host){
+	public TreeMap<String, String> walkOIDS(OID[] oids, SRSNMPTarget host){
 		
 		TreeMap<String, String> walkHash = new TreeMap<String, String>();
 		
@@ -425,7 +473,8 @@ public class SRSnmpPopulator {
 	    for (TreeEvent event : events) {
 		      if(event != null){
 		        if (event.isError()) {
-		            System.err.println("Error walking OIDS " + event.getErrorMessage());
+		            System.err.println("Error walking OIDS " + event.getErrorMessage() + " for host " + host.getAddress());
+		            this.connectionError = true;
 		          }
 		            
 		        VariableBinding[] varBindings = event.getVariableBindings();
@@ -485,7 +534,7 @@ public class SRSnmpPopulator {
 	
 	*/
 	
-    public static void populateHardwareData(SRSNMPTarget host, SRChassisObject router){
+    public void populateHardwareData(SRSNMPTarget host, SRChassisObject router){
 		OID[] oids = new OID[3];
 		
 		String pnOID = "1.3.6.1.4.1.6527.3.1.2.2.1.8.1.4";  // Part number
@@ -515,12 +564,12 @@ public class SRSnmpPopulator {
 	        	AlcatelHardwareObject hw = null;
 	        	
 	        	// continue if router doesn't have the index in the map
-				if ( !router.Cards.hasHardwareIndex(thisIndex)){
+				if ( !router.hasHardwareIndex(thisIndex)){
 
 					continue;
     			} 
 				
-				hw = router.Cards.getHardwareByIndex(thisIndex);
+				hw = router.getHardwareByIndex(thisIndex);
 				
 				if ( hw == null)
 					continue;
@@ -539,7 +588,7 @@ public class SRSnmpPopulator {
 	    	
 	    }
 	    catch(RuntimeException ex){
-	      System.out.println("OID is not specified correctly.");
+	      System.out.println("OID is not specified correctly in populate Hardware data for host " + host.getAddress());
 	      System.exit(1);
 	 
 	    }

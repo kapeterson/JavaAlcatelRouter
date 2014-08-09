@@ -20,9 +20,7 @@ public class ThreadedMySqlPopulatorTest {
 	
 	}
 	
-	public static synchronized void insertSN(String sn){
-		
-	}
+
 	
 	private static class MessageLoop 
 		implements Runnable {
@@ -34,17 +32,19 @@ public class ThreadedMySqlPopulatorTest {
 		SRSnmpPopulator pop;
 		private static Properties cProp = null;
 		private static Connection conn = null;
-		private static String insertStatement = null;
 		private static Statement statement = null;
 		
-		public void insertSN(String sn){
+		public void insertSN(Integer reportid, String ip, String name, String chassistype, String model, String objecttype, Integer slot, Integer complex, String cardtype, 
+				String pn, String sn, String md){
 			try {
-				String query = "insert into java_sn ( sn ) values('" + sn + "');";
-				System.out.println(query);
+				String query = "insert into java_sn (report_id, ip, host, chassis_type, model, object_type, slot, complex, card_type, ";
+				String pt2 =  String.format("pn, sn, manufacture_date ) values('%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s');", reportid, ip, name, chassistype, model, objecttype, slot, complex, cardtype, pn, sn, md);
+				query = query + pt2;
+				//System.out.println(query);
 				statement.executeUpdate(query);
 			
 			} catch (Exception er){
-				System.out.println("Error exeucting insert sn query" + er.getMessage());
+				System.out.println("Error exeucting insert sn query: " + er.getMessage());
 				System.exit(1);
 			}
 		}
@@ -91,11 +91,12 @@ public class ThreadedMySqlPopulatorTest {
 
 					router = pop.getRouter();
 					
-					if ( pop.hadConnectionError())
+					if ( pop.hasConnectionError()) {
 						System.out.println("Had connection error to " + hn + " ip =" + host);
-					else {
-						System.out.println("System name = " + router.System.getHostName() + " in thread " + tname);
-						this.insertSN(router.getChassisType());
+						this.insertSN(1, host, hn, "ERROR", "ERROR", "ERROR", 1, 1, "ERROR", "ERROR", "ERROR", "ERROR");
+					} else {
+						System.out.println("Reading host = " + router.System.getHostName() + " in thread " + tname);
+						this.insertSN(1, host, hn, "7750", "CHASSIS", Thread.currentThread().getName(), 1, 1, "NA", router.getSerialNumber(), router.getPartNumber(), router.getManufactureDate());
 					}
 					
 					pop.close();

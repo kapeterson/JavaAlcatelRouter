@@ -57,6 +57,9 @@ public class SRSNMPTarget {
 		
 	}
 	
+	public String getAddress(){
+		return address;
+	}
 	public Snmp getSNMP(){
 		return snmp;
 	}
