@@ -13,9 +13,9 @@ import org.snmp4j.util.TreeEvent;
 import org.snmp4j.util.TreeUtils;
 
 import alcatel.router.AlcatelHardwareObject;
-import alcatel.router.SRCardObject;
 import alcatel.router.SRChassisObject;
 import alcatel.router.SRSNMPTarget;
+import alcatel.router.card.SRCardObject;
 
 import java.util.regex.Matcher;
 

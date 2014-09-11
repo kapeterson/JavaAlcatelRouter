@@ -2,6 +2,8 @@ package alcatel.router;
 import java.util.TreeMap;
 import java.util.Hashtable;
 
+import alcatel.router.card.SRCardObject;
+
 public class SRCardConfiguration {
 	
 	protected TreeMap<Integer, SRCardObject> cards = null;

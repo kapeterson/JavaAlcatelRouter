@@ -1,9 +1,9 @@
 package examples;
-import alcatel.router.SRCardObject;
 import alcatel.router.SRChassisObject;
 import alcatel.router.SRSnmpPopulator;
-import alcatel.router.SRMDAObject;
-import alcatel.router.SRIOMObject;
+import alcatel.router.card.SRCardObject;
+import alcatel.router.card.SRIOMObject;
+import alcatel.router.card.SRMDAObject;
 
 public class SnmpPopulatorTest {
 

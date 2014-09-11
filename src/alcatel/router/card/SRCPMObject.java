@@ -1,4 +1,5 @@
-package alcatel.router;
+package alcatel.router.card;
+
 
 public class SRCPMObject extends SRCardObject{
 	

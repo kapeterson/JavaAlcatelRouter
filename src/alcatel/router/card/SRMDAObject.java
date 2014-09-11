@@ -1,4 +1,6 @@
-package alcatel.router;
+package alcatel.router.card;
+
+import alcatel.router.AlcatelHardwareObject;
 
 public class SRMDAObject extends AlcatelHardwareObject{
 

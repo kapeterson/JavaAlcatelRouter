@@ -1,4 +1,5 @@
-package alcatel.router;
+package alcatel.router.card;
+
 
 public class SRIOMObject extends SRCardObject{
     protected SRMDAObject[] mdas;

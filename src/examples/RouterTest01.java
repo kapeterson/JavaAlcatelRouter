@@ -2,8 +2,8 @@ package examples;
 import java.util.TreeMap;
 
 import alcatel.router.AlcatelRouterObject;
-import alcatel.router.SRCardObject;
 import alcatel.router.SRChassisObject;
+import alcatel.router.card.SRCardObject;
 
 public class RouterTest01 {
 

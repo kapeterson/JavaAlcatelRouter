@@ -5,6 +5,10 @@ import org.snmp4j.smi.OID;
 import org.snmp4j.smi.VariableBinding;
 
 
+
+
+
+
 import java.util.Hashtable;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -13,8 +17,12 @@ import org.snmp4j.util.DefaultPDUFactory;
 import org.snmp4j.util.TreeEvent;
 import org.snmp4j.util.TreeUtils;
 
-import java.util.regex.Matcher;
+import alcatel.router.card.SRCPMObject;
+import alcatel.router.card.SRCardObject;
+import alcatel.router.card.SRIOMObject;
+import alcatel.router.card.SRMDAObject;
 
+import java.util.regex.Matcher;
 import java.util.TreeMap;
 public class SRSnmpPopulator {
 
