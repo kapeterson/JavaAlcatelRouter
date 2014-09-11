@@ -1,7 +1,6 @@
 package examples;
 import java.util.TreeMap;
 
-import alcatel.router.AlcatelRouterObject;
 import alcatel.router.SRChassisObject;
 import alcatel.router.card.SRCardObject;
 
@@ -10,9 +9,9 @@ public class RouterTest01 {
 	public static void main(String[] args) {
 		
 		// TODO Auto-generated method stub
-		AlcatelRouterObject router = new AlcatelRouterObject();
-		router.setSystemName("LIO1");
-		System.out.println("Host name is " + router.getSystemName());
+		SRChassisObject router = new SRChassisObject();
+		router.System.setHostName("LIO1");
+		System.out.println("Host name is " + router.System.getHostName());
 		
 		SRChassisObject chassis = new SRChassisObject();
 		chassis.setSerialNumber("3NSFEEE");

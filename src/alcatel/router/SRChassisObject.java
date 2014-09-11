@@ -1,13 +1,14 @@
 package alcatel.router;
+import alcatel.router.system.*;
 
 import java.util.Hashtable;
-
 public class SRChassisObject extends AlcatelHardwareObject {
 
 	
 	//protected SRCardConfiguration = null;
 	public SRCardConfiguration Cards = null;
 	public SRSystemConfiguration System = null;
+	
 	public String chassisType;
 	protected Hashtable<String, AlcatelHardwareObject> hardwareIndexMap = null;
 	
