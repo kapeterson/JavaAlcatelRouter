@@ -47,7 +47,6 @@ public class CardParser extends ConfigurationSection{
 	
 	/**
 	 * Use default handler for exiting section
-	 * {@link ConfigurationSection:#exitSection(Matcher)}
 	 */
 	public void exitSection(Matcher matcher){
 		

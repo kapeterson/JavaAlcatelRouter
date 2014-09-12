@@ -48,7 +48,6 @@ public class SRIOMObject extends SRCardObject{
 	}
 	
 	/**
-	 * {@link SRIOMObject:#setMDA}
 	 * @param complex
 	 * @param mda
 	 */
