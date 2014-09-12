@@ -37,19 +37,24 @@ public abstract class AlcatelObject {
 	}
 	
 	public boolean isChassisObject(){
-		return false;
+		//return false;
+		return (this.getObjectType() == AlcatelObjectType.CHASSIS);
 	}
 	
 	public boolean isIOMObject(){
-		return false;
+		//return false;
+		return ( this.getObjectType() == AlcatelObjectType.IOM);
 	}
 	
 	public boolean isMDAObject(){
-		return false;
+		
+		//return false;
+		return ( this.getObjectType() == AlcatelObjectType.MDA);
 	}
 	
 	public boolean isCPMObject(){
-		return false;
+		//return false;
+		return (this.getObjectType() == AlcatelObjectType.CPM);
 	}
 	
 
