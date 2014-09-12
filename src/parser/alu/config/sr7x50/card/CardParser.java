@@ -25,7 +25,7 @@ public class CardParser extends ConfigurationSection{
 	 * @param contextChangeHandler	ContextChange handler to callback when when chanting context
 	 */
 	public CardParser(SRChassisObject router, ContextChange contextChangeHandler){
-		super("CONFIG.CARD", router, contextChangeHandler);
+		super("CONFIG.PORT", router, contextChangeHandler);
 		this.commandHash.put(Pattern.compile("^card ([0-9]+)"), new CommandHandler("setCardContext",false));
 	}
 	

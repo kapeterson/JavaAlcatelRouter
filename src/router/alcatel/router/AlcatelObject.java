@@ -21,13 +21,19 @@ public abstract class AlcatelObject {
 		this.objectType = objectType;
 	}
 	
-	protected void setObjectName(String objName){
+	
+	public String getName(){
+		return this.objectName;
+	}
+	
+	public void setObjectName(String objName){
 		objectName = objName;
 	}
 	
-	protected void setObjectType(AlcatelObjectType objecttype){
+	public void setObjectType(AlcatelObjectType objecttype){
 		objectType = objecttype;
 	}
+	
 	public AlcatelObjectType getObjectType(){
 		return objectType;
 	}
