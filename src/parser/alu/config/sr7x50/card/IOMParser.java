@@ -11,7 +11,7 @@ import router.alcatel.router.card.*;
 
 /**
  * IOM Parser for parsing all configuration inside each individual card context
- * @author pete
+ * @author Kris Peterson
  *
  */
 public class IOMParser extends ConfigurationSection {
