@@ -1,16 +1,33 @@
 package router.alcatel.router.card;
 
-
+/**
+ * Models SR 7x50 IOM 
+ * @author Kris Peterson
+ *
+ */
 public class SRIOMObject extends SRCardObject{
     protected SRMDAObject[] mdas;
     
+    /**
+     * Empty constructor
+     */
     public SRIOMObject(){
     	super();
     }
     
+    /**
+     * Constructor with card number only
+     * @param cardNumber integer slot position relative 1
+     */
     public SRIOMObject(int cardNumber){
     	super(cardNumber);
     }
+    
+    /**
+     * Constructor using card number and type
+     * @param cardNumber  Integer slot number relative 1
+     * @param ctype	Card type
+     */
 	public SRIOMObject(int cardNumber, String ctype){
 		super(cardNumber, ctype);
 		mdas = new SRMDAObject[2];
@@ -19,10 +36,22 @@ public class SRIOMObject extends SRCardObject{
 		
 	}
 
+
+	/**
+	 * Assigns the mda object to the complex relative 1
+	 * 
+	 * @param complex Integer value of the complex in which the mda resides relative 1
+	 * @param mda  MDAObject to put in position complex
+	 */
 	public void setMDA(int complex, SRMDAObject mda){
 		mdas[complex-1] = mda;
 	}
 	
+	/**
+	 * {@link SRIOMObject:#setMDA}
+	 * @param complex
+	 * @param mda
+	 */
 	public void addMDA(int complex, SRMDAObject mda){
 		setMDA(complex, mda);
 	}
@@ -38,6 +67,10 @@ public class SRIOMObject extends SRCardObject{
 		return mdas[complex-1];
 	}
 	
+	
+	/**
+	 * Always returns true
+	 */
 	public boolean isIOMObject(){
 		return true;
 	}
