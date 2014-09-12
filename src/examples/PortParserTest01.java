@@ -5,6 +5,7 @@ package examples;
 import parser.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.card.SRCardObject;
+import router.alcatel.router.port.SRPortObject;
 
 
 public class PortParserTest01 {
@@ -20,16 +21,16 @@ public class PortParserTest01 {
 		try {
 			pman.ParseConfig(cfile);
 			SRChassisObject router = pman.getRouter();
-			for ( Integer key : router.Cards.getCards().keySet()){
+			for ( String key : router.Ports.getPorts().keySet()){
 				
-				SRCardObject card = router.Cards.getCard(key);
-				System.out.format("\nCard %s  card-type %s \n", card.getSlotNumber(), card.getCardType());
+				SRPortObject port = router.Ports.getPort(key);
+				System.out.format("Port %s  Shutdown: %s \n", port.getName(), port.isShutdown());
 	
 				
 			}
 			
 		} catch ( Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("Run test error : " + e.getMessage());
 		}
 	}
 

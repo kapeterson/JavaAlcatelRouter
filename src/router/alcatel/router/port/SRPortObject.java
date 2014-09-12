@@ -4,14 +4,18 @@ import router.alcatel.router.*;
 
 /**
  * Models an SR Physical Port Object
- * @author pete
+ * @author Kris Peterson
  *
  */
 public class SRPortObject extends AlcatelObject {
 	
 	/** Boolean values storing shutdown state **/
-	protected boolean isShutdown = false;
+	protected boolean isShutdown = true;
 	
+	
+	/**
+	 *	Instantiate an SRPortObject
+	 */
 	public SRPortObject(){
 		super(AlcatelObjectType.PHYSICALPORT);
 		
@@ -40,6 +44,20 @@ public class SRPortObject extends AlcatelObject {
 	}
 	
 	
+	/**
+	 * 
+	 * @return boolean value stating whether or not the port is Shutdown
+	 */
+	public boolean isShutdown(){
+		return this.isShutdown;
+	}
 	
+	/**
+	 * Status of admin up
+	 * @return boolean value telling whether or not the port is up
+	 */
+	public boolean isAdminUp(){
+		return !this.isShutdown();
+	}
 	
 }

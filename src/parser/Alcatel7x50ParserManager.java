@@ -35,6 +35,7 @@ public class Alcatel7x50ParserManager implements ContextChange {
 		contextHash.put("echo \"System Security Configuration\"", defaultParser);
 		contextHash.put("echo \"Card Configuration\"", new CardParser(router, this));
 		contextHash.put("echo \"Port Configuration\"", new PortConfigurationParser(router, this));
+		contextHash.put("echo \"Redundancy Configuration\"", defaultParser);
 	}
 	
 	public void setActiveParser(ConfigurationSection parser){
@@ -59,12 +60,12 @@ public class Alcatel7x50ParserManager implements ContextChange {
 			br.close();
 
 		} catch ( Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("ERROR : " + e.getMessage());
 		}
 	}
 	
 	public void ParseLine(String linetoparse){
-		
+		try {
 		// Check for context switch
 		if ( contextHash.containsKey(linetoparse)) {
 			System.out.println("Context switch to contxt " + linetoparse);
@@ -78,6 +79,9 @@ public class Alcatel7x50ParserManager implements ContextChange {
 			} else {
 				activeParser.Parse(linetoparse);
 			}
+		}
+		} catch ( Exception err){
+			System.out.println("Error parsing line: " + err.getMessage());
 		}
 	}
 	

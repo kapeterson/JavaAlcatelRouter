@@ -1,6 +1,7 @@
 package router.alcatel.router;
 import java.util.Hashtable;
 import router.alcatel.router.system.*;
+import router.alcatel.router.port.*;
 
 
 /**
@@ -15,6 +16,7 @@ public class SRChassisObject extends AlcatelHardwareObject  {
 	//protected SRCardConfiguration = null;
 	public SRCardConfiguration Cards = null;
 	public SRSystemConfiguration System = null;
+	public SRPortConfiguration Ports = null;
 	
 	public String chassisType;
 	protected Hashtable<String, AlcatelHardwareObject> hardwareIndexMap = null;
@@ -24,6 +26,8 @@ public class SRChassisObject extends AlcatelHardwareObject  {
 		super(AlcatelObjectType.CHASSIS);
 		Cards = new SRCardConfiguration();
 		System = new SRSystemConfiguration();
+		Ports = new SRPortConfiguration();
+		
 		chassisType = "NA";
 		hardwareIndexMap = new Hashtable<String, AlcatelHardwareObject>();
 	}
