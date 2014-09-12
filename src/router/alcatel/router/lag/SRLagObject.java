@@ -36,10 +36,18 @@ public class SRLagObject extends AlcatelObject{
 		this.description = description;
 	}
 
+	/**
+	 * 
+	 * @return Returns String lag description
+	 */
 	public String getDescription(){
 		return this.description;
 	}
 	
+	/**
+	 * Adds port to the lag
+	 * @param port SRPortObject to add to the lag
+	 */
 	public void addPort(SRPortObject port){
 		ports.put(port.getName(), port);
 	}
@@ -53,25 +61,49 @@ public class SRLagObject extends AlcatelObject{
 		return this.ports;
 	}
 	
+	
+	/**
+	 * Sets the number of the lag
+	 * @param lagnumber Integer lag number
+	 */
 	public void setLagNumber(Integer lagnumber){
 		this.lagnumber = lagnumber;
 	}
 	
+	/**
+	 * 
+	 * @return Integer lag number
+	 */
 	public Integer getLagNumber(){
 		return this.lagnumber;
 	}
 	
+	/**
+	 * Forces the state of the lag to admin down / shutdown
+	 */
 	public void adminDown(){
 		this.isShutdown = true;
 	}
+	
+	/**
+	 * Forces the state of the lag to admin up / no shutdown
+	 */
 	public void adminUp(){
 		this.isShutdown = false;
 	}
 	
+	/**
+	 * 
+	 * @return is the lag shutdown
+	 */
 	public boolean isShutdown(){
 		return this.isShutdown;
 	}
 	
+	/**
+	 * 
+	 * @return boolean is the lad admin up a.k.a.  'no shutdown'
+	 */
 	public boolean isAdminUp(){
 		return !this.isShutdown();
 	}
