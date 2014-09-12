@@ -96,7 +96,7 @@ public abstract class ConfigurationSection    {
 					methodToCall.invoke(this,matcher);
 					
 				} catch ( Exception err ){
-					System.out.println("Error invoking method  " + err.getMessage());
+					System.out.println("Error invoking method  " + mName + " error = " + err.getMessage());
 				}
 			}
 		}
@@ -165,7 +165,7 @@ public abstract class ConfigurationSection    {
 	 */
 	public void defaultExitHandler(Matcher matcher){
 		if ( this.getLastCommandDepth() == this.sectionDepth) {
-			contextChange.contextChangeCallback(this, this.getParent());
+			this.getContextNotifier().contextChangeCallback(this, this.getParent());
 		}
 	}
 

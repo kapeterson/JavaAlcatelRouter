@@ -17,7 +17,7 @@ import router.alcatel.router.card.*;
 public class IOMParser extends ConfigurationSection {
 	
 	/** Model of the SRCardObject **/
-	SRCardObject card = null;
+	SRIOMObject iom = null;
 	
 	/**
 	 * Instantiates the IOM Parser for a single card
@@ -28,8 +28,19 @@ public class IOMParser extends ConfigurationSection {
 	public IOMParser(SRChassisObject router, ContextChange contextChangeHandler, int cardNumber){
 		
 		super("CONFIG.CARD.IOM", router, contextChangeHandler);
-		card = new SRCardObject(cardNumber,"");
+		iom = new SRIOMObject(cardNumber,"");
 		this.commandHash.put(Pattern.compile("^card\\-type (.*)"), new CommandHandler("setCardType",false));
+		this.commandHash.put(Pattern.compile("^mda ([1-2])$"), new CommandHandler("changeToMDAContext",true));
+	}
+	
+	
+	public void changeToMDAContext(Matcher matcher){
+		int mdaNumber = Integer.parseInt(matcher.group(1));
+		ConfigurationSection mdaSection = new MDAParser(this.router,this.getContextNotifier(), iom,  mdaNumber);
+		mdaSection.setParent(this);
+		mdaSection.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, mdaSection);
+		
 	}
 	
 	/**
@@ -38,7 +49,7 @@ public class IOMParser extends ConfigurationSection {
 	 */
 	public void setCardType(Matcher matcher){
 		//System.out.println("Card-type = " + matcher.group(1));
-		this.card.setCardType(matcher.group(1));
+		this.iom.setCardType(matcher.group(1));
 	}
 	
 	/**
@@ -48,9 +59,11 @@ public class IOMParser extends ConfigurationSection {
 	public void exitSection(Matcher matcher){
 		if ( this.getLastCommandDepth() == this.sectionDepth) {
 			//System.out.format("Exiting card %s of card type %s\n", card.getSlotNumber(), card.getCardType() );
-			router.Cards.addCard(card.getSlotNumber(), card);
+			router.Cards.addCard(iom.getSlotNumber(), iom);
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
 		}
 	}
+	
+
 	
 }

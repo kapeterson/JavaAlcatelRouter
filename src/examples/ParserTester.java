@@ -4,7 +4,8 @@ import java.io.FileReader;
 
 import parser.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.card.SRCardObject;
+import router.alcatel.router.card.*;
+
 
 public class ParserTester {
 
@@ -34,7 +35,14 @@ public class ParserTester {
 			for ( Integer key : router.Cards.getCards().keySet()){
 				
 				SRCardObject card = router.Cards.getCard(key);
-				System.out.format("Card %s  card-type %s \n", card.getSlotNumber(), card.getCardType());
+				System.out.format("\nCard %s  card-type %s \n", card.getSlotNumber(), card.getCardType());
+				if ( card.isIOMObject()) {
+					for ( int i = 1; i <=2;i++){
+						SRMDAObject mda = ((SRIOMObject) card).getMDA(i);
+						if ( mda != null)
+							System.out.format("\tMDA: %d  Type: %s\n", mda.getComplex(), mda.getMDAType());
+					}
+				}
 				
 			}
 		} catch ( Exception e) {

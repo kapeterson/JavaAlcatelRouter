@@ -59,6 +59,7 @@ public class Alcatel7x50ParserManager implements ContextChange {
 	}
 	
 	public void contextChangeCallback(ConfigurationSection oldSection, ConfigurationSection newSection){
+		
 		/*
 		if ( newSection == null) {
 			System.out.println("Handing back to null section");
