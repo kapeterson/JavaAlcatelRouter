@@ -39,6 +39,8 @@ public abstract class ConfigurationSection    {
 	protected int sectionDepth = -1;
 	
 	
+	protected String currentLine = "";
+	
 	/**
 	 * 
 	 * @param configSectionName	Custom string for the configuration section.  Each subclass should be unique
@@ -68,7 +70,7 @@ public abstract class ConfigurationSection    {
 	 * @param line	Single line from the configuration file
 	 */
 	public void Parse(String line){
-
+		this.currentLine = line;
 		for ( Pattern regex: commandHash.keySet()){
 
 			Matcher matcher = regex.matcher(line.trim());
@@ -102,6 +104,9 @@ public abstract class ConfigurationSection    {
 		}
 	}
 
+	public String getCurrentLine(){
+		return this.currentLine;
+	}
 	/**
 	 * Set the parent configuration section/mode.
 	 * @param section	Section that is the parent for the current context/mode.

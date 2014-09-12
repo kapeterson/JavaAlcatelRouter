@@ -16,7 +16,7 @@ public class PortConfigurationParser extends ConfigurationSection {
 
 	public PortConfigurationParser(SRChassisObject router, ContextChange contextChangeHandler){
 		super("CONFIG.PORT", router, contextChangeHandler);
-		System.out.println("Instantiated port configuration parser");
+		//System.out.println("Instantiated port configuration parser");
 		this.commandHash.put(Pattern.compile("^port ([0-9]+\\/[0-9]+\\/[0-9]+)"), new CommandHandler("setPortContext", true));
 	}
 	
