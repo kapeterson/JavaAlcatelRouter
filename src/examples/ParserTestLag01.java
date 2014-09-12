@@ -24,6 +24,7 @@ public class ParserTestLag01 {
 				SRLagObject lag = router.Lags.getLag(lagNumber);
 				//System.out.format("%-7s %-10s  AdminUp: %-8s Desc: %25s \n", "PORT", port.getName(), port.isAdminUp() ,port.getDescription());
 				System.out.format("\nLag %d\n", lag.getLagNumber());
+				System.out.println("\tAdmin Up: " + lag.isAdminUp());
 				System.out.println("\tDescription: " + lag.getDescription());
 				for ( String portName : lag.getPorts().keySet()){
 					System.out.println("\t" + portName);

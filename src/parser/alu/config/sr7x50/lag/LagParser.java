@@ -18,9 +18,20 @@ public class LagParser extends ConfigurationSection {
 		lag = new SRLagObject(lagNumber);
 		this.commandHash.put(Pattern.compile("^port ([0-9]+\\/[0-9]+\\/[0-9]+)"), new CommandHandler("addPort", true));
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
+		this.commandHash.put(Pattern.compile("^shutdown"), new CommandHandler("adminDown", true));
+		this.commandHash.put(Pattern.compile("^no shutdown"), new CommandHandler("adminUp", true));
+
+
 
 	}
 	
+	public void adminUp(Matcher matcher){
+		this.lag.adminUp();
+	}
+	
+	public void adminDown(Matcher matcher){
+		this.lag.adminDown();
+	}
 	
 	public void setDescription(Matcher matcher){
 		lag.setDescription(matcher.group(1));

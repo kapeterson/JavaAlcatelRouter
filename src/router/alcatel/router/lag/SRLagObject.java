@@ -60,4 +60,19 @@ public class SRLagObject extends AlcatelObject{
 	public Integer getLagNumber(){
 		return this.lagnumber;
 	}
+	
+	public void adminDown(){
+		this.isShutdown = true;
+	}
+	public void adminUp(){
+		this.isShutdown = false;
+	}
+	
+	public boolean isShutdown(){
+		return this.isShutdown;
+	}
+	
+	public boolean isAdminUp(){
+		return !this.isShutdown();
+	}
 }
