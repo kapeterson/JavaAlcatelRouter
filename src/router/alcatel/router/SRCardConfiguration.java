@@ -4,10 +4,23 @@ import java.util.Hashtable;
 
 import router.alcatel.router.card.SRCardObject;
 
+
+/**
+ * Exposes the card configuration section of the router.  Can then get lists
+ * of cards, and access the MDA, CPM and any configured parameters.
+ * @author pete
+ *
+ */
 public class SRCardConfiguration {
 	
+	/** Hashtable of the cards.  key = cardNumber value=SRCardObject **/
 	protected TreeMap<Integer, SRCardObject> cards = null;
+	
+	/** Hashtable of cardTypes.  Used when populating through SNMP.  Can lookup actual text card type by index **/
     protected Hashtable<String, String> cardTypes = null;
+    
+    /** Hashtable of mdaTypes.  Used when populating through SNMP>  Can lookup actual text mda type by index **/
+    
     protected Hashtable<String, String> mdaTypes = null;
     
 	//protected Hashtable<String, AlcatelHardwareObject> hardwareIndexMap = null;
@@ -20,23 +33,20 @@ public class SRCardConfiguration {
 		//hardwareIndexMap = new Hashtable<String, AlcatelHardwareObject>();
 	}
 	
-    /*
-    public boolean hasHardwareIndex(String indx){
-    	return hardwareIndexMap.containsKey(indx);
-    }
-    
-    public AlcatelHardwareObject getHardwareByIndex(String indx){
-    	return hardwareIndexMap.get(indx);
-    }
-    public void addIndexMap(String indx, AlcatelHardwareObject hw){
-    		hardwareIndexMap.put(indx, hw);
-    }
-    */
-    
+
+    /**
+     * Gets the card type when supplied with the card type index from SNMP
+     * @param indx Index of the card-type that ws populated through snmp
+     * @return Returns the text value of the card-type
+     */
 	public String getCardTypeByIndex(String indx){
 		return cardTypes.get(indx);
 	}
 	
+	/**
+	 * set the value of the card type hash
+	 * @param cardtypes Hashtable that contains the index and card type
+	 */
 	public void setCardTypes(Hashtable<String, String> cardtypes){
 		cardTypes = cardtypes;
 	}

@@ -3,6 +3,13 @@ package router.alcatel.router;
 // object types
 // HARDWARE
 
+
+/**
+ * Base AlcatelObject class from which all objects of the router should derive.
+ * Allows us to determine the type of object we are dealing with.
+ * @author pete
+ *
+ */
 public class AlcatelObject {
 
 	

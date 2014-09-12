@@ -3,6 +3,13 @@ import java.util.Hashtable;
 import router.RouterObject;
 import router.alcatel.router.system.*;
 
+
+/**
+ * Top level object for the router model.  exposes all configuration sections including System, Card etc.
+ * 
+ * @author pete
+ *
+ */
 public class SRChassisObject extends AlcatelHardwareObject  {
 
 	
@@ -36,10 +43,20 @@ public class SRChassisObject extends AlcatelHardwareObject  {
 		return chassisType;
 	}
 	
+	/**
+	 * Sets the chassis type
+	 * @param chassis  String value for the chassis type
+	 */
 	public void setChassisType(String chassis){
 		chassisType = chassis;
 	}
 	
+	/**
+	 * Returns whether or not the object is a chassis Object
+	 * O
+	 * @return True for all instances
+	 */
+	@Override
 	public boolean isChassisObject(){
 		return true;
 	}
