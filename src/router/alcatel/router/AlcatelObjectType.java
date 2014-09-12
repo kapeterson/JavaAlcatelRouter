@@ -14,5 +14,6 @@ public enum AlcatelObjectType {
 	CPM,
 	XF, 
 	PHYSICALPORT,
+	LAG,
 	};
 
