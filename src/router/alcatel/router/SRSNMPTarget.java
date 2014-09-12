@@ -1,14 +1,11 @@
 package router.alcatel.router;
-import java.net.*;
 import java.io.IOException;
-import java.net.Inet4Address;
 
 import org.snmp4j.CommunityTarget;
 import org.snmp4j.PDU;
 import org.snmp4j.Snmp;
 import org.snmp4j.TransportMapping;
 import org.snmp4j.event.ResponseEvent;
-import org.snmp4j.event.ResponseListener;
 import org.snmp4j.mp.SnmpConstants;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
 import org.snmp4j.Target;
@@ -17,12 +14,8 @@ import org.snmp4j.smi.VariableBinding;
 import org.snmp4j.smi.Address;
 import org.snmp4j.smi.GenericAddress;
 import org.snmp4j.smi.OctetString;
-import org.snmp4j.util.TreeUtils;
-import org.snmp4j.util.TreeEvent;
 
-import java.util.List;
 
-import org.snmp4j.util.DefaultPDUFactory;
 
 
 public class SRSNMPTarget {

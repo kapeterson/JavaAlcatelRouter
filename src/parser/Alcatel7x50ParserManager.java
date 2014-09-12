@@ -8,9 +8,7 @@ import parser.alu.config.sr7x50.system.*;
 import parser.alu.config.sr7x50.card.*;
 import parser.alu.config.sr7x50.port.*;
 import router.alcatel.router.*;
-import router.alcatel.router.card.SRCardObject;
-import router.alcatel.router.card.SRIOMObject;
-import router.alcatel.router.card.SRMDAObject;
+
 /**
  * Simple Description
  */

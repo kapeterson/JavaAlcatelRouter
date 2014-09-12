@@ -4,7 +4,6 @@ package examples;
 
 import parser.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.card.SRCardObject;
 import router.alcatel.router.port.SRPortObject;
 
 
