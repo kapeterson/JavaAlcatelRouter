@@ -5,4 +5,4 @@
  * @author kp109p
  *
  */
-package alcatel.router;
+package router.alcatel.router;

@@ -1,4 +1,4 @@
-package alcatel.router.system;
+package router.alcatel.router.system;
 
 public class SRSystemConfiguration {
 	protected String hostname;

@@ -1,6 +1,6 @@
-package alcatel.router.card;
+package router.alcatel.router.card;
 
-import alcatel.router.AlcatelHardwareObject;
+import router.alcatel.router.AlcatelHardwareObject;
 
 public class SRCardObject extends AlcatelHardwareObject{
 	

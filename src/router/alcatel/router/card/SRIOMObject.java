@@ -1,4 +1,4 @@
-package alcatel.router.card;
+package router.alcatel.router.card;
 
 
 public class SRIOMObject extends SRCardObject{

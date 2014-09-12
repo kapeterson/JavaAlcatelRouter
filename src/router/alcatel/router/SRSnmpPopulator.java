@@ -1,8 +1,9 @@
-package alcatel.router;
+package router.alcatel.router;
 import java.io.IOException;
 
 import org.snmp4j.smi.OID;
 import org.snmp4j.smi.VariableBinding;
+
 
 
 
@@ -17,10 +18,10 @@ import org.snmp4j.util.DefaultPDUFactory;
 import org.snmp4j.util.TreeEvent;
 import org.snmp4j.util.TreeUtils;
 
-import alcatel.router.card.SRCPMObject;
-import alcatel.router.card.SRCardObject;
-import alcatel.router.card.SRIOMObject;
-import alcatel.router.card.SRMDAObject;
+import router.alcatel.router.card.SRCPMObject;
+import router.alcatel.router.card.SRCardObject;
+import router.alcatel.router.card.SRIOMObject;
+import router.alcatel.router.card.SRMDAObject;
 
 import java.util.regex.Matcher;
 import java.util.TreeMap;

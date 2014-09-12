@@ -15,8 +15,9 @@ import org.snmp4j.util.TreeUtils;
 
 
 
-import alcatel.router.SRChassisObject;
-import alcatel.router.SRSNMPTarget;
+
+import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.SRSNMPTarget;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,4 +1,4 @@
-package alcatel.router;
+package router.alcatel.router;
 
 
 

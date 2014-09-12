@@ -1,7 +1,7 @@
-package alcatel.router;
-import alcatel.router.system.*;
-
+package router.alcatel.router;
 import java.util.Hashtable;
+
+import router.alcatel.router.system.*;
 public class SRChassisObject extends AlcatelHardwareObject {
 
 	

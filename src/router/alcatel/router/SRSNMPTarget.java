@@ -1,4 +1,4 @@
-package alcatel.router;
+package router.alcatel.router;
 import java.net.*;
 import java.io.IOException;
 import java.net.Inet4Address;

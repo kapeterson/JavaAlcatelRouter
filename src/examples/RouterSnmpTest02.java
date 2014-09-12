@@ -12,10 +12,10 @@ import org.snmp4j.util.DefaultPDUFactory;
 import org.snmp4j.util.TreeEvent;
 import org.snmp4j.util.TreeUtils;
 
-import alcatel.router.AlcatelHardwareObject;
-import alcatel.router.SRChassisObject;
-import alcatel.router.SRSNMPTarget;
-import alcatel.router.card.SRCardObject;
+import router.alcatel.router.AlcatelHardwareObject;
+import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.SRSNMPTarget;
+import router.alcatel.router.card.SRCardObject;
 
 import java.util.regex.Matcher;
 

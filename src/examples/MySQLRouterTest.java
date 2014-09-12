@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 
-import alcatel.router.SRChassisObject;
-import alcatel.router.SRSnmpPopulator;
+import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.SRSnmpPopulator;
 
 public class MySQLRouterTest {
 

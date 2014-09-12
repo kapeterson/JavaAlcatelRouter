@@ -1,8 +1,8 @@
-package alcatel.router;
+package router.alcatel.router;
 import java.util.TreeMap;
 import java.util.Hashtable;
 
-import alcatel.router.card.SRCardObject;
+import router.alcatel.router.card.SRCardObject;
 
 public class SRCardConfiguration {
 	
