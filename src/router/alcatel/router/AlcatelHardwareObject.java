@@ -25,7 +25,9 @@ public class AlcatelHardwareObject extends AlcatelObject{
 	/**
 	 * Instantiate the hardware object
 	 */
-	public AlcatelHardwareObject(){
+	public AlcatelHardwareObject(AlcatelObjectType otype){
+		
+		super(otype);
 		serialNumber = "";
 		manufactureDate = "";
 		partNumber = "";

@@ -10,15 +10,15 @@ package router.alcatel.router;
  * @author pete
  *
  */
-public class AlcatelObject {
+public abstract class AlcatelObject {
 
 	
 	private String objectName;
 	private AlcatelObjectType objectType;
 	
-	public AlcatelObject(){
+	public AlcatelObject(AlcatelObjectType objectType){
 		objectName = "";
-		objectType = AlcatelObjectType.NONE;
+		this.objectType = objectType;
 	}
 	
 	protected void setObjectName(String objName){
@@ -52,5 +52,6 @@ public class AlcatelObject {
 		return false;
 	}
 	
+
 	
 }

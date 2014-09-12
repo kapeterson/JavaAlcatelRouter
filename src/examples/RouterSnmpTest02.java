@@ -13,6 +13,7 @@ import org.snmp4j.util.TreeEvent;
 import org.snmp4j.util.TreeUtils;
 
 import router.alcatel.router.AlcatelHardwareObject;
+import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.SRSNMPTarget;
 import router.alcatel.router.card.SRCardObject;
@@ -59,7 +60,8 @@ public class RouterSnmpTest02 {
 				if ( typeName == null)
 					typeName = "EMPTY";
 				
-				SRCardObject tcard = new SRCardObject(key, typeName);
+				
+				SRCardObject tcard = new SRCardObject(AlcatelObjectType.NONE, key, typeName);
 				router.Cards.addCard(key, tcard);
 			
 			}

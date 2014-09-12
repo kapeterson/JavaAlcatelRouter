@@ -1,5 +1,6 @@
 package router.alcatel.router.card;
 
+import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.AlcatelHardwareObject;
 
 /**
@@ -22,17 +23,20 @@ public class SRCardObject extends AlcatelHardwareObject{
      * Default constructor for CardObject
      */
     
-    public SRCardObject(){
+    public SRCardObject(AlcatelObjectType objectType){
+    	super(objectType);
     	this.slot = 0;
     	this.cardType = "EMPTY";
     }
     
-    public SRCardObject(int cardNumber){
+    public SRCardObject(AlcatelObjectType objectType, int cardNumber){
+    	super(objectType);
     	this.slot = cardNumber;
     	this.cardType = "EMPTY";
     }
     
-	public SRCardObject(int cardNumber, String ctype){
+	public SRCardObject(AlcatelObjectType objectType, int cardNumber, String ctype){
+		super(objectType);
 		slot = cardNumber;
 		cardType = ctype; 
 

@@ -1,6 +1,7 @@
 package router.alcatel.router.card;
 
 import router.alcatel.router.AlcatelHardwareObject;
+import router.alcatel.router.AlcatelObjectType;
 /**
  * Models an Alcatel MDA 
  * @author Kris Peterson
@@ -18,6 +19,7 @@ public class SRMDAObject extends AlcatelHardwareObject{
 	 * Default constructor with no parameters
 	 */
 	public SRMDAObject(){
+		super(AlcatelObjectType.MDA);
 		mdaType = "";
 		
 	}
@@ -27,6 +29,7 @@ public class SRMDAObject extends AlcatelHardwareObject{
 	 * @param complex integer value for the MDA complex relative 1.  (i.e. first mda starts at 1)
 	 */
 	public SRMDAObject(int complex){
+		super(AlcatelObjectType.MDA);
 		this.mdaComplex = complex;
 		this.mdaType = "";
 	}
@@ -37,6 +40,7 @@ public class SRMDAObject extends AlcatelHardwareObject{
 	 * @param mdatype  the mda type
 	 */
 	public SRMDAObject(int complex, String mdatype){
+		super(AlcatelObjectType.MDA);
 		this.mdaType = mdatype;
 		this.mdaComplex = complex;
 	}
@@ -46,6 +50,7 @@ public class SRMDAObject extends AlcatelHardwareObject{
 	 * @param mdatype  Type of mda
 	 */
 	public SRMDAObject(String mdatype){
+		super(AlcatelObjectType.MDA);
 		mdaType = mdatype;
 	}
 	

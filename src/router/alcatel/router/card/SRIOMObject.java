@@ -1,5 +1,7 @@
 package router.alcatel.router.card;
 
+import router.alcatel.router.AlcatelObjectType;
+
 /**
  * Models SR 7x50 IOM 
  * @author Kris Peterson
@@ -12,7 +14,7 @@ public class SRIOMObject extends SRCardObject{
      * Empty constructor
      */
     public SRIOMObject(){
-    	super();
+    	super(AlcatelObjectType.IOM);
     }
     
     /**
@@ -20,7 +22,7 @@ public class SRIOMObject extends SRCardObject{
      * @param cardNumber integer slot position relative 1
      */
     public SRIOMObject(int cardNumber){
-    	super(cardNumber);
+    	super(AlcatelObjectType.IOM, cardNumber);
     }
     
     /**
@@ -29,7 +31,7 @@ public class SRIOMObject extends SRCardObject{
      * @param ctype	Card type
      */
 	public SRIOMObject(int cardNumber, String ctype){
-		super(cardNumber, ctype);
+		super(AlcatelObjectType.IOM, cardNumber, ctype);
 		mdas = new SRMDAObject[2];
 		mdas[0] = null;
 		mdas[1] = null;

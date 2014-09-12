@@ -1,6 +1,5 @@
 package router.alcatel.router;
 import java.util.Hashtable;
-import router.RouterObject;
 import router.alcatel.router.system.*;
 
 
@@ -21,8 +20,8 @@ public class SRChassisObject extends AlcatelHardwareObject  {
 	protected Hashtable<String, AlcatelHardwareObject> hardwareIndexMap = null;
 	
 	public SRChassisObject(){
-		this.setObjectType(AlcatelObjectType.CHASSIS);
-		
+
+		super(AlcatelObjectType.CHASSIS);
 		Cards = new SRCardConfiguration();
 		System = new SRSystemConfiguration();
 		chassisType = "NA";

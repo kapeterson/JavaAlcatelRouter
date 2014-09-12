@@ -5,5 +5,12 @@ package router.alcatel.router;
  * @author pete
  *
  */
-public enum AlcatelObjectType { NONE, CHASSIS, IOM, MDA, XF, };
+public enum AlcatelObjectType { 
+	NONE,
+	HARDWAREOBJECT,
+	CHASSIS, 
+	IOM, 
+	MDA, 
+	CPM,
+	XF, };
 

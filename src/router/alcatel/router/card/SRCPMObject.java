@@ -1,5 +1,7 @@
 package router.alcatel.router.card;
 
+import router.alcatel.router.AlcatelObjectType;
+
 /**
  * Models CPM Object
  * @author Kris Peterson
@@ -8,7 +10,7 @@ package router.alcatel.router.card;
 public class SRCPMObject extends SRCardObject{
 	
 	public SRCPMObject(int cardNumber, String ctype){
-		super(cardNumber, ctype);
+		super(AlcatelObjectType.CPM, cardNumber, ctype);
 	}
 	
 	public boolean isCPMObject(){

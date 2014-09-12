@@ -1,6 +1,7 @@
 package examples;
 import java.util.TreeMap;
 
+import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.card.SRCardObject;
 
@@ -21,18 +22,18 @@ public class RouterTest01 {
 			System.out.println("Chassis has part number " + chassis.getPartNumber());
 		}
 		
-		SRCardObject card = new SRCardObject(1, "m20-1gb-tx");
+		SRCardObject card = new SRCardObject(AlcatelObjectType.MDA, 1, "m20-1gb-tx");
 		System.out.println("Card " + String.valueOf(card.getSlotNumber()) + " is " + card.getCardType());
 		
 		chassis.Cards.addCard(card.getSlotNumber(), card);
 
-		card = new SRCardObject(2, "m10-1gb-tx");
+		card = new SRCardObject(AlcatelObjectType.MDA,2, "m10-1gb-tx");
 		chassis.Cards.addCard(card.getSlotNumber(), card);
 
-		card = new SRCardObject(3, "m60-1gb-tx");
+		card = new SRCardObject(AlcatelObjectType.MDA,3, "m60-1gb-tx");
 		chassis.Cards.addCard(card.getSlotNumber(), card);
 		
-		card = new SRCardObject(10, "imm12-sfp-sfp");
+		card = new SRCardObject(AlcatelObjectType.MDA, 10, "imm12-sfp-sfp");
 		chassis.Cards.addCard(card.getSlotNumber(), card);
 		
 		SRCardObject newCard = chassis.Cards.getCard(1);
