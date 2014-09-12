@@ -12,6 +12,7 @@ public class SRPortObject extends AlcatelObject {
 	/** Boolean values storing shutdown state **/
 	protected boolean isShutdown = true;
 	
+	protected String description = "";
 	
 	/**
 	 *	Instantiate an SRPortObject
@@ -58,6 +59,25 @@ public class SRPortObject extends AlcatelObject {
 	 */
 	public boolean isAdminUp(){
 		return !this.isShutdown();
+	}
+	
+	
+	/**
+	 * Sets description of the port
+	 * @param description STring value description for the port
+	 */
+	public void setDescription(String description){
+		this.description = description;
+	}
+	
+	
+	/**
+	 * Gets teh port description
+	 * @return String value of the port description
+	 */
+	
+	public String getDescription(){
+		return this.description;
 	}
 	
 }

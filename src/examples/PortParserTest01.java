@@ -24,7 +24,7 @@ public class PortParserTest01 {
 			for ( String key : router.Ports.getPorts().keySet()){
 				
 				SRPortObject port = router.Ports.getPort(key);
-				System.out.format("Port %s  Shutdown: %s \n", port.getName(), port.isShutdown());
+				System.out.format("%-7s %-10s  AdminUp: %-8s Desc: %25s \n", "PORT", port.getName(), port.isAdminUp() ,port.getDescription());
 	
 				
 			}

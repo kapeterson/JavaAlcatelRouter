@@ -15,10 +15,15 @@ public class PortParser extends ConfigurationSection {
 		super("CONFIG.PORT.PORT", router, contextChangeHandler);
 		this.commandHash.put(Pattern.compile("^no shutdown$"), new CommandHandler("enablePort", true));
 		this.commandHash.put(Pattern.compile("^shutdown$"), new CommandHandler("disablePort", true));
+		this.commandHash.put(Pattern.compile("^description \"(.*)\"$"), new CommandHandler("setPortDescription", true));
 
 		port = new SRPortObject();
 		port.setObjectName(portName);
 		this.router = router;
+	}
+	
+	public void setPortDescription(Matcher matcher){
+		port.setDescription(matcher.group(1));
 	}
 	public void disablePort(Matcher matcher){
 		//System.out.format("\tSet port to admin up for %s\n", port.getName());
@@ -26,7 +31,7 @@ public class PortParser extends ConfigurationSection {
 	}
 	
 	public void enablePort(Matcher matcher){
-		System.out.format("\tSet port to admin up for %s\n", port.getName());
+		//System.out.format("\tSet port to admin up for %s\n", port.getName());
 		port.setAdminUp();
 	}
 	/**
