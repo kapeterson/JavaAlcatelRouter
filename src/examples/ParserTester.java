@@ -4,6 +4,7 @@ import java.io.FileReader;
 
 import parser.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.card.SRCardObject;
 
 public class ParserTester {
 
@@ -30,6 +31,12 @@ public class ParserTester {
 			SRChassisObject router = pman.getRouter();
 			System.out.println("System name is " + router.System.getHostName());
 			
+			for ( Integer key : router.Cards.getCards().keySet()){
+				
+				SRCardObject card = router.Cards.getCard(key);
+				System.out.format("Card %s  card-type %s \n", card.getSlotNumber(), card.getCardType());
+				
+			}
 		} catch ( Exception e) {
 			System.out.println(e.getMessage());
 		}

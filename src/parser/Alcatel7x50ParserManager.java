@@ -3,6 +3,8 @@ package parser;
 import java.util.Hashtable;
 
 import parser.alu.config.sr7x50.system.*;
+import parser.alu.config.sr7x50.card.*;
+
 import router.alcatel.router.*;
 /**
  * Simple Description
@@ -26,7 +28,7 @@ public class Alcatel7x50ParserManager implements ContextChange {
 		
 		// Empty parsers that do nothing
 		contextHash.put("echo \"System Security Configuration\"", defaultParser);
-		contextHash.put("echo \"Card Configuration\"", defaultParser);
+		contextHash.put("echo \"Card Configuration\"", new CardParser(router, this));
 		contextHash.put("echo \"Port Configuration\"", defaultParser);
 	}
 	
@@ -43,6 +45,7 @@ public class Alcatel7x50ParserManager implements ContextChange {
 		// Check for context switch
 		if ( contextHash.containsKey(linetoparse)) {
 			System.out.println("Context switch to contxt " + linetoparse);
+			
 			activeParser = contextHash.get(linetoparse);
 		}  else {
 			
@@ -56,12 +59,13 @@ public class Alcatel7x50ParserManager implements ContextChange {
 	}
 	
 	public void contextChangeCallback(ConfigurationSection oldSection, ConfigurationSection newSection){
+		/*
 		if ( newSection == null) {
 			System.out.println("Handing back to null section");
 		} else {
 			System.out.println("Callback for ContextChange from " + oldSection.getName() + " (depth = " + oldSection.getSectionDepth() + ") to " + newSection.getName() + " depth = " + newSection.getSectionDepth());
 		}
-		
+		*/
 		activeParser = newSection;
 	}
 	

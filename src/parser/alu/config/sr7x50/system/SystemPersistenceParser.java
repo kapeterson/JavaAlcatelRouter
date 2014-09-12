@@ -19,12 +19,12 @@ public class SystemPersistenceParser extends ConfigurationSection {
 	}
 	
 	public void setPersistenceLocation(Matcher matcher){
-		System.out.println("\tSet location of the persistence to " + matcher.group(1));
+		//System.out.println("\tSet location of the persistence to " + matcher.group(1));
 	}
 	
 	
 	public void setDescription(Matcher matcher){
-		System.out.println("\tSet description of the persistence to " + matcher.group(1));
+		//System.out.println("\tSet description of the persistence to " + matcher.group(1));
 	}
 	
 	public void exitSection(Matcher matcher){

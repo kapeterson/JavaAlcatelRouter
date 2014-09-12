@@ -16,7 +16,7 @@ import router.alcatel.router.SRChassisObject;
  * @author Kris Peterson
  *
  */
-public abstract class ConfigurationSection implements Section   {
+public abstract class ConfigurationSection    {
 	
 	protected SRChassisObject router;
 
@@ -154,7 +154,7 @@ public abstract class ConfigurationSection implements Section   {
 	 * (non-Javadoc)
 	 * @see parser.Section#exitSection(java.util.regex.Matcher)
 	 */
-	public abstract void exitSection(Matcher matcher);
+	//public abstract void exitSection(Matcher matcher);
 	
 	/**
 	 * Default handler for exiting a section.  The depth is checked
@@ -168,11 +168,10 @@ public abstract class ConfigurationSection implements Section   {
 			contextChange.contextChangeCallback(this, this.getParent());
 		}
 	}
-	/*
-	public void exitSection(Matcher matcher){
-		if ( this.getLastCommandDepth() == this.sectionDepth) {
-			contextChange.contextChangeCallback(this, this.getParent());
-		}
-	}*/
 
+	public abstract void exitSection(Matcher matcher);
+	
+	public ContextChange getContextNotifier(){
+		return this.contextChange;
+	}
 }
