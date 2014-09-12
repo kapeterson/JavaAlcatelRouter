@@ -4,6 +4,7 @@ import java.util.Hashtable;
 
 import parser.alu.config.sr7x50.system.*;
 import parser.alu.config.sr7x50.card.*;
+import parser.alu.config.sr7x50.port.*;
 
 import router.alcatel.router.*;
 /**
@@ -29,7 +30,7 @@ public class Alcatel7x50ParserManager implements ContextChange {
 		// Empty parsers that do nothing
 		contextHash.put("echo \"System Security Configuration\"", defaultParser);
 		contextHash.put("echo \"Card Configuration\"", new CardParser(router, this));
-		contextHash.put("echo \"Port Configuration\"", defaultParser);
+		contextHash.put("echo \"Port Configuration\"", new PortConfigurationParser(router, this));
 	}
 	
 	public void setActiveParser(ConfigurationSection parser){
