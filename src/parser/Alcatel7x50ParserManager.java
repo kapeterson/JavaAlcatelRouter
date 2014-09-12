@@ -1,12 +1,16 @@
 package parser;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.Hashtable;
 
 import parser.alu.config.sr7x50.system.*;
 import parser.alu.config.sr7x50.card.*;
 import parser.alu.config.sr7x50.port.*;
-
 import router.alcatel.router.*;
+import router.alcatel.router.card.SRCardObject;
+import router.alcatel.router.card.SRIOMObject;
+import router.alcatel.router.card.SRMDAObject;
 /**
  * Simple Description
  */
@@ -39,6 +43,24 @@ public class Alcatel7x50ParserManager implements ContextChange {
 	
 	public SRChassisObject getRouter(){
 		return this.router;
+	}
+	
+	public void ParseConfig(String filelocation){
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("/home/pete/temp/RCSNTXHV0BW010103021LVH01.cfg"));
+
+			String line;
+			while ( br.ready()) {
+				line = br.readLine();
+				this.ParseLine(line);
+
+				
+			}
+			br.close();
+
+		} catch ( Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public void ParseLine(String linetoparse){
