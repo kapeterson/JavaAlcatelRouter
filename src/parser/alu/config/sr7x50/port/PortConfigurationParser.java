@@ -8,6 +8,11 @@ import parser.CommandHandler;
 import parser.ContextChange;
 import router.alcatel.router.SRChassisObject;
 
+/**
+ * Parser for port configuration section
+ * @author Kris Peterson
+ *
+ */
 public class PortConfigurationParser extends ConfigurationSection {
 
 	public PortConfigurationParser(SRChassisObject router, ContextChange contextChangeHandler){
@@ -17,6 +22,10 @@ public class PortConfigurationParser extends ConfigurationSection {
 		this.commandHash.put(Pattern.compile("^port ([0-9]+\\/[0-9]+\\/[0-9]+)"), new CommandHandler("setPortContext", true));
 	}
 	
+	/**
+	 * Change the context to the individual port configuration
+	 * @param matcher  Matcher containing the port number as the first group
+	 */
 	public void setPortContext(Matcher matcher){
 		System.out.println("Received port " + matcher.group(1));
 	}
