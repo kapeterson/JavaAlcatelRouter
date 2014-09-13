@@ -17,15 +17,18 @@ public class LagConfigurationParser extends ConfigurationSection {
 	
 	
 	public void setLagContext(Matcher matcher){
+		
 		//System.out.println("OKaaaaaaaaaaaaaaay " + matcher.group(1));
 		//System.out.println(this.getCurrentLine());
 		//System.out.format("Lag %s\n", matcher.group(1));
+		
 		Integer lagnumber = Integer.parseInt(matcher.group(1));
 		LagParser lagparser = new LagParser(this.router, this.getContextNotifier(), lagnumber);
 		lagparser.setSectionDepth(this.getLastCommandDepth());
 		lagparser.setParent(this);
 		this.getContextNotifier().contextChangeCallback(this, lagparser);
 	}
+	
 	/**
 	 * Use default handler for exiting section
 	 */

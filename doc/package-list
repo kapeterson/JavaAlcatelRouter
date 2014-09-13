@@ -1,11 +1,13 @@
 examples
 parser
 parser.alu.config.sr7x50.card
+parser.alu.config.sr7x50.lag
 parser.alu.config.sr7x50.port
 parser.alu.config.sr7x50.system
 router
 router.alcatel.router
 router.alcatel.router.card
+router.alcatel.router.lag
 router.alcatel.router.port
 router.alcatel.router.system
 router.routerinterface

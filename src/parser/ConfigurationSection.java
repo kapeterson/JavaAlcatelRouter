@@ -71,6 +71,9 @@ public abstract class ConfigurationSection    {
 	 */
 	public void Parse(String line){
 		this.currentLine = line;
+		//if ( this.getName() == "CONFIG.QOS")
+		//	System.out.println(line);
+		
 		for ( Pattern regex: commandHash.keySet()){
 
 			Matcher matcher = regex.matcher(line.trim());

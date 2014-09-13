@@ -8,6 +8,8 @@ import parser.alu.config.sr7x50.system.*;
 import parser.alu.config.sr7x50.card.*;
 import parser.alu.config.sr7x50.port.*;
 import parser.alu.config.sr7x50.lag.*;
+import parser.alu.config.sr7x50.qos.*;
+
 
 import router.alcatel.router.*;
 
@@ -37,6 +39,8 @@ public class Alcatel7x50ParserManager implements ContextChange {
 		contextHash.put("echo \"Port Configuration\"", new PortConfigurationParser(router, this));
 		contextHash.put("echo \"Redundancy Configuration\"", defaultParser);
 		contextHash.put("echo \"LAG Configuration\"", new LagConfigurationParser(router, this));
+		contextHash.put("echo \"QoS Policy Configuration\"", new QosConfigurationParser(router,this));
+		contextHash.put("echo \"Filter Configuration\"", defaultParser);
 	}
 	
 	public void setActiveParser(ConfigurationSection parser){
