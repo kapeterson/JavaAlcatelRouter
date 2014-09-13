@@ -2,7 +2,7 @@ package router.alcatel.router.qos;
 
 import java.util.TreeMap;
 
-public class QOSConfiguration {
+public class SRQOSConfiguration {
 	
 	protected TreeMap<Integer, NetworkQOSPolicy> networkPolicies = null;
 	protected TreeMap<Integer, SAPIngressQOSPolicy> sapIngressPolicies = null;
@@ -10,7 +10,7 @@ public class QOSConfiguration {
 	protected TreeMap<String, NetworkQueueQOSPolicy> networkQueuePolicies = null;
 
 	
-	public QOSConfiguration(){
+	public SRQOSConfiguration(){
 		networkPolicies = new TreeMap<Integer, NetworkQOSPolicy>();
 		sapIngressPolicies = new TreeMap<Integer, SAPIngressQOSPolicy>();
 		sapEgressPolicies = new TreeMap<Integer, SAPEgressQOSPolicy>();
@@ -47,6 +47,22 @@ public class QOSConfiguration {
 	
 	public SAPEgressQOSPolicy getSAPEgressQOSPolicy(Integer policyNumber){
 		return this.sapEgressPolicies.get(policyNumber);
+	}
+	
+	public TreeMap<Integer, SAPEgressQOSPolicy> getSAPEgressQOSPolicies(){
+		return this.sapEgressPolicies;
+	}
+	
+	public TreeMap<Integer, SAPIngressQOSPolicy> getSAPIngressQOSPolicies(){
+		return this.sapIngressPolicies;
+	}
+	
+	public TreeMap<Integer, NetworkQOSPolicy> getNetworkQOSPolicies(){
+		return this.networkPolicies;
+	}
+	
+	public TreeMap<String, NetworkQueueQOSPolicy> getNetworkQueueQOSPolicies(){
+		return this.networkQueuePolicies;
 	}
 	
 }

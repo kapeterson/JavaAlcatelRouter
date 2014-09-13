@@ -7,7 +7,7 @@ import parser.CommandHandler;
 import parser.ConfigurationSection;
 import parser.ContextChange;
 import router.alcatel.router.SRChassisObject;
-
+import router.alcatel.router.qos.*;
 public class QosConfigurationParser extends ConfigurationSection {
 	
 	public QosConfigurationParser(SRChassisObject router, ContextChange contextChangeHandler){
@@ -22,20 +22,34 @@ public class QosConfigurationParser extends ConfigurationSection {
 	}
 	
 	public void setNetworkQueueQosContext(Matcher matcher){
-		System.out.println("Network-queue " + matcher.group(1));
+		//System.out.println("Network-queue " + matcher.group(1));
+		NetworkQueueQOSPolicy policy = new NetworkQueueQOSPolicy();
+		policy.setPolicyName(matcher.group(1));
+		this.router.QOS.addNetworkQueueQOSPolicy(policy);
 	}
 	
 	public void setSapEgressContext(Matcher matcher){
-		System.out.println("Sap egress " + matcher.group(1));
+		//System.out.println("Sap egress " + matcher.group(1));
+		SAPEgressQOSPolicy policy = new SAPEgressQOSPolicy();
+		policy.setPolicyNumber(Integer.parseInt(matcher.group(1)));
+		this.router.QOS.addSAPEgressQOSPolicy(policy);
 	}
 	
 	public void setNetworkQosContext(Matcher matcher){
-		System.out.println("Network QOS " + matcher.group(1));
+		//System.out.println("Network QOS " + matcher.group(1));
+		NetworkQOSPolicy policy = new NetworkQOSPolicy();
+		policy.setPolicyNumber(Integer.parseInt(matcher.group(1)));
+		this.router.QOS.addNetworkQOSPolicy(policy);
+			
 	}
 	
 	public void setSapIngressContext(Matcher matcher){
-		System.out.println("Sap ingress " + matcher.group(1));
+		//System.out.println("Sap ingress " + matcher.group(1));
+		SAPIngressQOSPolicy policy = new SAPIngressQOSPolicy();
+		policy.setPolicyNumber(Integer.parseInt(matcher.group(1)));
+		this.router.QOS.addSAPIngressQOSPolicy(policy);
 	}
+	
 	/**
 	 * Use default handler for exiting section
 	 */
