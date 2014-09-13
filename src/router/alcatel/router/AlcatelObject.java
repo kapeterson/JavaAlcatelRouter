@@ -63,6 +63,30 @@ public abstract class AlcatelObject {
 		return (this.getObjectType() == AlcatelObjectType.CPM);
 	}
 	
+	public boolean isQOSPolicy(){
+		return false;
+	}
+	
+	public boolean isNetworkQOSPolicy(){
+		return ( this.getObjectType() == AlcatelObjectType.NETWORKQOSPOLICY);
+	}
+	
+	public boolean isNetworkQueueQOSPolicy(){
+		return ( this.getObjectType() == AlcatelObjectType.NETWORKQUEUEQOSPOLICY);
+	}
+	
+	public boolean isSAPEgressQOSPolicy(){
+		return ( this.getObjectType() == AlcatelObjectType.SAPEGRESSQOSPOLICY);
+	}
+	
+	public boolean isSAPIngressQOSPolicy(){
+		return ( this.getObjectType() == AlcatelObjectType.SAPINGRESSQOSPOLICY);
+	}
+	
+	public boolean isSAPQOSPolicy(){
+		return false;
+	}
+	
 
 	
 }
