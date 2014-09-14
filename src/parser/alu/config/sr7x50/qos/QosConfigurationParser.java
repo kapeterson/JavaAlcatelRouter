@@ -17,8 +17,6 @@ public class QosConfigurationParser extends ConfigurationSection {
 		this.commandHash.put(Pattern.compile("^network ([0-9]+) create"), new CommandHandler("setNetworkQosContext", true));
 		this.commandHash.put(Pattern.compile("^network\\-queue \"([0-9]+)\" create"), new CommandHandler("setNetworkQueueQosContext", true));
 
-
-
 	}
 	
 	public void setNetworkQueueQosContext(Matcher matcher){
