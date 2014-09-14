@@ -1,16 +1,17 @@
-package parser;
+package parser.manager;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Hashtable;
 
+import parser.ConfigurationSection;
+import parser.ContextChange;
+import parser.DefaultConfigurationSection;
 import parser.alu.config.sr7x50.system.*;
 import parser.alu.config.sr7x50.card.*;
 import parser.alu.config.sr7x50.port.*;
 import parser.alu.config.sr7x50.lag.*;
 import parser.alu.config.sr7x50.qos.*;
-
-
 import router.alcatel.router.*;
 
 /**

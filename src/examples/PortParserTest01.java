@@ -2,7 +2,7 @@ package examples;
 
 
 
-import parser.Alcatel7x50ParserManager;
+import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.port.SRPortObject;
 
