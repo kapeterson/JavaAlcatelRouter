@@ -127,6 +127,10 @@ public abstract class AlcatelObject {
 	public boolean isSDPObject(){
 		return false;
 	}
+	
+	public boolean isSAPObject(){
+		return false;
+	}
 
 	
 }

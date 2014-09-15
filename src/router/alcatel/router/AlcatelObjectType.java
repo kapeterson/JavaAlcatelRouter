@@ -35,6 +35,7 @@ public enum AlcatelObjectType {
 	IESSERVICE,
 	VPRNSERVICE,
 	EPIPESERVICE,
+	SAPOBJECT,
 	
 	};
 
