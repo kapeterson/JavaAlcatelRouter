@@ -13,8 +13,42 @@ public class ServiceConfigurationParser extends ConfigurationSection {
 	public ServiceConfigurationParser(SRChassisObject router, ContextChange contextChangeHandler){
 		super("CONFIG.SERVICE", router, contextChangeHandler);
 		this.commandHash.put(Pattern.compile("^vpls ([0-9]+) .*"), new CommandHandler("setVPLSContext", true));
+		this.commandHash.put(Pattern.compile("^sdp ([0-9]+) (mpls)? create"), new CommandHandler("setSDPContext", true));
+		this.commandHash.put(Pattern.compile("^ies ([0-9]+) customer .* create"), new CommandHandler("setIESContext", true));
 
 	}
+	
+	
+	public void setIESContext(Matcher matcher){
+
+		//System.out.println("ies " + matcher.group(1) );
+		
+		
+		
+		Integer vplsnumber = Integer.parseInt(matcher.group(1));
+		IESParser parser = new IESParser(this.router, this.getContextNotifier(), vplsnumber);
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
+		
+		
+	}
+	
+	public void setSDPContext(Matcher matcher){
+
+		//System.out.println("sdp " + matcher.group(1) + " mpls = " + matcher.group(2));
+	
+		
+		
+		Integer vplsnumber = Integer.parseInt(matcher.group(1));
+		SDPParser parser = new SDPParser(this.router, this.getContextNotifier(), vplsnumber);
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
+		
+	}
+	
+	
 	
 	public void setVPLSContext(Matcher matcher){
 
