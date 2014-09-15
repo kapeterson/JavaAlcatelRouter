@@ -115,6 +115,18 @@ public abstract class AlcatelObject {
 	public boolean isService(){
 		return false;
 	}
+	
+	public boolean isVPLSObject(){
+		return false;
+	}
+	
+	public boolean isIESObject(){
+		return false;
+	}
+	
+	public boolean isSDPObject(){
+		return false;
+	}
 
 	
 }
