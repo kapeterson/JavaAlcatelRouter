@@ -90,6 +90,17 @@ public abstract class ConfigurationSection    {
 					this.contextChange.contextDepthChange(depth);
 				}
 
+				/*
+				if ( this.getName() == "CONFIG.FILTER" || this.getName() == "CONFIG.FILTER.IP"){
+					
+					if ( line.contains("filter"))
+						System.out.println(line + " at depth = " + this.getLastCommandDepth());
+					
+					if ( line.contains("exit") && this.getLastCommandDepth() <  12)
+						System.out.println(line + " at " + this.getLastCommandDepth());
+				}
+				*/
+				
 				Class<? extends ConfigurationSection> c = this.getClass();
 				String mName = "";
 				

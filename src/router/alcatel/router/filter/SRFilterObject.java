@@ -18,6 +18,9 @@ public abstract class SRFilterObject {
 		this.defaultAction = FilterAction.Drop;
 	}
 	
+	public Integer getFilterNumber(){
+		return this.filterNumber;
+	}
 	public void setFilterNumber(Integer number){
 		this.filterNumber = number;
 	}
