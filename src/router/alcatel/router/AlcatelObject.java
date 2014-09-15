@@ -91,6 +91,10 @@ public abstract class AlcatelObject {
 	public boolean isFilterObject(){
 		return false;
 	}
+	
+	public boolean isFilterEntryObject(){
+		return false;
+	}
 
 	
 }
