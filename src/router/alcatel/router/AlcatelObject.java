@@ -95,6 +95,18 @@ public abstract class AlcatelObject {
 	public boolean isFilterEntryObject(){
 		return false;
 	}
+	
+	public boolean isIPFilterObject(){
+		return false;
+	}
+	
+	public boolean isMacFilterObject(){
+		return false;
+	}
+	
+	public boolean isInterfaceObject(){
+		return false;
+	}
 
 	
 }

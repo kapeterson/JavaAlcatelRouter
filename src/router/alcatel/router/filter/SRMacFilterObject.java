@@ -10,4 +10,8 @@ public class SRMacFilterObject extends SRFilterObject {
 	public SRMacFilterObject(Integer filterNumber){
 		super(filterNumber);
 	}
+	
+	public boolean isMacFilterObject(){
+		return true;
+	}
 }

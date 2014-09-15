@@ -48,4 +48,6 @@ public class MacFilterParser extends ConfigurationSection{
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
 		}
 	}
+	
+
 }
