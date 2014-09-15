@@ -1,6 +1,6 @@
 package router.alcatel.router.routerinterface;
 
-public abstract class SRRouterInterface {
+public class SRRouterInterface {
 	
 	protected String interfaceName = "";
 	protected String description = "";
@@ -20,5 +20,13 @@ public abstract class SRRouterInterface {
 	
 	public boolean isInterfaceObject(){
 		return true;
+	}
+	
+	public String getName(){
+		return this.interfaceName;
+	}
+	
+	public void setName(String ifaceName){
+		this.interfaceName = ifaceName;
 	}
 }
