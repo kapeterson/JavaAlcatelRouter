@@ -8,10 +8,18 @@ public class SQLTest {
 	public static void main(String[] args) {
 		try {
 			
-			Properties connectionProps = new Properties();
+			if (args.length < 2){
+				System.out.println("Error you must supply user /and password for kp109p database");
+				return;
+			}
 
-			connectionProps.put("user", "kp109p");
-			connectionProps.put("password", "uv3rs3");
+			Properties connectionProps = new Properties();
+			String userName = args[0];
+			String psswd = args[1];
+			
+			connectionProps.put("user", userName);
+			connectionProps.put("password", psswd);
+
 			
 			Connection conn = DriverManager.getConnection("jdbc:mysql://68.253.91.179:3306/kp109p", connectionProps);
 			

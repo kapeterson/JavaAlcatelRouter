@@ -49,17 +49,12 @@ public class ThreadedMySqlPopulatorTest {
 			}
 		}
 		
-		public MessageLoop(ResultSet rs,  String community){
+		public MessageLoop(ResultSet rs,  String community, Properties connectionProps){
 			rSet = rs;
 			comm = community;
 			startTime = System.nanoTime();
 			router = new SRChassisObject();
-			if ( cProp == null) {
-				cProp = new Properties();
-				cProp.put("user", "kp109p");
-				cProp.put("password", "uv3rs3");
-				
-			}
+			cProp = connectionProps;
 			
 			try {
 			if ( conn == null) {
@@ -117,15 +112,24 @@ public class ThreadedMySqlPopulatorTest {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		
 		Properties connectionProps =  new Properties();
-		connectionProps.put("user", "kp109p");
-		connectionProps.put("password", "uv3rs3");
+
 		
 		try {
-			if (args.length < 1){
-				System.out.println("Error you must supply an snmp community");
+			
+			if (args.length < 3){
+				System.out.println("Error you must supply <snmpcommunity> <username> <password> for kp109p database");
 				return;
 			}
+
+			String userName = args[0];
+			String psswd = args[1];
+			
+			connectionProps.put("user", userName);
+			connectionProps.put("password", psswd);
+
 			String comm = args[0];
 
 
@@ -148,7 +152,7 @@ public class ThreadedMySqlPopulatorTest {
 			
 			int i = 0;
 			while( i < tcount){
-				tlist[i] = new Thread(new MessageLoop(rs, comm));
+				tlist[i] = new Thread(new MessageLoop(rs, comm, connectionProps));
 			   i++;
 			   
 			}

@@ -14,16 +14,21 @@ public class MySQLRouterTest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			if (args.length < 1){
-				System.out.println("Error you must supply an snmp community");
+			if (args.length < 3){
+				System.out.println("Error you must supply <snmpcommunity> <user> <password> user /and password for kp109p database");
 				return;
 			}
+
 			String comm = args[0];
 
 			Properties connectionProps = new Properties();
+			String userName = args[1];
+			String psswd = args[2];
+			
+			connectionProps.put("user", userName);
+			connectionProps.put("password", psswd);
 
-			connectionProps.put("user", "kp109p");
-			connectionProps.put("password", "uv3rs3");
+
 			
 			Connection conn = DriverManager.getConnection("jdbc:mysql://68.253.91.179:3306/kp109p", connectionProps);
 			
