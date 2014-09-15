@@ -20,7 +20,7 @@ public class ParserTestVPLS01 {
 	
 			
 			for ( Integer serviceNumber : router.Services.getServices().keySet()){
-				SRServiceObject vpls = router.Services.getService(serviceNumber);
+				SRVPLSObject vpls = router.Services.getVPLS(serviceNumber);
 				System.out.format("Service Vpls:  %d  Description: %-20s\n", serviceNumber, vpls.getDesription());
 				
 			}

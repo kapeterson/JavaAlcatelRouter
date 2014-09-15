@@ -3,22 +3,22 @@ package router.alcatel.router.service;
 import java.util.TreeMap;
 public class SRServiceConfiguration {
 	
-	protected TreeMap<Integer, SRServiceObject> services;
+	protected TreeMap<Integer, SRVPLSObject> vpls;
 	
 	public SRServiceConfiguration(){
-		this.services = new TreeMap<Integer, SRServiceObject>();
+		this.vpls = new TreeMap<Integer, SRVPLSObject>();
 	}
 	
-	public void addService(SRServiceObject service){
-		this.services.put(service.getServiceNumber(), service);
+	public void addVPLS(SRVPLSObject service){
+		this.vpls.put(service.getServiceNumber(), service);
 	}
 	
-	public TreeMap<Integer, SRServiceObject> getServices(){
-		return this.services;
+	public TreeMap<Integer, SRVPLSObject> getServices(){
+		return this.vpls;
 	}
 	
-	public SRServiceObject getService(Integer serviceNumber){
-		return this.services.get(serviceNumber);
+	public SRVPLSObject getVPLS(Integer serviceNumber){
+		return this.vpls.get(serviceNumber);
 	}
 	
 	

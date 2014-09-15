@@ -31,7 +31,7 @@ public class VPLSParser extends ConfigurationSection {
 		
 		if ( this.getSectionDepth() == this.getLastCommandDepth()) {
 			//System.out.println("Adding vpls " + this.vpls.getServiceNumber());
-			this.router.Services.addService(this.vpls);
+			this.router.Services.addVPLS(this.vpls);
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
 		}
 		//super.defaultExitHandler(matcher);
