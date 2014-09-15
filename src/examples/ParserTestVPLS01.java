@@ -19,7 +19,7 @@ public class ParserTestVPLS01 {
 			SRChassisObject router = pman.getRouter();
 	
 			
-			for ( Integer serviceNumber : router.Services.getServices().keySet()){
+			for ( Integer serviceNumber : router.Services.getVPLSs().keySet()){
 				SRVPLSObject vpls = router.Services.getVPLS(serviceNumber);
 				System.out.format("Service Vpls:  %d  Description: %-20s\n", serviceNumber, vpls.getDesription());
 				
