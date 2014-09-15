@@ -27,8 +27,13 @@ public class IPFilterParser extends ConfigurationSection {
 	
 	
 	public void setDescription(Matcher matcher){
-	
+		this.filter.setDescription(matcher.group(1));
 	}
+	
+	public String getDescription(){
+		return this.filter.getDescription();
+	}
+	
 	public void addEntry(Matcher matcher){
 		//System.out.println("Entry ");
 	}
@@ -40,6 +45,7 @@ public class IPFilterParser extends ConfigurationSection {
 		
 		if ( this.getSectionDepth() <= this.getLastCommandDepth() && this.getLastCommandDepth() <= (this.getSectionDepth() + 3)) {
 			//System.out.format("Exited filter %s\n", this.filter.getFilterNumber().toString());
+			this.router.Filters.addIPFilter(filter);
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
 		}
 	}

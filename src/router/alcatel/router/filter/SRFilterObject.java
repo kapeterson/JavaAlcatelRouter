@@ -36,4 +36,12 @@ public abstract class SRFilterObject {
 	public FilterAction getDefaultAction(){
 		return this.defaultAction;
 	}
+	
+	public void setDescription(String desc){
+		this.description = desc;
+	}
+	
+	public String getDescription(){
+		return this.description;
+	}
 }

@@ -19,7 +19,7 @@ public class FilterConfigurationParser extends ConfigurationSection {
 	
 	public void setIPFilterContext(Matcher matcher){
 		
-		System.out.println("IP filter " + matcher.group(1));
+		//System.out.println("IP filter " + matcher.group(1));
 		Integer filternumber = Integer.parseInt(matcher.group(1));
 		IPFilterParser parser = new IPFilterParser(this.router, this.getContextNotifier(), filternumber);
 		parser.setParent(this);
