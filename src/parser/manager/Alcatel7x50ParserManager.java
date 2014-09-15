@@ -48,6 +48,18 @@ public class Alcatel7x50ParserManager implements ContextChange {
 		contextHash.put("echo \"Filter Configuration\"", new FilterConfigurationParser(router, this));
 		contextHash.put("echo \"Router (Network Side) Configuration\"", new InterfaceConfigurationParser(router, this));
 		contextHash.put("echo \"Static Route Configuration\"", defaultParser);
+		contextHash.put("echo \"SGT Mapping Configuration\"", defaultParser);
+		contextHash.put("echo \"OSPFv2 Configuration\"",defaultParser);
+		contextHash.put("echo \"IGMP Configuration\"",defaultParser);
+		contextHash.put("echo \"PIM Configuration\"", defaultParser);
+		contextHash.put("echo \"MPLS Configuration\"", defaultParser);
+		contextHash.put("echo \"RSVP Configuration\"", defaultParser);
+		contextHash.put("echo \"MPLS LSP Configuration\"", defaultParser);
+		contextHash.put("echo \"LDP Configuration\"", defaultParser);
+		contextHash.put("echo \"Service Configuration\"", defaultParser);
+		contextHash.put("echo \"Policy Configuration\"", defaultParser);
+		contextHash.put("echo \"BGP Configuration\"", defaultParser);
+		
 	}
 	
 	public void setActiveParser(ConfigurationSection parser){
