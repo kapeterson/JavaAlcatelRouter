@@ -5,6 +5,7 @@ import router.alcatel.router.port.*;
 import router.alcatel.router.lag.*;
 import router.alcatel.router.qos.*;
 import router.alcatel.router.filter.*;
+import router.alcatel.router.routerinterface.*;
 
 
 /**
@@ -23,6 +24,7 @@ public class SRChassisObject extends AlcatelHardwareObject  {
 	public SRLagConfiguration Lags = null;
 	public SRQOSConfiguration QOS = null;
 	public SRFilterConfiguration Filters = null;
+	public SRInterfaceConfiguration Interface = null;
 	
 	public String chassisType;
 	protected Hashtable<String, AlcatelHardwareObject> hardwareIndexMap = null;
@@ -36,6 +38,7 @@ public class SRChassisObject extends AlcatelHardwareObject  {
 		Lags = new SRLagConfiguration();
 		QOS = new SRQOSConfiguration();
 		Filters = new SRFilterConfiguration();
+		Interface = new SRInterfaceConfiguration();
 		
 		chassisType = "NA";
 		hardwareIndexMap = new Hashtable<String, AlcatelHardwareObject>();

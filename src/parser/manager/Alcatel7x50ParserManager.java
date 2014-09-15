@@ -13,6 +13,7 @@ import parser.alu.config.sr7x50.port.*;
 import parser.alu.config.sr7x50.lag.*;
 import parser.alu.config.sr7x50.qos.*;
 import parser.alu.config.sr7x50.filter.*;
+import parser.alu.config.sr7x50.routerinterace.*;
 
 import router.alcatel.router.*;
 
@@ -45,6 +46,8 @@ public class Alcatel7x50ParserManager implements ContextChange {
 		contextHash.put("echo \"QoS Policy Configuration\"", new QosConfigurationParser(router,this));
 		contextHash.put("echo \"Management Router Configuration\"", defaultParser);
 		contextHash.put("echo \"Filter Configuration\"", new FilterConfigurationParser(router, this));
+		contextHash.put("echo \"Router (Network Side) Configuration\"", new InterfaceConfigurationParser(router, this));
+		contextHash.put("echo \"Static Route Configuration\"", defaultParser);
 	}
 	
 	public void setActiveParser(ConfigurationSection parser){
