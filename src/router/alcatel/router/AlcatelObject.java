@@ -87,6 +87,10 @@ public abstract class AlcatelObject {
 		return false;
 	}
 	
+	
+	public boolean isFilterObject(){
+		return false;
+	}
 
 	
 }

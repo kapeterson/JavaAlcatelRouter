@@ -17,4 +17,8 @@ public abstract class SRFilterObject {
 	public void setFilterNumber(Integer number){
 		this.filterNumber = number;
 	}
+	
+	public boolean isFilterObject(){
+		return true;
+	}
 }
