@@ -18,9 +18,16 @@ public class VPLSParser extends ConfigurationSection {
 		super("CONFIG.SERVICE.VPLS", router, contextChangeHandler);
 		vpls = new SRVPLSObject(vplsnumber);
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
+		this.commandHash.put(Pattern.compile("^sap (.*) create"), new CommandHandler("setSAPContext", true));
+
 	}
 	
-
+	public void setSAPContext(Matcher matcher){
+		System.out.println("SAP " + matcher.group(1));
+		SRSAPObject newSAP = new SRSAPObject(matcher.group(1));
+		this.vpls.addSAPObject(newSAP);
+	}
+	
 	public void setDescription(Matcher matcher){
 		this.vpls.setDescription(matcher.group(1));
 	}
