@@ -14,6 +14,7 @@ import parser.alu.config.sr7x50.lag.*;
 import parser.alu.config.sr7x50.qos.*;
 import parser.alu.config.sr7x50.filter.*;
 import parser.alu.config.sr7x50.routerinterace.*;
+import parser.alu.config.sr7x50.service.*;
 
 import router.alcatel.router.*;
 
@@ -56,7 +57,7 @@ public class Alcatel7x50ParserManager implements ContextChange {
 		contextHash.put("echo \"RSVP Configuration\"", defaultParser);
 		contextHash.put("echo \"MPLS LSP Configuration\"", defaultParser);
 		contextHash.put("echo \"LDP Configuration\"", defaultParser);
-		contextHash.put("echo \"Service Configuration\"", defaultParser);
+		contextHash.put("echo \"Service Configuration\"", new ServiceConfigurationParser(router, this));
 		contextHash.put("echo \"Policy Configuration\"", defaultParser);
 		contextHash.put("echo \"BGP Configuration\"", defaultParser);
 		
