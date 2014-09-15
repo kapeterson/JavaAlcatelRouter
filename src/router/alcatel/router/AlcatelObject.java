@@ -107,6 +107,14 @@ public abstract class AlcatelObject {
 	public boolean isInterfaceObject(){
 		return false;
 	}
+	
+	public boolean isNetworkInterfaceObject(){
+		return false;
+	}
+	
+	public boolean isService(){
+		return false;
+	}
 
 	
 }

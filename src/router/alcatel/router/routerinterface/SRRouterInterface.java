@@ -1,13 +1,22 @@
 package router.alcatel.router.routerinterface;
 
-public class SRRouterInterface {
+
+import router.alcatel.router.*;
+
+public class SRRouterInterface extends AlcatelObject {
 	
 	protected String interfaceName = "";
 	protected String description = "";
 	
 	public SRRouterInterface(String interfaceName){
+		super(AlcatelObjectType.ROUTERINTERFACE);
 		this.interfaceName = interfaceName;
 		
+	}
+	
+	public SRRouterInterface(String interfaceName, AlcatelObjectType oType){
+		super(oType);
+		this.interfaceName = interfaceName;
 	}
 	
 	public void setDescription(String desc){

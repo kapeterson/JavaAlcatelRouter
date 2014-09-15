@@ -6,12 +6,12 @@ import router.alcatel.router.lag.*;
 import router.alcatel.router.qos.*;
 import router.alcatel.router.filter.*;
 import router.alcatel.router.routerinterface.*;
-
+import router.alcatel.router.service.*;
 
 /**
  * Top level object for the router model.  exposes all configuration sections including System, Card etc.
  * 
- * @author pete
+ * @author Kris Peterson
  *
  */
 public class SRChassisObject extends AlcatelHardwareObject  {
@@ -25,6 +25,7 @@ public class SRChassisObject extends AlcatelHardwareObject  {
 	public SRQOSConfiguration QOS = null;
 	public SRFilterConfiguration Filters = null;
 	public SRInterfaceConfiguration Interface = null;
+	public SRServiceConfiguration Services = null;
 	
 	public String chassisType;
 	protected Hashtable<String, AlcatelHardwareObject> hardwareIndexMap = null;
@@ -39,6 +40,7 @@ public class SRChassisObject extends AlcatelHardwareObject  {
 		QOS = new SRQOSConfiguration();
 		Filters = new SRFilterConfiguration();
 		Interface = new SRInterfaceConfiguration();
+		Services = new SRServiceConfiguration();
 		
 		chassisType = "NA";
 		hardwareIndexMap = new Hashtable<String, AlcatelHardwareObject>();
