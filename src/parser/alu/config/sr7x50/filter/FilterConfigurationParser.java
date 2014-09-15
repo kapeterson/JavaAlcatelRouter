@@ -13,9 +13,20 @@ public class FilterConfigurationParser extends ConfigurationSection {
 	public FilterConfigurationParser(SRChassisObject router, ContextChange contextChangeHandler){
 		super("CONFIG.FILTER", router, contextChangeHandler);
 		this.commandHash.put(Pattern.compile("^ip\\-filter ([0-9]+) create"), new CommandHandler("setIPFilterContext", true));
+		this.commandHash.put(Pattern.compile("^mac\\-filter ([0-9]+) create"), new CommandHandler("setMacFilterContext", true));
 
 	}
 	
+	public void setMacFilterContext(Matcher matcher){
+		
+		//System.out.println("IP filter " + matcher.group(1));
+		Integer filternumber = Integer.parseInt(matcher.group(1));
+		MacFilterParser parser = new MacFilterParser(this.router, this.getContextNotifier(), filternumber);
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
+
+	}
 	
 	public void setIPFilterContext(Matcher matcher){
 		
