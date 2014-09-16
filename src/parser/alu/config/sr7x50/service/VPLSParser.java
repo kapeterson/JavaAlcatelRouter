@@ -23,7 +23,7 @@ public class VPLSParser extends ConfigurationSection {
 	}
 	
 	public void setSAPContext(Matcher matcher){
-		System.out.println("SAP " + matcher.group(1));
+		//System.out.println("SAP " + matcher.group(1));
 		SRSAPObject newSAP = new SRSAPObject(matcher.group(1));
 		this.vpls.addSAPObject(newSAP);
 	}
