@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import parser.ConfigurationSection;
 import parser.CommandHandler;
 import parser.ContextChange;
+import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.service.*;
 
@@ -19,9 +20,25 @@ public class VPLSParser extends ConfigurationSection {
 		vpls = new SRVPLSObject(vplsnumber);
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
 		this.commandHash.put(Pattern.compile("^sap (.*) create"), new CommandHandler("setSAPContext", true));
+		this.commandHash.put(Pattern.compile("^spoke\\-sdp (.*) create"), new CommandHandler("setSpokeSDPContext", true));
+		this.commandHash.put(Pattern.compile("^mesh\\-sdp (.*) create"), new CommandHandler("setMeshSDPContext", true));
+
+
 
 	}
 	
+	public void setMeshSDPContext(Matcher matcher){
+		//System.out.println("Spoke sdp " + matcher.group(1));
+		SRServiceSDPObject sdp = new SRServiceSDPObject(AlcatelObjectType.MESHSDPOBJECT, matcher.group(1));
+		this.vpls.addSDPObject(sdp);
+	}
+	
+	
+	public void setSpokeSDPContext(Matcher matcher){
+		//System.out.println("Spoke sdp " + matcher.group(1));
+		SRServiceSDPObject sdp = new SRServiceSDPObject(AlcatelObjectType.SPOKESDPOBJECT, matcher.group(1));
+		this.vpls.addSDPObject(sdp);
+	}
 	public void setSAPContext(Matcher matcher){
 		//System.out.println("SAP " + matcher.group(1));
 		SRSAPObject newSAP = new SRSAPObject(matcher.group(1));
