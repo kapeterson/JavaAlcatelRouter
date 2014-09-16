@@ -7,8 +7,12 @@ import router.alcatel.router.routerinterface.*;
 public class ParserTestNetworkInterface01 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("OK");
-		String cfile = "/home/pete/temp/RCSNTXHV0BW010103021LVH01.cfg";
+		if (args.length < 1){
+			System.out.println("Error you must supply path to configuration file");
+			return;
+		}		
+		
+		String cfile = args[0];
 		System.out.println("Going to parse " + cfile);
 		
 

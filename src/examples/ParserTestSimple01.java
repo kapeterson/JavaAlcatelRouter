@@ -7,9 +7,13 @@ import router.alcatel.router.port.SRPortObject;
 public class ParserTestSimple01 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("OK");
-		String cfile = "/home/pete/temp/RCSNTXHV0BW010103021LVH01.cfg";
-		System.out.println("Going to parse " + cfile);
+		if (args.length < 1){
+			System.out.println("Error you must supply path to configuration file");
+			return;
+		}		
+		
+		String cfile = args[0];
+		System.out.println("Going to parse " + cfile);;
 		
 
 		Alcatel7x50ParserManager pman = new Alcatel7x50ParserManager();

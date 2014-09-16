@@ -73,7 +73,7 @@ public class Alcatel7x50ParserManager implements ContextChange {
 	
 	public void ParseConfig(String filelocation){
 		try {
-			BufferedReader br = new BufferedReader(new FileReader("/home/pete/temp/RCSNTXHV0BW010103021LVH01.cfg"));
+			BufferedReader br = new BufferedReader(new FileReader(filelocation));
 
 			String line;
 			while ( br.ready()) {
