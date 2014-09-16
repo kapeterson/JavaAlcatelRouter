@@ -32,6 +32,8 @@ public enum AlcatelObjectType {
 	OSPFAREA,
 	OSPFINTERFACE,
 	
+	PIMINTERFACE,
+	
 	SERVICE,
 	SDPSERVICE,
 	VPLSSERVICE,
