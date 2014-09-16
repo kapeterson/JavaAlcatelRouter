@@ -6,6 +6,7 @@ public class SROSPFInterface extends AlcatelObject{
 
 	public SROSPFInterface(String interfacename){
 		super(AlcatelObjectType.OSPFINTERFACE);
+		this.setName(interfacename);
 	}
 	
 }

@@ -7,21 +7,23 @@ public class SROSPFArea extends AlcatelObject {
 
 	protected String areaName = "";
 	protected TreeMap<String, SROSPFInterface> interfaces = null;
+	
 	public SROSPFArea(String areaname){
 		super(AlcatelObjectType.OSPFAREA);
 		this.areaName = areaname;
 		this.interfaces = new TreeMap<String, SROSPFInterface>();
 	}
 	
-	public String getName(){
+	public String getAreaName(){
 		return this.areaName;
 	}
 	
-	public void setName(String areaname){
+	public void setAreaName(String areaname){
 		this.areaName = areaname;
 	}
 	
 	public void addInterface(SROSPFInterface iface){
+		System.out.println("Added interface " + iface.getName());
 		this.interfaces.put(iface.getName(), iface);
 	}
 	

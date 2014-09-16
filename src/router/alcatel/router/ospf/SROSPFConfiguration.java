@@ -11,7 +11,7 @@ public class SROSPFConfiguration {
 	}
 	
 	public void addArea(SROSPFArea area){
-		this.areas.put(area.getName(), area);
+		this.areas.put(area.getAreaName(), area);
 	}
 	
 	public SROSPFArea getArea(String areaname){

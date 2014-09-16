@@ -21,6 +21,9 @@ public abstract class AlcatelObject {
 		this.objectType = objectType;
 	}
 	
+	public void setName(String oName){
+		this.objectName = oName;
+	}
 	
 	public String getName(){
 		return this.objectName;
