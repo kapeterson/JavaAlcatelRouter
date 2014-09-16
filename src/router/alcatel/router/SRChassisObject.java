@@ -8,6 +8,7 @@ import router.alcatel.router.filter.*;
 import router.alcatel.router.routerinterface.*;
 import router.alcatel.router.service.*;
 import router.alcatel.router.ospf.*;
+import router.alcatel.router.pim.*;
 
 /**
  * Top level object for the router model.  exposes all configuration sections including System, Card etc.
@@ -28,6 +29,7 @@ public class SRChassisObject extends AlcatelHardwareObject  {
 	public SRInterfaceConfiguration Interface = null;
 	public SRServiceConfiguration Services = null;
 	public SROSPFConfiguration OSPF = null;
+	public SRPIMConfiguration PIM = null;
 	
 	public String chassisType;
 	protected Hashtable<String, AlcatelHardwareObject> hardwareIndexMap = null;
@@ -44,7 +46,7 @@ public class SRChassisObject extends AlcatelHardwareObject  {
 		Interface = new SRInterfaceConfiguration();
 		Services = new SRServiceConfiguration();
 		OSPF = new SROSPFConfiguration();
-		
+		PIM = new SRPIMConfiguration();
 		
 		chassisType = "NA";
 		hardwareIndexMap = new Hashtable<String, AlcatelHardwareObject>();

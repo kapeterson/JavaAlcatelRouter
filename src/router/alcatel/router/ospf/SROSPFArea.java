@@ -23,7 +23,6 @@ public class SROSPFArea extends AlcatelObject {
 	}
 	
 	public void addInterface(SROSPFInterface iface){
-		System.out.println("Added interface " + iface.getName());
 		this.interfaces.put(iface.getName(), iface);
 	}
 	
