@@ -6,15 +6,19 @@ import router.alcatel.router.*;
 import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
+import java.util.regex.Pattern;
+
+import java.util.regex.Matcher;
 
 public class SRRouterInterface extends AlcatelObject {
 	
-	protected Inet4Address v4Address;
+	protected InetAddress v4Address;
 	protected Inet6Address v6Address;
 	
 	protected String interfaceName = "";
 	protected String description = "";
 	
+	protected Pattern ipv4Pattern = Pattern.compile("([0-9]+)\\.([0-9]+)\\.([0-9]+)\\.([0-9]+)");
 	public SRRouterInterface(String interfaceName){
 		super(AlcatelObjectType.ROUTERINTERFACE);
 		this.interfaceName = interfaceName;
@@ -26,15 +30,26 @@ public class SRRouterInterface extends AlcatelObject {
 	
 	public void setIPv4Address(String ipaddr){
 		try {
-		this.v4Address = (Inet4Address)Inet4Address.getByName(ipaddr);
+
+			this.v4Address = InetAddress.getByName(ipaddr);
+
+			
 		} catch (Exception err){
-			System.out.println("Error parsing ipv4 address from string");
+			System.out.println("Error parsing ipv4 address from string " + err.getMessage());
+			System.exit(1);
 		}
 		
 	}
 	
-	public Inet4Address getIPv4Address(){
+	
+	/** returns ip address as ipaddress object **/
+	public InetAddress getIPv4Address(){
 		return this.v4Address;
+	}
+	
+	/** Returns ip address as string value **/
+	public String getIPv4HostAddress(){
+		return this.v4Address.getHostAddress();
 	}
 	public SRRouterInterface(String interfaceName, AlcatelObjectType oType){
 		super(oType);
