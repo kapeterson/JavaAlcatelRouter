@@ -15,16 +15,24 @@ public class InterfaceParser extends ConfigurationSection {
 		super("CONFIG.INTERFACE.INTERFACE", router, contextChangeHandler);
 		this.iface = new SRNetworkInterface(intName);
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
+		this.commandHash.put(Pattern.compile("^address ([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)\\/([0-9]+)$"), new CommandHandler("setIPv4Address", true));
 
 	}
 	
+	public void setIPv4Address(Matcher matcher){
+		
+		//System.out.println("IPv4 address = " + matcher.group(1) + " / " + matcher.group(2));
+		this.iface.setIPv4Address(matcher.group(1));
+	}
 	
 	public void setDescription(Matcher matcher){
 		this.iface.setDescription(matcher.group(1));
 	}
+	
 	/**
 	 * Custom handler
 	 */
+	
 	public void exitSection(Matcher matcher){
 		
 		if ( this.getSectionDepth() == this.getLastCommandDepth()) {
