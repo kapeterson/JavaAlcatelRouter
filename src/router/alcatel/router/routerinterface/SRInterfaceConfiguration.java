@@ -20,4 +20,8 @@ public class SRInterfaceConfiguration {
 	public SRRouterInterface getInterface(String intName){
 		return this.interfaces.get(intName);
 	}
+	
+	public boolean hasInterface(String intName){
+		return this.interfaces.containsKey(intName);
+	}
 }
