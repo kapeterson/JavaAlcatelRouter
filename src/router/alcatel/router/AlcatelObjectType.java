@@ -33,6 +33,7 @@ public enum AlcatelObjectType {
 	OSPFINTERFACE,
 	
 	PIMINTERFACE,
+	IGMPINTERFACE,
 	
 	SERVICE,
 	SDPSERVICE,
