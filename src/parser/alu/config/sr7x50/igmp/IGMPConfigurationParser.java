@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 import parser.ConfigurationSection;
 import parser.CommandHandler;
 import parser.ContextChange;
-import parser.alu.config.sr7x50.pim.PIMInterfaceParser;
 import router.alcatel.router.*;
 
 
