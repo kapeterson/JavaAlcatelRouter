@@ -11,6 +11,8 @@ import router.alcatel.router.ospf.*;
 import router.alcatel.router.pim.*;
 import router.alcatel.router.igmp.*;
 import router.alcatel.router.mpls.*;
+import router.alcatel.router.ldp.*;
+import router.alcatel.router.rsvp.*;
 
 
 /**
@@ -35,6 +37,8 @@ public class SRChassisObject extends AlcatelHardwareObject  {
 	public SRPIMConfiguration PIM = null;
 	public SRIGMPConfiguration IGMP = null;
 	public SRMPLSConfiguration MPLS = null;
+	public SRLDPConfiguration LDP = null;
+	public SRRSVPConfiguration RSVP = null;
 	
 	
 	public String chassisType;
@@ -55,7 +59,8 @@ public class SRChassisObject extends AlcatelHardwareObject  {
 		PIM = new SRPIMConfiguration();
 		IGMP = new SRIGMPConfiguration();
 		MPLS = new SRMPLSConfiguration();
-		
+		LDP = new SRLDPConfiguration();
+		RSVP = new SRRSVPConfiguration();
 		
 		
 		chassisType = "NA";
