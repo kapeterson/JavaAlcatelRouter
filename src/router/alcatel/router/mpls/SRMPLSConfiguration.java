@@ -1,7 +1,6 @@
 package router.alcatel.router.mpls;
 import java.util.TreeMap;
 
-import router.alcatel.router.pim.SRPIMInterface;
 
 public class SRMPLSConfiguration {
 	protected TreeMap<String, SRMPLSInterface> interfaces;
