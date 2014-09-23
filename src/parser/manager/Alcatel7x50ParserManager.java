@@ -17,7 +17,7 @@ import parser.alu.config.sr7x50.routerinterace.*;
 import parser.alu.config.sr7x50.ospf.*;
 import parser.alu.config.sr7x50.service.*;
 import parser.alu.config.sr7x50.pim.*;
-
+import parser.alu.config.sr7x50.igmp.*;
 
 import router.alcatel.router.*;
 
@@ -54,7 +54,7 @@ public class Alcatel7x50ParserManager implements ContextChange {
 		contextHash.put("echo \"Static Route Configuration\"", defaultParser);
 		contextHash.put("echo \"SGT Mapping Configuration\"", defaultParser);
 		contextHash.put("echo \"OSPFv2 Configuration\"",new OSPFConfigurationParser(router, this));
-		contextHash.put("echo \"IGMP Configuration\"",defaultParser);
+		contextHash.put("echo \"IGMP Configuration\"", new IGMPConfigurationParser(router, this));
 		contextHash.put("echo \"PIM Configuration\"", new PIMConfigurationParser(router, this));
 		contextHash.put("echo \"MPLS Configuration\"", defaultParser);
 		contextHash.put("echo \"RSVP Configuration\"", defaultParser);
