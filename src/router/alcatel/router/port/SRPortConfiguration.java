@@ -30,4 +30,8 @@ public class SRPortConfiguration {
 	public TreeMap<String, SRPortObject> getPorts(){
 		return this.ports;
 	}
+	
+	public boolean hasPort(String portName){
+		return this.ports.containsKey(portName);
+	}
 }
