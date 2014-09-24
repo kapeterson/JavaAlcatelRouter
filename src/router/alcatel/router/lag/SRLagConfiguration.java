@@ -24,4 +24,6 @@ public class SRLagConfiguration {
 	public boolean hasLag(Integer lagnumber){
 		return this.lags.containsKey(lagnumber);
 	}
+	
+
 }

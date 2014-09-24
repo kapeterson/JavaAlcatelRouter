@@ -8,9 +8,14 @@ import parser.CommandHandler;
 import parser.ContextChange;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.routerinterface.*;
+import router.alcatel.router.lag.*;
+import router.alcatel.router.port.*;
 
 public class InterfaceParser extends ConfigurationSection {
 	protected SRNetworkInterface iface = null;
+	protected Pattern lagPattern = Pattern.compile("lag\\-([0-9]+)(:)?([0-9]+)?");
+	protected Pattern portPattern = Pattern.compile("([0-9]{1,2}\\/[0-9]{1,2}\\/[0-9]{1,2})(:)?([0-9]{1,10})?");
+
 	public InterfaceParser(SRChassisObject router, ContextChange contextChangeHandler, String intName){
 		super("CONFIG.INTERFACE.INTERFACE", router, contextChangeHandler);
 		this.iface = new SRNetworkInterface(intName);
@@ -22,23 +27,68 @@ public class InterfaceParser extends ConfigurationSection {
 	}
 	
 	
-	public void setPortBinding(Matcher matcher){
+	
+	public void setPortBinding(Matcher matcher) throws Exception {
 		String bindingName = matcher.group(1);
-		
-		if ( bindingName.matches("[0-9]+\\/[0-9]+\\/[0-9]+" ) ){
-			//System.out.println("Port binding " + bindingName);
-			if ( this.router.Ports.hasPort(bindingName)){
-				//System.out.println("We have port " + bindingName);
-				try {
-					this.iface.setBinding(this.router.Ports.getPort(bindingName));
-				} catch ( Exception err){
-					System.out.println(err.getMessage());
-					System.exit(1);
-				}
-			}
-		} else {
+		//System.out.println("Trying " + bindingName);
+		if ( bindingName.matches("[0-9]+\\/[0-9]+\\/[0-9]+(:)?([0-9]+)?" ) ){
+			//System.out.println("We have port " + bindingName);
 			
+			Matcher m = portPattern.matcher(bindingName);
+			if ( m.find()){
+				
+				if ( this.router.Ports.hasPort(m.group(1))){
+					SRPortObject port = this.router.Ports.getPort(m.group(1));
+					//int tag = -1;
+					//if ( m.group(3) != null)
+					//	tag = Integer.parseInt(m.group(3));
+					
+					final int tag = ( m.group(3) == null ) ? -1 : Integer.parseInt(m.group(3));
+					SRInterfaceBinding binding = new SRInterfaceBinding(port, tag);
+					this.iface.setBinding(binding);
+					
+				} else {
+					throw new Exception("ERROR: Port  "  + bindingName + " could not be retried from port configuration when binding to interface in the parser");
+
+				}
+				
+			} else {
+				throw new Exception("ERROR: Port  "  + bindingName + " was not found when trying to set port binding to an interface in the parser");
+			}
+			
+
+			
+		} else if ( bindingName.matches("lag\\-[0-9]+(:)?([0-9]+)?") ){
+			//System.out.println("OK");
+
 			//System.out.println("Lag binding " + bindingName);
+			
+			Matcher m = lagPattern.matcher(bindingName);
+			
+			if ( m.find()){
+				
+				if ( this.router.Lags.hasLag(Integer.parseInt(m.group(1)))) {
+					
+					SRLagObject lag = this.router.Lags.getLag(Integer.parseInt(m.group(1)));
+					final int tag = ( m.group(3) == null ) ? -1 : Integer.parseInt(m.group(3));
+					//System.out.format("Tag of lag %d is %d\n", lag.getLagNumber(), tag);
+					SRInterfaceBinding binding = new SRInterfaceBinding(lag, tag);
+					this.iface.setBinding(binding);
+				} else {
+					throw new Exception("ERROR: could not get lag object in lag  " + bindingName + " when binding to interface in parser");
+				}
+				
+				
+
+				
+			} else {
+				throw new Exception("ERROR: Error matching lag value when trying to bind an interface to a lag : " + bindingName);
+
+			}
+			
+		} else {
+			System.out.println("No match for binding for interface  " + bindingName);
+			//throw new Exception("ERROR: Binding interface to object with name " + bindingName + " did not match lag or port types searched");
 		}
 		
 			

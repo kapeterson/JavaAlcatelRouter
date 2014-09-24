@@ -17,7 +17,7 @@ public class SRRouterInterface extends AlcatelObject {
 	protected String description = "";
 	
 	protected AlcatelObjectType[] bindingTypes = { AlcatelObjectType.PHYSICALPORT, AlcatelObjectType.LAG };
-	protected AlcatelObject binding = null;
+	protected SRInterfaceBinding binding = null;
 	
 	protected Pattern ipv4Pattern = Pattern.compile("([0-9]+)\\.([0-9]+)\\.([0-9]+)\\.([0-9]+)");
 	
@@ -31,7 +31,7 @@ public class SRRouterInterface extends AlcatelObject {
 	}
 	
 	
-	public void setBinding(AlcatelObject bindingObject) throws Exception{
+	public void setBinding(SRInterfaceBinding bindingObject) throws Exception{
 		if ( Arrays.asList(this.bindingTypes).contains(bindingObject.getObjectType()) )
 			this.binding = bindingObject;
 		else{
