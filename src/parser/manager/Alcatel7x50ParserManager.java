@@ -102,7 +102,7 @@ public class Alcatel7x50ParserManager implements ContextChange {
 		try {
 		// Check for context switch
 		if ( contextHash.containsKey(linetoparse)) {
-			System.out.println("Context switch to contxt " + linetoparse);
+			//System.out.println("Context switch to contxt " + linetoparse);
 			
 			activeParser = contextHash.get(linetoparse);
 		}  else {
