@@ -19,6 +19,8 @@ import parser.alu.config.sr7x50.service.*;
 import parser.alu.config.sr7x50.pim.*;
 import parser.alu.config.sr7x50.igmp.*;
 import parser.alu.config.sr7x50.mpls.*;
+import parser.alu.config.sr7x50.ldp.*;
+import parser.alu.config.sr7x50.rsvp.*;
 
 import router.alcatel.router.*;
 
@@ -58,9 +60,9 @@ public class Alcatel7x50ParserManager implements ContextChange {
 		contextHash.put("echo \"IGMP Configuration\"", new IGMPConfigurationParser(router, this));
 		contextHash.put("echo \"PIM Configuration\"", new PIMConfigurationParser(router, this));
 		contextHash.put("echo \"MPLS Configuration\"", new MPLSConfigurationParser(router, this));
-		contextHash.put("echo \"RSVP Configuration\"", defaultParser);
+		contextHash.put("echo \"RSVP Configuration\"", new RSVPConfigurationParser(router, this));
 		contextHash.put("echo \"MPLS LSP Configuration\"", new MPLSConfigurationParser(router, this));
-		contextHash.put("echo \"LDP Configuration\"", defaultParser);
+		contextHash.put("echo \"LDP Configuration\"",  new LDPConfigurationParser(router, this));
 		contextHash.put("echo \"Service Configuration\"", new ServiceConfigurationParser(router, this));
 		contextHash.put("echo \"Policy Configuration\"", defaultParser);
 		contextHash.put("echo \"BGP Configuration\"", defaultParser);
