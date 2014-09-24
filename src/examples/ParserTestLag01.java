@@ -3,7 +3,6 @@ package examples;
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.lag.SRLagObject;
-import router.alcatel.router.port.SRPortObject;
 
 public class ParserTestLag01 {
 	public static void main(String[] args) {

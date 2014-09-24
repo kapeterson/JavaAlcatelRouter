@@ -5,4 +5,4 @@
  * @author kp109p
  *
  */
-package router.alcatel.bgp;
+package router.alcatel.router.bgp;

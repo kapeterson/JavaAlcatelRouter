@@ -1,4 +1,4 @@
-package router.alcatel.bgp;
+package router.alcatel.router.bgp;
 
 import java.util.TreeMap;
 

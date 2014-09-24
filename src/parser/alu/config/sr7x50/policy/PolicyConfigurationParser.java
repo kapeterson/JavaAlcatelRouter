@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 import parser.ConfigurationSection;
 import parser.CommandHandler;
 import parser.ContextChange;
-import parser.alu.config.sr7x50.pim.PIMInterfaceParser;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.policy.SRPolicyCommunity;
 
@@ -31,16 +30,13 @@ public class PolicyConfigurationParser extends ConfigurationSection {
 	
 	public void setCommunityContext(Matcher matcher){
 		
-		//System.out.println("Community weeeee " + matcher.group(1));
 		SRPolicyCommunity comm = new SRPolicyCommunity(matcher.group(1));
 		
 		Matcher m = memberPattern.matcher(matcher.group(2));
 		while ( m.find()){
-			//System.out.println(" \t\t" + m.group(1) + ":" + m.group(2));
 			comm.addMember(m.group(1));
 		}
 		
-		//System.out.println("Added community " + comm.getName());
 		router.Policy.addCommunity(comm);
 	}
 	

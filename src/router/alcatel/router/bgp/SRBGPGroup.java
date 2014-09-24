@@ -1,4 +1,4 @@
-package router.alcatel.bgp;
+package router.alcatel.router.bgp;
 
 import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.*;
