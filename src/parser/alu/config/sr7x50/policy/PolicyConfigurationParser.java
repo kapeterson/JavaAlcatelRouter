@@ -8,9 +8,11 @@ import parser.ConfigurationSection;
 import parser.CommandHandler;
 import parser.ContextChange;
 import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.policy.SRPolicyCommunity;
 
 public class PolicyConfigurationParser extends ConfigurationSection {
-	
+	protected Pattern memberPattern = Pattern.compile("\"([0-9]+:[0-9]+)");
+
 	public PolicyConfigurationParser(SRChassisObject router, ContextChange contextChangeHandler){
 		super("CONFIG.POLICY", router, contextChangeHandler);
 		this.commandHash.put(Pattern.compile("^community \"(.*)\" members (.*)"), new CommandHandler("setCommunityContext", true));
@@ -19,19 +21,17 @@ public class PolicyConfigurationParser extends ConfigurationSection {
 	
 	public void setCommunityContext(Matcher matcher){
 		
-		Pattern memberPattern = Pattern.compile("\"([0-9]+):([0-9]+)");
-		System.out.println("Community weeeee " + matcher.group(1));
-		//System.out.println("\t members " + matcher.group(2));
-		String[] members = matcher.group(2).split(" ");
-		Matcher m = memberPattern.matcher(matcher.group(2));
-		//String[] matches = matcher.group(2).match("\"[0-9]+:[0-9]+\"");
-		/*
-		CommunityParser parser = new CommunityParser(this.router, this.getContextNotifier(), matcher.group(1));
-		parser.setParent(this);
-		parser.setSectionDepth(this.getLastCommandDepth());
-		this.getContextNotifier().contextChangeCallback(this, parser);
-		*/
+		//System.out.println("Community weeeee " + matcher.group(1));
+		SRPolicyCommunity comm = new SRPolicyCommunity(matcher.group(1));
 		
+		Matcher m = memberPattern.matcher(matcher.group(2));
+		while ( m.find()){
+			//System.out.println(" \t\t" + m.group(1) + ":" + m.group(2));
+			comm.addMember(m.group(1));
+		}
+		
+		//System.out.println("Added community " + comm.getName());
+		router.Policy.addCommunity(comm);
 	}
 	
 	/**
