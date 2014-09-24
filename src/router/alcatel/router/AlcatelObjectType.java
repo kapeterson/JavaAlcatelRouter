@@ -51,6 +51,8 @@ public enum AlcatelObjectType {
 	MESHSDPOBJECT,
 	
 	POLICYCOMMUNITY,
+	POLICYSTATEMENT,
+	
 	
 	};
 

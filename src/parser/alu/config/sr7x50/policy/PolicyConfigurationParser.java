@@ -4,9 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import parser.ConfigurationSection;
-
 import parser.CommandHandler;
 import parser.ContextChange;
+import parser.alu.config.sr7x50.pim.PIMInterfaceParser;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.policy.SRPolicyCommunity;
 
@@ -16,8 +16,18 @@ public class PolicyConfigurationParser extends ConfigurationSection {
 	public PolicyConfigurationParser(SRChassisObject router, ContextChange contextChangeHandler){
 		super("CONFIG.POLICY", router, contextChangeHandler);
 		this.commandHash.put(Pattern.compile("^community \"(.*)\" members (.*)"), new CommandHandler("setCommunityContext", true));
+		this.commandHash.put(Pattern.compile("^policy\\-statement \"(.*)\""), new CommandHandler("setStatementContext", true));
+
 	}
 	
+	
+	public void setStatementContext(Matcher matcher){
+		
+		PolicyStatementParser parser = new PolicyStatementParser(this.router, this.getContextNotifier(), matcher.group(1));
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
+	}
 	
 	public void setCommunityContext(Matcher matcher){
 		
