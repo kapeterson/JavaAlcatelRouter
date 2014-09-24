@@ -31,7 +31,9 @@ public class SRLagObject extends AlcatelObject{
 		super(AlcatelObjectType.LAG);
 		this.ports = new Hashtable<String, SRPortObject>();
 		this.lagnumber = lagNumber;
+		this.setName(String.valueOf(lagNumber));
 	}
+	
 	public void setDescription(String description){
 		this.description = description;
 	}
@@ -68,6 +70,7 @@ public class SRLagObject extends AlcatelObject{
 	 */
 	public void setLagNumber(Integer lagnumber){
 		this.lagnumber = lagnumber;
+		this.setName(String.valueOf(lagnumber));
 	}
 	
 	/**

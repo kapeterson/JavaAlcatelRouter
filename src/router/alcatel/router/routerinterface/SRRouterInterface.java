@@ -31,6 +31,10 @@ public class SRRouterInterface extends AlcatelObject {
 	}
 	
 	
+	public SRInterfaceBinding getBinding(){
+		return this.binding;
+	}
+	
 	public void setBinding(SRInterfaceBinding bindingObject) throws Exception{
 		if ( Arrays.asList(this.bindingTypes).contains(bindingObject.getObjectType()) )
 			this.binding = bindingObject;
