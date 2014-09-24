@@ -53,6 +53,6 @@ public enum AlcatelObjectType {
 	POLICYCOMMUNITY,
 	POLICYSTATEMENT,
 	
-	
+	BGPGROUP,
 	};
 
