@@ -40,6 +40,9 @@ public class LagParser extends ConfigurationSection {
 	public void addPort(Matcher matcher){
 		String portName = matcher.group(1);
 		SRPortObject p = this.router.Ports.getPort(portName);
+		
+		// now add the association
+		p.addAssociation(this.lag);
 		this.lag.addPort(p);
 	}
 	/**

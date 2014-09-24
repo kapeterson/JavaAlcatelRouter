@@ -36,7 +36,9 @@ public class InterfaceParser extends ConfigurationSection {
 			if ( m.find()){
 				
 				if ( this.router.Ports.hasPort(m.group(1))){
+					
 					SRPortObject port = this.router.Ports.getPort(m.group(1));
+					port.addAssociation(this.iface);
 					
 					final int tag = ( m.group(3) == null ) ? -1 : Integer.parseInt(m.group(3));
 					SRInterfaceBinding binding = new SRInterfaceBinding(port, tag);
