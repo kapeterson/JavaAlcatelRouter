@@ -4,7 +4,7 @@ import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.ospf.*;
 
-public class ParserOSPFAreaTest01 {
+public class OSPFAreaTest01 {
 	public static void main(String[] args){
 	if (args.length < 1){
 		System.out.println("Error you must supply path to configuration file");

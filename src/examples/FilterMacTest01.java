@@ -2,9 +2,9 @@ package examples;
 
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.service.SRSDPObject;
+import router.alcatel.router.filter.SRMacFilterObject;
 
-public class ParserTestSDP01 {
+public class FilterMacTest01 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		if (args.length < 1){
@@ -21,11 +21,11 @@ public class ParserTestSDP01 {
 		try {
 			pman.ParseConfig(cfile);
 			SRChassisObject router = pman.getRouter();
-	
-			
-			for ( Integer serviceNumber : router.Services.getSDPs().keySet()){
-				SRSDPObject vpls = router.Services.getSDP(serviceNumber);
-				System.out.format("Service sdp:  %d  Description: %-20s\n", serviceNumber, vpls.getDesription());
+
+		for ( Integer filternumber : router.Filters.getMacFilters().keySet()){
+				SRMacFilterObject filter = router.Filters.getMacFilter(filternumber);
+				System.out.format("Mac Filter: %6d  Description: %-20s \n", filternumber, filter.getDescription());
+
 				
 			}
 			

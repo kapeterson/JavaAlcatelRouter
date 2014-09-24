@@ -2,10 +2,9 @@ package examples;
 
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.policy.SRPolicyCommunity;
+import router.alcatel.router.policy.*;
 
-public class ParserTestPolicyStatement01 {
-	
+public class PolicyCommunityTest01 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		if (args.length < 1){
@@ -24,12 +23,14 @@ public class ParserTestPolicyStatement01 {
 			SRChassisObject router = pman.getRouter();
 
 		
-			for ( String statementName : router.Policy.getStatements().keySet()){
-				SRPolicyCommunity comm = router.Policy.getCommunity(statementName);
+		for ( String commname : router.Policy.getCommunities().keySet()){
+				SRPolicyCommunity comm = router.Policy.getCommunity(commname);
 				
-				System.out.format("Statement %s \n", statementName);
+				System.out.format("Community %s \n", commname);
 				
-
+				for ( String member : comm.getMembers()){
+					System.out.println("\t" + member);
+				}
 
 				
 			}
@@ -39,4 +40,3 @@ public class ParserTestPolicyStatement01 {
 		}
 	}
 }
-

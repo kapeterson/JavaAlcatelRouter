@@ -3,7 +3,7 @@ package examples;
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
 
-public class ParserTestLDP01 {
+public class MPLSTest01 {
 	public static void main(String[] args){
 		if (args.length < 1){
 			System.out.println("Error you must supply path to configuration file");
@@ -22,9 +22,9 @@ public class ParserTestLDP01 {
 
 		
 			
-			for ( String intname : router.LDP.getInterfaces().keySet()){
+			for ( String intname : router.MPLS.getInterfaces().keySet()){
 				
-				System.out.format("LDP INT:  %s  \n",  intname);
+				System.out.format("MPLS INT:  %s  \n",  intname);
 		
 			
 			}

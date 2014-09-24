@@ -2,9 +2,9 @@ package examples;
 
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.filter.SRMacFilterObject;
+import router.alcatel.router.filter.*;;
 
-public class ParserTestMacFilter01 {
+public class FilterIPTest01 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		if (args.length < 1){
@@ -22,9 +22,9 @@ public class ParserTestMacFilter01 {
 			pman.ParseConfig(cfile);
 			SRChassisObject router = pman.getRouter();
 
-		for ( Integer filternumber : router.Filters.getMacFilters().keySet()){
-				SRMacFilterObject filter = router.Filters.getMacFilter(filternumber);
-				System.out.format("Mac Filter: %6d  Description: %-20s \n", filternumber, filter.getDescription());
+		for ( Integer filternumber : router.Filters.getIPFilters().keySet()){
+				SRIPFilterObject filter = router.Filters.getIPFilter(filternumber);
+				System.out.format("Filter: %6d  Description: %-20s \n", filternumber, filter.getDescription());
 
 				
 			}

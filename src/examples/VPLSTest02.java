@@ -2,12 +2,11 @@ package examples;
 
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.service.SRIESObject;
+import router.alcatel.router.service.*;
 
-public class ParserTestIES01 {
+public class VPLSTest02 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
 		if (args.length < 1){
 			System.out.println("Error you must supply path to configuration file");
 			return;
@@ -15,7 +14,6 @@ public class ParserTestIES01 {
 		
 		String cfile = args[0];
 		System.out.println("Going to parse " + cfile);
-		
 
 		Alcatel7x50ParserManager pman = new Alcatel7x50ParserManager();
 
@@ -24,9 +22,15 @@ public class ParserTestIES01 {
 			SRChassisObject router = pman.getRouter();
 	
 			
-			for ( Integer serviceNumber : router.Services.getIESs().keySet()){
-				SRIESObject ies = router.Services.getIES(serviceNumber);
-				System.out.format("Service ies:  %d  Description: %-20s\n", serviceNumber, ies.getDesription());
+			for ( Integer serviceNumber : router.Services.getVPLSs().keySet()){
+				SRVPLSObject vpls = router.Services.getVPLS(serviceNumber);
+				System.out.format("Service Vpls:  %d  Description: %-20s\n", serviceNumber, vpls.getDesription());
+
+				for ( String sapnumber : vpls.getSAPs().keySet()) {
+					//SRVPLSObject vpls = router.Services.getVPLS(serviceNumber);
+					SRSAPObject sap = vpls.getSAP(sapnumber);
+					System.out.println("\tSAP: " + sapnumber);
+				}
 				
 			}
 			

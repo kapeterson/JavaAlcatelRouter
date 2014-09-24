@@ -6,7 +6,7 @@ import router.alcatel.router.service.SRSAPObject;
 import router.alcatel.router.service.SRServiceSDPObject;
 import router.alcatel.router.service.SRVPLSObject;
 
-public class ParserVPLSFull01 {
+public class VPLSTest01 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		if (args.length < 1){

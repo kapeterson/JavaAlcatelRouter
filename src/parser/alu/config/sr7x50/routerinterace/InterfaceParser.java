@@ -30,18 +30,13 @@ public class InterfaceParser extends ConfigurationSection {
 	
 	public void setPortBinding(Matcher matcher) throws Exception {
 		String bindingName = matcher.group(1);
-		//System.out.println("Trying " + bindingName);
 		if ( bindingName.matches("[0-9]+\\/[0-9]+\\/[0-9]+(:)?([0-9]+)?" ) ){
-			//System.out.println("We have port " + bindingName);
 			
 			Matcher m = portPattern.matcher(bindingName);
 			if ( m.find()){
 				
 				if ( this.router.Ports.hasPort(m.group(1))){
 					SRPortObject port = this.router.Ports.getPort(m.group(1));
-					//int tag = -1;
-					//if ( m.group(3) != null)
-					//	tag = Integer.parseInt(m.group(3));
 					
 					final int tag = ( m.group(3) == null ) ? -1 : Integer.parseInt(m.group(3));
 					SRInterfaceBinding binding = new SRInterfaceBinding(port, tag);
@@ -59,9 +54,7 @@ public class InterfaceParser extends ConfigurationSection {
 
 			
 		} else if ( bindingName.matches("lag\\-[0-9]+(:)?([0-9]+)?") ){
-			//System.out.println("OK");
 
-			//System.out.println("Lag binding " + bindingName);
 			
 			Matcher m = lagPattern.matcher(bindingName);
 			
@@ -71,7 +64,6 @@ public class InterfaceParser extends ConfigurationSection {
 					
 					SRLagObject lag = this.router.Lags.getLag(Integer.parseInt(m.group(1)));
 					final int tag = ( m.group(3) == null ) ? -1 : Integer.parseInt(m.group(3));
-					//System.out.format("Tag of lag %d is %d\n", lag.getLagNumber(), tag);
 					SRInterfaceBinding binding = new SRInterfaceBinding(lag, tag);
 					this.iface.setBinding(binding);
 				} else {

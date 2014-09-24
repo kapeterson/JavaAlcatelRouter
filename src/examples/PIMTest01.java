@@ -3,7 +3,7 @@ package examples;
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
 
-public class ParserTestMPLS01 {
+public class PIMTest01 {
 	public static void main(String[] args){
 		if (args.length < 1){
 			System.out.println("Error you must supply path to configuration file");
@@ -22,9 +22,9 @@ public class ParserTestMPLS01 {
 
 		
 			
-			for ( String intname : router.MPLS.getInterfaces().keySet()){
+			for ( String intname : router.PIM.getInterfaces().keySet()){
 				
-				System.out.format("MPLS INT:  %s  \n",  intname);
+				System.out.format("PIM INT:  %s  \n",  intname);
 		
 			
 			}

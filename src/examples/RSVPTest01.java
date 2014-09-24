@@ -3,7 +3,7 @@ package examples;
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
 
-public class ParserTestPIM01 {
+public class RSVPTest01 {
 	public static void main(String[] args){
 		if (args.length < 1){
 			System.out.println("Error you must supply path to configuration file");
@@ -22,9 +22,9 @@ public class ParserTestPIM01 {
 
 		
 			
-			for ( String intname : router.PIM.getInterfaces().keySet()){
+			for ( String intname : router.RSVP.getInterfaces().keySet()){
 				
-				System.out.format("PIM INT:  %s  \n",  intname);
+				System.out.format("RSVP INT:  %s  \n",  intname);
 		
 			
 			}

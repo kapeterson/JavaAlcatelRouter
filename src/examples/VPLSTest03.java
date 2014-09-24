@@ -2,9 +2,9 @@ package examples;
 
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.routerinterface.*;
+import router.alcatel.router.service.*;
 
-public class ParserTestNetworkInterface01 {
+public class VPLSTest03 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		if (args.length < 1){
@@ -21,12 +21,11 @@ public class ParserTestNetworkInterface01 {
 		try {
 			pman.ParseConfig(cfile);
 			SRChassisObject router = pman.getRouter();
-
-		for ( String interfaceName : router.Interface.getInterfaces().keySet()){
-				SRRouterInterface iface = router.Interface.getInterface(interfaceName);
-				
-				System.out.format("Interface: %-15s  Desc: %-20s \n", interfaceName, iface.getDescription());
-
+	
+			
+			for ( Integer serviceNumber : router.Services.getVPLSs().keySet()){
+				SRVPLSObject vpls = router.Services.getVPLS(serviceNumber);
+				System.out.format("Service Vpls:  %d  Description: %-20s\n", serviceNumber, vpls.getDesription());
 				
 			}
 			
