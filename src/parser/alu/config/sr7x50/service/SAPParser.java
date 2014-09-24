@@ -9,6 +9,7 @@ import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.service.SRSAPObject;
 import parser.CommandHandler;
 import router.alcatel.router.port.*;
+import router.alcatel.router.lag.*;
 
 public class SAPParser extends ConfigurationSection{
 	
@@ -44,7 +45,7 @@ public class SAPParser extends ConfigurationSection{
 			if ( m.find()){
 				foundBinding = true;
 				String portNumber = m.group(1);
-				//System.out.println("Found port binding on sap for " + portNumber);
+				
 				if ( this.router.Ports.hasPort(portNumber)){
 					
 					SRPortObject port = this.router.Ports.getPort(portNumber);
@@ -58,6 +59,16 @@ public class SAPParser extends ConfigurationSection{
 			Matcher mlag = lagPattern.matcher(this.sap.getName());
 			if ( mlag.find()){
 				foundBinding = true;
+				Integer lagNumber = Integer.parseInt(mlag.group(1));
+				if ( this.router.Lags.hasLag(lagNumber)){
+					
+					SRLagObject lag = this.router.Lags.getLag(lagNumber);
+					lag.addAssociation(this.sap);
+					
+				} else {
+					System.out.println("ERROR: Error finding lag " + lagNumber + " when adding association in sap config ");
+
+				}
 			}
 			
 			 if(!foundBinding) {

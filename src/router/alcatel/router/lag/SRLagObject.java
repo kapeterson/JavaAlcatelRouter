@@ -2,6 +2,7 @@ package router.alcatel.router.lag;
 import router.alcatel.router.*;
 import router.alcatel.router.port.*;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 /**
  * Models SR 7x50 Lag 
@@ -9,6 +10,10 @@ import java.util.Hashtable;
  *
  */
 public class SRLagObject extends AlcatelObject{
+	
+	/** Array List containing pointer to every association (interface, sap, lag etc)**/
+	protected ArrayList<AlcatelObject> associations = new ArrayList<AlcatelObject>();
+	
 	
 	/** Lag description **/
 	protected String description = "";
@@ -109,5 +114,23 @@ public class SRLagObject extends AlcatelObject{
 	 */
 	public boolean isAdminUp(){
 		return !this.isShutdown();
+	}
+	
+	/**
+	 * Returns an array list of every association for the lag
+	 * @return ArrayList of AlcatelObjects
+	 */
+	public ArrayList<AlcatelObject> getAssociations(){
+		return this.associations;
+	}
+	
+	/**
+	 * Creates a pointer to the parent and/or association for the lag object
+	 * if the lag is part of an interface or sap an association should be added
+	 * @param associationObject Object that is assocated with the lag
+	 * 
+	 */
+	public void addAssociation(AlcatelObject associationObject){
+		this.associations.add(associationObject);
 	}
 }
