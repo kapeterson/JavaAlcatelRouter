@@ -8,6 +8,7 @@ public class SRSAPObject extends AlcatelObject {
 	protected String description = "";
 	public SRSAPObject(String sapname){
 		super(AlcatelObjectType.SAPOBJECT);
+		this.setName(sapname);
 		this.sapName = sapname;
 		this.description = "";
 	}
