@@ -15,6 +15,7 @@ import router.alcatel.router.service.*;
 public class VPLSParser extends ConfigurationSection {
 
 	protected SRVPLSObject vpls = null;
+	
 	public VPLSParser(SRChassisObject router, ContextChange contextChangeHandler, Integer vplsnumber){
 		super("CONFIG.SERVICE.VPLS", router, contextChangeHandler);
 		vpls = new SRVPLSObject(vplsnumber);
@@ -33,6 +34,9 @@ public class VPLSParser extends ConfigurationSection {
 		this.vpls.addSDPObject(sdp);
 	}
 	
+	public void addSAP(SRSAPObject sap){
+		this.vpls.addSAPObject(sap);
+	}
 	
 	public void setSpokeSDPContext(Matcher matcher){
 		//System.out.println("Spoke sdp " + matcher.group(1));
@@ -41,8 +45,12 @@ public class VPLSParser extends ConfigurationSection {
 	}
 	public void setSAPContext(Matcher matcher){
 		//System.out.println("SAP " + matcher.group(1));
-		SRSAPObject newSAP = new SRSAPObject(matcher.group(1));
-		this.vpls.addSAPObject(newSAP);
+		//SRSAPObject newSAP = new SRSAPObject(matcher.group(1));
+		//this.vpls.addSAPObject(newSAP);
+		SAPParser parser = new SAPParser(router, this.contextChange, matcher.group(1));
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
 	}
 	
 	public void setDescription(Matcher matcher){
@@ -54,10 +62,8 @@ public class VPLSParser extends ConfigurationSection {
 	public void exitSection(Matcher matcher){
 		
 		if ( this.getSectionDepth() == this.getLastCommandDepth()) {
-			//System.out.println("Adding vpls " + this.vpls.getServiceNumber());
 			this.router.Services.addVPLS(this.vpls);
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
 		}
-		//super.defaultExitHandler(matcher);
 	}
 }
