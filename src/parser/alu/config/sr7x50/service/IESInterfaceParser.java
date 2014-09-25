@@ -7,6 +7,7 @@ import parser.CommandHandler;
 import parser.ConfigurationSection;
 import parser.ContextChange;
 import router.alcatel.router.AlcatelObject;
+import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.RouterRegex;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.port.SRPortObject;
@@ -23,7 +24,7 @@ public class IESInterfaceParser extends ConfigurationSection {
 		super("CONFIG.SERVICE.IES.INTERFACE", router, contextChangeHandler);
 		interfaceObject = new SRServiceInterface(interfaceName);
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
-		this.commandHash.put(Pattern.compile("^spoke\\-sdp (.*) create"), new CommandHandler("setSDPBinding", true));
+		this.commandHash.put(Pattern.compile("^spoke\\-sdp (.*) create"), new CommandHandler("setSpokeSDPBinding", true));
 		this.commandHash.put(Pattern.compile("^sap (.*) create"), new CommandHandler("setSAPContext", true));
 	}
 	
@@ -36,36 +37,21 @@ public class IESInterfaceParser extends ConfigurationSection {
 		this.getContextNotifier().contextChangeCallback(this, parser);
 	}
 
-	public void setSDPBinding(Matcher matcher) throws Exception{
-		ServiceSDPParser parser = new ServiceSDPParser(router, this.contextChange, matcher.group(1));
+	public void setSpokeSDPBinding(Matcher matcher) throws Exception{
+		ServiceSDPParser parser = new ServiceSDPParser(router, this.contextChange, matcher.group(1), AlcatelObjectType.SPOKESDPOBJECT);
 		parser.setParent(this);
 		parser.setSectionDepth(this.getLastCommandDepth());
 		this.getContextNotifier().contextChangeCallback(this, parser);
-		/*
-		System.out.println("\nSetting ies binding to " + matcher.group(1));
-		String[] sdpInfo = matcher.group(1).split(":");
-		System.out.println("SDP = " + sdpInfo[0]);
-		System.out.println("VCID = " + sdpInfo[1]);
-		if ( this.router.Services.hasSDP(sdpInfo[0])){
-			
-			SRSDPObject sdp = this.router.Services.getSDP(Integer.parseInt(sdpInfo[0]));
-			int tag = -1;
-			//int tag = Integer.parseInt(sdpInfo[1]);
-			try {
-				tag = Integer.parseInt(sdpInfo[1].trim());
-			} catch ( Exception err ) {
-				System.out.println("Error convertin to int " + err.getMessage());
-				System.exit(1);
-			}
-			//int tag = 3;
-			SRInterfaceBinding binding = new SRInterfaceBinding(sdp, tag);
-			
-			this.interfaceObject.setBinding(binding);
-			
-		}
-		*/
+
 	}
 	
+	public void setMeshSDPBinding(Matcher matcher) throws Exception{
+		ServiceSDPParser parser = new ServiceSDPParser(router, this.contextChange, matcher.group(1), AlcatelObjectType.MESHSDPOBJECT);
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
+
+	}
 	
 	public void addObject(AlcatelObject object){
 		

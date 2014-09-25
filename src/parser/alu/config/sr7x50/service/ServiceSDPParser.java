@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import parser.CommandHandler;
 import parser.ConfigurationSection;
 import parser.ContextChange;
+import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.service.SRServiceSDPObject;
 
@@ -14,8 +15,14 @@ public class ServiceSDPParser extends ConfigurationSection {
 	 
 	protected SRServiceSDPObject sdp = null;
 	
-	public ServiceSDPParser(SRChassisObject router, ContextChange contextChangeHandler, String sdpName){
+	public ServiceSDPParser(SRChassisObject router, ContextChange contextChangeHandler, String sdpName, AlcatelObjectType sdpType){
 		super("CONFIG.SERVICE.IES.INTERFACE.SDP", router, contextChangeHandler);
+		
+		if ( sdpType != AlcatelObjectType.MESHSDPOBJECT && sdpType != AlcatelObjectType.SPOKESDPOBJECT){
+			System.out.println("Error invalid sdp type in ServiceSDP Parser");
+			System.exit(1);
+		}
+		
 		this.sdp = new SRServiceSDPObject(null, sdpName);
 		// = new SRSAPObject(sapName);
 		//this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));

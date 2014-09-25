@@ -43,8 +43,12 @@ public class VPLSParser extends ConfigurationSection {
 	
 	public void setSpokeSDPContext(Matcher matcher){
 		//System.out.println("Spoke sdp " + matcher.group(1));
-		SRServiceSDPObject sdp = new SRServiceSDPObject(AlcatelObjectType.SPOKESDPOBJECT, matcher.group(1));
-		this.vpls.addSDPObject(sdp);
+		//SRServiceSDPObject sdp = new SRServiceSDPObject(AlcatelObjectType.SPOKESDPOBJECT, matcher.group(1));
+		//this.vpls.addSDPObject(sdp);
+		ServiceSDPParser parser = new ServiceSDPParser(router, this.contextChange, matcher.group(1), AlcatelObjectType.SPOKESDPOBJECT);
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
 	}
 	public void setSAPContext(Matcher matcher){
 		//System.out.println("SAP " + matcher.group(1));
@@ -56,6 +60,8 @@ public class VPLSParser extends ConfigurationSection {
 		this.getContextNotifier().contextChangeCallback(this, parser);
 	}
 	
+	
+
 	public void setDescription(Matcher matcher){
 		this.vpls.setDescription(matcher.group(1));
 	}
@@ -74,6 +80,9 @@ public class VPLSParser extends ConfigurationSection {
 		
 		if ( object.isSAPObject()){
 			this.vpls.addSAPObject((SRSAPObject)object);
+		} else if ( object.isServiceSDPObject()){
+			System.out.println("Adding objectd  " + object.getName());
+			this.vpls.addSDPObject((SRServiceSDPObject)object);
 		}
 	}
 }
