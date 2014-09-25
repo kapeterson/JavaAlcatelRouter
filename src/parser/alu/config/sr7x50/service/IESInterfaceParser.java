@@ -37,7 +37,10 @@ public class IESInterfaceParser extends ConfigurationSection {
 	}
 
 	public void setSDPBinding(Matcher matcher) throws Exception{
-		
+		ServiceSDPParser parser = new ServiceSDPParser(router, this.contextChange, matcher.group(1));
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
 		/*
 		System.out.println("\nSetting ies binding to " + matcher.group(1));
 		String[] sdpInfo = matcher.group(1).split(":");
@@ -67,16 +70,12 @@ public class IESInterfaceParser extends ConfigurationSection {
 	public void addObject(AlcatelObject object){
 		
 		if ( object.isSAPObject()){
-			//System.out.println("Add teh damn sap -> " + object.getName());
-			
-			//SRInterfaceBinding binding = new SRInterfaceBinding(object, );
-			
-			// check the regex to get the port and vlan if it exists
+
 			Pattern sapPattern = Pattern.compile(RouterRegex.PortRegex);
 			Matcher m = sapPattern.matcher(object.getName());
 			
 			if ( m.find()){
-				String portNumber = m.group(1);
+
 				Integer tag = -1;
 				if ( m.group(3) != null){
 					tag = Integer.parseInt(m.group(3));
@@ -95,6 +94,38 @@ public class IESInterfaceParser extends ConfigurationSection {
 			
 			this.interfaceObject.setServiceBinding(object);
 			
+		} else if ( object.isServiceSDPObject()) {
+			System.out.println("Adding sdp to ies " + object.getName().trim());
+			Pattern sdpPattern = Pattern.compile(RouterRegex.sdpInfoPattern);
+
+			Matcher sdpMatch = sdpPattern.matcher(object.getName().trim());
+			
+			if ( sdpMatch.find()){
+				
+				Integer tag = -1;
+				if ( sdpMatch.group(2) != null){
+					tag = Integer.parseInt(sdpMatch.group(2));
+				} else {
+					System.out.println("Error getting vcid in sdp binding " );
+					System.exit(1);
+				}
+				
+				SRInterfaceBinding binding = new SRInterfaceBinding(object, tag);
+				
+				try {
+					this.interfaceObject.setBinding(binding);
+				} catch ( Exception err){
+					System.out.println("Error trying to set binding of ies to a sdp " + object.getName());
+					System.exit(1);
+				}				
+				
+				this.interfaceObject.setServiceBinding(object);
+
+				
+			} else {
+				System.out.println("Error trying to set binding of ies to a sdp " + object.getName());
+				System.exit(1);
+			}
 		}
 	}
 	public void setDescription(Matcher matcher){

@@ -21,7 +21,7 @@ public class SRServiceInterface extends SRRouterInterface {
 	}
 	
 	private void setBindingTypes(){
-		this.bindingTypes = new AlcatelObjectType[] { AlcatelObjectType.SAPOBJECT, AlcatelObjectType.SDPOBJECT };
+		this.bindingTypes = new AlcatelObjectType[] { AlcatelObjectType.SAPOBJECT, AlcatelObjectType.SERVICESDPOBJECT };
 	}
 	
 	

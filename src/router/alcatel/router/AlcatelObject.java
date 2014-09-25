@@ -134,6 +134,18 @@ public abstract class AlcatelObject {
 	public boolean isSAPObject(){
 		return false;
 	}
+	
+	public boolean isServiceSDPObject(){
+		return false;
+	}
+	
+	public boolean isMeshSDP(){
+		return false;
+	}
+	
+	public boolean isSpokeSDP(){
+		return false;
+	}
 
 	
 }
