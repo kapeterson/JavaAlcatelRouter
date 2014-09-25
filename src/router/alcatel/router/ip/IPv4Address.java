@@ -65,6 +65,7 @@ public class IPv4Address extends IPAddress {
 	public int getNetmask(){
 		return this.netmask;
 	}
+	
 	public String getNetwork(){
 		return "";
 	}
