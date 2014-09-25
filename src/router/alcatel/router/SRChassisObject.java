@@ -45,7 +45,7 @@ public class SRChassisObject extends AlcatelHardwareObject  {
 	public SRRSVPConfiguration RSVP = null;
 	public SRPolicyConfiguration Policy = null;
 	public SRBGPConfiguration BGP = null;
-	public SRStaticRouteConfiguration StaticRoute = null;
+	public SRStaticRouteConfiguration StaticRoutes = null;
 	
 	
 	public String chassisType;
@@ -70,7 +70,7 @@ public class SRChassisObject extends AlcatelHardwareObject  {
 		RSVP = new SRRSVPConfiguration();
 		Policy = new SRPolicyConfiguration();
 		BGP = new SRBGPConfiguration();
-		StaticRoute = new SRStaticRouteConfiguration();
+		StaticRoutes = new SRStaticRouteConfiguration();
 		
 		
 		chassisType = "NA";

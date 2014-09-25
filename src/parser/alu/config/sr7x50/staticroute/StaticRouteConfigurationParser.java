@@ -40,7 +40,7 @@ public class StaticRouteConfigurationParser extends ConfigurationSection  {
 		}
 		
 		//System.out.println("Created it");
-		this.router.StaticRoute.addIPv4StaticRoute(myRoute);
+		this.router.StaticRoutes.addIPv4StaticRoute(myRoute);
 	}
 	
 	
@@ -59,7 +59,7 @@ public class StaticRouteConfigurationParser extends ConfigurationSection  {
 		}
 		
 		//System.out.println("Created it");
-		this.router.StaticRoute.addIPv4StaticRoute(myRoute);
+		this.router.StaticRoutes.addIPv4StaticRoute(myRoute);
 	}
 	
 	public void addStaticRoute(Matcher matcher){
@@ -79,7 +79,7 @@ public class StaticRouteConfigurationParser extends ConfigurationSection  {
 			myRoute.setMetric(Integer.parseInt(mMatch.group(1)));
 		}
 		
-		this.router.StaticRoute.addIPv4StaticRoute(myRoute);
+		this.router.StaticRoutes.addIPv4StaticRoute(myRoute);
 		
 	}
 	
