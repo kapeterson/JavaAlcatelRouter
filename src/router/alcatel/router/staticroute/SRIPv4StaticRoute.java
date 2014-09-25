@@ -1,14 +1,15 @@
 package router.alcatel.router.staticroute;
 import router.alcatel.router.ip.*;
-public class IPv4StaticRoute extends SRStaticRouteObject {
+public class SRIPv4StaticRoute extends SRStaticRouteObject {
 	
 	//protected byte mask = 0;
-	protected int nexthop = 0;
+	protected IPv4Address nexthop = null;
 	protected IPv4Address addr = null;
 	
-	public IPv4StaticRoute(String network, String mask){
+	public SRIPv4StaticRoute(String network, String mask, String nexthop){
 		super();
-		addr = new IPv4Address(network, mask);
+		this.addr = new IPv4Address(network, mask);
+		this.nexthop = new IPv4Address(nexthop, "32");
 	}
 	
 	public String getMask(){
@@ -16,7 +17,7 @@ public class IPv4StaticRoute extends SRStaticRouteObject {
 	}
 	
 	public String getNextHop(){
-		return String.valueOf(this.nexthop);
+		return this.nexthop.getHostAddress();
 	}
 	
 	public String getNetwork(){

@@ -15,6 +15,7 @@ import router.alcatel.router.ldp.*;
 import router.alcatel.router.rsvp.*;
 import router.alcatel.router.policy.*;
 import router.alcatel.router.bgp.*;
+import router.alcatel.router.staticroute.*;
 
 /**
  * Top level object for the router model.  exposes all configuration sections including System, Card etc.
@@ -42,6 +43,7 @@ public class SRChassisObject extends AlcatelHardwareObject  {
 	public SRRSVPConfiguration RSVP = null;
 	public SRPolicyConfiguration Policy = null;
 	public SRBGPConfiguration BGP = null;
+	public SRStaticRouteConfiguration StaticRoute = null;
 	
 	
 	public String chassisType;
@@ -66,6 +68,7 @@ public class SRChassisObject extends AlcatelHardwareObject  {
 		RSVP = new SRRSVPConfiguration();
 		Policy = new SRPolicyConfiguration();
 		BGP = new SRBGPConfiguration();
+		StaticRoute = new SRStaticRouteConfiguration();
 		
 		
 		chassisType = "NA";

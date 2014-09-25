@@ -6,6 +6,7 @@ public class IPv4Address extends IPAddress {
 
 	protected int loweraddress = 0;
 	protected String hostString = "";
+	
 	protected int netmask = 0;
 	protected int bitmask = 0;
 	
@@ -31,8 +32,9 @@ public class IPv4Address extends IPAddress {
 		this.bitmask = 0x01;
 		this.bitmask = this.bitmask << 31;
 		this.bitmask = this.bitmask >> 31;
-		this.bitmask = (this.bitmask >> (31 - this.netmask) ) << ( 31 - this.netmask );
-		
+		//System.out.println("Full bitmask = " + Integer.toBinaryString(this.bitmask));
+		this.bitmask = (this.bitmask >> (32 - this.netmask ) ) << ( 32 - this.netmask );
+		//System.out.println("init bitmask to " + Integer.toBinaryString(this.bitmask) + " for " + ipAddress + "/" + mask);
 	}
 	
 	private int convertIPToInt(String ipstring){
@@ -56,6 +58,14 @@ public class IPv4Address extends IPAddress {
 		return address;
 	}
 	
+	private String convertIntToIPString(int ip){
+		String o1 = String.valueOf(( ip >> 24 ) & 0xFF);
+		String o2 = String.valueOf((ip >> 16) & 0xFF);
+		String o3 = String.valueOf((ip >> 8) & 0xFF);
+		String o4 = String.valueOf(ip & 0xFF);
+		return (o1 + "." + o2 + "." + o3 + "." + o4);
+	}
+	
 	/** returns the bit pattern bitmask **/
 	public int getBitMask(){
 		return this.netmask;
@@ -67,7 +77,10 @@ public class IPv4Address extends IPAddress {
 	}
 	
 	public String getNetwork(){
-		return "";
+		// mask the host and bitmask
+		//System.out.println("Mas is " + Integer.toBinaryString(this.bitmask));
+		int nw = this.loweraddress & this.bitmask;
+		return convertIntToIPString( nw );
 	}
 	
 	public String getHostAddress(){

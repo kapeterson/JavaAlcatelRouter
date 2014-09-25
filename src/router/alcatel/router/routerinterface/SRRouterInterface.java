@@ -53,7 +53,7 @@ public class SRRouterInterface extends AlcatelObject {
 			this.v4Address = new IPv4Address(ipaddr, netmask);
 			
 		} catch (Exception err){
-			System.out.println("Error parsing ipv4 address from string " + err.getMessage());
+			System.out.println("Error parsing ipv4 address from string ");
 			System.exit(1);
 		}
 		
