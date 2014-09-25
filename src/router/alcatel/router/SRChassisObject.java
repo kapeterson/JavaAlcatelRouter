@@ -35,7 +35,7 @@ public class SRChassisObject extends AlcatelHardwareObject  {
 	public SRLagConfiguration Lags = null;
 	public SRQOSConfiguration QOS = null;
 	public SRFilterConfiguration Filters = null;
-	public SRInterfaceConfiguration Interface = null;
+	public SRInterfaceConfiguration Interfaces = null;
 	public SRServiceConfiguration Services = null;
 	public SROSPFConfiguration OSPF = null;
 	public SRPIMConfiguration PIM = null;
@@ -60,7 +60,7 @@ public class SRChassisObject extends AlcatelHardwareObject  {
 		Lags = new SRLagConfiguration();
 		QOS = new SRQOSConfiguration();
 		Filters = new SRFilterConfiguration();
-		Interface = new SRInterfaceConfiguration();
+		Interfaces = new SRInterfaceConfiguration();
 		Services = new SRServiceConfiguration();
 		OSPF = new SROSPFConfiguration();
 		PIM = new SRPIMConfiguration();

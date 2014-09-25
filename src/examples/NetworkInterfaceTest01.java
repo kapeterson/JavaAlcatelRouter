@@ -21,8 +21,8 @@ public class NetworkInterfaceTest01 {
 			pman.ParseConfig(cfile);
 			SRChassisObject router = pman.getRouter();
 
-		for ( String  iname : router.Interface.getInterfaces().keySet()){
-				SRRouterInterface iface = router.Interface.getInterface(iname);
+		for ( String  iname : router.Interfaces.getInterfaces().keySet()){
+				SRRouterInterface iface = router.Interfaces.getInterface(iname);
 				//System.out.println("Interface " + iname + " addr = " + iface.getIPv4Address().toString().split("/")[1]);
 				System.out.println("Interface " + iname + " addr = " + iface.getIPv4HostAddress() + "/" + iface.getIPv4Mask());
 				

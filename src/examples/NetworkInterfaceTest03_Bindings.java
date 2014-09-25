@@ -23,8 +23,8 @@ public class NetworkInterfaceTest03_Bindings {
 			pman.ParseConfig(cfile);
 			SRChassisObject router = pman.getRouter();
 
-		for ( String interfaceName : router.Interface.getInterfaces().keySet()){
-				SRRouterInterface iface = router.Interface.getInterface(interfaceName);
+		for ( String interfaceName : router.Interfaces.getInterfaces().keySet()){
+				SRRouterInterface iface = router.Interfaces.getInterface(interfaceName);
 				SRInterfaceBinding binding = iface.getBinding();
 				if ( binding != null)
 					System.out.format("Interface: %-15s  Binding: %-15s TAG: %-5d\n", interfaceName, binding.getBinding().getName(), binding.getTag());

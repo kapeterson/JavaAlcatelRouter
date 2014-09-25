@@ -109,7 +109,7 @@ public class InterfaceParser extends ConfigurationSection {
 		
 		if ( this.getSectionDepth() == this.getLastCommandDepth()) {
 			//System.out.format("Exited lag %s\n", this.lag.getLagNumber().toString());
-			router.Interface.addInterface(this.iface);
+			router.Interfaces.addInterface(this.iface);
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
 		}
 		//super.defaultExitHandler(matcher);
