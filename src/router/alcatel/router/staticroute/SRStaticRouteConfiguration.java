@@ -17,6 +17,8 @@ public class SRStaticRouteConfiguration {
 	 * @param route an SRIPv4StaticRoute
 	 */
 	public void addIPv4StaticRoute(SRIPv4StaticRoute route){
+		String nh = "";
+		
 		String keystring = route.getNetwork() + "/" + route.getMask() + "/" + route.getNextHop();
 		//System.out.println("Adding route with key " + keystring);
 		this.ipv4Routes.put(keystring, route);

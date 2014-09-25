@@ -18,13 +18,33 @@ public class StaticRouteConfigurationParser extends ConfigurationSection  {
 		super("CONFIG.STATICROUTE", router, contextChangeHandler);
 		//System.out.println("Instantiated port configuration parser");
 		this.commandHash.put(Pattern.compile("^static\\-route ([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)\\/([0-9]+) next\\-hop ([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+) .*"), new CommandHandler("addStaticRoute", true));
+		this.commandHash.put(Pattern.compile("^static\\-route ([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)\\/([0-9]+) black\\-hole .*"), new CommandHandler("addBlackHoleRoute", true));
+
 	}
 	
+	
+	public void addBlackHoleRoute(Matcher matcher){
+		SRIPv4BHStaticRoute myRoute = new SRIPv4BHStaticRoute(matcher.group(1), matcher.group(2));
+		Matcher tmatch = tagPattern.matcher(matcher.group());
+		
+		if ( tmatch.find()){
+			myRoute.setTag(Integer.parseInt(tmatch.group(1)));
+		}
+		
+		Matcher mMatch = metricPattern.matcher(matcher.group());
+		
+		if ( mMatch.find()){
+			myRoute.setMetric(Integer.parseInt(mMatch.group(1)));
+		}
+		
+		System.out.println("Created it");
+		this.router.StaticRoute.addIPv4StaticRoute(myRoute);
+	}
 	
 	public void addStaticRoute(Matcher matcher){
 
 		//System.out.println("Found static route " + matcher.group(1));
-		SRIPv4StaticRoute myRoute = new SRIPv4StaticRoute(matcher.group(1), matcher.group(2), matcher.group(3));
+		SRIPv4NHStaticRoute myRoute = new SRIPv4NHStaticRoute(matcher.group(1), matcher.group(2), matcher.group(3));
 		//System.out.println("\n\nMatched on string " + matcher.group());
 		Matcher tmatch = tagPattern.matcher(matcher.group());
 		

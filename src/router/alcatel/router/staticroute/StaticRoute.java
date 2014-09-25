@@ -9,4 +9,7 @@ public interface StaticRoute {
 	public boolean isIPv4Route();
 	public boolean isIPv6Route();
 	public String getRouteCommand();
+	public boolean isNextHopRoute();
+	public boolean isIndirectRoute();
+	public boolean isBlackHoleRoute();
 }

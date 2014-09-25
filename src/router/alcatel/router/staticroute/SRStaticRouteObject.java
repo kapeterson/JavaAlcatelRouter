@@ -61,4 +61,16 @@ public abstract class SRStaticRouteObject extends AlcatelObject implements Stati
 		
 	}
 	
+	public boolean isNextHopRoute(){
+		return false;
+	}
+	
+	public boolean isBlackHoleRoute(){
+		return false;
+	}
+	
+	public boolean isIndirectRoute(){
+		return false;
+	}
+	
 }
