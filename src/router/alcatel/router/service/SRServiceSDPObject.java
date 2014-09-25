@@ -8,6 +8,8 @@ public class SRServiceSDPObject extends AlcatelObject{
 	
 	public SRServiceSDPObject(AlcatelObjectType sdpType, String sdpName){
 		super(sdpType);
+		//this.setObjectType(AlcatelObjectType.SDPSERVICE);
+		//this.setName(sdpName);
 		String[] sdp = sdpName.split(":");
 		this.sdpNumber = Integer.parseInt(sdp[0]);
 		this.vcid = Integer.parseInt(sdp[1]);

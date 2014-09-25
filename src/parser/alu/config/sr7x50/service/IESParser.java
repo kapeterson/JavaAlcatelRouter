@@ -23,7 +23,6 @@ public class IESParser extends ConfigurationSection{
 	
 
 	public void setInterfaceContext(Matcher matcher){
-		//System.out.println("Iface context");
 		IESInterfaceParser parser = new IESInterfaceParser(this.router, this.getContextNotifier(), matcher.group(1));
 		parser.setParent(this);
 		parser.setSectionDepth(this.getLastCommandDepth());
@@ -36,7 +35,6 @@ public class IESParser extends ConfigurationSection{
 	}
 	
 	public void addInterface(SRServiceInterface iface){
-		System.out.println("Adding sinterface " + iface);
 		iface.setParentService(this.ies);
 		this.ies.addInterface(iface);
 		this.router.Interfaces.addInterface(iface);

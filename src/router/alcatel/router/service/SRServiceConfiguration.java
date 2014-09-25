@@ -52,4 +52,11 @@ public class SRServiceConfiguration {
 		return this.sdp;
 	}
 	
+	
+	public boolean hasSDP(String sdpnumberstring){
+		return this.sdp.containsKey(Integer.parseInt(sdpnumberstring));
+	}
+	public boolean hasSDP(Integer sdpnumber){
+		return this.sdp.containsKey(sdpnumber);
+	}
 }

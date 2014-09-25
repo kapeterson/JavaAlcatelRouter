@@ -11,7 +11,7 @@ public class SRInterfaceBinding {
 		this.binding = bindingObject;
 	}
 	
-	public SRInterfaceBinding(AlcatelObject bindingObject, Integer tag){
+	public SRInterfaceBinding(AlcatelObject bindingObject, int tag){
 		this.binding = bindingObject;
 		this.bindingTag = tag;
 		
