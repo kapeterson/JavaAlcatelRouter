@@ -28,6 +28,8 @@ public class VPLSParser extends ConfigurationSection {
 
 	}
 	
+	
+
 	public void setMeshSDPContext(Matcher matcher){
 		//System.out.println("Spoke sdp " + matcher.group(1));
 		SRServiceSDPObject sdp = new SRServiceSDPObject(AlcatelObjectType.MESHSDPOBJECT, matcher.group(1));

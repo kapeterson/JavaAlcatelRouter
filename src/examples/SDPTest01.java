@@ -25,7 +25,7 @@ public class SDPTest01 {
 			
 			for ( Integer serviceNumber : router.Services.getSDPs().keySet()){
 				SRSDPObject vpls = router.Services.getSDP(serviceNumber);
-				System.out.format("Service sdp:  %d  Description: %-20s\n", serviceNumber, vpls.getDesription());
+				System.out.format("Service sdp:  %d  Description: %-20s\n", serviceNumber, vpls.getDescription());
 				
 			}
 			

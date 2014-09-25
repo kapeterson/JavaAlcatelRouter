@@ -24,7 +24,7 @@ public class VPLSTest02 {
 			
 			for ( Integer serviceNumber : router.Services.getVPLSs().keySet()){
 				SRVPLSObject vpls = router.Services.getVPLS(serviceNumber);
-				System.out.format("Service Vpls:  %d  Description: %-20s\n", serviceNumber, vpls.getDesription());
+				System.out.format("Service Vpls:  %d  Description: %-20s\n", serviceNumber, vpls.getDescription());
 
 				for ( String sapnumber : vpls.getSAPs().keySet()) {
 					//SRVPLSObject vpls = router.Services.getVPLS(serviceNumber);

@@ -25,7 +25,7 @@ public class SRServiceObject extends AlcatelObject{
 		this.serviceDescription = desc;
 	}
 	
-	public String getDesription(){
+	public String getDescription(){
 		return this.serviceDescription;
 	}
 	

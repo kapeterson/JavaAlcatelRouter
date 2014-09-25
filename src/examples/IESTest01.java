@@ -26,7 +26,7 @@ public class IESTest01 {
 			
 			for ( Integer serviceNumber : router.Services.getIESs().keySet()){
 				SRIESObject ies = router.Services.getIES(serviceNumber);
-				System.out.format("Service ies:  %d  Description: %-20s\n", serviceNumber, ies.getDesription());
+				System.out.format("Service ies:  %d  Description: %-20s\n", serviceNumber, ies.getDescription());
 				
 			}
 			
