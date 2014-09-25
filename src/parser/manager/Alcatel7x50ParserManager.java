@@ -23,7 +23,7 @@ import parser.alu.config.sr7x50.ldp.*;
 import parser.alu.config.sr7x50.rsvp.*;
 import parser.alu.config.sr7x50.policy.*;
 import parser.alu.config.sr7x50.bgp.*;
-
+import parser.alu.config.sr7x50.staticroute.*;
 
 import router.alcatel.router.*;
 
@@ -57,7 +57,7 @@ public class Alcatel7x50ParserManager implements ContextChange {
 		contextHash.put("echo \"Management Router Configuration\"", defaultParser);
 		contextHash.put("echo \"Filter Configuration\"", new FilterConfigurationParser(router, this));
 		contextHash.put("echo \"Router (Network Side) Configuration\"", new InterfaceConfigurationParser(router, this));
-		contextHash.put("echo \"Static Route Configuration\"", defaultParser);
+		contextHash.put("echo \"Static Route Configuration\"", new StaticRouteConfigurationParser(router, this));
 		contextHash.put("echo \"SGT Mapping Configuration\"", defaultParser);
 		contextHash.put("echo \"OSPFv2 Configuration\"",new OSPFConfigurationParser(router, this));
 		contextHash.put("echo \"IGMP Configuration\"", new IGMPConfigurationParser(router, this));
