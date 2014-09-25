@@ -39,7 +39,7 @@ public class StaticRouteConfigurationParser extends ConfigurationSection  {
 			myRoute.setMetric(Integer.parseInt(mMatch.group(1)));
 		}
 		
-		System.out.println("Created it");
+		//System.out.println("Created it");
 		this.router.StaticRoute.addIPv4StaticRoute(myRoute);
 	}
 	
@@ -58,7 +58,7 @@ public class StaticRouteConfigurationParser extends ConfigurationSection  {
 			myRoute.setMetric(Integer.parseInt(mMatch.group(1)));
 		}
 		
-		System.out.println("Created it");
+		//System.out.println("Created it");
 		this.router.StaticRoute.addIPv4StaticRoute(myRoute);
 	}
 	

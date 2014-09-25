@@ -1,5 +1,6 @@
 package router.alcatel.router;
 import java.util.Hashtable;
+
 import router.alcatel.router.system.*;
 import router.alcatel.router.port.*;
 import router.alcatel.router.lag.*;
@@ -15,6 +16,7 @@ import router.alcatel.router.ldp.*;
 import router.alcatel.router.rsvp.*;
 import router.alcatel.router.policy.*;
 import router.alcatel.router.bgp.*;
+import router.alcatel.router.card.SRCardConfiguration;
 import router.alcatel.router.staticroute.*;
 
 /**
