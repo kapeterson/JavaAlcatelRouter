@@ -18,7 +18,7 @@ public class SRRouterInterface extends AlcatelObject {
 	protected String interfaceName = "";
 	protected String description = "";
 	
-	protected AlcatelObjectType[] bindingTypes = { AlcatelObjectType.PHYSICALPORT, AlcatelObjectType.LAG };
+	protected AlcatelObjectType[] bindingTypes = new AlcatelObjectType[] {  };
 	protected SRInterfaceBinding binding = null;
 	
 	protected Pattern ipv4Pattern = Pattern.compile("([0-9]+)\\.([0-9]+)\\.([0-9]+)\\.([0-9]+)");
