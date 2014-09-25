@@ -1,12 +1,16 @@
 package router.alcatel.router.service;
 
+import java.util.Arrays;
+
+import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.routerinterface.SRRouterInterface;
 
 public class SRServiceInterface extends SRRouterInterface {
 	
-	protected SRServiceObject parentService = null;
 	
+	protected SRServiceObject parentService = null;
+	protected AlcatelObject serviceBinding = null;
 	
 	public SRServiceInterface(String interfaceName){
 		
@@ -19,6 +23,8 @@ public class SRServiceInterface extends SRRouterInterface {
 	private void setBindingTypes(){
 		this.bindingTypes = new AlcatelObjectType[] { AlcatelObjectType.SAPOBJECT, AlcatelObjectType.SDPOBJECT };
 	}
+	
+	
 	public SRServiceInterface(String interfaceName, SRServiceObject parentService){
 		
 		super(interfaceName);
@@ -29,6 +35,14 @@ public class SRServiceInterface extends SRRouterInterface {
 
 	}
 	
+	public void setServiceBinding(AlcatelObject serviceBinding){
+		if (Arrays.asList(this.bindingTypes).contains(serviceBinding.getObjectType()) ){
+			this.serviceBinding = serviceBinding;
+		} else {
+			System.out.println("ERROR binding service type " + serviceBinding.getObjectType() + " to an ies interface");
+			System.exit(1);
+		}
+	}
 	public void setParentService(SRServiceObject parentService){
 		this.parentService = parentService;
 	}

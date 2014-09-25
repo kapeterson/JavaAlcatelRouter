@@ -75,7 +75,8 @@ public class SAPParser extends ConfigurationSection{
 					System.out.println("Error parsing port value in sap parser " + sname);
 					System.exit(1);
 			}
-			((VPLSParser)this.getParent()).addSAP(this.sap);
+			 
+			this.getParent().addObject(this.sap);
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
 			
 			

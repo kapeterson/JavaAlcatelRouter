@@ -39,7 +39,7 @@ public class SRRouterInterface extends AlcatelObject {
 	
 	public void setBinding(SRInterfaceBinding bindingObject) throws Exception{
 		
-		System.out.println("Checking binding type");
+		//System.out.println("Checking binding type");
 		if ( Arrays.asList(this.bindingTypes).contains(bindingObject.getObjectType()) )
 			this.binding = bindingObject;
 		else{

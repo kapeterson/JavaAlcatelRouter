@@ -4,6 +4,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.lang.reflect.Method;
 
+import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
 
 /**
@@ -192,5 +193,9 @@ public abstract class ConfigurationSection    {
 	
 	public ContextChange getContextNotifier(){
 		return this.contextChange;
+	}
+	
+	public void addObject(AlcatelObject object){
+		
 	}
 }

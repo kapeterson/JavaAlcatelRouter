@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import parser.ConfigurationSection;
 import parser.CommandHandler;
 import parser.ContextChange;
+import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.service.*;
@@ -66,6 +67,13 @@ public class VPLSParser extends ConfigurationSection {
 		if ( this.getSectionDepth() == this.getLastCommandDepth()) {
 			this.router.Services.addVPLS(this.vpls);
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
+		}
+	}
+	
+	public void addObject(AlcatelObject object){
+		
+		if ( object.isSAPObject()){
+			this.vpls.addSAPObject((SRSAPObject)object);
 		}
 	}
 }
