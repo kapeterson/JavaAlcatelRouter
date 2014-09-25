@@ -8,7 +8,18 @@ public class SRServiceSDPObject extends AlcatelObject{
 	
 	public SRServiceSDPObject(AlcatelObjectType sdpType, String sdpName){
 		super(sdpType);
-		this.setObjectType(AlcatelObjectType.SERVICESDPOBJECT);
+		
+		
+		// verify object type
+		if ( sdpType != null && ( sdpType != AlcatelObjectType.MESHSDPOBJECT && sdpType != AlcatelObjectType.SPOKESDPOBJECT))
+			System.out.println("ERROR: Invalid object type in sdp instantiation " + sdpType);
+		
+		
+		if ( sdpType != null)
+			this.setObjectType(sdpType);
+		else
+			this.setObjectType(AlcatelObjectType.SERVICESDPOBJECT);
+		
 		this.setName(sdpName);
 		String[] sdp = sdpName.split(":");
 		this.sdpNumber = Integer.parseInt(sdp[0]);

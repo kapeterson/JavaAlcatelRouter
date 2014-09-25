@@ -23,7 +23,7 @@ public class ServiceSDPParser extends ConfigurationSection {
 			System.exit(1);
 		}
 		
-		this.sdp = new SRServiceSDPObject(null, sdpName);
+		this.sdp = new SRServiceSDPObject(sdpType, sdpName);
 		// = new SRSAPObject(sapName);
 		//this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
 	}
