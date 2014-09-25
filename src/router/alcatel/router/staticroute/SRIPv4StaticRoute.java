@@ -28,4 +28,19 @@ public class SRIPv4StaticRoute extends SRStaticRouteObject {
 		return true;
 	}
 	
+	public String getRouteCommand(){
+		String cmd = "static-route " + this.getNetwork() + "/" + this.getMask() + " next-hop " + this.getNextHop();
+		cmd += " preference " + this.getPreference() + " metric " + this.getMetric(); 
+		
+		
+		if ( this.tag > 0)
+			cmd += " tag " + this.getTag();
+		
+		if ( this.isEnabled())
+			cmd += " enabled";
+		else 
+			cmd += " disabled ";
+		return cmd;
+	}
+	
 }

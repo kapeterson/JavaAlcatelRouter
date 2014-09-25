@@ -25,7 +25,7 @@ public class StaticRouteConfigurationParser extends ConfigurationSection  {
 
 		//System.out.println("Found static route " + matcher.group(1));
 		SRIPv4StaticRoute myRoute = new SRIPv4StaticRoute(matcher.group(1), matcher.group(2), matcher.group(3));
-		System.out.println("\n\nMatched on string " + matcher.group());
+		//System.out.println("\n\nMatched on string " + matcher.group());
 		Matcher tmatch = tagPattern.matcher(matcher.group());
 		
 		if ( tmatch.find()){

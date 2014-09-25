@@ -8,4 +8,5 @@ public interface StaticRoute {
 	public String getNextHop();
 	public boolean isIPv4Route();
 	public boolean isIPv6Route();
+	public String getRouteCommand();
 }

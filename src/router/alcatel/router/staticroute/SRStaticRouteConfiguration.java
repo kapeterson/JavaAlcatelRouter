@@ -18,7 +18,7 @@ public class SRStaticRouteConfiguration {
 	 */
 	public void addIPv4StaticRoute(SRIPv4StaticRoute route){
 		String keystring = route.getNetwork() + "/" + route.getMask() + "/" + route.getNextHop();
-		System.out.println("Adding route with key " + keystring);
+		//System.out.println("Adding route with key " + keystring);
 		this.ipv4Routes.put(keystring, route);
 	}
 	
@@ -30,5 +30,9 @@ public class SRStaticRouteConfiguration {
 		String keystring = network + "/" + mask + "/" + nexthop;
 		return this.ipv4Routes.containsKey(keystring);
 		
+	}
+	
+	public SRIPv4StaticRoute getIPv4StaticRoute(String routekey){
+		return this.ipv4Routes.get(routekey);
 	}
 }
