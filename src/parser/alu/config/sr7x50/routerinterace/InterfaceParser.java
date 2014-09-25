@@ -94,7 +94,7 @@ public class InterfaceParser extends ConfigurationSection {
 	public void setIPv4Address(Matcher matcher){
 		
 		//System.out.println("IPv4 address = " + matcher.group(1) + " / " + matcher.group(2));
-		this.iface.setIPv4Address(matcher.group(1));
+		this.iface.setIPv4Address(matcher.group(1), matcher.group(2));
 	}
 	
 	public void setDescription(Matcher matcher){

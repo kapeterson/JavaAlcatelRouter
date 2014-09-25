@@ -24,7 +24,7 @@ public class NetworkInterfaceTest01 {
 		for ( String  iname : router.Interface.getInterfaces().keySet()){
 				SRRouterInterface iface = router.Interface.getInterface(iname);
 				//System.out.println("Interface " + iname + " addr = " + iface.getIPv4Address().toString().split("/")[1]);
-				System.out.println("Interface " + iname + " addr = " + iface.getIPv4HostAddress());
+				System.out.println("Interface " + iname + " addr = " + iface.getIPv4HostAddress() + "/" + iface.getIPv4Mask());
 				
 			}
 			

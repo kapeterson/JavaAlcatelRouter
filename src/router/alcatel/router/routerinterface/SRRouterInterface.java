@@ -2,6 +2,7 @@ package router.alcatel.router.routerinterface;
 
 
 import router.alcatel.router.*;
+import router.alcatel.router.ip.*;
 
 import java.net.InetAddress;
 import java.util.Arrays;
@@ -10,7 +11,8 @@ import java.util.regex.Pattern;
 
 public class SRRouterInterface extends AlcatelObject {
 	
-	protected InetAddress v4Address;
+	protected IPv4Address v4Address;
+	//protected InetAddress v4Address;
 	protected InetAddress v6Address;
 	
 	protected String interfaceName = "";
@@ -44,11 +46,11 @@ public class SRRouterInterface extends AlcatelObject {
 		}
 	}
 	
-	public void setIPv4Address(String ipaddr){
+	public void setIPv4Address(String ipaddr, String netmask){
 		try {
 
-			this.v4Address = InetAddress.getByName(ipaddr);
-
+			//this.v4Address = InetAddress.getByName(ipaddr);
+			this.v4Address = new IPv4Address(ipaddr, netmask);
 			
 		} catch (Exception err){
 			System.out.println("Error parsing ipv4 address from string " + err.getMessage());
@@ -59,10 +61,14 @@ public class SRRouterInterface extends AlcatelObject {
 	
 	
 	/** returns ip address as ipaddress object **/
-	public InetAddress getIPv4Address(){
+	public IPv4Address getIPv4Address(){
 		return this.v4Address;
 	}
 	
+	/** return netmask of the ipv4 address **/
+	public int getIPv4Mask(){
+		return this.v4Address.getNetmask();
+	}
 	/** Returns ip address as string value **/
 	public String getIPv4HostAddress(){
 		return this.v4Address.getHostAddress();
