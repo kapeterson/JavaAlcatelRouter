@@ -1,8 +1,10 @@
 package parser.alu.config.sr7x50.card;
 
 import parser.*;
+import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.card.*;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +14,7 @@ public class MDAParser extends ConfigurationSection {
 	SRIOMObject iom = null;
 	
 	int complex = -1;
+	
 	public MDAParser(SRChassisObject router, ContextChange contextChangeHandler, SRIOMObject iom,  int mdaNumber){
 		super("CONFIG.CARD.IOM.MDA",router, contextChangeHandler);
 		
@@ -27,7 +30,7 @@ public class MDAParser extends ConfigurationSection {
 	}
 	
 	public void setIngressContext(Matcher matcher){
-		MDAIngressParser parser = new MDAIngressParser(this.router, this.getContextNotifier());
+		MDAIngressParser parser = new MDAIngressParser(this.router, this.getContextNotifier(), this.mda);
 		parser.setParent(this);
 		parser.setSectionDepth(this.getLastCommandDepth());
 		this.getContextNotifier().contextChangeCallback(this, parser);
@@ -47,6 +50,12 @@ public class MDAParser extends ConfigurationSection {
 		this.mda.setMDAType(matcher.group(1));
 	}
 	
+	public void addObject(AlcatelObject obj){
+		//System.out.println("Add item " + obj.getObjectType() + " to mda ");
+		if ( obj.isMDAIngressObject()){
+			this.mda.INGRESS = (SRMDAIngress)obj;
+		}
+	}
 	public void exitSection(Matcher matcher){
 		if ( this.getSectionDepth() == this.lastDepth) {
 			//System.out.println("exit");
@@ -55,4 +64,5 @@ public class MDAParser extends ConfigurationSection {
 			this.getContextNotifier().contextChangeCallback(this, this.parent);
 		}
 	}
+	
 }

@@ -168,4 +168,12 @@ public abstract class AlcatelObject {
 		return this.parent;
 	}
 	
+	public boolean isMDAIngressObject(){
+		return false;
+	}
+	
+	public boolean isMDAPathManagement(){
+		return false;
+	}
+	
 }

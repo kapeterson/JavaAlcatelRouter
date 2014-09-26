@@ -7,7 +7,7 @@ import router.alcatel.router.impm.SRBandwidthPolicy;
 public class SRMDAIngress extends AlcatelObject {
 	
 	/** IMPM section for the MDA.  Will be null for IOM3 and IMM **/
-	public MDAMcastPathManagement MDAPATHMGMT = null;
+	public SRMDAMcastPathManagement MDAPATHMGMT = null;
 	
 	public SRMDAIngress(SRMDAObject mda){
 		super(AlcatelObjectType.MDAINGRESS);
@@ -15,35 +15,17 @@ public class SRMDAIngress extends AlcatelObject {
 		
 		SRIOMObject iom = (SRIOMObject)mda.getParent();
 		if ( iom.isIOMb()){
-			MDAPATHMGMT = new MDAMcastPathManagement();
+			MDAPATHMGMT = new SRMDAMcastPathManagement();
 		}
 	}
 	
-	
-	public class MDAMcastPathManagement extends AlcatelObject {
-		
-		protected SRBandwidthPolicy bwPolicy = null;
-		
-		public MDAMcastPathManagement(){
-			super(AlcatelObjectType.MDAMCASTPATHMANAGEMENT);
-		}
-		
-		public void setBandwidthPolicy(SRBandwidthPolicy bwPolicy){
-			this.bwPolicy = bwPolicy;
-		}
-		
-		public SRBandwidthPolicy getBandwidthPolicy(){
-			return this.bwPolicy;
-		}
-		
-		public String getBandwidthPolicyName(){
-			
-			if ( this.bwPolicy != null)
-				return this.bwPolicy.getName();
-			else
-				return "";
-		}
-		
+	@Override
+	public boolean isMDAIngressObject(){
+		return true;
 	}
+
+	
+	
+	
 
 }
