@@ -11,6 +11,7 @@ public class SRPortEthernet extends AlcatelObject {
 	protected List<String> encapTypes = new ArrayList<String>(); 
 	
 	protected String encapsulation = "null";
+	public SREthernetNetwork NETWORK = new SREthernetNetwork();
 	
 	public SRPortEthernet(){
 		super(AlcatelObjectType.PORTETHERNET);

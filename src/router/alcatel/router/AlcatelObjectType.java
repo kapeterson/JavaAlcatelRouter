@@ -26,6 +26,7 @@ public enum AlcatelObjectType {
 	XF, 
 	PHYSICALPORT,
 	PORTETHERNET,
+	ETHERNETNETWORK,
 	LAG,
 	QOSPOLICY,
 	

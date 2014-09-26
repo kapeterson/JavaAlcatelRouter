@@ -196,4 +196,8 @@ public abstract class AlcatelObject {
 	public boolean isPortEthernet(){
 		return (this.getObjectType() == AlcatelObjectType.PORTETHERNET);
 	}
+
+	public boolean isEthernetNetwork(){
+		return (this.getObjectType() == AlcatelObjectType.ETHERNETNETWORK);
+	}
 }
