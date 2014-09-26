@@ -19,7 +19,29 @@ public class MDAParser extends ConfigurationSection {
 		this.iom = iom;
 		this.complex = mdaNumber;
 		this.commandHash.put(Pattern.compile("mda\\-type (.*)"), new CommandHandler("setMDAType",false));
+		this.commandHash.put(Pattern.compile("^no shutdown$"), new CommandHandler("adminUp",false));
+		this.commandHash.put(Pattern.compile("^shutdown$"), new CommandHandler("adminDown",false));
+		this.commandHash.put(Pattern.compile("^ingress$"), new CommandHandler("setIngressContext",false));
+
+
 	}
+	
+	public void setIngressContext(Matcher matcher){
+		MDAIngressParser parser = new MDAIngressParser(this.router, this.getContextNotifier());
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
+
+	}
+	
+	public void adminDown(Matcher matcher){
+		this.mda.adminDown();
+	}
+	
+	public void adminUp(Matcher matcher){
+		this.mda.adminUp();
+	}
+	
 	
 	public void setMDAType(Matcher matcher){
 		this.mda.setMDAType(matcher.group(1));

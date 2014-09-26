@@ -9,6 +9,9 @@ import router.alcatel.router.AlcatelObjectType;
  */
 public class SRMDAObject extends AlcatelHardwareObject{
 
+	/** Admin state of the MDA **/
+	protected boolean isShutdown = false;
+	
 	/** MDA complex.  Wil be relative 1 */
 	protected int mdaComplex = -1;
 	
@@ -87,5 +90,42 @@ public class SRMDAObject extends AlcatelHardwareObject{
 	 */
 	public void setComplex(int complex){
 		this.mdaComplex = (complex-1);
+	}
+	
+	/**
+	 * Is the MDA shut ?
+	 * @return boolean
+	 */
+	public boolean isShutdown(){
+		return this.isShutdown;
+	}
+	
+	
+	/**
+	 * is the mda admin up
+	 * @return boolean
+	 */
+	public boolean isAdminUp(){
+		return !this.isShutdown();
+	}
+	/**
+	 * Sets the shutdown state of the mda ( shut or no shut )
+	 * @param val
+	 */
+	public void setShudown(boolean val){
+		this.isShutdown = val;
+	}
+	
+	
+	/** 'no shut' the mda **/
+	public void adminUp(){
+		this.isShutdown = false;
+	}
+	
+	/**
+	 * Shutdown the mda
+	 */
+	public void adminDown(){
+		this.isShutdown = true;
 	}
 }
