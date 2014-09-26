@@ -8,17 +8,17 @@ import parser.ConfigurationSection;
 import parser.ContextChange;
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.card.SRMDAIngress;
+import router.alcatel.router.card.SRFPIngress;
 import router.alcatel.router.card.SRMcastPathManagement;
 import router.alcatel.router.card.SRMDAObject;
 import router.alcatel.router.qos.SRNetworkQueueQOSPolicy;
 
 public class MDAIngressParser extends ConfigurationSection {
 
-	SRMDAIngress mdaingress = null;
+	SRFPIngress mdaingress = null;
 	public MDAIngressParser(SRChassisObject router, ContextChange contextChangeHandler, SRMDAObject mda){
 		super("CONFIG.CARD.IOM.MDA.INGRESS",router, contextChangeHandler);
-		mdaingress = new SRMDAIngress(mda);
+		mdaingress = new SRFPIngress(mda);
 		this.commandHash.put(Pattern.compile("^mcast\\-path\\-management$"), new CommandHandler("setIMPMContext",false));
 		
 	}

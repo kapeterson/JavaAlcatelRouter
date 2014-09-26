@@ -5,11 +5,12 @@ import router.alcatel.router.AlcatelObjectType;
 
 public class SRIOMForwardingPath extends AlcatelObject {
 
-	public SRMcastPathManagement PATHMGMT = new SRMcastPathManagement();
-	 
+	//public SRMcastPathManagement PATHMGMT = new SRMcastPathManagement();
+	public SRFPIngress INGRESS = null;
+	
 	public SRIOMForwardingPath(){
 		super(AlcatelObjectType.IOMFP);
-		
+		INGRESS = new SRFPIngress(this);
 	}
 	
 	

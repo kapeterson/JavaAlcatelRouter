@@ -41,7 +41,7 @@ public class FPParser extends ConfigurationSection {
 	public void addObject(AlcatelObject obj){
 		
 		if ( obj.isPathManagment()){
-			this.fp.PATHMGMT = (SRMcastPathManagement)obj;
+			this.fp.INGRESS.PATHMGMT = (SRMcastPathManagement)obj;
 		}
 	}
 	

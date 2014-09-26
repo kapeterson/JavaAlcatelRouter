@@ -69,7 +69,7 @@ public class MDAParser extends ConfigurationSection {
 	public void addObject(AlcatelObject obj){
 		//System.out.println("Add item " + obj.getObjectType() + " to mda ");
 		if ( obj.isMDAIngressObject()){
-			this.mda.INGRESS = (SRMDAIngress)obj;
+			this.mda.INGRESS = (SRFPIngress)obj;
 		} else if ( obj.isMDANetworkObject()){
 			this.mda.NETWORK = (SRMDANetwork)obj;
 		}

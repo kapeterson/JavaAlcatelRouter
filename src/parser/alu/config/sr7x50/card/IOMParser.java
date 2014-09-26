@@ -37,14 +37,16 @@ public class IOMParser extends ConfigurationSection {
 	}
 	
 	public void setFPContext(Matcher matcher){
-		FPParser mdaSection = new FPParser(this.router,this.getContextNotifier());
-		mdaSection.setParent(this);
-		mdaSection.setSectionDepth(this.getLastCommandDepth());
-		this.getContextNotifier().contextChangeCallback(this, mdaSection);
+		
+		FPParser fpsection = new FPParser(this.router,this.getContextNotifier());
+		fpsection.setParent(this);
+		fpsection.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, fpsection);
 		
 	}
 	
 	public void changeToMDAContext(Matcher matcher){
+		
 		int mdaNumber = Integer.parseInt(matcher.group(1));
 		ConfigurationSection mdaSection = new MDAParser(this.router,this.getContextNotifier(), iom,  mdaNumber);
 		mdaSection.setParent(this);

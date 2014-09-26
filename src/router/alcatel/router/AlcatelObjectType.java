@@ -15,7 +15,7 @@ public enum AlcatelObjectType {
 	
 	IOM, 
 	MDA, 
-	MDAINGRESS,
+	FPINGRESS,
 	MDANETWORK,
 	MDAACCESS,
 	MDANETWORKINGRESS,

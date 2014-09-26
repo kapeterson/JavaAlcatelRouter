@@ -11,7 +11,7 @@ import router.alcatel.router.AlcatelObjectType;
 public class SRMDAObject extends AlcatelHardwareObject{
 
 	/** Ingress MDA configuration object **/
-	public SRMDAIngress INGRESS = null;
+	public SRFPIngress INGRESS = null;
 	
 	public SRMDANetwork NETWORK = null;
 	
@@ -49,7 +49,7 @@ public class SRMDAObject extends AlcatelHardwareObject{
 	}
 	
 	private void initializeMDA(){
-		this.INGRESS = new SRMDAIngress(this);
+		this.INGRESS = new SRFPIngress(this);
 		this.NETWORK = new SRMDANetwork(this);
 		this.ACCESS = new SRMDAAccess(this);
 	}
@@ -144,4 +144,5 @@ public class SRMDAObject extends AlcatelHardwareObject{
 	public void adminDown(){
 		this.isShutdown = true;
 	}
+
 }

@@ -28,7 +28,7 @@ public class SRMcastPathManagement extends AlcatelObject {
 		if ( this.bwPolicy != null)
 			return this.bwPolicy.getName();
 		else
-			return "";
+			return "NA";
 	}
 	
 	public boolean isPathManagment(){

@@ -5,20 +5,24 @@ import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.impm.SRBandwidthPolicy;
 import router.alcatel.router.qos.SRNetworkQueueQOSPolicy;
 
-public class SRMDAIngress extends AlcatelObject {
+public class SRFPIngress extends AlcatelObject {
 	
 	/** IMPM section for the MDA.  Will be null for IOM3 and IMM **/
 	public SRMcastPathManagement PATHMGMT = null;
 	
 	
-	public SRMDAIngress(SRMDAObject mda){
-		super(AlcatelObjectType.MDAINGRESS);
-		this.parent = mda;
+	public SRFPIngress(AlcatelObject parent){
+		super(AlcatelObjectType.FPINGRESS);
+		this.parent = parent;
 		
-		SRIOMObject iom = (SRIOMObject)mda.getParent();
-		if ( iom.isIOMb()){
-			PATHMGMT = new SRMcastPathManagement();
+		SRIOMObject iom = null;
+		if ( parent.isMDAObject()) {
+			iom = (SRIOMObject)parent.getParent();
+		} else if ( parent.isIOMObject()){
+			iom = (SRIOMObject)parent;
 		}
+		
+			PATHMGMT = new SRMcastPathManagement();
 	}
 	
 
