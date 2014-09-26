@@ -1,6 +1,7 @@
 package router.alcatel.router.card;
 
 import router.alcatel.router.AlcatelHardwareObject;
+import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
 /**
  * Models an Alcatel MDA 
@@ -9,6 +10,8 @@ import router.alcatel.router.AlcatelObjectType;
  */
 public class SRMDAObject extends AlcatelHardwareObject{
 
+	/** Ingress MDA configuration object **/
+	public SRMDAIngress INGRESS = null;
 	/** Admin state of the MDA **/
 	protected boolean isShutdown = false;
 	
@@ -24,17 +27,18 @@ public class SRMDAObject extends AlcatelHardwareObject{
 	public SRMDAObject(){
 		super(AlcatelObjectType.MDA);
 		mdaType = "";
-		
+		this.INGRESS = new SRMDAIngress(this);
 	}
 	
 	/**
 	 * Constructor with MDA complex only
 	 * @param complex integer value for the MDA complex relative 1.  (i.e. first mda starts at 1)
 	 */
-	public SRMDAObject(int complex){
+	public SRMDAObject(int complex, SRIOMObject parentObject){
 		super(AlcatelObjectType.MDA);
 		this.mdaComplex = complex;
 		this.mdaType = "";
+		this.parent = parentObject;
 	}
 	
 	/**

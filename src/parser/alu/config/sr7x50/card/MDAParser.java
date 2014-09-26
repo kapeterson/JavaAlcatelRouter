@@ -15,7 +15,7 @@ public class MDAParser extends ConfigurationSection {
 	public MDAParser(SRChassisObject router, ContextChange contextChangeHandler, SRIOMObject iom,  int mdaNumber){
 		super("CONFIG.CARD.IOM.MDA",router, contextChangeHandler);
 		
-		this.mda = new SRMDAObject(mdaNumber);
+		this.mda = new SRMDAObject(mdaNumber, iom);
 		this.iom = iom;
 		this.complex = mdaNumber;
 		this.commandHash.put(Pattern.compile("mda\\-type (.*)"), new CommandHandler("setMDAType",false));

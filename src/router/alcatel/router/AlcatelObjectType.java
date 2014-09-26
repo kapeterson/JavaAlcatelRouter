@@ -15,6 +15,9 @@ public enum AlcatelObjectType {
 	
 	IOM, 
 	MDA, 
+	MDAINGRESS,
+	MDAMCASTPATHMANAGEMENT,
+	
 	CPM,
 	IOMFP,
 	XF, 
