@@ -8,18 +8,29 @@ import parser.ConfigurationSection;
 import parser.ContextChange;
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.card.SRMDAMcastPathManagement;
+import router.alcatel.router.card.SRMcastPathManagement;
 import router.alcatel.router.impm.SRBandwidthPolicy;
 
 public class PathManagementParser extends ConfigurationSection {
 
-	protected SRMDAMcastPathManagement mcast = null;
+	protected SRMcastPathManagement mcast = null;
 	
 	public PathManagementParser(SRChassisObject router, ContextChange contextChangeHandler){
 		super("CONFIG.CARD.IOM.MDA.INGRESS.PATHMGMT",router, contextChangeHandler);
 		this.commandHash.put(Pattern.compile("^bandwidth\\-policy \"(.*)\""), new CommandHandler("setBandwidthPolicy",false));
-		this.mcast = new SRMDAMcastPathManagement();
+		this.commandHash.put(Pattern.compile("^no shutdown$"), new CommandHandler("enableIMPM",false));
+		this.commandHash.put(Pattern.compile("^shutdown$"), new CommandHandler("disableIMPM",false));
 
+		this.mcast = new SRMcastPathManagement();
+
+	}
+	
+	public void enableIMPM(Matcher matcher){
+		this.mcast.enable();
+	}
+	
+	public void disableIMPM(Matcher matcher){
+		this.mcast.disable();
 	}
 
 	public void setBandwidthPolicy(Matcher matcher){

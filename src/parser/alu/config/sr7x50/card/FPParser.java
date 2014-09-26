@@ -8,23 +8,20 @@ import parser.ConfigurationSection;
 import parser.ContextChange;
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.card.SRMDAIngress;
+import router.alcatel.router.card.SRIOMForwardingPath;
 import router.alcatel.router.card.SRMcastPathManagement;
-import router.alcatel.router.card.SRMDAObject;
-import router.alcatel.router.qos.SRNetworkQueueQOSPolicy;
 
-public class MDAIngressParser extends ConfigurationSection {
-
-	SRMDAIngress mdaingress = null;
-	public MDAIngressParser(SRChassisObject router, ContextChange contextChangeHandler, SRMDAObject mda){
-		super("CONFIG.CARD.IOM.MDA.INGRESS",router, contextChangeHandler);
-		mdaingress = new SRMDAIngress(mda);
+public class FPParser extends ConfigurationSection {
+	
+	protected SRIOMForwardingPath fp = new SRIOMForwardingPath();
+	
+	public FPParser(SRChassisObject router, ContextChange contextChangeHandler){
+		super("CONFIG.CARD.IOM.FP", router, contextChangeHandler);
 		this.commandHash.put(Pattern.compile("^mcast\\-path\\-management$"), new CommandHandler("setIMPMContext",false));
-		
+
 	}
 	
 	
-
 	public void setIMPMContext(Matcher matcher){
 		//System.out.println("MCASTMGMT context");
 		PathManagementParser parser = new PathManagementParser(this.router, this.getContextNotifier());
@@ -34,17 +31,17 @@ public class MDAIngressParser extends ConfigurationSection {
 		
 	}
 	
-	public void addObject(AlcatelObject obj){
-		if ( obj.isPathManagment()){
-			this.mdaingress.PATHMGMT = (SRMcastPathManagement)obj;
-			
+	public void exitSection(Matcher matcher){
+		if ( this.getSectionDepth() == this.lastDepth) {
+			this.getParent().addObject(this.fp);
+			this.getContextNotifier().contextChangeCallback(this, this.parent);
 		}
 	}
 	
-	public void exitSection(Matcher matcher){
-		if ( this.getSectionDepth() == this.lastDepth) {
-			this.getParent().addObject(this.mdaingress);
-			this.getContextNotifier().contextChangeCallback(this, this.parent);
+	public void addObject(AlcatelObject obj){
+		
+		if ( obj.isPathManagment()){
+			this.fp.PATHMGMT = (SRMcastPathManagement)obj;
 		}
 	}
 	

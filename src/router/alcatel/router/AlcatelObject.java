@@ -177,7 +177,7 @@ public abstract class AlcatelObject {
 		return false;
 	}
 	
-	public boolean isMDAPathManagement(){
+	public boolean isPathManagment(){
 		return false;
 	}
 	
@@ -186,6 +186,10 @@ public abstract class AlcatelObject {
 	}
 	
 	public boolean isMDANetworkObject(){
+		return false;
+	}
+	
+	public boolean isForwardingPath(){
 		return false;
 	}
 }

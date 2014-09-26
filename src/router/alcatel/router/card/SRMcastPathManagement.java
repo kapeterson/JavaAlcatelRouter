@@ -5,12 +5,14 @@ import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.impm.SRBandwidthPolicy;
 
 
-public class SRMDAMcastPathManagement extends AlcatelObject {
+public class SRMcastPathManagement extends AlcatelObject {
 	
 	protected SRBandwidthPolicy bwPolicy = null;
 	
-	public SRMDAMcastPathManagement(){
-		super(AlcatelObjectType.MDAMCASTPATHMANAGEMENT);
+	protected boolean isShutdown = true;
+	
+	public SRMcastPathManagement(){
+		super(AlcatelObjectType.MCASTPATHMANAGEMENT);
 	}
 	
 	public void setBandwidthPolicy(SRBandwidthPolicy bwPolicy){
@@ -29,8 +31,31 @@ public class SRMDAMcastPathManagement extends AlcatelObject {
 			return "";
 	}
 	
-	public boolean isMDAPathManagement(){
+	public boolean isPathManagment(){
 		return true;
 	}
+	
+	public boolean isShutdown(){
+		return this.isShutdown;
+	}
+	
+	public void setShutdown(boolean val){
+		this.isShutdown = val;
+	}
+	
+	public void enable(){
+		this.isShutdown = false;
+	}
+	
+	public void disable(){
+		this.isShutdown = true;
+	}
+	
+	public boolean isEnabled(){
+		return !this.isShutdown();
+	}
+	
+	
+	
 	
 }

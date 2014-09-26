@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import parser.CommandHandler;
 import parser.ContextChange;
 import parser.ConfigurationSection;
+import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.card.*;
 
@@ -31,8 +32,17 @@ public class IOMParser extends ConfigurationSection {
 		iom = new SRIOMObject(cardNumber,"");
 		this.commandHash.put(Pattern.compile("^card\\-type (.*)"), new CommandHandler("setCardType",false));
 		this.commandHash.put(Pattern.compile("^mda ([1-2])$"), new CommandHandler("changeToMDAContext",true));
+		this.commandHash.put(Pattern.compile("^fp 1$"), new CommandHandler("setFPContext",true));
+
 	}
 	
+	public void setFPContext(Matcher matcher){
+		FPParser mdaSection = new FPParser(this.router,this.getContextNotifier());
+		mdaSection.setParent(this);
+		mdaSection.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, mdaSection);
+		
+	}
 	
 	public void changeToMDAContext(Matcher matcher){
 		int mdaNumber = Integer.parseInt(matcher.group(1));
@@ -64,6 +74,13 @@ public class IOMParser extends ConfigurationSection {
 		}
 	}
 	
+	
+	public void addObject(AlcatelObject obj){
+		
+		if ( obj.isForwardingPath()){
+			this.iom.FP = (SRIOMForwardingPath)obj;
+		}
+	}
 
 	
 }

@@ -113,7 +113,9 @@ public abstract class ConfigurationSection    {
 					methodToCall.invoke(this,matcher);
 					
 				} catch ( Exception err ){
-					System.out.println("Error invoking method  " + mName + " error = " + err.getMessage());
+					System.out.println("Error invoking method  " + mName + " in section " + this.getName() + " error = " + err.getMessage());
+					System.out.println("Parent was " + this.getParent());
+					
 				}
 			}
 		}

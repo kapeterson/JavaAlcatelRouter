@@ -8,7 +8,7 @@ import router.alcatel.router.qos.SRNetworkQueueQOSPolicy;
 public class SRMDAIngress extends AlcatelObject {
 	
 	/** IMPM section for the MDA.  Will be null for IOM3 and IMM **/
-	public SRMDAMcastPathManagement MDAPATHMGMT = null;
+	public SRMcastPathManagement PATHMGMT = null;
 	
 	
 	public SRMDAIngress(SRMDAObject mda){
@@ -17,7 +17,7 @@ public class SRMDAIngress extends AlcatelObject {
 		
 		SRIOMObject iom = (SRIOMObject)mda.getParent();
 		if ( iom.isIOMb()){
-			MDAPATHMGMT = new SRMDAMcastPathManagement();
+			PATHMGMT = new SRMcastPathManagement();
 		}
 	}
 	

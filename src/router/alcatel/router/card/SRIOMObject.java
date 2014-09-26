@@ -12,7 +12,7 @@ public class SRIOMObject extends SRCardObject{
 	
     protected SRMDAObject[] mdas;
     
-    protected SRIOMForwardingPath FP = null;
+    public SRIOMForwardingPath FP = null;
     /**
      * Empty constructor
      */
@@ -35,6 +35,7 @@ public class SRIOMObject extends SRCardObject{
      */
 	public SRIOMObject(int cardNumber, String ctype){
 		super(AlcatelObjectType.IOM, cardNumber, ctype);
+		this.setCardType(ctype);
 		mdas = new SRMDAObject[2];
 		mdas[0] = null;
 		mdas[1] = null;
@@ -99,5 +100,19 @@ public class SRIOMObject extends SRCardObject{
 	
 	public boolean isIOM3(){
 		return this.cardType.matches("iom3.*");
+	}
+	
+	/**
+	 * sets the card type
+	 * @param cardType string value of the card type.  unchecked / unverified.
+	 */
+	@Override
+	public void setCardType(String cardType){
+		this.cardType = cardType;
+		if ( this.isIOM3() || this.isIMM()){
+			this.FP = new SRIOMForwardingPath();
+		}  else {
+			this.FP = null;
+		}
 	}
 }
