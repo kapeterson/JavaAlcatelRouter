@@ -147,4 +147,20 @@ public abstract class AlcatelObject {
 		return false;
 	}
 	
+	public boolean isAssociationChild(){
+		return false;
+	}
+	
+	public boolean isAssociationParent(){
+		return false;
+	}
+	
+	public boolean isBindingParent(){
+		return false;
+	}
+	
+	public boolean isBindingChild(){
+		return false;
+	}
+	
 }

@@ -9,7 +9,7 @@ import java.util.Hashtable;
  * @author Kris Peterson
  *
  */
-public class SRLagObject extends AlcatelObject{
+public class SRLagObject extends AlcatelObject implements BindingChild, AssociationChild{
 	
 	/** Array List containing pointer to every association (interface, sap, lag etc)**/
 	protected ArrayList<AlcatelObject> associations = new ArrayList<AlcatelObject>();
@@ -132,5 +132,15 @@ public class SRLagObject extends AlcatelObject{
 	 */
 	public void addAssociation(AlcatelObject associationObject){
 		this.associations.add(associationObject);
+	}
+	
+	@Override
+	public boolean isAssociationChild(){
+		return true;
+	}
+	
+	@Override
+	public boolean isBindingChild(){
+		return true;
 	}
 }

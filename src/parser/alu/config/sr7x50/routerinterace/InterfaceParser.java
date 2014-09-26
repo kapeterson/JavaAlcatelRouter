@@ -29,25 +29,35 @@ public class InterfaceParser extends ConfigurationSection {
 	
 	
 	public void setPortBinding(Matcher matcher) throws Exception {
+		
 		String bindingName = matcher.group(1);
+		
+		// if it's a port
+		// create a binding and add it
+		
 		if ( bindingName.matches("[0-9]+\\/[0-9]+\\/[0-9]+(:)?([0-9]+)?" ) ){
 			
 			Matcher m = portPattern.matcher(bindingName);
 			if ( m.find()){
 				
+				
 				if ( this.router.Ports.hasPort(m.group(1))){
 					
+					
 					SRPortObject port = this.router.Ports.getPort(m.group(1));
-					port.addAssociation(this.iface);
+					//port.addAssociation(this.iface);
+					
 					
 					final int tag = ( m.group(3) == null ) ? -1 : Integer.parseInt(m.group(3));
 					SRInterfaceBinding binding = new SRInterfaceBinding(port, tag);
 					this.iface.setBinding(binding);
 					
+					
 				} else {
 					throw new Exception("ERROR: Port  "  + bindingName + " could not be retried from port configuration when binding to interface in the parser");
 
 				}
+				
 				
 			} else {
 				throw new Exception("ERROR: Port  "  + bindingName + " was not found when trying to set port binding to an interface in the parser");

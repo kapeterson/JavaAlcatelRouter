@@ -10,7 +10,6 @@ import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.RouterRegex;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.port.SRPortObject;
 import router.alcatel.router.routerinterface.SRInterfaceBinding;
 import router.alcatel.router.service.SRSDPObject;
 import router.alcatel.router.service.SRServiceInterface;
@@ -68,6 +67,7 @@ public class IESInterfaceParser extends ConfigurationSection {
 				}
 				
 				SRInterfaceBinding binding = new SRInterfaceBinding(object, tag);
+				
 				try {
 					this.interfaceObject.setBinding(binding);
 				} catch ( Exception err){

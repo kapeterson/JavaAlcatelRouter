@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 
-public class SRRouterInterface extends AlcatelObject {
+public class SRRouterInterface extends AlcatelObject implements BindingParent, AssociationParent  {
 	
 	protected IPv4Address v4Address;
 	//protected InetAddress v4Address;
@@ -38,17 +38,27 @@ public class SRRouterInterface extends AlcatelObject {
 		return this.binding;
 	}
 	
-	public synchronized void setBinding(SRInterfaceBinding bindingObject) throws Exception{
+	public synchronized void setBinding(SRInterfaceBinding bindingObject){
 		
-		//System.out.println("Checking binding type");
+		if ( !(bindingObject.getBinding() instanceof BindingChild)){
+			System.out.println("ERROR: Could not bind " + bindingObject.getObjectType() + " to " + this.getObjectType());
+			System.exit(1);
+		}
+		
 		if ( Arrays.asList(this.bindingTypes).contains(bindingObject.getObjectType()) ) {
-			this.binding = bindingObject;
-
-		
-		} else {
-			System.out.println("oh no");
-			throw new Exception("ERROR: Attempting to bind invalid object type "  + bindingObject.getObjectType().toString() + " to interface");
 			
+			this.binding = bindingObject;
+			
+			// Check to see if the child needs to track associations
+			if ( bindingObject.getBinding().isAssociationChild()) {
+				AssociationChild aObj = (AssociationChild)bindingObject.getBinding();
+				aObj.addAssociation(this);
+			}
+			
+		} else {
+			System.out.println("Could not set binding on interface to " + bindingObject.getBinding().getObjectType());
+			//throw new Exception("ERROR: Attempting to bind invalid object type "  + bindingObject.getObjectType().toString() + " to interface");
+			System.exit(1);
 		}
 	}
 	
