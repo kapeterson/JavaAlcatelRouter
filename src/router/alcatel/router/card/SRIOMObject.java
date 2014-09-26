@@ -8,8 +8,11 @@ import router.alcatel.router.AlcatelObjectType;
  *
  */
 public class SRIOMObject extends SRCardObject{
+	
+	
     protected SRMDAObject[] mdas;
     
+    protected SRIOMForwardingPath FP = null;
     /**
      * Empty constructor
      */

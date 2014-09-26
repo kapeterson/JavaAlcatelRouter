@@ -25,8 +25,24 @@ public class MDAParser extends ConfigurationSection {
 		this.commandHash.put(Pattern.compile("^no shutdown$"), new CommandHandler("adminUp",false));
 		this.commandHash.put(Pattern.compile("^shutdown$"), new CommandHandler("adminDown",false));
 		this.commandHash.put(Pattern.compile("^ingress$"), new CommandHandler("setIngressContext",false));
+		this.commandHash.put(Pattern.compile("^network$"), new CommandHandler("setNetworkContext",false));
+		this.commandHash.put(Pattern.compile("^access$"), new CommandHandler("setAccessContext",false));
 
 
+	}
+	
+	public void setNetworkContext(Matcher matcher){
+		MDANetworkParser parser = new MDANetworkParser(this.router, this.getContextNotifier(), this.mda);
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
+	}
+	
+	public void setAccessContext(Matcher matcher){
+		MDAAccessParser parser = new MDAAccessParser(this.router, this.getContextNotifier(), this.mda);
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
 	}
 	
 	public void setIngressContext(Matcher matcher){
