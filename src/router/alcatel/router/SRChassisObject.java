@@ -20,6 +20,8 @@ import router.alcatel.router.policy.*;
 import router.alcatel.router.bgp.*;
 import router.alcatel.router.card.SRCardConfiguration;
 import router.alcatel.router.staticroute.*;
+import router.alcatel.router.impm.*;
+
 
 /**
  * Top level object for the router model.  exposes all configuration sections including System, Card etc.
@@ -48,7 +50,7 @@ public class SRChassisObject extends AlcatelHardwareObject {
 	public SRPolicyConfiguration Policy = null;
 	public SRBGPConfiguration BGP = null;
 	public SRStaticRouteConfiguration StaticRoutes = null;
-	
+	public SRIMPMConfiguration IMPM = null;
 	
 	public String chassisType;
 	protected Hashtable<String, AlcatelHardwareObject> hardwareIndexMap = null;
@@ -73,7 +75,7 @@ public class SRChassisObject extends AlcatelHardwareObject {
 		Policy = new SRPolicyConfiguration();
 		BGP = new SRBGPConfiguration();
 		StaticRoutes = new SRStaticRouteConfiguration();
-		
+		this.IMPM = new SRIMPMConfiguration();
 		
 		chassisType = "NA";
 		hardwareIndexMap = new Hashtable<String, AlcatelHardwareObject>();
