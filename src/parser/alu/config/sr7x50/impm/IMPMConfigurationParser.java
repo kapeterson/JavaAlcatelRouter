@@ -6,7 +6,9 @@ import java.util.regex.Pattern;
 import parser.CommandHandler;
 import parser.ConfigurationSection;
 import parser.ContextChange;
+import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.impm.SRBandwidthPolicy;
 
 public class IMPMConfigurationParser extends ConfigurationSection {
 	
@@ -25,6 +27,13 @@ public class IMPMConfigurationParser extends ConfigurationSection {
 		this.getContextNotifier().contextChangeCallback(this, parser);
 	}
 	
+	
+	public void addObject(AlcatelObject obj){
+		
+		if ( obj.isBandwidthPolicy()){
+			this.router.IMPM.addBandwidthPolicy((SRBandwidthPolicy)obj);
+		}
+	}
 	
 	/**
 	 * Use default handler for exiting section

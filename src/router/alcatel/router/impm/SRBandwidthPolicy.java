@@ -9,5 +9,9 @@ public class SRBandwidthPolicy extends AlcatelObject {
 		super(AlcatelObjectType.BANDWIDTHPOLICY);
 		this.setName(policyName);
 	}
+	
+	public boolean isBandwidthPolicy(){
+		return true;
+	}
 
 }

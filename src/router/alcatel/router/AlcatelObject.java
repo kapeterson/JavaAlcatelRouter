@@ -176,4 +176,7 @@ public abstract class AlcatelObject {
 		return false;
 	}
 	
+	public boolean isBandwidthPolicy(){
+		return false;
+	}
 }

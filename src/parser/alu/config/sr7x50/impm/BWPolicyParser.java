@@ -7,19 +7,26 @@ import parser.CommandHandler;
 import parser.ConfigurationSection;
 import parser.ContextChange;
 import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.impm.SRBandwidthPolicy;
 
 public class BWPolicyParser extends ConfigurationSection {
-
+	
+	protected SRBandwidthPolicy bwPolicy = null;
+	
 	public BWPolicyParser(SRChassisObject router, ContextChange contextChangeHandler, String policyName){
 		super("CONFIG.IMPM.BWPOLICY", router, contextChangeHandler);
 		//this.commandHash.put(Pattern.compile("^bandwidth\\-policy \"(.*)\" create"), new CommandHandler("setBandwidthPolicyContext", true));
+		this.bwPolicy = new SRBandwidthPolicy(policyName);
 	}
 	
 	/**
-	 * Use default handler for exiting section
+	 * Use customer exit
 	 */
 	public void exitSection(Matcher matcher){
-		
-		super.defaultExitHandler(matcher);
+		 
+		if ( this.getSectionDepth() == this.lastDepth) {
+			this.getParent().addObject(this.bwPolicy);
+			this.getContextNotifier().contextChangeCallback(this, this.parent);
+		}	
 	}
 }

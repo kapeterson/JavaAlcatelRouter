@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import parser.CommandHandler;
 import parser.ConfigurationSection;
 import parser.ContextChange;
+import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.card.SRMDAMcastPathManagement;
 import router.alcatel.router.impm.SRBandwidthPolicy;
@@ -26,10 +27,17 @@ public class PathManagementParser extends ConfigurationSection {
 		//this.mcast.setName(matcher.group(1));
 		
 		// get the policy and add it to the mcast
+		if ( !this.router.IMPM.hasBandwidthPolicy(matcher.group(1))){
+			System.out.println("Error bw policy doesn't exist");
+			System.exit(1);
+		}
+		
 		SRBandwidthPolicy bwPolicy = this.router.IMPM.getPolicy(matcher.group(1));
 		this.mcast.setBandwidthPolicy(bwPolicy);
 	}
 	
+	
+
 	/**
 	 * Use customer exit
 	 */
