@@ -24,6 +24,7 @@ import parser.alu.config.sr7x50.rsvp.*;
 import parser.alu.config.sr7x50.policy.*;
 import parser.alu.config.sr7x50.bgp.*;
 import parser.alu.config.sr7x50.staticroute.*;
+import parser.alu.config.sr7x50.impm.*;
 
 import router.alcatel.router.*;
 
@@ -51,7 +52,7 @@ public class Alcatel7x50ParserManager implements ContextChange {
 		contextHash.put("echo \"System Security Configuration\"", defaultParser);
 		contextHash.put("echo \"Filter Log Configuration\"", defaultParser);
 		
-		contextHash.put("echo \"Multicast Path Management Policy Configuration\"", defaultParser);
+		contextHash.put("echo \"Multicast Path Management Policy Configuration\"", new IMPMConfigurationParser(router, this));
 		contextHash.put("echo \"Card Configuration\"", new CardParser(router, this));
 		contextHash.put("echo \"Port Configuration\"", new PortConfigurationParser(router, this));
 		contextHash.put("echo \"Redundancy Configuration\"", defaultParser);
