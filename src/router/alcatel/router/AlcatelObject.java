@@ -146,6 +146,5 @@ public abstract class AlcatelObject {
 	public boolean isSpokeSDP(){
 		return false;
 	}
-
 	
 }

@@ -14,6 +14,7 @@ public class SRVPLSObject extends SRServiceObject {
 	}
 	
 	public void addSAPObject(SRSAPObject sap){
+		
 		this.saps.put(sap.getSAPName(), sap);
 	}
 	

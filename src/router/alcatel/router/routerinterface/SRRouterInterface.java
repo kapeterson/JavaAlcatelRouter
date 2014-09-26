@@ -23,6 +23,7 @@ public class SRRouterInterface extends AlcatelObject {
 	
 	protected Pattern ipv4Pattern = Pattern.compile("([0-9]+)\\.([0-9]+)\\.([0-9]+)\\.([0-9]+)");
 	
+
 	public SRRouterInterface(String interfaceName){
 		super(AlcatelObjectType.ROUTERINTERFACE);
 		this.interfaceName = interfaceName;
@@ -37,12 +38,14 @@ public class SRRouterInterface extends AlcatelObject {
 		return this.binding;
 	}
 	
-	public void setBinding(SRInterfaceBinding bindingObject) throws Exception{
+	public synchronized void setBinding(SRInterfaceBinding bindingObject) throws Exception{
 		
 		//System.out.println("Checking binding type");
-		if ( Arrays.asList(this.bindingTypes).contains(bindingObject.getObjectType()) )
+		if ( Arrays.asList(this.bindingTypes).contains(bindingObject.getObjectType()) ) {
 			this.binding = bindingObject;
-		else{
+
+		
+		} else {
 			System.out.println("oh no");
 			throw new Exception("ERROR: Attempting to bind invalid object type "  + bindingObject.getObjectType().toString() + " to interface");
 			
@@ -100,4 +103,5 @@ public class SRRouterInterface extends AlcatelObject {
 	public void setName(String ifaceName){
 		this.interfaceName = ifaceName;
 	}
+	
 }

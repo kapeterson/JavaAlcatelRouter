@@ -1,4 +1,6 @@
 package router.alcatel.router;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Hashtable;
 
 import router.alcatel.router.system.*;
@@ -25,7 +27,7 @@ import router.alcatel.router.staticroute.*;
  * @author Kris Peterson
  *
  */
-public class SRChassisObject extends AlcatelHardwareObject  {
+public class SRChassisObject extends AlcatelHardwareObject {
 
 	
 	//protected SRCardConfiguration = null;
@@ -158,5 +160,15 @@ public class SRChassisObject extends AlcatelHardwareObject  {
 	 */
 	public boolean isCO(){
 		return this.System.getHostName().matches(".*LSW[0-9]$");
+	}
+	
+	
+	class AssociationListener implements ActionListener {
+
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+		}
 	}
 }

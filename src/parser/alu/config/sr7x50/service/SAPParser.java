@@ -35,7 +35,6 @@ public class SAPParser extends ConfigurationSection{
 	public void exitSection(Matcher matcher){
 		
 		if ( this.getSectionDepth() == this.getLastCommandDepth()) {
-			
 			// set the assocation to the port now
 			String sname = this.sap.getName();
 			Matcher m = portPattern.matcher(this.sap.getName());
@@ -75,7 +74,7 @@ public class SAPParser extends ConfigurationSection{
 					System.out.println("Error parsing port value in sap parser " + sname);
 					System.exit(1);
 			}
-			 
+		 
 			this.getParent().addObject(this.sap);
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
 			

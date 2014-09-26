@@ -1,6 +1,7 @@
 package router.alcatel.router.port;
 
 import router.alcatel.router.*;
+
 import java.util.ArrayList;
 
 /**
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  * @author Kris Peterson
  *
  */
-public class SRPortObject extends AlcatelObject {
+public class SRPortObject extends AlcatelObject implements AssociationChild {
 	
 	/** Array List containing pointer to every association (interface, sap, lag etc)**/
 	protected ArrayList<AlcatelObject> associations = new ArrayList<AlcatelObject>();
@@ -103,4 +104,5 @@ public class SRPortObject extends AlcatelObject {
 	public void addAssociation(AlcatelObject associationObject){
 		this.associations.add(associationObject);
 	}
+
 }
