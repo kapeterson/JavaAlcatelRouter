@@ -164,6 +164,11 @@ public abstract class AlcatelObject {
 		return false;
 	}
 	
+	
+	public void setParent(AlcatelObject parent){
+		this.parent = parent;
+	}
+	
 	public AlcatelObject getParent(){
 		return this.parent;
 	}
@@ -177,6 +182,10 @@ public abstract class AlcatelObject {
 	}
 	
 	public boolean isBandwidthPolicy(){
+		return false;
+	}
+	
+	public boolean isMDANetworkObject(){
 		return false;
 	}
 }

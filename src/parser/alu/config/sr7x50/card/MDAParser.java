@@ -70,6 +70,8 @@ public class MDAParser extends ConfigurationSection {
 		//System.out.println("Add item " + obj.getObjectType() + " to mda ");
 		if ( obj.isMDAIngressObject()){
 			this.mda.INGRESS = (SRMDAIngress)obj;
+		} else if ( obj.isMDANetworkObject()){
+			this.mda.NETWORK = (SRMDANetwork)obj;
 		}
 	}
 	public void exitSection(Matcher matcher){

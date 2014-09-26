@@ -12,6 +12,11 @@ public class SRMDAObject extends AlcatelHardwareObject{
 
 	/** Ingress MDA configuration object **/
 	public SRMDAIngress INGRESS = null;
+	
+	public SRMDANetwork NETWORK = null;
+	
+	public SRMDAAccess ACCESS = null;
+	
 	/** Admin state of the MDA **/
 	protected boolean isShutdown = false;
 	
@@ -27,7 +32,8 @@ public class SRMDAObject extends AlcatelHardwareObject{
 	public SRMDAObject(){
 		super(AlcatelObjectType.MDA);
 		mdaType = "";
-		this.INGRESS = new SRMDAIngress(this);
+		this.initializeMDA();
+
 	}
 	
 	/**
@@ -39,8 +45,14 @@ public class SRMDAObject extends AlcatelHardwareObject{
 		this.mdaComplex = complex;
 		this.mdaType = "";
 		this.parent = parentObject;
+		this.initializeMDA();
 	}
 	
+	private void initializeMDA(){
+		this.INGRESS = new SRMDAIngress(this);
+		this.NETWORK = new SRMDANetwork(this);
+		this.ACCESS = new SRMDAAccess(this);
+	}
 	/**
 	 * Constructor with MDA Complex and MDA Type
 	 * @param complex  complex value for the mda.  relative 1 (i.e. starts at 1)

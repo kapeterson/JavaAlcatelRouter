@@ -21,22 +21,10 @@ public class MDAIngressParser extends ConfigurationSection {
 		mdaingress = new SRMDAIngress(mda);
 		this.commandHash.put(Pattern.compile("^mcast\\-path\\-management$"), new CommandHandler("setIMPMContext",false));
 		
-		this.commandHash.put(Pattern.compile("^queue\\-policy \"(.*)\"$"), new CommandHandler("setIngressQueuePolicy",false));
+	}
+	
+	
 
-	}
-	
-	
-	public void setIngressQueuePolicy(Matcher matcher){
-		
-		SRNetworkQueueQOSPolicy policy = this.router.QOS.getNetworkQueueQOSPolicy(matcher.group(1));
-		if ( policy == null){
-			System.out.println("ERROR: QUEUE policy " + matcher.group(1) + " was not found when adding to mda ingress");
-			System.exit(1);
-		}
-		
-		this.mdaingress.setIngressQOS(policy);
-		
-	}
 	public void setIMPMContext(Matcher matcher){
 		//System.out.println("MCASTMGMT context");
 		PathManagementParser parser = new PathManagementParser(this.router, this.getContextNotifier());
@@ -48,7 +36,6 @@ public class MDAIngressParser extends ConfigurationSection {
 	
 	public void addObject(AlcatelObject obj){
 		if ( obj.isMDAPathManagement()){
-			//System.out.println("Add obj t omda ingress");
 			this.mdaingress.MDAPATHMGMT = (SRMDAMcastPathManagement)obj;
 			
 		}

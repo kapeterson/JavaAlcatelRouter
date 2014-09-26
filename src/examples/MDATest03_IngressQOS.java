@@ -30,11 +30,10 @@ public class MDATest03_IngressQOS {
 				SRCardObject card = router.Cards.getCard(key);
 				System.out.format("\n\nCard %s  card-type %s \n", card.getSlotNumber(), card.getCardType());
 				if ( card.isIOMObject()) {
-					SRIOMObject iom = (SRIOMObject)card;
 					for ( int i = 1; i <=2;i++){
 						SRMDAObject mda = ((SRIOMObject) card).getMDA(i);
 						if ( mda != null){
-							System.out.format("\tMDA: %-3d  Type: %-20s  IngressQOS: %-8s AdminUp: %-6s\n", mda.getComplex(), mda.getMDAType(),  mda.INGRESS.getIngressQueuePolicyName(), mda.isAdminUp());
+							System.out.format("\tMDA: %-3d  Type: %-20s  IngressQOS: %-8s AdminUp: %-6s\n", mda.getComplex(), mda.getMDAType(),  mda.NETWORK.INGRESS.getIngressQueuePolicyName(), mda.isAdminUp());
 
 						}
 					}
