@@ -2,16 +2,18 @@ package router.alcatel.router.service;
 
 import router.alcatel.router.*;
 
-public class SRSAPObject extends AlcatelObject implements BindingChild {
+public class SRSAPObject extends AlcatelObject implements SRInterfaceBindingObject, SRServiceChild {
 
 	protected String sapName = "";
 	protected String description = "";
+	protected AlcatelObject parentService = null;
 	
-	public SRSAPObject(String sapname){
+	public SRSAPObject(String sapname, AlcatelObject parentService){
 		super(AlcatelObjectType.SAPOBJECT);
 		this.setName(sapname);
 		this.sapName = sapname;
 		this.description = "";
+		this.parentService = parentService;
 	}
 		
 	public String getSAPName(){
@@ -33,6 +35,11 @@ public class SRSAPObject extends AlcatelObject implements BindingChild {
 	@Override
 	public boolean isBindingChild(){
 		return true;
+	}
+	
+	@Override
+	public AlcatelObject getParentService(){
+		return this.parentService;
 	}
 	
 }

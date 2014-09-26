@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 
 import parser.ConfigurationSection;
 import parser.ContextChange;
+import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.service.SRSAPObject;
 import parser.CommandHandler;
@@ -18,9 +19,9 @@ public class SAPParser extends ConfigurationSection{
 	protected Pattern portPattern = Pattern.compile("([0-9]{1,2}\\/[0-9]{1,2}\\/[0-9]{1,2})(:)?([0-9]{1,10})?");
 	protected Pattern lagPattern = Pattern.compile("lag\\-([0-9]+)(:)?([0-9]+)?");
 
-	public SAPParser(SRChassisObject router, ContextChange contextChangeHandler, String sapName){
+	public SAPParser(SRChassisObject router, ContextChange contextChangeHandler, String sapName, AlcatelObject parentService){
 		super("CONFIG.SERVICE.SAP", router, contextChangeHandler);
-		sap = new SRSAPObject(sapName);
+		sap = new SRSAPObject(sapName, parentService);
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
 	}
 	

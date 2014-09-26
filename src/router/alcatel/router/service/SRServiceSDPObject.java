@@ -3,11 +3,12 @@ package router.alcatel.router.service;
 import java.util.ArrayList;
 
 import router.alcatel.router.*;
-public class SRServiceSDPObject extends AlcatelObject implements BindingChild {
+
+public class SRServiceSDPObject extends AlcatelObject implements SRInterfaceBindingObject, SRServiceChild {
 
 	protected Integer sdpNumber = 0;
 	protected Integer vcid = 0;
-	
+	protected AlcatelObject parentService = null;
 
 	
 	public SRServiceSDPObject(AlcatelObjectType sdpType, String sdpName, AlcatelObject parentSDP){
@@ -48,6 +49,9 @@ public class SRServiceSDPObject extends AlcatelObject implements BindingChild {
 		return true;
 	}
 
-
+	@Override
+	public AlcatelObject getParentService(){
+		return this.parentService;
+	}
 
 }

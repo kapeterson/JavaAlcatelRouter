@@ -48,7 +48,7 @@ public class InterfaceParser extends ConfigurationSection {
 				
 					final int tag = ( m.group(3) == null ) ? -1 : Integer.parseInt(m.group(3));
 					SRInterfaceBinding binding = new SRInterfaceBinding(port, tag);
-					this.iface.setBinding(binding);
+					this.iface.setInterfaceBinding(binding);
 					
 					
 				} else {
@@ -76,7 +76,7 @@ public class InterfaceParser extends ConfigurationSection {
 					
 					final int tag = ( m.group(3) == null ) ? -1 : Integer.parseInt(m.group(3));
 					SRInterfaceBinding binding = new SRInterfaceBinding(lag, tag);
-					this.iface.setBinding(binding);
+					this.iface.setInterfaceBinding(binding);
 					
 				} else {
 					throw new Exception("ERROR: could not get lag object in lag  " + bindingName + " when binding to interface in parser");

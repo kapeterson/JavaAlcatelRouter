@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 import router.alcatel.router.service.SRSDPObject;
 import router.alcatel.router.service.SRServiceSDPObject;
 
-public class SRRouterInterface extends AlcatelObject implements BindingParent, AssociationParent  {
+public class SRRouterInterface extends AlcatelObject implements  AssociationParent   {
 	
 	protected IPv4Address v4Address;
 	//protected InetAddress v4Address;
@@ -40,9 +40,9 @@ public class SRRouterInterface extends AlcatelObject implements BindingParent, A
 		return this.binding;
 	}
 	
-	public synchronized void setBinding(SRInterfaceBinding bindingObject){
+	public void setInterfaceBinding(SRInterfaceBinding bindingObject){
 		
-		if ( !(bindingObject.getBinding() instanceof BindingChild)){
+		if ( !(bindingObject.getBinding() instanceof SRInterfaceBindingObject)){
 			System.out.println("ERROR: Could not bind " + bindingObject.getObjectType() + " to " + this.getObjectType());
 			System.exit(1);
 		}

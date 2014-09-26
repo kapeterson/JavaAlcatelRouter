@@ -6,6 +6,7 @@ import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.service.SRSDPObject;
 
 public class SDPTest02Associations {
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		if (args.length < 1){

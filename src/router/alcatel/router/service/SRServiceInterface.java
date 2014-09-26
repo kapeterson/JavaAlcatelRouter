@@ -6,7 +6,13 @@ import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.routerinterface.SRRouterInterface;
 
-public class SRServiceInterface extends SRRouterInterface {
+/**
+ * interface for all base services vpls, ies, sdp that are bound to
+ * service children
+ * @author Kris Peterson
+ *
+ */
+public class SRServiceInterface extends SRRouterInterface implements SRServiceChild {
 	
 	
 	protected SRServiceObject parentService = null;
@@ -50,4 +56,6 @@ public class SRServiceInterface extends SRRouterInterface {
 	public SRServiceObject getParentService(){
 		return this.parentService;
 	}
+	
+
 }

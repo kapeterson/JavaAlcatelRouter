@@ -1,6 +1,6 @@
 package router.alcatel.router;
 
-public interface BindingChild {
+public interface SRInterfaceBindingObject {
 
 	public boolean isBindingChild();
 }

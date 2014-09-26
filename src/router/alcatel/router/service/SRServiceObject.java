@@ -2,7 +2,14 @@ package router.alcatel.router.service;
 
 import router.alcatel.router.*;
 
-public class SRServiceObject extends AlcatelObject{
+
+/**
+ * BAse class for all Main / Parent Service objects
+ * including VPLS, IES, SDP etc
+ * @author Kris Peterson
+ *
+ */
+public class SRServiceObject extends AlcatelObject {
 	
 	protected Integer serviceNumber = 0;
 	protected String serviceDescription = "";

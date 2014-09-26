@@ -30,7 +30,7 @@ public class IESInterfaceParser extends ConfigurationSection {
 	
 	public void setSAPContext(Matcher matcher){
 
-		SAPParser parser = new SAPParser(router, this.contextChange, matcher.group(1));
+		SAPParser parser = new SAPParser(router, this.contextChange, matcher.group(1), this.interfaceObject);
 		parser.setParent(this);
 		parser.setSectionDepth(this.getLastCommandDepth());
 		this.getContextNotifier().contextChangeCallback(this, parser);
@@ -75,7 +75,7 @@ public class IESInterfaceParser extends ConfigurationSection {
 				SRInterfaceBinding binding = new SRInterfaceBinding(object, tag);
 				
 				try {
-					this.interfaceObject.setBinding(binding);
+					this.interfaceObject.setInterfaceBinding(binding);
 				} catch ( Exception err){
 					System.out.println("Error trying to set binding of ies to a sap " + object.getName());
 					System.exit(1);
@@ -105,7 +105,7 @@ public class IESInterfaceParser extends ConfigurationSection {
 				SRInterfaceBinding binding = new SRInterfaceBinding(object, tag);
 				
 				try {
-					this.interfaceObject.setBinding(binding);
+					this.interfaceObject.setInterfaceBinding(binding);
 				} catch ( Exception err){
 					System.out.println("Error trying to set binding of ies to a sdp " + object.getName());
 					System.exit(1);

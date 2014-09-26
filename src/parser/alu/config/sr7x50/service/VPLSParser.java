@@ -57,7 +57,7 @@ public class VPLSParser extends ConfigurationSection {
 		//System.out.println("SAP " + matcher.group(1));
 		//SRSAPObject newSAP = new SRSAPObject(matcher.group(1));
 		//this.vpls.addSAPObject(newSAP);
-		SAPParser parser = new SAPParser(router, this.contextChange, matcher.group(1));
+		SAPParser parser = new SAPParser(router, this.contextChange, matcher.group(1), this.vpls);
 		parser.setParent(this);
 		parser.setSectionDepth(this.getLastCommandDepth());
 		this.getContextNotifier().contextChangeCallback(this, parser);

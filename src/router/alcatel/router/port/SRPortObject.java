@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author Kris Peterson
  *
  */
-public class SRPortObject extends AlcatelObject implements AssociationChild, BindingChild {
+public class SRPortObject extends AlcatelObject implements AssociationChild, SRInterfaceBindingObject {
 	
 	/** Array List containing pointer to every association (interface, sap, lag etc)**/
 	protected ArrayList<AlcatelObject> associations = new ArrayList<AlcatelObject>();
