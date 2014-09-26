@@ -21,7 +21,7 @@ public class QosConfigurationParser extends ConfigurationSection {
 	
 	public void setNetworkQueueQosContext(Matcher matcher){
 		//System.out.println("Network-queue " + matcher.group(1));
-		NetworkQueueQOSPolicy policy = new NetworkQueueQOSPolicy();
+		SRNetworkQueueQOSPolicy policy = new SRNetworkQueueQOSPolicy();
 		policy.setPolicyName(matcher.group(1));
 		this.router.QOS.addNetworkQueueQOSPolicy(policy);
 	}
@@ -35,7 +35,7 @@ public class QosConfigurationParser extends ConfigurationSection {
 	
 	public void setNetworkQosContext(Matcher matcher){
 		//System.out.println("Network QOS " + matcher.group(1));
-		NetworkQOSPolicy policy = new NetworkQOSPolicy();
+		SRNetworkQOSPolicy policy = new SRNetworkQOSPolicy();
 		policy.setPolicyNumber(Integer.parseInt(matcher.group(1)));
 		this.router.QOS.addNetworkQOSPolicy(policy);
 			

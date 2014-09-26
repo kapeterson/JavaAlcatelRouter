@@ -2,11 +2,11 @@ package router.alcatel.router.qos;
 
 import router.alcatel.router.*;
 
-public class NetworkQOSPolicy extends AlcatelObject {
+public class SRNetworkQOSPolicy extends AlcatelObject {
 	
 	protected Integer policyNumber = 0;
 	
-	public NetworkQOSPolicy(){
+	public SRNetworkQOSPolicy(){
 		super(AlcatelObjectType.NETWORKQOSPOLICY);
 		this.policyNumber = 0;
 	}

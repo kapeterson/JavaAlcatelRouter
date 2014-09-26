@@ -6,7 +6,7 @@ import router.alcatel.router.card.SRCardObject;
 import router.alcatel.router.card.SRIOMObject;
 import router.alcatel.router.card.SRMDAObject;
 
-public class MDATest02_withimpm {
+public class MDATest03_IngressQOS {
 	public static void main(String[] args){
 		if (args.length < 1){
 			System.out.println("Error you must supply path to configuration file");
@@ -34,12 +34,8 @@ public class MDATest02_withimpm {
 					for ( int i = 1; i <=2;i++){
 						SRMDAObject mda = ((SRIOMObject) card).getMDA(i);
 						if ( mda != null){
-							System.out.format("\tMDA: %-3d  Type: %-15s  AdminUp: %-6s\n", mda.getComplex(), mda.getMDAType(), mda.isAdminUp());
-							
-							
-							if ( iom.isIOMb()){
-								System.out.println("\t\tIngress IMPM Policy = " + mda.INGRESS.MDAPATHMGMT.getBandwidthPolicyName());
-							}
+							System.out.format("\tMDA: %-3d  Type: %-20s  IngressQOS: %-8s AdminUp: %-6s\n", mda.getComplex(), mda.getMDAType(),  mda.INGRESS.getIngressQueuePolicyName(), mda.isAdminUp());
+
 						}
 					}
 				}
@@ -52,3 +48,5 @@ public class MDATest02_withimpm {
 		}
 	}
 }
+
+

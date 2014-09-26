@@ -4,24 +4,24 @@ import java.util.TreeMap;
 
 public class SRQOSConfiguration {
 	
-	protected TreeMap<Integer, NetworkQOSPolicy> networkPolicies = null;
+	protected TreeMap<Integer, SRNetworkQOSPolicy> networkPolicies = null;
 	protected TreeMap<Integer, SAPIngressQOSPolicy> sapIngressPolicies = null;
 	protected TreeMap<Integer, SAPEgressQOSPolicy> sapEgressPolicies = null;
-	protected TreeMap<String, NetworkQueueQOSPolicy> networkQueuePolicies = null;
+	protected TreeMap<String, SRNetworkQueueQOSPolicy> networkQueuePolicies = null;
 
 	
 	public SRQOSConfiguration(){
-		networkPolicies = new TreeMap<Integer, NetworkQOSPolicy>();
+		networkPolicies = new TreeMap<Integer, SRNetworkQOSPolicy>();
 		sapIngressPolicies = new TreeMap<Integer, SAPIngressQOSPolicy>();
 		sapEgressPolicies = new TreeMap<Integer, SAPEgressQOSPolicy>();
-		networkQueuePolicies = new TreeMap<String, NetworkQueueQOSPolicy>();
+		networkQueuePolicies = new TreeMap<String, SRNetworkQueueQOSPolicy>();
 	}
 	
-	public void addNetworkQOSPolicy(NetworkQOSPolicy policy){
+	public void addNetworkQOSPolicy(SRNetworkQOSPolicy policy){
 		this.networkPolicies.put(policy.getPolicyNumber(), policy);
 	}
 	
-	public void addNetworkQueueQOSPolicy(NetworkQueueQOSPolicy policy){
+	public void addNetworkQueueQOSPolicy(SRNetworkQueueQOSPolicy policy){
 		this.networkQueuePolicies.put(policy.getPolicyName(), policy);
 	}
 	
@@ -33,11 +33,11 @@ public class SRQOSConfiguration {
 		this.sapEgressPolicies.put(policy.getPolicyNumber(), policy);
 	}
 	
-	public NetworkQOSPolicy getNetworkQOSPolicy(Integer policynumber){
+	public SRNetworkQOSPolicy getNetworkQOSPolicy(Integer policynumber){
 		return this.networkPolicies.get(policynumber);
 	}
 	
-	public NetworkQueueQOSPolicy getNetworkQueueQOSPolicy(String policyName){
+	public SRNetworkQueueQOSPolicy getNetworkQueueQOSPolicy(String policyName){
 		return this.networkQueuePolicies.get(policyName);
 	}
 	
@@ -57,11 +57,11 @@ public class SRQOSConfiguration {
 		return this.sapIngressPolicies;
 	}
 	
-	public TreeMap<Integer, NetworkQOSPolicy> getNetworkQOSPolicies(){
+	public TreeMap<Integer, SRNetworkQOSPolicy> getNetworkQOSPolicies(){
 		return this.networkPolicies;
 	}
 	
-	public TreeMap<String, NetworkQueueQOSPolicy> getNetworkQueueQOSPolicies(){
+	public TreeMap<String, SRNetworkQueueQOSPolicy> getNetworkQueueQOSPolicies(){
 		return this.networkQueuePolicies;
 	}
 	

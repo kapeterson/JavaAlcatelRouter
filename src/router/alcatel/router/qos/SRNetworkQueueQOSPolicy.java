@@ -3,11 +3,11 @@ package router.alcatel.router.qos;
 import router.alcatel.router.*;
 
 
-public class NetworkQueueQOSPolicy extends AlcatelObject {
+public class SRNetworkQueueQOSPolicy extends AlcatelObject {
 	
 	protected String policyName = "";
 	
-	public NetworkQueueQOSPolicy(){
+	public SRNetworkQueueQOSPolicy(){
 		super(AlcatelObjectType.NETWORKQUEUEQOSPOLICY);
 		this.policyName = "";
 	}
@@ -19,5 +19,6 @@ public class NetworkQueueQOSPolicy extends AlcatelObject {
 	
 	public void setPolicyName(String policyname){
 		this.policyName = policyname;
+		this.setName(policyname);
 	}
 }

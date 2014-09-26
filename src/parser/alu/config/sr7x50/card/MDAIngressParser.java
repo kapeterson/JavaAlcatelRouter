@@ -11,6 +11,7 @@ import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.card.SRMDAIngress;
 import router.alcatel.router.card.SRMDAMcastPathManagement;
 import router.alcatel.router.card.SRMDAObject;
+import router.alcatel.router.qos.SRNetworkQueueQOSPolicy;
 
 public class MDAIngressParser extends ConfigurationSection {
 
@@ -19,9 +20,23 @@ public class MDAIngressParser extends ConfigurationSection {
 		super("CONFIG.CARD.IOM.MDA.INGRESS",router, contextChangeHandler);
 		mdaingress = new SRMDAIngress(mda);
 		this.commandHash.put(Pattern.compile("^mcast\\-path\\-management$"), new CommandHandler("setIMPMContext",false));
+		
+		this.commandHash.put(Pattern.compile("^queue\\-policy \"(.*)\"$"), new CommandHandler("setIngressQueuePolicy",false));
+
 	}
 	
 	
+	public void setIngressQueuePolicy(Matcher matcher){
+		
+		SRNetworkQueueQOSPolicy policy = this.router.QOS.getNetworkQueueQOSPolicy(matcher.group(1));
+		if ( policy == null){
+			System.out.println("ERROR: QUEUE policy " + matcher.group(1) + " was not found when adding to mda ingress");
+			System.exit(1);
+		}
+		
+		this.mdaingress.setIngressQOS(policy);
+		
+	}
 	public void setIMPMContext(Matcher matcher){
 		//System.out.println("MCASTMGMT context");
 		PathManagementParser parser = new PathManagementParser(this.router, this.getContextNotifier());
