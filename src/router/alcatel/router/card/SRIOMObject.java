@@ -75,4 +75,26 @@ public class SRIOMObject extends SRCardObject{
 	public boolean isIOMObject(){
 		return true;
 	}
+	
+	
+	/**
+	 * Is the IOM an IMM
+	 * @return
+	 */
+	public boolean isIMM(){
+		return this.cardType.contains("imm");
+	}
+	
+
+	/**
+	 * Is the iom an iomb
+	 * @return
+	 */
+	public boolean isIOMb(){
+		return this.cardType.matches("iom(2)?\\-20g.*");
+	}
+	
+	public boolean isIOM3(){
+		return this.cardType.matches("iom3.*");
+	}
 }

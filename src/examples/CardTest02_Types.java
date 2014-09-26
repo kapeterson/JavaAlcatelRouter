@@ -1,15 +1,12 @@
 package examples;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.card.SRCardObject;
 import router.alcatel.router.card.SRIOMObject;
 import router.alcatel.router.card.SRMDAObject;
 
-public class CardTest01 {
+public class CardTest02_Types {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		if (args.length < 1){
@@ -30,14 +27,11 @@ public class CardTest01 {
 			for ( Integer key : router.Cards.getCards().keySet()){
 				
 				SRCardObject card = router.Cards.getCard(key);
-				System.out.format("\nCard %s  card-type %s \n", card.getSlotNumber(), card.getCardType());
 				if ( card.isIOMObject()) {
-					for ( int i = 1; i <=2;i++){
-						SRMDAObject mda = ((SRIOMObject) card).getMDA(i);
-						if ( mda != null)
-							System.out.format("\tMDA: %d  Type: %s\n", mda.getComplex(), mda.getMDAType());
-					}
+					SRIOMObject iom = (SRIOMObject)card;
+					System.out.format("Card %-3d  card-type: %-15s  iomb: %-6s imm: %-6s  iom3: %-6s \n", iom.getSlotNumber(), iom.getCardType(), iom.isIOMb(), iom.isIMM(), iom.isIOM3());
 				}
+			
 				
 			}
 		} catch ( Exception e) {

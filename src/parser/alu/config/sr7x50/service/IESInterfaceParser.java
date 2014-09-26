@@ -87,7 +87,7 @@ public class IESInterfaceParser extends ConfigurationSection {
 			this.interfaceObject.setServiceBinding(object);
 			
 		} else if ( object.isServiceSDPObject()) {
-			System.out.println("Adding sdp to ies " + object.getName().trim());
+			//System.out.println("Adding sdp to ies " + object.getName().trim());
 			Pattern sdpPattern = Pattern.compile(RouterRegex.sdpInfoPattern);
 
 			Matcher sdpMatch = sdpPattern.matcher(object.getName().trim());
