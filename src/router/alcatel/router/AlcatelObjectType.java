@@ -12,6 +12,7 @@ public enum AlcatelObjectType {
 	IOM, 
 	MDA, 
 	CPM,
+	IOMFP,
 	XF, 
 	PHYSICALPORT,
 	LAG,
