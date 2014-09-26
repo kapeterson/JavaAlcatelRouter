@@ -49,6 +49,9 @@ public class Alcatel7x50ParserManager implements ContextChange {
 		
 		// Empty parsers that do nothing
 		contextHash.put("echo \"System Security Configuration\"", defaultParser);
+		contextHash.put("echo \"Filter Log Configuration\"", defaultParser);
+		
+		contextHash.put("echo \"Multicast Path Management Policy Configuration\"", defaultParser);
 		contextHash.put("echo \"Card Configuration\"", new CardParser(router, this));
 		contextHash.put("echo \"Port Configuration\"", new PortConfigurationParser(router, this));
 		contextHash.put("echo \"Redundancy Configuration\"", defaultParser);
