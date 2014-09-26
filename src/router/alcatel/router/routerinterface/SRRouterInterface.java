@@ -8,6 +8,8 @@ import java.net.InetAddress;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
+import router.alcatel.router.service.SRSDPObject;
+import router.alcatel.router.service.SRServiceSDPObject;
 
 public class SRRouterInterface extends AlcatelObject implements BindingParent, AssociationParent  {
 	
@@ -53,11 +55,13 @@ public class SRRouterInterface extends AlcatelObject implements BindingParent, A
 			if ( bindingObject.getBinding().isAssociationChild()) {
 				AssociationChild aObj = (AssociationChild)bindingObject.getBinding();
 				aObj.addAssociation(this);
+			} else if (bindingObject.getBinding().isServiceSDPObject()){
+				SRSDPObject sdp = (SRSDPObject)((SRServiceSDPObject)bindingObject.getBinding()).getParent();
+				sdp.addAssociation(this);
 			}
 			
 		} else {
 			System.out.println("Could not set binding on interface to " + bindingObject.getBinding().getObjectType());
-			//throw new Exception("ERROR: Attempting to bind invalid object type "  + bindingObject.getObjectType().toString() + " to interface");
 			System.exit(1);
 		}
 	}

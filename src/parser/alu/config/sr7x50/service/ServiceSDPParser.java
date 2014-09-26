@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import parser.CommandHandler;
 import parser.ConfigurationSection;
 import parser.ContextChange;
+import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.service.SRServiceSDPObject;
@@ -15,7 +16,7 @@ public class ServiceSDPParser extends ConfigurationSection {
 	 
 	protected SRServiceSDPObject sdp = null;
 	
-	public ServiceSDPParser(SRChassisObject router, ContextChange contextChangeHandler, String sdpName, AlcatelObjectType sdpType){
+	public ServiceSDPParser(SRChassisObject router, ContextChange contextChangeHandler, String sdpName, AlcatelObjectType sdpType, AlcatelObject parentSDP){
 		super("CONFIG.SERVICE.IES.INTERFACE.SDP", router, contextChangeHandler);
 		
 		if ( sdpType != AlcatelObjectType.MESHSDPOBJECT && sdpType != AlcatelObjectType.SPOKESDPOBJECT){
@@ -23,7 +24,7 @@ public class ServiceSDPParser extends ConfigurationSection {
 			System.exit(1);
 		}
 		
-		this.sdp = new SRServiceSDPObject(sdpType, sdpName);
+		this.sdp = new SRServiceSDPObject(sdpType, sdpName, parentSDP);
 		// = new SRSAPObject(sapName);
 		//this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
 	}

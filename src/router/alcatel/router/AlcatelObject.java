@@ -15,6 +15,7 @@ public abstract class AlcatelObject {
 	
 	private String objectName;
 	private AlcatelObjectType objectType;
+	protected AlcatelObject parent = null;
 	
 	public AlcatelObject(AlcatelObjectType objectType){
 		objectName = "";
@@ -161,6 +162,10 @@ public abstract class AlcatelObject {
 	
 	public boolean isBindingChild(){
 		return false;
+	}
+	
+	public AlcatelObject getParent(){
+		return this.parent;
 	}
 	
 }

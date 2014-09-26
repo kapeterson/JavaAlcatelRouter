@@ -37,7 +37,10 @@ public class IESInterfaceParser extends ConfigurationSection {
 	}
 
 	public void setSpokeSDPBinding(Matcher matcher) throws Exception{
-		ServiceSDPParser parser = new ServiceSDPParser(router, this.contextChange, matcher.group(1), AlcatelObjectType.SPOKESDPOBJECT);
+		
+		SRSDPObject sdpObj = this.router.Services.getSDP(Integer.parseInt(matcher.group(1).split(":")[0]));
+
+		ServiceSDPParser parser = new ServiceSDPParser(router, this.contextChange, matcher.group(1), AlcatelObjectType.SPOKESDPOBJECT, sdpObj);
 		parser.setParent(this);
 		parser.setSectionDepth(this.getLastCommandDepth());
 		this.getContextNotifier().contextChangeCallback(this, parser);
@@ -45,7 +48,10 @@ public class IESInterfaceParser extends ConfigurationSection {
 	}
 	
 	public void setMeshSDPBinding(Matcher matcher) throws Exception{
-		ServiceSDPParser parser = new ServiceSDPParser(router, this.contextChange, matcher.group(1), AlcatelObjectType.MESHSDPOBJECT);
+		
+		SRSDPObject sdpObj = this.router.Services.getSDP(Integer.parseInt(matcher.group(1).split(":")[0]));
+
+		ServiceSDPParser parser = new ServiceSDPParser(router, this.contextChange, matcher.group(1), AlcatelObjectType.MESHSDPOBJECT, sdpObj);
 		parser.setParent(this);
 		parser.setSectionDepth(this.getLastCommandDepth());
 		this.getContextNotifier().contextChangeCallback(this, parser);

@@ -31,6 +31,9 @@ public class SRVPLSObject extends SRServiceObject {
 	}
 	
 	public void addSDPObject(SRServiceSDPObject sdp){
+		
+		SRSDPObject sdpObj = (SRSDPObject)sdp.getParent();
+		sdpObj.addAssociation(sdp);
 		this.sdps.put(sdp.getSDPName(), sdp);
 	}
 	

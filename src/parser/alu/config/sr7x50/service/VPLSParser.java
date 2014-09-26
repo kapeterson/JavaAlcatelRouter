@@ -33,7 +33,8 @@ public class VPLSParser extends ConfigurationSection {
 
 	public void setMeshSDPContext(Matcher matcher){
 		//System.out.println("Spoke sdp " + matcher.group(1));
-		SRServiceSDPObject sdp = new SRServiceSDPObject(AlcatelObjectType.MESHSDPOBJECT, matcher.group(1));
+		SRSDPObject sdpObject = this.router.Services.getSDP(Integer.parseInt(matcher.group(1).split(":")[0]));
+		SRServiceSDPObject sdp = new SRServiceSDPObject(AlcatelObjectType.MESHSDPOBJECT, matcher.group(1), sdpObject);
 		this.vpls.addSDPObject(sdp);
 	}
 	
@@ -45,7 +46,9 @@ public class VPLSParser extends ConfigurationSection {
 		//System.out.println("Spoke sdp " + matcher.group(1));
 		//SRServiceSDPObject sdp = new SRServiceSDPObject(AlcatelObjectType.SPOKESDPOBJECT, matcher.group(1));
 		//this.vpls.addSDPObject(sdp);
-		ServiceSDPParser parser = new ServiceSDPParser(router, this.contextChange, matcher.group(1), AlcatelObjectType.SPOKESDPOBJECT);
+		
+		SRSDPObject sdpObj = this.router.Services.getSDP(Integer.parseInt(matcher.group(1).split(":")[0]));
+		ServiceSDPParser parser = new ServiceSDPParser(router, this.contextChange, matcher.group(1), AlcatelObjectType.SPOKESDPOBJECT, sdpObj);
 		parser.setParent(this);
 		parser.setSectionDepth(this.getLastCommandDepth());
 		this.getContextNotifier().contextChangeCallback(this, parser);

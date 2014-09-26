@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
+import router.alcatel.router.AssociationChild;
 
-public class SRSDPObject extends SRServiceObject{
+public class SRSDPObject extends SRServiceObject implements AssociationChild {
 	
 	
 	/** Array List containing pointer to every association (interface, vpls, etc)**/
@@ -39,5 +40,9 @@ public class SRSDPObject extends SRServiceObject{
 	 */
 	public ArrayList<AlcatelObject> getAssociations(){
 		return this.associations;
+	}
+	
+	public boolean isAssociationChild(){
+		return true;
 	}
 }
