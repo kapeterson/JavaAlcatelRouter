@@ -81,7 +81,7 @@ public class VPLSParser extends ConfigurationSection {
 		if ( object.isSAPObject()){
 			this.vpls.addSAPObject((SRSAPObject)object);
 		} else if ( object.isServiceSDPObject()){
-			System.out.println("Adding objectd  " + object.getName());
+			//System.out.println("Adding objectd  " + object.getName());
 			this.vpls.addSDPObject((SRServiceSDPObject)object);
 		}
 	}

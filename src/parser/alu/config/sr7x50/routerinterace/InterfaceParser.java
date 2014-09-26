@@ -45,9 +45,7 @@ public class InterfaceParser extends ConfigurationSection {
 					
 					
 					SRPortObject port = this.router.Ports.getPort(m.group(1));
-					//port.addAssociation(this.iface);
-					
-					
+				
 					final int tag = ( m.group(3) == null ) ? -1 : Integer.parseInt(m.group(3));
 					SRInterfaceBinding binding = new SRInterfaceBinding(port, tag);
 					this.iface.setBinding(binding);
@@ -75,12 +73,11 @@ public class InterfaceParser extends ConfigurationSection {
 				if ( this.router.Lags.hasLag(Integer.parseInt(m.group(1)))) {
 					
 					SRLagObject lag = this.router.Lags.getLag(Integer.parseInt(m.group(1)));
-					lag.addAssociation(this.iface);
-					
 					
 					final int tag = ( m.group(3) == null ) ? -1 : Integer.parseInt(m.group(3));
 					SRInterfaceBinding binding = new SRInterfaceBinding(lag, tag);
 					this.iface.setBinding(binding);
+					
 				} else {
 					throw new Exception("ERROR: could not get lag object in lag  " + bindingName + " when binding to interface in parser");
 				}
