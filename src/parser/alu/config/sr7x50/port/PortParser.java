@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import parser.ConfigurationSection;
 import parser.CommandHandler;
 import parser.ContextChange;
+import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.port.*;
 public class PortParser extends ConfigurationSection {
@@ -16,12 +17,20 @@ public class PortParser extends ConfigurationSection {
 		this.commandHash.put(Pattern.compile("^no shutdown$"), new CommandHandler("enablePort", true));
 		this.commandHash.put(Pattern.compile("^shutdown$"), new CommandHandler("disablePort", true));
 		this.commandHash.put(Pattern.compile("^description \"(.*)\"$"), new CommandHandler("setPortDescription", true));
+		this.commandHash.put(Pattern.compile("^ethernet$"), new CommandHandler("setEthernetContext", true));
 
 		port = new SRPortObject();
 		port.setObjectName(portName);
 		this.router = router;
 	}
 	
+	public void setEthernetContext(Matcher matcher){
+		//System.out.println("Ethernet context for port " + this.port.getName());
+		EthernetParser parser = new EthernetParser(this.router, this.getContextNotifier());
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
+	}
 	public void setPortDescription(Matcher matcher){
 		port.setDescription(matcher.group(1));
 	}
@@ -33,6 +42,14 @@ public class PortParser extends ConfigurationSection {
 	public void enablePort(Matcher matcher){
 		//System.out.format("\tSet port to admin up for %s\n", port.getName());
 		port.setAdminUp();
+	}
+	
+	public void addObject(AlcatelObject obj){
+		
+		if ( obj.isPortEthernet()){
+			
+			this.port.ETHERNET = (SRPortEthernet)obj;
+		}
 	}
 	/**
 	 * Custom handler

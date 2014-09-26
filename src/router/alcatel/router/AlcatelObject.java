@@ -192,4 +192,8 @@ public abstract class AlcatelObject {
 	public boolean isForwardingPath(){
 		return false;
 	}
+	
+	public boolean isPortEthernet(){
+		return (this.getObjectType() == AlcatelObjectType.PORTETHERNET);
+	}
 }

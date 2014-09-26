@@ -11,6 +11,9 @@ import java.util.ArrayList;
  */
 public class SRPortObject extends AlcatelObject implements AssociationChild, SRInterfaceBindingObject {
 	
+	
+	public SRPortEthernet ETHERNET = new SRPortEthernet();
+	
 	/** Array List containing pointer to every association (interface, sap, lag etc)**/
 	protected ArrayList<AlcatelObject> associations = new ArrayList<AlcatelObject>();
 	
