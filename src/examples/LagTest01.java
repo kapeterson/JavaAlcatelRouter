@@ -28,6 +28,7 @@ public class LagTest01 {
 				System.out.format("\nLag %d\n", lag.getLagNumber());
 				System.out.println("\tAdmin Up: " + lag.isAdminUp());
 				System.out.println("\tEncap: " + lag.getEncapsulation());
+				System.out.println("\tMode: " + lag.getMode());
 
 				System.out.println("\tDescription: " + lag.getDescription());
 				for ( String portName : lag.getPorts().keySet()){

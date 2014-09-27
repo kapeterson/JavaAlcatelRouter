@@ -28,7 +28,10 @@ public class SRLagObject extends AlcatelObject implements SRInterfaceBindingObje
 	protected Hashtable<String, SRPortObject> ports = null;
 	
 
+	/** lag encapsulation type **/
 	protected String encapsulation = "null";
+	
+	protected String mode = "network";
 	
 	public SRLagObject(){
 		super(AlcatelObjectType.LAG);
@@ -150,6 +153,19 @@ public class SRLagObject extends AlcatelObject implements SRInterfaceBindingObje
 	public String getEncapsulation(){
 		return this.encapsulation;
 	}
+	
+	public void setMode(String mode){
+		if ( SRData.ETHERNET_MODES.contains(mode))
+			this.mode = mode;
+		else{
+			System.out.println("ERROR setting mode to " + mode + " on port ");
+		}
+	}
+	
+	public String getMode(){
+		return this.mode;
+	}
+	
 	
 	@Override
 	public boolean isAssociationChild(){

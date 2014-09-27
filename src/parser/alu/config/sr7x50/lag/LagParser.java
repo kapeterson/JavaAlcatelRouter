@@ -22,10 +22,14 @@ public class LagParser extends ConfigurationSection {
 		this.commandHash.put(Pattern.compile("^no shutdown"), new CommandHandler("adminUp", true));
 
 		this.commandHash.put(Pattern.compile("^encap\\-type (.*)"), new CommandHandler("setEncapType", true));
+		this.commandHash.put(Pattern.compile("^mode (.*)$"), new CommandHandler("setMode", false));
 
 
 	}
 	
+	public void setMode(Matcher matcher){
+		this.lag.setMode(matcher.group(1));
+	}
 	
 	public void setEncapType(Matcher matcher){
 		this.lag.setEncapsulation(matcher.group(1));
