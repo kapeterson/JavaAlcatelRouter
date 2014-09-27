@@ -24,7 +24,11 @@ public class SRLagObject extends AlcatelObject implements SRInterfaceBindingObje
 	/** Lag number */
 	protected Integer lagnumber = 0;
 	
+	/** Hashtable of ports, key = portname value = port object **/
 	protected Hashtable<String, SRPortObject> ports = null;
+	
+
+	protected String encapsulation = "null";
 	
 	public SRLagObject(){
 		super(AlcatelObjectType.LAG);
@@ -132,6 +136,19 @@ public class SRLagObject extends AlcatelObject implements SRInterfaceBindingObje
 	 */
 	public void addAssociation(AlcatelObject associationObject){
 		this.associations.add(associationObject);
+	}
+	
+	
+	public void setEncapsulation(String encapType){
+		if ( SRData.PORT_ENCAP_TYPES.contains(encapType)){
+			this.encapsulation = encapType;
+		} else {
+			System.out.println("ERROR: Could not set encapsulation to " + encapType + " on lag " + this.getLagNumber());
+		}
+	}
+	
+	public String getEncapsulation(){
+		return this.encapsulation;
 	}
 	
 	@Override
