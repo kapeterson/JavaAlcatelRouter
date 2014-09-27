@@ -23,7 +23,7 @@ public class PortTest03_Encap {
 			for ( String key : router.Ports.getPorts().keySet()){
 				
 				SRPortObject port = router.Ports.getPort(key);
-				System.out.format("PORT: %-10s  ADMINUP: %-6s ENCAP: %-7s QOS: %-10s DESC: %-50s\n", port.getName(),  port.isAdminUp(), port.ETHERNET.getEncapType(), port.ETHERNET.NETWORK.getQueuePolicyName(), port.getDescription());
+				System.out.format("PORT: %-10s  ADMINUP: %-6s ENCAP: %-7s QOS: %-10s Mode: %-8s DESC: %-50s\n", port.getName(),  port.isAdminUp(), port.ETHERNET.getEncapType(), port.ETHERNET.NETWORK.getQueuePolicyName(), port.ETHERNET.getMode(), port.getDescription());
 				
 			}
 			

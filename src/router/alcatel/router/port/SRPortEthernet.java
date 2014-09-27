@@ -1,24 +1,19 @@
 package router.alcatel.router.port;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.SRData;
 
 public class SRPortEthernet extends AlcatelObject {
  
-	//protected List<String> encapTypes = new ArrayList<String>(); 
 	
 	protected String encapsulation = "null";
+	protected String mode = "network";
 	public SREthernetNetwork NETWORK = new SREthernetNetwork();
 	
 	public SRPortEthernet(){
 		super(AlcatelObjectType.PORTETHERNET);
-		//encapTypes.add("null");
-		//encapTypes.add("dot1q");
-		//encapTypes.add("qinq");
+
 
 	}
 
@@ -35,6 +30,18 @@ public class SRPortEthernet extends AlcatelObject {
 	
 	public String getEncapType(){
 		return this.encapsulation;
+	}
+	
+	public void setMode(String mode){
+		if ( SRData.ETHERNET_MODES.contains(mode))
+			this.mode = mode;
+		else{
+			System.out.println("ERROR setting mode to " + mode + " on port ");
+		}
+	}
+	
+	public String getMode(){
+		return this.mode;
 	}
 
 }

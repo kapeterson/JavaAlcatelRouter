@@ -19,8 +19,13 @@ public class EthernetParser extends ConfigurationSection {
 		super("CONFIG.PORT.ETHERNET", router, contextChangeHandler);	
 		this.commandHash.put(Pattern.compile("^encap\\-type (.*)"), new CommandHandler("setEncapType", false));
 		this.commandHash.put(Pattern.compile("^network$"), new CommandHandler("setNetworkContext", false));
+		this.commandHash.put(Pattern.compile("^mode (.*)$"), new CommandHandler("setMode", false));
 
 	
+	}
+	
+	public void setMode(Matcher matcher){
+		this.ethernet.setMode(matcher.group(1));
 	}
 	
 	public void setNetworkContext(Matcher matcher){
