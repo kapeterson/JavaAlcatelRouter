@@ -7,6 +7,8 @@ public class SRSAPObject extends AlcatelObject implements SRInterfaceBindingObje
 	protected String sapName = "";
 	protected String description = "";
 	protected AlcatelObject parentService = null;
+	public SRSAPIngress INGRESS = new SRSAPIngress();
+	public SRSAPEgress EGRESS = new SRSAPEgress();
 	
 	public SRSAPObject(String sapname, AlcatelObject parentService){
 		super(AlcatelObjectType.SAPOBJECT);
