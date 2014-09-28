@@ -11,12 +11,19 @@ public class SRQOSConfiguration {
 
 	
 	public SRQOSConfiguration(){
+		
 		networkPolicies = new TreeMap<Integer, SRNetworkQOSPolicy>();
+		this.createNetworkQos1();
+		
 		sapIngressPolicies = new TreeMap<Integer, SAPIngressQOSPolicy>();
 		sapEgressPolicies = new TreeMap<Integer, SAPEgressQOSPolicy>();
 		networkQueuePolicies = new TreeMap<String, SRNetworkQueueQOSPolicy>();
 	}
 	
+	
+	public void createNetworkQos1(){
+		this.addNetworkQOSPolicy(new SRNetworkQOSPolicy(1));
+	}
 	public void addNetworkQOSPolicy(SRNetworkQOSPolicy policy){
 		this.networkPolicies.put(policy.getPolicyNumber(), policy);
 	}

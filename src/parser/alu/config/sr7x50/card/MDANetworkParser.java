@@ -24,21 +24,17 @@ public class MDANetworkParser extends ConfigurationSection{
 	
 	public void setIngressQueuePolicy(Matcher matcher){
 		
-		SRNetworkQueueQOSPolicy policy = this.router.QOS.getNetworkQueueQOSPolicy(matcher.group(1));
-		if ( policy == null){
-			System.out.println("ERROR: QUEUE policy " + matcher.group(1) + " was not found when adding to mda ingress");
-			System.exit(1);
-		}
-		
-		this.network.INGRESS.setIngressQOS(policy);
+		this.network.INGRESS.setIngressQOSName(matcher.group(1));
 		
 	}
 	
 	public void exitSection(Matcher matcher){
+		
 		if ( this.getSectionDepth() == this.lastDepth) {
 			this.getParent().addObject(this.network);
 			this.getContextNotifier().contextChangeCallback(this, this.parent);
 		}
+		
 	}
 	
 }

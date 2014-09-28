@@ -35,8 +35,7 @@ public class QosConfigurationParser extends ConfigurationSection {
 	
 	public void setNetworkQosContext(Matcher matcher){
 		//System.out.println("Network QOS " + matcher.group(1));
-		SRNetworkQOSPolicy policy = new SRNetworkQOSPolicy();
-		policy.setPolicyNumber(Integer.parseInt(matcher.group(1)));
+		SRNetworkQOSPolicy policy = new SRNetworkQOSPolicy(Integer.parseInt(matcher.group(1)));
 		this.router.QOS.addNetworkQOSPolicy(policy);
 			
 	}

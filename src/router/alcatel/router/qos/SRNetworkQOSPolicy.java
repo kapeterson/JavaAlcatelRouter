@@ -6,9 +6,9 @@ public class SRNetworkQOSPolicy extends AlcatelObject {
 	
 	protected Integer policyNumber = 0;
 	
-	public SRNetworkQOSPolicy(){
+	public SRNetworkQOSPolicy(Integer policynumber){
 		super(AlcatelObjectType.NETWORKQOSPOLICY);
-		this.policyNumber = 0;
+		this.policyNumber = policynumber;
 	}
 	
 	public void setPolicyNumber(Integer policynumber){

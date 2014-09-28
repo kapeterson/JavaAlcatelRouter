@@ -165,6 +165,7 @@ public class SRChassisObject extends AlcatelHardwareObject {
 	}
 	
 	
+	
 	class AssociationListener implements ActionListener {
 
 

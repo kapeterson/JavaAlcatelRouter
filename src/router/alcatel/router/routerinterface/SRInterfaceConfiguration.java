@@ -7,6 +7,7 @@ import router.alcatel.router.ConfigurationEventListener;
 
 public class SRInterfaceConfiguration {
 	
+	
 	protected TreeMap<String, SRRouterInterface> interfaces = null;
 	protected List<ConfigurationEventListener> eventListeners = new ArrayList<ConfigurationEventListener>();
 	

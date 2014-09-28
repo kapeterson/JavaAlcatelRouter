@@ -6,8 +6,8 @@ import router.alcatel.router.qos.SRNetworkQueueQOSPolicy;
 
 public class SRMDANetworkIngress extends AlcatelObject {
 	
-	protected SRNetworkQueueQOSPolicy ingressqueue = null;
-	
+	//protected SRNetworkQueueQOSPolicy ingressqueue = null;
+	protected String ingressNewtworkQueueName = "default";
 	
 	public SRMDANetworkIngress(){
 		super(AlcatelObjectType.MDANETWORKINGRESS);
@@ -15,19 +15,14 @@ public class SRMDANetworkIngress extends AlcatelObject {
 	}
 	
 	
-	public void setIngressQOS(SRNetworkQueueQOSPolicy policy){
-		this.ingressqueue = policy;
+	public void setIngressQOSName(String policy){
+		this.ingressNewtworkQueueName = policy;
 	}
 	
-	public SRNetworkQueueQOSPolicy getIngressQueuePolicy(){
-		return this.ingressqueue;
-	}
+
 	
 	public String getIngressQueuePolicyName(){
-		if ( this.ingressqueue == null )
-			return "default";
-		else
-			return this.ingressqueue.getName();
+		return this.ingressNewtworkQueueName;
 	}
 	
 	
