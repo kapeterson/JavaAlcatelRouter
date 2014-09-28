@@ -22,7 +22,7 @@ public class SRNetworkInterface extends SRRouterInterface{
 		this.qos = networkPolicy;
 	}
 
-	public Integer getQOSPolicy(){
+	public Integer getQOSPolicyNumber(){
 		return this.qos;
 	}
 	
