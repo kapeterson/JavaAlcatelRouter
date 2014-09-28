@@ -8,6 +8,7 @@ public class SRVPLSObject extends SRServiceObject {
 	
 	public SRVPLSObject(Integer vplsnumber){
 		super(vplsnumber);
+		this.setName(vplsnumber.toString());
 		saps = new TreeMap<String, SRSAPObject>();
 		sdps = new TreeMap<String, SRServiceSDPObject>();
 	
