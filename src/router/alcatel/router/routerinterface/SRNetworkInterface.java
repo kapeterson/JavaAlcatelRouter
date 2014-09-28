@@ -5,7 +5,7 @@ import router.alcatel.router.qos.SRNetworkQOSPolicy;
 
 public class SRNetworkInterface extends SRRouterInterface{
 		
-	protected SRNetworkQOSPolicy qos = null;
+	protected Integer qos = 1;
 	
 	public SRNetworkInterface(String intName){
 		super(intName, AlcatelObjectType.ROUTERNETWORKINTERFACE);
@@ -18,11 +18,11 @@ public class SRNetworkInterface extends SRRouterInterface{
 		return true;
 	}
 	
-	public void setQOS(SRNetworkQOSPolicy policyObject){
-		this.qos = policyObject;
+	public void setQOS(Integer networkPolicy){
+		this.qos = networkPolicy;
 	}
 
-	public SRNetworkQOSPolicy getQOSPolicy(){
+	public Integer getQOSPolicy(){
 		return this.qos;
 	}
 	

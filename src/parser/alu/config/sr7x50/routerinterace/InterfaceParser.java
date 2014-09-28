@@ -22,12 +22,16 @@ public class InterfaceParser extends ConfigurationSection {
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
 		this.commandHash.put(Pattern.compile("^address ([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)\\/([0-9]+)$"), new CommandHandler("setIPv4Address", true));
 		this.commandHash.put(Pattern.compile("^port (.*)$"), new CommandHandler("setPortBinding", true));
+		this.commandHash.put(Pattern.compile("^qos ([0-9]+)$"), new CommandHandler("setQOS", true));
 
 
 	}
 	
 	
 	
+	public void setQOS(Matcher matcher){
+		this.iface.setQOS(Integer.parseInt(matcher.group(1)));
+	}
 	public void setPortBinding(Matcher matcher) throws Exception {
 		
 		String bindingName = matcher.group(1);

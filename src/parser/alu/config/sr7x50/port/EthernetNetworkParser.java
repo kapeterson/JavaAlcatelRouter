@@ -22,12 +22,8 @@ public class EthernetNetworkParser extends ConfigurationSection {
 	
 	
 	public void setQueuePolicy(Matcher matcher){
-		SRNetworkQueueQOSPolicy policy = this.router.QOS.getNetworkQueueQOSPolicy(matcher.group(1));
-		if ( policy == null){
-			System.out.println("ERROR: could not find queue policy " + matcher.group(1) + " to apply to port ");
-			System.exit(1);
-		}
-		this.network.setQueuePolicy(policy);
+
+		this.network.setQueuePolicyName(matcher.group(1));
 	}
 	/**
 	 * Custom handler
