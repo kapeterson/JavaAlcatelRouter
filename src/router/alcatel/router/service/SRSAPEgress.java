@@ -6,9 +6,9 @@ import router.alcatel.router.AlcatelObjectType;
 public class SRSAPEgress extends AlcatelObject {
 
 	protected Integer sapIngressQOS = 1;
-	protected Integer sapIngressFilter = -1;
+	protected Integer sapIngressFilter = null;
 	
-	protected SRSAPEgress(){
+	public SRSAPEgress(){
 		super(AlcatelObjectType.SAPEGRESSOBJECT);
 		
 	}

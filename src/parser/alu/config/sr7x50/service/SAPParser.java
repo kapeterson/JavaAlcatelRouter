@@ -7,7 +7,8 @@ import parser.ConfigurationSection;
 import parser.ContextChange;
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.service.SRSAPObject;
+import router.alcatel.router.service.*;
+
 import parser.CommandHandler;
 import router.alcatel.router.port.*;
 import router.alcatel.router.lag.*;
@@ -23,13 +24,43 @@ public class SAPParser extends ConfigurationSection{
 		super("CONFIG.SERVICE.SAP", router, contextChangeHandler);
 		sap = new SRSAPObject(sapName, parentService);
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
+		this.commandHash.put(Pattern.compile("^ingress$"), new CommandHandler("changeIngressContext", true));
+		this.commandHash.put(Pattern.compile("^egress$"), new CommandHandler("changeEgressContext", true));
+
 	}
 	
 
+	public void changeIngressContext(Matcher matcher){
+		SAPIngressParser parser = new SAPIngressParser(this.router, this.getContextNotifier());
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
+	}
+	
+	public void changeEgressContext(Matcher matcher){
+		SAPEgressParser parser = new SAPEgressParser(this.router, this.getContextNotifier());
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
+	}
+	
+	
 	public void setDescription(Matcher matcher){
 		this.sap.setDescription(matcher.group(1));
 	}
 	
+	public void addObject(AlcatelObject obj){
+		
+		if ( obj.isSAPIngressObject()){
+			this.sap.INGRESS = (SRSAPIngress)obj;
+		} else if ( obj.isSAPEgressObject()){
+			this.sap.EGRESS = (SRSAPEgress)obj;
+		} else {
+			System.out.println("ERROR: Could not add " + obj.getObjectType() + " : " + obj.getName() + " to sap");
+			System.exit(1);
+		}
+		
+	}
 	/**
 	 * Custom handler
 	 */

@@ -200,4 +200,12 @@ public abstract class AlcatelObject {
 	public boolean isEthernetNetwork(){
 		return (this.getObjectType() == AlcatelObjectType.ETHERNETNETWORK);
 	}
+	
+	public boolean isSAPIngressObject(){
+		return (this.objectType == AlcatelObjectType.SAPINGRESSOBJECT);
+	}
+	
+	public boolean isSAPEgressObject(){
+		return (this.objectType == AlcatelObjectType.SAPEGRESSOBJECT);
+	}
 }
