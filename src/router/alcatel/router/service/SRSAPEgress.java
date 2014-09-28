@@ -2,12 +2,14 @@ package router.alcatel.router.service;
 
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
+import router.alcatel.router.filter.SRFilterType;
 
 public class SRSAPEgress extends AlcatelObject {
 
 	protected Integer sapIngressQOS = 1;
 	protected Integer sapIngressFilter = null;
-	
+	protected SRFilterType filtertype = null;
+
 	public SRSAPEgress(){
 		super(AlcatelObjectType.SAPEGRESSOBJECT);
 		
@@ -27,5 +29,13 @@ public class SRSAPEgress extends AlcatelObject {
 	
 	public Integer getFilterNumber(){
 		return this.sapIngressFilter;
+	}
+	
+	public SRFilterType getFilterType(){
+		return this.filtertype;
+	}
+	
+	public void setFilterType(SRFilterType type){
+		this.filtertype = type;
 	}
 }

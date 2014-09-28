@@ -12,7 +12,6 @@ public class SRData {
 	/** List of valid Port Ethernet modes **/
 	public final static List<String> ETHERNET_MODES = new ArrayList<String>();
 	
-
 	
 	static {
 		

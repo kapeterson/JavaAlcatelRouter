@@ -7,6 +7,7 @@ import parser.CommandHandler;
 import parser.ConfigurationSection;
 import parser.ContextChange;
 import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.filter.SRFilterType;
 import router.alcatel.router.service.SRSAPEgress;
 
 public class SAPEgressParser extends ConfigurationSection {
@@ -15,12 +16,25 @@ public class SAPEgressParser extends ConfigurationSection {
 	public SAPEgressParser(SRChassisObject router, ContextChange contextChangeHandler)  {
 		super("CONFIG.SERVICE.SAP.EGRESS", router, contextChangeHandler);
 		this.commandHash.put(Pattern.compile("^qos ([0-9]+)$"), new CommandHandler("setQOSPolicy", true));
-		this.commandHash.put(Pattern.compile("^filter ip ([0-9]+)$"), new CommandHandler("setIPFilter", true));
+		this.commandHash.put(Pattern.compile("^filter (ip|mac) ([0-9]+)$"), new CommandHandler("setIPFilter", true));
 	}
 	
 	
 	public void setIPFilter(Matcher matcher){
-		this.sapegress.setFilter(Integer.parseInt(matcher.group(1)));
+		
+		if ( matcher.group(1).equals("mac")){
+			this.sapegress.setFilterType(SRFilterType.mac);
+
+		} else if ( matcher.group(1).equals("ip")){
+			
+			this.sapegress.setFilterType(SRFilterType.ip);
+
+		} else {
+			System.out.println("ERROR: Invalid filter type " + matcher.group(1) + " for sap Ingress " + this.sapegress.getName());
+			System.exit(1);
+		}
+		
+		this.sapegress.setFilter(Integer.parseInt(matcher.group(2)));
 	}
 	
 	

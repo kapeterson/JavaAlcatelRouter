@@ -29,7 +29,7 @@ public class SAPTest02_FilterandQos {
 
 				for ( String sapnumber : vpls.getSAPs().keySet()) {
 					SRSAPObject sap = vpls.getSAP(sapnumber);
-					System.out.format("\tVPLS: %-13s SAP : %-12s  IngressQOS: %-5d  EgressQOS: %-5d  IngressFilter: %-5d  EgressFilter: %-5d Description: %-20s\n ", sap.getParentService().getName(), sapnumber, sap.INGRESS.getQosPolicyNumber(), sap.EGRESS.getQosPolicyNumber(), sap.INGRESS.getFilterNumber(), sap.EGRESS.getFilterNumber(),  sap.getDescription());
+					System.out.format("\tVPLS: %-13s SAP : %-12s  IngressQOS: %-5d  EgressQOS: %-5d   IngressFilter: %-4s %-5d  EgressFilter: %-4s %-5d Description: %-20s\n ", sap.getParentService().getName(), sapnumber, sap.INGRESS.getQosPolicyNumber(), sap.EGRESS.getQosPolicyNumber(), sap.INGRESS.getFilterType(), sap.INGRESS.getFilterNumber(), sap.EGRESS.getFilterType(), sap.EGRESS.getFilterNumber(),  sap.getDescription());
 				}
 
 				
