@@ -116,6 +116,8 @@ public abstract class ConfigurationSection    {
 				} catch ( Exception err ){
 					System.out.println("Error invoking method  " + mName + " in section " + this.getName() + " error = " + err.getMessage());
 					System.out.println("Parent was " + this.getParent());
+					System.out.println("Line was " + this.currentLine);
+					System.out.println("--------");
 					
 				}
 			}

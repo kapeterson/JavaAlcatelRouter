@@ -7,6 +7,7 @@ import parser.CommandHandler;
 import parser.ConfigurationSection;
 import parser.ContextChange;
 import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.filter.SRFilterProtocol;
 import router.alcatel.router.filter.SRIPFilterEntry;
 
 public class IPEntryParser extends ConfigurationSection {
@@ -16,8 +17,40 @@ public class IPEntryParser extends ConfigurationSection {
 	public IPEntryParser(SRChassisObject router, ContextChange contextChangeHandler, Integer entryNumber){
 		super("CONFIG.FILTER.IP.ENTRY", router, contextChangeHandler);
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
+		this.commandHash.put(Pattern.compile("^src\\-ip (.*)\\/([0-9]+)"), new CommandHandler("setSrcIP", true));
+		this.commandHash.put(Pattern.compile("^dst\\-ip (.*)\\/([0-9]+)"), new CommandHandler("setDstIP", true));
+		this.commandHash.put(Pattern.compile("^match protocol (.*)"), new CommandHandler("setProtocol", true));
 
 		this.entry = new SRIPFilterEntry(entryNumber);
+	}
+	
+	
+	public void setProtocol(Matcher matcher){
+
+		//
+		
+		boolean validProtocol = false;
+		
+		for ( SRFilterProtocol prot : SRFilterProtocol.values() ) {
+			if ( prot.name().equals(matcher.group(1)))
+				validProtocol = true;
+		}
+	
+		if ( !validProtocol){
+			System.out.println("ERROR: Invalid protocol value in filter protocl match " + matcher.group(1));
+			System.exit(1);
+		}
+		
+		SRFilterProtocol protocolValue = SRFilterProtocol.valueOf(matcher.group(1));
+		this.entry.setProtocol(protocolValue);
+	}
+	
+	public void setDstIP(Matcher matcher){
+		this.entry.setDestAddress(matcher.group(1), matcher.group(2));
+	}
+	
+	public void setSrcIP(Matcher matcher){
+		this.entry.setSourceAddress(matcher.group(1), matcher.group(2));
 	}
 	
 	public void setDescription(Matcher matcher){

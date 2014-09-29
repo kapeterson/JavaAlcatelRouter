@@ -29,6 +29,10 @@ public class FilterIPTest01 {
 				for ( Integer entryNumber : filter.getEntries().keySet()){
 					SRIPFilterEntry entry = filter.getEntry(entryNumber);
 					System.out.println("\tEntry: " + entryNumber + " Desc: " + entry.getDescription());
+					System.out.println("\t\tProtocol : " + entry.getProtocol());
+					System.out.println("\t\tSrc: " + entry.getSourceAddress() + "/" + entry.getSourceMask());
+					System.out.println("\t\tDst: " + entry.getDestAddress() + "/" + entry.getDestMask());
+
 				}
 				
 			}
