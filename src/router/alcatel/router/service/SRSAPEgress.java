@@ -8,7 +8,7 @@ public class SRSAPEgress extends AlcatelObject {
 
 	protected Integer sapIngressQOS = 1;
 	protected Integer sapIngressFilter = null;
-	protected SRFilterType filtertype = null;
+	protected SRFilterType filtertype = SRFilterType.none;
 
 	public SRSAPEgress(){
 		super(AlcatelObjectType.SAPEGRESSOBJECT);
