@@ -16,10 +16,21 @@ public class MplsLSPParser extends ConfigurationSection {
 	public MplsLSPParser(SRChassisObject router, ContextChange contextChangeHandler, String lspname){
 		super("CONFIG.MPLS.LSP", router, contextChangeHandler);
 		this.commandHash.put(Pattern.compile("^to (.*)$"), new CommandHandler("setTo", true));
+		this.commandHash.put(Pattern.compile("^primary \"(.*)\"$"), new CommandHandler("setPrimary", true));
+		this.commandHash.put(Pattern.compile("^secondary \"(.*)\"$"), new CommandHandler("setSecondary", true));
 
 		this.lsp = new SRMplsLSP(lspname);
 	}
 	
+	
+	
+	public void setPrimary(Matcher matcher){
+		this.lsp.setPrimaryPath(matcher.group(1));
+	}
+	
+	public void setSecondary(Matcher matcher){
+		this.lsp.setSecondaryPath(matcher.group(1));
+	}
 	
 	public void setTo(Matcher matcher){
 		this.lsp.setToAddress(matcher.group(1));
