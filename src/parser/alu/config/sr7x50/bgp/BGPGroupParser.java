@@ -1,11 +1,14 @@
 package parser.alu.config.sr7x50.bgp;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import parser.CommandHandler;
 import parser.ContextChange;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.bgp.*;
-
 import parser.ConfigurationSection;
 
 
@@ -15,7 +18,13 @@ public class BGPGroupParser extends ConfigurationSection {
 	public BGPGroupParser(SRChassisObject router, ContextChange contextChangeHandler, String groupName){
 		super("CONFIG.BGP.GrOUP", router, contextChangeHandler);
 		this.group = new SRBGPGroup(groupName);
+		this.commandHash.put(Pattern.compile("^neighbor (.*)"), new CommandHandler("addNeighbor", true));
 
+	}
+	
+	
+	public void addNeighbor(Matcher matcher){
+		this.group.addNeighbor(matcher.group(1));
 	}
 	
 	/**
@@ -30,4 +39,6 @@ public class BGPGroupParser extends ConfigurationSection {
 
 		}
 	}
+	
+
 }

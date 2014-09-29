@@ -2,6 +2,7 @@ package examples;
 
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.bgp.SRBGPGroup;
 
 public class BGPTest01 {
 	public static void main(String[] args){
@@ -25,7 +26,11 @@ public class BGPTest01 {
 			for ( String groupName : router.BGP.getGroups().keySet()){
 				
 				System.out.format("BGP Group:  %s  \n",  groupName);
-		
+				SRBGPGroup group = router.BGP.getGroup(groupName);
+				
+				for ( String neighbor : group.getNeighbors()){
+					System.out.println("\tNeighbor: " + neighbor);
+				}
 			
 			}
 			
