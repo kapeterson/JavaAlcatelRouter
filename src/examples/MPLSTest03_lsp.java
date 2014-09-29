@@ -3,6 +3,7 @@ package examples;
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.mpls.SRMplsHop;
+import router.alcatel.router.mpls.SRMplsLSP;
 import router.alcatel.router.mpls.SRMplsPath;
 
 public class MPLSTest03_lsp {
@@ -26,7 +27,9 @@ public class MPLSTest03_lsp {
 			
 			for ( String lspName : router.MPLS.getLSPs().keySet()){
 				
-				System.out.format("MPLS LSP:  %s  \n",  lspName);
+				SRMplsLSP lsp = router.MPLS.getLSP(lspName);
+				System.out.format("MPLS LSP:  %-12s  TO: %-12s\n",  lspName, lsp.getToAddress());
+				
 
 			
 			}
