@@ -25,9 +25,9 @@ public class MPLSTest03_lsp {
 
 		
 			
-			for ( String lspName : router.MPLS.getLSPs().keySet()){
+			for ( String lspName : router.Router.MPLS.getLSPs().keySet()){
 				
-				SRMplsLSP lsp = router.MPLS.getLSP(lspName);
+				SRMplsLSP lsp = router.Router.MPLS.getLSP(lspName);
 				System.out.format("\nMPLS LSP:  %-12s  TO: %-12s\n",  lspName, lsp.getToAddress());
 				System.out.format("\tPrimary   : %-8s\n", lsp.getPrimaryPath());
 				System.out.format("\tSecondary : %-8s\n", lsp.getSecondaryPath());

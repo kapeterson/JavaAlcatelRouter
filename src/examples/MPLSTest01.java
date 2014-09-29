@@ -22,7 +22,7 @@ public class MPLSTest01 {
 
 		
 			
-			for ( String intname : router.MPLS.getInterfaces().keySet()){
+			for ( String intname : router.Router.MPLS.getInterfaces().keySet()){
 				
 				System.out.format("MPLS INT:  %s  \n",  intname);
 		

@@ -24,10 +24,10 @@ public class MPLSTest02_Path {
 
 		
 			
-			for ( String pname : router.MPLS.getPaths().keySet()){
+			for ( String pname : router.Router.MPLS.getPaths().keySet()){
 				
 				System.out.format("MPLS Path:  %s  \n",  pname);
-				SRMplsPath path = router.MPLS.getPath(pname);
+				SRMplsPath path = router.Router.MPLS.getPath(pname);
 				
 				for ( Integer hopnumber : path.getHops().keySet()){
 					SRMplsHop hop = path.getHop(hopnumber);

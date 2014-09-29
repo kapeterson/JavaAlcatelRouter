@@ -23,10 +23,10 @@ public class BGPTest01 {
 
 		
 			
-			for ( String groupName : router.BGP.getGroups().keySet()){
+			for ( String groupName : router.Router.BGP.getGroups().keySet()){
 				
 				System.out.format("BGP Group:  %s  \n",  groupName);
-				SRBGPGroup group = router.BGP.getGroup(groupName);
+				SRBGPGroup group = router.Router.BGP.getGroup(groupName);
 				
 				for ( String neighbor : group.getNeighbors()){
 					System.out.println("\tNeighbor: " + neighbor);

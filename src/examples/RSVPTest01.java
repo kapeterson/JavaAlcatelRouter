@@ -22,7 +22,7 @@ public class RSVPTest01 {
 
 		
 			
-			for ( String intname : router.RSVP.getInterfaces().keySet()){
+			for ( String intname : router.Router.RSVP.getInterfaces().keySet()){
 				
 				System.out.format("RSVP INT:  %s  \n",  intname);
 		

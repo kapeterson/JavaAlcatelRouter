@@ -23,11 +23,11 @@ public class StaticRouteTest01 {
 
 		
 			
-			for ( String routeHash : router.StaticRoutes.getIPv4StaticRoutes().keySet()){
+			for ( String routeHash : router.Router.StaticRoutes.getIPv4StaticRoutes().keySet()){
 				
 				//System.out.format("Route :  %s  \n",  routeHash);
 				
-				SRIPv4StaticRoute route = router.StaticRoutes.getIPv4StaticRoute(routeHash);
+				SRIPv4StaticRoute route = router.Router.StaticRoutes.getIPv4StaticRoute(routeHash);
 				//System.out.format("\nRoute %15s/%2s \n", route.getNetwork(), route.getMask());
 				System.out.println(route.getRouteCommand());
 			}

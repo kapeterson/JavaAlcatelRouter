@@ -24,8 +24,8 @@ public class NetworkInterfaceTest04_Qos {
 			pman.ParseConfig(cfile);
 			SRChassisObject router = pman.getRouter();
 
-		for ( String interfaceName : router.Interfaces.getInterfaces().keySet()){
-				SRRouterInterface iface = router.Interfaces.getInterface(interfaceName);
+		for ( String interfaceName : router.Router.Interfaces.getInterfaces().keySet()){
+				SRRouterInterface iface = router.Router.Interfaces.getInterface(interfaceName);
 				if ( iface.isNetworkInterfaceObject()){
 					SRNetworkInterface netInterface = (SRNetworkInterface)iface;
 					System.out.format("Interface: %-15s  QOS: %-15d\n", interfaceName, netInterface.getQOSPolicyNumber());

@@ -22,7 +22,7 @@ public class IGMPTest01 {
 
 		
 			
-			for ( String intname : router.IGMP.getInterfaces().keySet()){
+			for ( String intname : router.Router.IGMP.getInterfaces().keySet()){
 				
 				System.out.format("IGMP INT:  %s  \n",  intname);
 		

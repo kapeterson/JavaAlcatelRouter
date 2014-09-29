@@ -22,7 +22,7 @@ public class PIMTest01 {
 
 		
 			
-			for ( String intname : router.PIM.getInterfaces().keySet()){
+			for ( String intname : router.Router.PIM.getInterfaces().keySet()){
 				
 				System.out.format("PIM INT:  %s  \n",  intname);
 		

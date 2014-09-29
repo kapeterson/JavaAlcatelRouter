@@ -24,8 +24,8 @@ public class IESInterfaceTest02_sapinfo {
 			pman.ParseConfig(cfile);
 			SRChassisObject router = pman.getRouter();
 
-		for ( String interfaceName : router.Interfaces.getInterfaces().keySet()){
-				SRRouterInterface iface = router.Interfaces.getInterface(interfaceName);
+		for ( String interfaceName : router.Router.Interfaces.getInterfaces().keySet()){
+				SRRouterInterface iface = router.Router.Interfaces.getInterface(interfaceName);
 				SRInterfaceBinding binding = iface.getBinding();
 				if ( binding != null && binding.getBinding().isSAPObject()) {
 					SRSAPObject sap = (SRSAPObject)binding.getBinding();

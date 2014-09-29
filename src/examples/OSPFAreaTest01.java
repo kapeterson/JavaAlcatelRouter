@@ -22,8 +22,8 @@ public class OSPFAreaTest01 {
 		SRChassisObject router = pman.getRouter();
 
 		
-		for ( String areaname : router.OSPF.getAreas().keySet()){
-			SROSPFArea area = router.OSPF.getArea(areaname);
+		for ( String areaname : router.Router.OSPF.getAreas().keySet()){
+			SROSPFArea area = router.Router.OSPF.getArea(areaname);
 			//System.out.println("Areaname is of type " + areaname.getClass().toString() + " areaname ");
 			System.out.format("AREA:  %s  \n",  areaname);
 			for ( String intName : area.getInterfaces().keySet() ){

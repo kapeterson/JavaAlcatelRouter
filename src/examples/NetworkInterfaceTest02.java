@@ -22,8 +22,8 @@ public class NetworkInterfaceTest02 {
 			pman.ParseConfig(cfile);
 			SRChassisObject router = pman.getRouter();
 
-		for ( String interfaceName : router.Interfaces.getInterfaces().keySet()){
-				SRRouterInterface iface = router.Interfaces.getInterface(interfaceName);
+		for ( String interfaceName : router.Router.Interfaces.getInterfaces().keySet()){
+				SRRouterInterface iface = router.Router.Interfaces.getInterface(interfaceName);
 				
 				System.out.format("Interface: %-15s  Desc: %-20s \n", interfaceName, iface.getDescription());
 

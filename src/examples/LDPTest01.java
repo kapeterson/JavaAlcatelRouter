@@ -22,7 +22,7 @@ public class LDPTest01 {
 
 		
 			
-			for ( String intname : router.LDP.getInterfaces().keySet()){
+			for ( String intname : router.Router.LDP.getInterfaces().keySet()){
 				
 				System.out.format("LDP INT:  %s  \n",  intname);
 		
