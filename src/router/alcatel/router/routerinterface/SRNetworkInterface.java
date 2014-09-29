@@ -1,7 +1,6 @@
 package router.alcatel.router.routerinterface;
 
 import router.alcatel.router.AlcatelObjectType;
-import router.alcatel.router.qos.SRNetworkQOSPolicy;
 
 public class SRNetworkInterface extends SRRouterInterface{
 		

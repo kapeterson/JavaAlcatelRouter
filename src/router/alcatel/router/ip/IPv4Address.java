@@ -4,7 +4,7 @@ import java.util.regex.*;
 
 public class IPv4Address extends IPAddress {
 
-	protected int loweraddress = 0;
+	protected long loweraddress = 0;
 	protected String hostString = "";
 	
 	protected int netmask = 0;
@@ -37,16 +37,17 @@ public class IPv4Address extends IPAddress {
 		//System.out.println("init bitmask to " + Integer.toBinaryString(this.bitmask) + " for " + ipAddress + "/" + mask);
 	}
 	
-	private int convertIPToInt(String ipstring){
+	private long convertIPToInt(String ipstring){
 		
 		Matcher matcher = ipPattern.matcher(ipstring);
-		int address = 0;
+		long address = 0;
 		if (matcher.find()){
 			
-			int o1 = Integer.parseInt(matcher.group(1));
-			int o2 = Integer.parseInt(matcher.group(2));
-			int o3 = Integer.parseInt(matcher.group(3));
-			int o4 = Integer.parseInt(matcher.group(4));
+			
+			long o1 = Long.parseLong(matcher.group(1));
+			long o2 = Long.parseLong(matcher.group(2));
+			long o3 = Long.parseLong(matcher.group(3));
+			long o4 = Long.parseLong(matcher.group(4));
 			address = (o1 << 24 ) | ( o2 << 16) | ( o3 << 8) | o4;
 			
 			
@@ -58,7 +59,7 @@ public class IPv4Address extends IPAddress {
 		return address;
 	}
 	
-	private String convertIntToIPString(int ip){
+	private String convertIntToIPString(long ip){
 		String o1 = String.valueOf(( ip >> 24 ) & 0xFF);
 		String o2 = String.valueOf((ip >> 16) & 0xFF);
 		String o3 = String.valueOf((ip >> 8) & 0xFF);
@@ -68,7 +69,7 @@ public class IPv4Address extends IPAddress {
 	
 	/** returns the bit pattern bitmask **/
 	public int getBitMask(){
-		return this.netmask;
+		return this.bitmask;
 	}
 	
 	/** returns the integer netmask **/
@@ -79,7 +80,7 @@ public class IPv4Address extends IPAddress {
 	public String getNetwork(){
 		// mask the host and bitmask
 		//System.out.println("Mas is " + Integer.toBinaryString(this.bitmask));
-		int nw = this.loweraddress & this.bitmask;
+		long nw = this.loweraddress & this.bitmask;
 		return convertIntToIPString( nw );
 	}
 	
@@ -89,5 +90,17 @@ public class IPv4Address extends IPAddress {
 	
 	public static boolean validateIP(String ip){
 		return ip.matches(IPADDRESS_PATTERN);
+	}
+
+	public long getAddress(){
+		return this.loweraddress;
+	}
+	
+	public boolean isNetworkMatch(IPv4Address addr){
+		
+		long addr1 = this.loweraddress & this.getBitMask();
+		long addr2 = addr.loweraddress & this.getBitMask();
+		
+		return (addr1 == addr2);
 	}
 }
