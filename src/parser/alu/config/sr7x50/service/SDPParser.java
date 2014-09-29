@@ -4,9 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import parser.ConfigurationSection;
-
 import parser.CommandHandler;
 import parser.ContextChange;
+import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.service.SRSDPObject;;
 
@@ -18,9 +18,15 @@ public class SDPParser extends ConfigurationSection{
 		super("CONFIG.SERVICE.SDP", router, contextChangeHandler);
 		sdp = new SRSDPObject(sdpnumber);
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
+
+
 	}
 	
 
+
+
+	
+	
 	public void setDescription(Matcher matcher){
 		this.sdp.setDescription(matcher.group(1));
 	}

@@ -208,4 +208,12 @@ public abstract class AlcatelObject {
 	public boolean isSAPEgressObject(){
 		return (this.objectType == AlcatelObjectType.SAPEGRESSOBJECT);
 	}
+	
+	public boolean isSDPIngress(){
+		return (this.objectType == AlcatelObjectType.SDPINGRESS);
+	}
+	
+	public boolean isSDPEgress(){
+		return (this.objectType == AlcatelObjectType.SDPEGRESS);
+	}
 }

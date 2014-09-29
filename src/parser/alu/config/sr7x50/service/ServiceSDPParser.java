@@ -9,6 +9,8 @@ import parser.ContextChange;
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.service.SRSDPEgress;
+import router.alcatel.router.service.SRSDPIngress;
 import router.alcatel.router.service.SRServiceSDPObject;
 
 public class ServiceSDPParser extends ConfigurationSection {
@@ -25,11 +27,40 @@ public class ServiceSDPParser extends ConfigurationSection {
 		}
 		
 		this.sdp = new SRServiceSDPObject(sdpType, sdpName, parentSDP);
+		this.commandHash.put(Pattern.compile("^ingress$"), new CommandHandler("setIngressMode", true));
+		this.commandHash.put(Pattern.compile("^egress$"), new CommandHandler("setEgressMode", true));
 		// = new SRSAPObject(sapName);
 		//this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
 	}
 	
-
+	public void setIngressMode(){
+		SDPIngressParser parser = new SDPIngressParser(this.router, this.getContextNotifier());
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
+	}
+	
+	public void setEgressMode(){
+		SDPEgressParser parser = new SDPEgressParser(this.router, this.getContextNotifier());
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
+	}
+	
+	
+	public void addObject(AlcatelObject obj){
+		
+		if (obj.isSDPEgress()){
+			this.sdp.EGRESS = (SRSDPEgress)obj;
+		} else if ( obj.isSDPIngress()){
+			this.sdp.INGRESS = (SRSDPIngress)obj;
+		} else { 
+			System.out.println("Error could not assign obj " + obj.getObjectType() + " to service sdp");
+			System.exit(1);
+		}
+	}
+	
+	
 	@Override
 	public void exitSection(Matcher matcher) {
 		// TODO Auto-generated method stub

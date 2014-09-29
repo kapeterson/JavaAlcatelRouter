@@ -9,7 +9,9 @@ public class SRServiceSDPObject extends AlcatelObject implements SRInterfaceBind
 	protected Integer sdpNumber = 0;
 	protected Integer vcid = 0;
 	protected AlcatelObject parentService = null;
-
+	public SRSDPIngress INGRESS = new SRSDPIngress();
+	public SRSDPEgress EGRESS = new SRSDPEgress();
+	
 	
 	public SRServiceSDPObject(AlcatelObjectType sdpType, String sdpName, AlcatelObject parentSDP){
 		super(sdpType);

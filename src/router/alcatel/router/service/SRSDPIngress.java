@@ -1,15 +1,17 @@
 package router.alcatel.router.service;
 
+import router.alcatel.router.AlcatelObject;
+import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.filter.SRFilterType;
 
-public class SRSDPIngress {
+public class SRSDPIngress extends AlcatelObject {
 	
 	protected Integer filterNumber = null;
 	protected SRFilterType filterType = SRFilterType.none;
 	protected Integer vclabel = null;
 	
 	public SRSDPIngress(){
-		
+		super(AlcatelObjectType.SDPINGRESS);
 	}
 	
 	public void setFilterNumber(Integer filterNumber){
