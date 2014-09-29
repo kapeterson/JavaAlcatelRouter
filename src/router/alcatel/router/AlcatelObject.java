@@ -224,4 +224,8 @@ public abstract class AlcatelObject {
 	public boolean isMPLSPath(){
 		return (this.objectType == AlcatelObjectType.MPLSPATH);
 	}
+	
+	public boolean isMPLSLSP(){
+		return (this.objectType == AlcatelObjectType.MPLSLSP);
+	}
 }

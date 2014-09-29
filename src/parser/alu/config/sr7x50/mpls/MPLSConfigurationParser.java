@@ -8,7 +8,8 @@ import parser.ConfigurationSection;
 import parser.ContextChange;
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.mpls.SRMPLSPath;
+import router.alcatel.router.mpls.SRMplsLSP;
+import router.alcatel.router.mpls.SRMplsPath;
 
 public class MPLSConfigurationParser extends ConfigurationSection{
 	
@@ -17,9 +18,17 @@ public class MPLSConfigurationParser extends ConfigurationSection{
 		//System.out.println("Instantiated port configuration parser");
 		this.commandHash.put(Pattern.compile("^interface \"(.*)\""), new CommandHandler("setMPLSInterfaceContext", true));
 		this.commandHash.put(Pattern.compile("^path \"(.*)\""), new CommandHandler("setPathMode", true));
+		this.commandHash.put(Pattern.compile("^lsp \"(.*)\""), new CommandHandler("setLSPMode", true));
 
 	}
 	
+	
+	public void setLSPMode(Matcher matcher){
+		MplsLSPParser parser = new MplsLSPParser(this.router, this.contextChange, matcher.group(1));
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
+	}
 	
 	public void setPathMode(Matcher matcher){
 		MPLSPathParser parser = new MPLSPathParser(this.router, this.contextChange, matcher.group(1));
@@ -31,7 +40,10 @@ public class MPLSConfigurationParser extends ConfigurationSection{
 	public void addObject(AlcatelObject obj){
 		
 		if ( obj.isMPLSPath()){
-			this.router.MPLS.addPath((SRMPLSPath)obj);
+			this.router.MPLS.addPath((SRMplsPath)obj);
+		} else if ( obj.isMPLSLSP()) {
+			
+			this.router.MPLS.addLSP((SRMplsLSP)obj);
 		} else {
 			System.out.println("ERROR error adding obj " + obj.getName()  + " to mpls in parser");
 		}

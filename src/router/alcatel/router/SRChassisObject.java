@@ -44,7 +44,7 @@ public class SRChassisObject extends AlcatelHardwareObject {
 	public SROSPFConfiguration OSPF = null;
 	public SRPIMConfiguration PIM = null;
 	public SRIGMPConfiguration IGMP = null;
-	public SRMPLSConfiguration MPLS = null;
+	public SRMplsConfiguration MPLS = null;
 	public SRLDPConfiguration LDP = null;
 	public SRRSVPConfiguration RSVP = null;
 	public SRPolicyConfiguration Policy = null;
@@ -69,7 +69,7 @@ public class SRChassisObject extends AlcatelHardwareObject {
 		OSPF = new SROSPFConfiguration();
 		PIM = new SRPIMConfiguration();
 		IGMP = new SRIGMPConfiguration();
-		MPLS = new SRMPLSConfiguration();
+		MPLS = new SRMplsConfiguration();
 		LDP = new SRLDPConfiguration();
 		RSVP = new SRRSVPConfiguration();
 		Policy = new SRPolicyConfiguration();

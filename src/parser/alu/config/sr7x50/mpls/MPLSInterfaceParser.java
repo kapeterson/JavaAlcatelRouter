@@ -12,11 +12,11 @@ import router.alcatel.router.mpls.*;
 
 public class MPLSInterfaceParser extends ConfigurationSection {
 	
-	protected SRMPLSInterface mplsInterface = null;
+	protected SRMplsInterface mplsInterface = null;
 	
 	public MPLSInterfaceParser(SRChassisObject router, ContextChange contextChangeHandler, String interfaceName){
 		super("CONFIG.MPLS.INTERFACE", router, contextChangeHandler);
-		this.mplsInterface = new SRMPLSInterface(interfaceName);
+		this.mplsInterface = new SRMplsInterface(interfaceName);
 
 	}
 	

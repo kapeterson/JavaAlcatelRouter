@@ -5,13 +5,13 @@ import java.util.TreeMap;
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
 
-public class SRMPLSPath extends AlcatelObject {
+public class SRMplsPath extends AlcatelObject {
 
 	protected boolean isShutdown = true;
-	protected TreeMap<Integer, SRMPLSHop> hops = new TreeMap<Integer, SRMPLSHop>();
+	protected TreeMap<Integer, SRMplsHop> hops = new TreeMap<Integer, SRMplsHop>();
 	
 	
-	public SRMPLSPath(String name){
+	public SRMplsPath(String name){
 		super(AlcatelObjectType.MPLSPATH);
 		this.setName(name);
 	}
@@ -44,15 +44,15 @@ public class SRMPLSPath extends AlcatelObject {
 		return !(this.isShutdown());
 	}
 	
-	public void addHop(SRMPLSHop hop){
+	public void addHop(SRMplsHop hop){
 		this.hops.put(hop.getHopNumber(), hop);
 	}
 	
-	public TreeMap<Integer, SRMPLSHop> getHops(){
+	public TreeMap<Integer, SRMplsHop> getHops(){
 		return this.hops;
 	}
 	
-	public SRMPLSHop getHop(Integer hopnumber){
+	public SRMplsHop getHop(Integer hopnumber){
 		return this.hops.get(hopnumber);
 	}
 }

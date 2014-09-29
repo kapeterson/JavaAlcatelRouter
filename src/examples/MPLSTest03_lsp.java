@@ -5,7 +5,7 @@ import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.mpls.SRMplsHop;
 import router.alcatel.router.mpls.SRMplsPath;
 
-public class MPLSTest02_Path {
+public class MPLSTest03_lsp {
 	public static void main(String[] args){
 		if (args.length < 1){
 			System.out.println("Error you must supply path to configuration file");
@@ -24,15 +24,10 @@ public class MPLSTest02_Path {
 
 		
 			
-			for ( String pname : router.MPLS.getPaths().keySet()){
+			for ( String lspName : router.MPLS.getLSPs().keySet()){
 				
-				System.out.format("MPLS Path:  %s  \n",  pname);
-				SRMplsPath path = router.MPLS.getPath(pname);
-				
-				for ( Integer hopnumber : path.getHops().keySet()){
-					SRMplsHop hop = path.getHop(hopnumber);
-					System.out. format("\tHop : %-5d  Address: %-9s\n", hopnumber, hop.getAddress());
-				}
+				System.out.format("MPLS LSP:  %s  \n",  lspName);
+
 			
 			}
 			
