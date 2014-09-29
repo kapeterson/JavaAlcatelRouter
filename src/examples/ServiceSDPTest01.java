@@ -47,7 +47,7 @@ public class ServiceSDPTest01 {
 					
 					SRInterfaceBinding binding = iface.getBinding();
 					if ( binding.getBinding().isServiceSDPObject()) {
-						System.out.format("IES: %-12d  INT: %-12s  SDP: %-8s Ing. Filter: %-12s Egr. Filter: %-12s\n", iesNumber, intName, binding.getBinding().getName(), ((SRServiceSDPObject)binding.getBinding()).INGRESS.getFilterNumber(), ((SRServiceSDPObject)binding.getBinding()).EGRESS.getFilterNumber());
+						System.out.format("IES: %-12d  INT: %-12s  SDP: %-8s Ing. Filter:  %-12s Egr. Filter: %-12s\n", iesNumber, intName, binding.getBinding().getName(), ((SRServiceSDPObject)binding.getBinding()).INGRESS.getFilterNumber(), ((SRServiceSDPObject)binding.getBinding()).EGRESS.getFilterNumber());
 					}
 				}
 				//System.out.format("IES: %-12d\n", iesNumber);
