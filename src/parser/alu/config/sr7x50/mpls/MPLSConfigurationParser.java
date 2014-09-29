@@ -7,6 +7,7 @@ import parser.CommandHandler;
 import parser.ConfigurationSection;
 import parser.ContextChange;
 import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.mpls.SRMPLSPath;
 
 public class MPLSConfigurationParser extends ConfigurationSection{
 	
@@ -14,9 +15,15 @@ public class MPLSConfigurationParser extends ConfigurationSection{
 		super("CONFIG.MPLS", router, contextChangeHandler);
 		//System.out.println("Instantiated port configuration parser");
 		this.commandHash.put(Pattern.compile("^interface \"(.*)\""), new CommandHandler("setMPLSInterfaceContext", true));
+		this.commandHash.put(Pattern.compile("^path \"(.*)\""), new CommandHandler("addMPLSPath", true));
+
 	}
 	
 	
+	public void addMPLSPath(Matcher matcher){
+		SRMPLSPath path = new SRMPLSPath(matcher.group(1));
+		this.router.MPLS.addPath(path);
+	}
 	public void setMPLSInterfaceContext(Matcher matcher){
 		//System.out.println("MPLS Interface " + matcher.group(1));
 		
