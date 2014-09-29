@@ -87,11 +87,17 @@ public class SRRouterInterface extends AlcatelObject implements  AssociationPare
 	
 	/** return netmask of the ipv4 address **/
 	public int getIPv4Mask(){
-		return this.v4Address.getNetmask();
+		if ( this.v4Address == null)
+			return 0;
+		else
+			return this.v4Address.getNetmask();
 	}
 	/** Returns ip address as string value **/
 	public String getIPv4HostAddress(){
-		return this.v4Address.getHostAddress();
+		if ( v4Address != null)
+			return this.v4Address.getHostAddress();
+		else
+			return "0.0.0.0";
 	}
 	public SRRouterInterface(String interfaceName, AlcatelObjectType oType){
 		super(oType);

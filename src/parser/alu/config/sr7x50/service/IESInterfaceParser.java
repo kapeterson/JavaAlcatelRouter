@@ -25,6 +25,14 @@ public class IESInterfaceParser extends ConfigurationSection {
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
 		this.commandHash.put(Pattern.compile("^spoke\\-sdp (.*) create"), new CommandHandler("setSpokeSDPBinding", true));
 		this.commandHash.put(Pattern.compile("^sap (.*) create"), new CommandHandler("setSAPContext", true));
+		this.commandHash.put(Pattern.compile("^address ([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)\\/([0-9]+)$"), new CommandHandler("setIPv4Address", true));
+
+	}
+	
+	public void setIPv4Address(Matcher matcher){
+		
+		//System.out.println("IPv4 address = " + matcher.group(1) + " / " + matcher.group(2));
+		this.interfaceObject.setIPv4Address(matcher.group(1), matcher.group(2));
 	}
 	
 	
