@@ -23,7 +23,7 @@ public class LDPInterfaceParser extends ConfigurationSection{
 	public void exitSection(Matcher matcher){
 		
 		if ( this.getSectionDepth() == this.getLastCommandDepth()) {
-			this.router.LDP.addInterface(this.ldpInterface);
+			this.router.Router.LDP.addInterface(this.ldpInterface);
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
 
 		}

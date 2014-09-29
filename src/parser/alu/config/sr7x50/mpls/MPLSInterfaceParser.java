@@ -27,7 +27,7 @@ public class MPLSInterfaceParser extends ConfigurationSection {
 		
 		if ( this.getSectionDepth() == this.getLastCommandDepth()) {
 			//System.out.println("Added a mpls int");
-			this.router.MPLS.addInterface(this.mplsInterface);
+			this.router.Router.MPLS.addInterface(this.mplsInterface);
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
 
 		}

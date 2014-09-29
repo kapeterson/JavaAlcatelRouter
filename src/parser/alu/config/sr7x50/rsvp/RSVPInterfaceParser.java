@@ -25,7 +25,7 @@ public class RSVPInterfaceParser extends ConfigurationSection {
 	public void exitSection(Matcher matcher){
 		
 		if ( this.getSectionDepth() == this.getLastCommandDepth()) {
-			this.router.RSVP.addInterface(this.rsvpInterface);
+			this.router.Router.RSVP.addInterface(this.rsvpInterface);
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
 
 		}

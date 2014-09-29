@@ -26,7 +26,7 @@ public class PIMInterfaceParser extends ConfigurationSection{
 		
 		if ( this.getSectionDepth() == this.getLastCommandDepth()) {
 			//System.out.println("Added a pim int");
-			this.router.PIM.addInterface(this.pimInterface);
+			this.router.Router.PIM.addInterface(this.pimInterface);
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
 
 		}

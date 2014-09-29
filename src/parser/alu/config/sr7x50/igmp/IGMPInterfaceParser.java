@@ -28,7 +28,7 @@ public class IGMPInterfaceParser extends ConfigurationSection{
 		
 		if ( this.getSectionDepth() == this.getLastCommandDepth()) {
 			//System.out.println("Added a pim int");
-			this.router.IGMP.addInterface(this.igmpInterface);
+			this.router.Router.IGMP.addInterface(this.igmpInterface);
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
 
 		}

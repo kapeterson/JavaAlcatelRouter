@@ -1,7 +1,5 @@
 package parser.alu.config.sr7x50.bgp;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,7 +32,7 @@ public class BGPGroupParser extends ConfigurationSection {
 		
 		if ( this.getSectionDepth() == this.getLastCommandDepth()) {
 			//System.out.println("Added a group " + this.group.getName());
-			this.router.BGP.addBGPGroup(this.group);
+			this.router.Router.BGP.addBGPGroup(this.group);
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
 
 		}

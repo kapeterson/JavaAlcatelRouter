@@ -40,10 +40,10 @@ public class MPLSConfigurationParser extends ConfigurationSection{
 	public void addObject(AlcatelObject obj){
 		
 		if ( obj.isMPLSPath()){
-			this.router.MPLS.addPath((SRMplsPath)obj);
+			this.router.Router.MPLS.addPath((SRMplsPath)obj);
 		} else if ( obj.isMPLSLSP()) {
 			
-			this.router.MPLS.addLSP((SRMplsLSP)obj);
+			this.router.Router.MPLS.addLSP((SRMplsLSP)obj);
 		} else {
 			System.out.println("ERROR error adding obj " + obj.getName()  + " to mpls in parser");
 		}

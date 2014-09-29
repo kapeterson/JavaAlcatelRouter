@@ -8,6 +8,7 @@ import router.alcatel.router.port.*;
 import router.alcatel.router.lag.*;
 import router.alcatel.router.qos.*;
 import router.alcatel.router.filter.*;
+import router.alcatel.router.router.SRRouterConfiguration;
 import router.alcatel.router.routerinterface.*;
 import router.alcatel.router.service.*;
 import router.alcatel.router.ospf.*;
@@ -32,25 +33,17 @@ import router.alcatel.router.impm.*;
 public class SRChassisObject extends AlcatelHardwareObject {
 
 	
-	//protected SRCardConfiguration = null;
 	public SRCardConfiguration Cards = null;
 	public SRSystemConfiguration System = null;
 	public SRPortConfiguration Ports = null;
 	public SRLagConfiguration Lags = null;
 	public SRQOSConfiguration QOS = null;
 	public SRFilterConfiguration Filters = null;
-	public SRInterfaceConfiguration Interfaces = null;
 	public SRServiceConfiguration Services = null;
-	public SROSPFConfiguration OSPF = null;
-	public SRPIMConfiguration PIM = null;
-	public SRIGMPConfiguration IGMP = null;
-	public SRMplsConfiguration MPLS = null;
-	public SRLDPConfiguration LDP = null;
-	public SRRSVPConfiguration RSVP = null;
 	public SRPolicyConfiguration Policy = null;
-	public SRBGPConfiguration BGP = null;
-	public SRStaticRouteConfiguration StaticRoutes = null;
 	public SRIMPMConfiguration IMPM = null;
+	
+	public SRRouterConfiguration Router = null;
 	
 	public String chassisType;
 	protected Hashtable<String, AlcatelHardwareObject> hardwareIndexMap = null;
@@ -64,18 +57,11 @@ public class SRChassisObject extends AlcatelHardwareObject {
 		Lags = new SRLagConfiguration();
 		QOS = new SRQOSConfiguration();
 		Filters = new SRFilterConfiguration();
-		Interfaces = new SRInterfaceConfiguration();
 		Services = new SRServiceConfiguration();
-		OSPF = new SROSPFConfiguration();
-		PIM = new SRPIMConfiguration();
-		IGMP = new SRIGMPConfiguration();
-		MPLS = new SRMplsConfiguration();
-		LDP = new SRLDPConfiguration();
-		RSVP = new SRRSVPConfiguration();
 		Policy = new SRPolicyConfiguration();
-		BGP = new SRBGPConfiguration();
-		StaticRoutes = new SRStaticRouteConfiguration();
+
 		this.IMPM = new SRIMPMConfiguration();
+		this.Router = new SRRouterConfiguration();
 		
 		chassisType = "NA";
 		hardwareIndexMap = new Hashtable<String, AlcatelHardwareObject>();

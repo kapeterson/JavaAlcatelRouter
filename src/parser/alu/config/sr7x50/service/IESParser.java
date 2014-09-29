@@ -37,7 +37,7 @@ public class IESParser extends ConfigurationSection{
 	public void addInterface(SRServiceInterface iface){
 		iface.setParentService(this.ies);
 		this.ies.addInterface(iface);
-		this.router.Interfaces.addInterface(iface);
+		this.router.Router.Interfaces.addInterface(iface);
 	}
 	/**
 	 * Custom handler

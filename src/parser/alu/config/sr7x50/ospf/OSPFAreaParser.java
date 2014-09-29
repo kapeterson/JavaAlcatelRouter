@@ -34,7 +34,7 @@ public class OSPFAreaParser extends ConfigurationSection {
 		
 		if ( this.getSectionDepth() == this.getLastCommandDepth()) {
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
-			this.router.OSPF.addArea(ospfArea);
+			this.router.Router.OSPF.addArea(ospfArea);
 		}
 	}
 }
