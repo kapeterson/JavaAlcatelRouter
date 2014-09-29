@@ -2,7 +2,10 @@ package examples;
 
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.routerinterface.SRInterfaceBinding;
+import router.alcatel.router.service.SRIESObject;
 import router.alcatel.router.service.SRSAPObject;
+import router.alcatel.router.service.SRServiceInterface;
 import router.alcatel.router.service.SRServiceSDPObject;
 import router.alcatel.router.service.SRVPLSObject;
 
@@ -34,6 +37,20 @@ public class ServiceSDPTest01 {
 				}
 
 				
+			}
+			
+			for ( Integer iesNumber : router.Services.getIESs().keySet()){
+				SRIESObject ies = router.Services.getIES(iesNumber);
+				
+				for ( String intName : ies.getInterfaces().keySet()){
+					SRServiceInterface iface = ies.getInterface(intName);
+					
+					SRInterfaceBinding binding = iface.getBinding();
+					if ( binding.getBinding().isServiceSDPObject()) {
+						System.out.format("IES: %-12d  INT: %-12s  SDP: %-8s Ing. Filter: %-12s Egr. Filter: %-12s\n", iesNumber, intName, binding.getBinding().getName(), ((SRServiceSDPObject)binding.getBinding()).INGRESS.getFilterNumber(), ((SRServiceSDPObject)binding.getBinding()).EGRESS.getFilterNumber());
+					}
+				}
+				//System.out.format("IES: %-12d\n", iesNumber);
 			}
 			
 		} catch ( Exception e) {

@@ -33,14 +33,14 @@ public class ServiceSDPParser extends ConfigurationSection {
 		//this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
 	}
 	
-	public void setIngressMode(){
+	public void setIngressMode(Matcher matcher){
 		SDPIngressParser parser = new SDPIngressParser(this.router, this.getContextNotifier());
 		parser.setParent(this);
 		parser.setSectionDepth(this.getLastCommandDepth());
 		this.getContextNotifier().contextChangeCallback(this, parser);
 	}
 	
-	public void setEgressMode(){
+	public void setEgressMode(Matcher matcher){
 		SDPEgressParser parser = new SDPEgressParser(this.router, this.getContextNotifier());
 		parser.setParent(this);
 		parser.setSectionDepth(this.getLastCommandDepth());
