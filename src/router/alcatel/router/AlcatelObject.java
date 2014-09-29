@@ -216,4 +216,12 @@ public abstract class AlcatelObject {
 	public boolean isSDPEgress(){
 		return (this.objectType == AlcatelObjectType.SDPEGRESS);
 	}
+	
+	public boolean isMPLSPathHop(){
+		return (this.objectType == AlcatelObjectType.MPLSPATHHOP);
+	}
+	
+	public boolean isMPLSPath(){
+		return (this.objectType == AlcatelObjectType.MPLSPATH);
+	}
 }

@@ -2,6 +2,8 @@ package examples;
 
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.mpls.SRMPLSHop;
+import router.alcatel.router.mpls.SRMPLSPath;
 
 public class MPLSTest02_Path {
 	public static void main(String[] args){
@@ -25,7 +27,12 @@ public class MPLSTest02_Path {
 			for ( String pname : router.MPLS.getPaths().keySet()){
 				
 				System.out.format("MPLS Path:  %s  \n",  pname);
-		
+				SRMPLSPath path = router.MPLS.getPath(pname);
+				
+				for ( Integer hopnumber : path.getHops().keySet()){
+					SRMPLSHop hop = path.getHop(hopnumber);
+					System.out. format("\tHop : %-5d  Address: %-9s\n", hopnumber, hop.getAddress());
+				}
 			
 			}
 			
