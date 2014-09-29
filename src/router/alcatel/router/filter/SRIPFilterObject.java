@@ -18,4 +18,16 @@ public class SRIPFilterObject extends SRFilterObject {
 	public boolean isIPFilterObject(){
 		return true;
 	}
+	
+	public void addEntry(SRIPFilterEntry entry){
+		this.entries.put(Integer.parseInt(entry.getName()), entry);
+	}
+	
+	public TreeMap<Integer, SRIPFilterEntry> getEntries(){
+		return this.entries;
+	}
+	
+	public SRIPFilterEntry getEntry(Integer entryNumber){
+		return this.entries.get(entryNumber);
+	}
 }

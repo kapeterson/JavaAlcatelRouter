@@ -87,6 +87,7 @@ public abstract class ConfigurationSection    {
 				// possible new section if the spacing changes
 				if ( depth != lastDepth){
 					
+					//System.out.println(String.valueOf(depth));
 					lastDepth = depth;
 					this.contextChange.contextDepthChange(depth);
 				}

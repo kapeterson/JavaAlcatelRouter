@@ -228,4 +228,8 @@ public abstract class AlcatelObject {
 	public boolean isMPLSLSP(){
 		return (this.objectType == AlcatelObjectType.MPLSLSP);
 	}
+	
+	public boolean isIPFilterEntry(){
+		return (this.objectType == AlcatelObjectType.SRIPFILTERENTRY);
+	}
 }
