@@ -98,6 +98,10 @@ public class SRIOMObject extends SRCardObject{
 		return this.cardType.matches("iom(2)?\\-20g.*");
 	}
 	
+	/**
+	 * Is the iom an IOM3?
+	 * @return
+	 */
 	public boolean isIOM3(){
 		return this.cardType.matches("iom3.*");
 	}

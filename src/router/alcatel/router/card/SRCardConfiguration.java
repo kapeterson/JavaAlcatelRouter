@@ -49,27 +49,60 @@ public class SRCardConfiguration {
 		cardTypes = cardtypes;
 	}
 	
+	/**
+	 * Set the value for the mda types, this is used when populating via SNMP.  The Hashtable is set
+	 * and the mda type is matched to a string representation
+	 * @param mdatypes
+	 */
 	public void setMDATypes(Hashtable<String, String> mdatypes){
 		this.mdaTypes = mdatypes;
 	}
 	
+	
+	/**
+	 * Looks up the mda type string for the given index.  The index is retried via SNMP.
+	 * @param indx
+	 * @return
+	 */
 	public String getMDATypeByIndex(String indx){
 		return mdaTypes.get(indx);
 	}
 	
+	
+	/**
+	 * Add the card Object to the card configuration
+	 * @param slotNumber Slot number in which the card resides
+	 * @param cardObject The SRCardObject to put in the slot
+	 */
 	public void addCard(int slotNumber, SRCardObject cardObject){
 		
 		cards.put(slotNumber, cardObject);
 	}
 	
+	
+	/**
+	 * Get the card in the given slot
+	 * @param slotNumber
+	 * @return
+	 */
 	public SRCardObject getCard(String slotNumber){
 		return cards.get(slotNumber);
 	}
 	
+	/**
+	 * Get the card in the integer slot
+	 * @param slotNumber
+	 * @return
+	 */
 	public SRCardObject getCard(int slotNumber){
 		return cards.get(slotNumber);
 	}
 	
+	
+	/**
+	 * Get a list of all cards as a TreeMap where the slot number is the key and the card object is the value
+	 * @return
+	 */
 	public TreeMap<Integer, SRCardObject> getCards(){
 		return cards;
 	}

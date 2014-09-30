@@ -13,8 +13,11 @@ public class SRMDAObject extends AlcatelHardwareObject{
 	/** Ingress MDA configuration object **/
 	public SRFPIngress INGRESS = null;
 	
+	/** Accessor to the MDA Network configuration **/
 	public SRMDANetwork NETWORK = null;
 	
+	
+	/** Accessor to the MDA Access configuration **/
 	public SRMDAAccess ACCESS = null;
 	
 	/** Admin state of the MDA **/

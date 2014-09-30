@@ -3,9 +3,14 @@ package router.alcatel.router.card;
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
 
+/**
+ * Models the IOM Forwarding Path
+ * @author Kris Peterson
+ *
+ */
 public class SRIOMForwardingPath extends AlcatelObject {
 
-	//public SRMcastPathManagement PATHMGMT = new SRMcastPathManagement();
+	/** Accessor to the Forwarding Path Ingress configuration **/
 	public SRFPIngress INGRESS = null;
 	
 	public SRIOMForwardingPath(){
