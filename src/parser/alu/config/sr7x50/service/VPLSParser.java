@@ -23,8 +23,7 @@ public class VPLSParser extends ConfigurationSection {
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
 		this.commandHash.put(Pattern.compile("^sap ([0-9]+\\/[0-9]+\\/[0-9]+.*) (split.*)? create"), new CommandHandler("setSAPContext", true));
 
-		this.commandHash.put(Pattern.compile("^sap (lag\\-[0-9]+.*) (split.*)? create"), new CommandHandler("setSAPContext", true));
-		this.commandHash.put(Pattern.compile("^sap (lag\\-[0-9]+.*) create"), new CommandHandler("setSAPContext", true));
+		this.commandHash.put(Pattern.compile("^sap (lag\\-[0-9]+)(:)?([0-9]+)(\\.)?([0-9]+)? create"), new CommandHandler("setLagSapContext", true));
 
 		this.commandHash.put(Pattern.compile("^spoke\\-sdp (.*) create"), new CommandHandler("setSpokeSDPContext", true));
 		this.commandHash.put(Pattern.compile("^mesh\\-sdp (.*) create"), new CommandHandler("setMeshSDPContext", true));
@@ -57,6 +56,23 @@ public class VPLSParser extends ConfigurationSection {
 		parser.setSectionDepth(this.getLastCommandDepth());
 		this.getContextNotifier().contextChangeCallback(this, parser);
 	}
+	
+	public void setLagSapContext(Matcher matcher){
+		
+		String sapName = matcher.group(1);
+		if ( matcher.group(3) != null)
+			sapName += ":" + matcher.group(3);
+		
+		if ( matcher.group(5) != null){
+			sapName += "." + matcher.group(4);
+		}
+		SAPParser parser = new SAPParser(router, this.contextChange, sapName, this.vpls);
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
+	}
+	
+	
 	public void setSAPContext(Matcher matcher){
 		//System.out.println("SAP " + matcher.group(1));
 		//SRSAPObject newSAP = new SRSAPObject(matcher.group(1));
