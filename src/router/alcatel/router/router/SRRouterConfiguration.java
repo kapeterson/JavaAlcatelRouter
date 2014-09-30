@@ -31,6 +31,7 @@ public class SRRouterConfiguration {
 		this.RSVP = new SRRSVPConfiguration();
 		this.BGP = new SRBGPConfiguration();
 		this.StaticRoutes = new SRStaticRouteConfiguration();
+		this.LDP = new SRLDPConfiguration();
 		
 	}
 }

@@ -20,7 +20,7 @@ public class LDPConfigurationParser extends ConfigurationSection{
 	
 	public void addObject(AlcatelObject obj){
 		if ( obj.isLDPInterface()){
-			//this.router.Router.LDP.addInterface( (SRLDPInterface)obj);
+			this.router.Router.LDP.addInterface( (SRLDPInterface)obj);
 		}
 	}
 	
