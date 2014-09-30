@@ -236,4 +236,8 @@ public abstract class AlcatelObject {
 	public boolean isIOMFP(){
 		return (this.objectType == AlcatelObjectType.IOMFP);
 	}
+	
+	public boolean isLDPInterface(){
+		return (this.getObjectType() == AlcatelObjectType.LDPINTERFACE) ;
+	}
 }

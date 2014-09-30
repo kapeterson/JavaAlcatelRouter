@@ -20,10 +20,13 @@ public class LDPInterfaceParser extends ConfigurationSection{
 	/**
 	 * Custom handler
 	 */
+	@Override
 	public void exitSection(Matcher matcher){
 		
+		//this.defaultExitHandler(matcher);
 		if ( this.getSectionDepth() == this.getLastCommandDepth()) {
-			this.router.Router.LDP.addInterface(this.ldpInterface);
+	
+			this.getParent().addObject(this.ldpInterface);
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
 
 		}

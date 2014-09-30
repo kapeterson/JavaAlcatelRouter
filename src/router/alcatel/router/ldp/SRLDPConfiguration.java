@@ -11,6 +11,7 @@ public class SRLDPConfiguration {
 	}
 	
 	public void addInterface(SRLDPInterface ldpInterfaceObject){
+		System.out.println("OK");
 		this.interfaces.put(ldpInterfaceObject.getName(), ldpInterfaceObject);
 	}
 	
