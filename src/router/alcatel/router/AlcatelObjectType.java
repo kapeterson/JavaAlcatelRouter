@@ -1,8 +1,9 @@
 package router.alcatel.router;
 
 /**
- * Enum for object types.  Each new object should be added here.
- * @author pete
+ * Enum for Alcatel Object typeobject types.  Each new object should be added here and can later be used to
+ * determin the type of object you are working with.
+ * @author Kris Peterson
  *
  */
 public enum AlcatelObjectType { 

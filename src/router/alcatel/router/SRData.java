@@ -3,6 +3,12 @@ package router.alcatel.router;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Class to contain the valid data types for certain parameters.
+ * @author Kris Peterson
+ *
+ */
 public class SRData {
 
 	/** List of valid port encpsulations **/

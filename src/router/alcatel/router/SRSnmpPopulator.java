@@ -25,6 +25,12 @@ import router.alcatel.router.card.SRMDAObject;
 
 import java.util.regex.Matcher;
 import java.util.TreeMap;
+
+/**
+ * Class that will be used to populate a router object through SNMP.
+ * @author Kris Peterson
+ *
+ */
 public class SRSnmpPopulator {
 
 	private String hostIP;
