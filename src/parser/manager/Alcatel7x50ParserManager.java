@@ -29,7 +29,9 @@ import parser.alu.config.sr7x50.impm.*;
 import router.alcatel.router.*;
 
 /**
- * Simple Description
+ * Parses 7x50 Configuration
+ * @author Kris Peterson
+ *
  */
 public class Alcatel7x50ParserManager implements ContextChange {
 	
@@ -38,6 +40,10 @@ public class Alcatel7x50ParserManager implements ContextChange {
 	protected Hashtable<String, ConfigurationSection> contextHash;
 	protected SRChassisObject router;
 
+	
+	/**
+	 * Parser Manager Constructor
+	 */
 	public Alcatel7x50ParserManager(){
 		
 		router = new SRChassisObject();
@@ -80,10 +86,20 @@ public class Alcatel7x50ParserManager implements ContextChange {
 		activeParser = parser;
 	}
 	
+	
+	/**
+	 * Returs the SRChassisObject router that was parsed
+	 * @return
+	 */
 	public SRChassisObject getRouter(){
 		return this.router;
 	}
 	
+	
+	/**
+	 * Parse the file at the provided location
+	 * @param filelocation - Full path to the file
+	 */
 	public void ParseConfig(String filelocation){
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(filelocation));
@@ -102,6 +118,10 @@ public class Alcatel7x50ParserManager implements ContextChange {
 		}
 	}
 	
+	/**
+	 * Parses an individual configuration line
+	 * @param linetoparse
+	 */
 	public void ParseLine(String linetoparse){
 		try {
 		// Check for context switch
@@ -124,6 +144,10 @@ public class Alcatel7x50ParserManager implements ContextChange {
 		}
 	}
 	
+	
+	/**
+	 * Callback used to move between configuration context and depths
+	 */
 	public void contextChangeCallback(ConfigurationSection oldSection, ConfigurationSection newSection){
 		
 		/*

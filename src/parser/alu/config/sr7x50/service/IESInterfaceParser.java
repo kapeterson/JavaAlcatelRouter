@@ -30,7 +30,7 @@ public class IESInterfaceParser extends ConfigurationSection {
 	}
 	
 	public void setIPv4Address(Matcher matcher){
-		
+		//System.out.println("OK");
 		//System.out.println("IPv4 address = " + matcher.group(1) + " / " + matcher.group(2));
 		this.interfaceObject.setIPv4Address(matcher.group(1), matcher.group(2));
 	}
