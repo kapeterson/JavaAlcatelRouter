@@ -30,14 +30,18 @@ public class IPEntryParser extends ConfigurationSection {
 		//
 		
 		boolean validProtocol = false;
+
+		if ( matcher.group(1).equals("*"))
+			return;
 		
 		for ( SRFilterProtocol prot : SRFilterProtocol.values() ) {
-			if ( prot.name().equals(matcher.group(1)))
+			if ( prot.name().equals(matcher.group(1)) )
 				validProtocol = true;
 		}
 	
 		if ( !validProtocol){
 			System.out.println("ERROR: Invalid protocol value in filter protocl match " + matcher.group(1));
+			System.out.println("CFG: " + this.getCurrentLine());
 			System.exit(1);
 		}
 		

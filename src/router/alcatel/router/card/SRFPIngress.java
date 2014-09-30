@@ -25,6 +25,9 @@ public class SRFPIngress extends AlcatelObject {
 			iom = (SRIOMObject)parent.getParent();
 		} else if ( parent.isIOMObject()){
 			iom = (SRIOMObject)parent;
+		} else if ( parent.isIOMFP()){
+			iom = (SRIOMObject)parent.getParent();
+		
 		} else {
 			System.out.println("Invalid parent type when assigning forwarding patch to parent " + parent.getObjectType());
 			System.exit(1);

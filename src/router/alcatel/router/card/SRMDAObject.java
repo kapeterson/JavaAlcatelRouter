@@ -45,6 +45,7 @@ public class SRMDAObject extends AlcatelHardwareObject{
 	 */
 	public SRMDAObject(int complex, SRIOMObject parentObject){
 		super(AlcatelObjectType.MDA);
+		this.setObjectType(AlcatelObjectType.MDA);
 		this.mdaComplex = complex;
 		this.mdaType = "";
 		this.parent = parentObject;
@@ -52,8 +53,8 @@ public class SRMDAObject extends AlcatelHardwareObject{
 	}
 	
 	private void initializeMDA(){
-		this.INGRESS = new SRFPIngress(this);
 		this.NETWORK = new SRMDANetwork(this);
+		this.INGRESS = new SRFPIngress(this);
 		this.ACCESS = new SRMDAAccess(this);
 	}
 	/**

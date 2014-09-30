@@ -232,4 +232,8 @@ public abstract class AlcatelObject {
 	public boolean isIPFilterEntry(){
 		return (this.objectType == AlcatelObjectType.SRIPFILTERENTRY);
 	}
+	
+	public boolean isIOMFP(){
+		return (this.objectType == AlcatelObjectType.IOMFP);
+	}
 }

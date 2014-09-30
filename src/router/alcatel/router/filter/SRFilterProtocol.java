@@ -7,6 +7,7 @@ package router.alcatel.router.filter;
  */
 public enum SRFilterProtocol {
 
+	
 	none,
 	tcp,
 	udp,
@@ -14,4 +15,6 @@ public enum SRFilterProtocol {
 	igmp,
 	rsvp,
 	gre
+	
+	
 }
