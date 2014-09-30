@@ -21,7 +21,11 @@ public class VPLSParser extends ConfigurationSection {
 		super("CONFIG.SERVICE.VPLS", router, contextChangeHandler);
 		vpls = new SRVPLSObject(vplsnumber);
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
-		this.commandHash.put(Pattern.compile("^sap (.*) (split.*)? create"), new CommandHandler("setSAPContext", true));
+		this.commandHash.put(Pattern.compile("^sap ([0-9]+\\/[0-9]+\\/[0-9]+.*) (split.*)? create"), new CommandHandler("setSAPContext", true));
+
+		this.commandHash.put(Pattern.compile("^sap (lag\\-[0-9]+.*) (split.*)? create"), new CommandHandler("setSAPContext", true));
+		this.commandHash.put(Pattern.compile("^sap (lag\\-[0-9]+.*) create"), new CommandHandler("setSAPContext", true));
+
 		this.commandHash.put(Pattern.compile("^spoke\\-sdp (.*) create"), new CommandHandler("setSpokeSDPContext", true));
 		this.commandHash.put(Pattern.compile("^mesh\\-sdp (.*) create"), new CommandHandler("setMeshSDPContext", true));
 

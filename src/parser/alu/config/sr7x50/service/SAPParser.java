@@ -22,6 +22,7 @@ public class SAPParser extends ConfigurationSection{
 
 	public SAPParser(SRChassisObject router, ContextChange contextChangeHandler, String sapName, AlcatelObject parentService){
 		super("CONFIG.SERVICE.SAP", router, contextChangeHandler);
+		System.out.println("SAP : " + sapName);
 		sap = new SRSAPObject(sapName, parentService);
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
 		this.commandHash.put(Pattern.compile("^ingress$"), new CommandHandler("changeIngressContext", true));
