@@ -5,7 +5,7 @@ import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.service.SRSAPObject;
 import router.alcatel.router.service.SRVPLSObject;
 
-public class SAPTest02_FilterandQos {
+public class SAPTest01_vplssapcount {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		if (args.length < 1){
@@ -25,14 +25,7 @@ public class SAPTest02_FilterandQos {
 			System.out.println("System ip = " + router.Router.Interfaces.getInterface("system").getIPv4HostAddress());
 			for ( Integer serviceNumber : router.Services.getVPLSs().keySet()){
 				SRVPLSObject vpls = router.Services.getVPLS(serviceNumber);
-				System.out.format("\n\nService Vpls:  %d  Description: %-20s\n", serviceNumber, vpls.getDescription());
-
-				for ( String sapnumber : vpls.getSAPs().keySet()) {
-					SRSAPObject sap = vpls.getSAP(sapnumber);
-					System.out.format("\tVPLS: %-13s SAP : %-12s  IngressQOS: %-5d  EgressQOS: %-5d   IngressFilter: %-4s %-5d  EgressFilter: %-4s %-5d Description: %-20s\n ", sap.getParentService().getName(), sapnumber, sap.INGRESS.getQosPolicyNumber(), sap.EGRESS.getQosPolicyNumber(), sap.INGRESS.getFilterType(), sap.INGRESS.getFilterNumber(), sap.EGRESS.getFilterType(), sap.EGRESS.getFilterNumber(),  sap.getDescription());
-				}
-
-				
+				System.out.format("VPLS: %-15d    SAP Count: %-5d\n", serviceNumber, vpls.getSAPs().size());
 			}
 			
 		} catch ( Exception e) {
