@@ -51,7 +51,6 @@ public class SRServiceSDPObject extends AlcatelObject implements SRInterfaceBind
 		return true;
 	}
 
-	@Override
 	public AlcatelObject getParentService(){
 		return this.parentService;
 	}

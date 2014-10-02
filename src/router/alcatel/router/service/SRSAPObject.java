@@ -39,7 +39,6 @@ public class SRSAPObject extends AlcatelObject implements SRInterfaceBindingObje
 		return true;
 	}
 	
-	@Override
 	public AlcatelObject getParentService(){
 		return this.parentService;
 	}
