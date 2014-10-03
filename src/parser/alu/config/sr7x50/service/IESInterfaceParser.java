@@ -11,6 +11,7 @@ import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.RouterRegex;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.routerinterface.SRInterfaceBinding;
+import router.alcatel.router.service.SRIESObject;
 import router.alcatel.router.service.SRSDPObject;
 import router.alcatel.router.service.SRServiceInterface;
 import router.alcatel.router.service.SRServiceSDPObject;
@@ -19,9 +20,11 @@ public class IESInterfaceParser extends ConfigurationSection {
 	
 	protected SRServiceInterface interfaceObject = null;
 	
-	public IESInterfaceParser(SRChassisObject router, ContextChange contextChangeHandler, String interfaceName){
+	public IESInterfaceParser(SRChassisObject router, ContextChange contextChangeHandler, String interfaceName, SRIESObject parentIES){
 		super("CONFIG.SERVICE.IES.INTERFACE", router, contextChangeHandler);
 		interfaceObject = new SRServiceInterface(interfaceName);
+		interfaceObject.setParent(parentIES);
+		
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
 		this.commandHash.put(Pattern.compile("^spoke\\-sdp (.*) create"), new CommandHandler("setSpokeSDPBinding", true));
 		this.commandHash.put(Pattern.compile("^sap (.*) create"), new CommandHandler("setSAPContext", true));

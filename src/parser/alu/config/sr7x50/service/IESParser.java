@@ -23,7 +23,7 @@ public class IESParser extends ConfigurationSection{
 	
 
 	public void setInterfaceContext(Matcher matcher){
-		IESInterfaceParser parser = new IESInterfaceParser(this.router, this.getContextNotifier(), matcher.group(1));
+		IESInterfaceParser parser = new IESInterfaceParser(this.router, this.getContextNotifier(), matcher.group(1), this.ies);
 		parser.setParent(this);
 		parser.setSectionDepth(this.getLastCommandDepth());
 		this.getContextNotifier().contextChangeCallback(this, parser);
