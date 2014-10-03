@@ -100,7 +100,7 @@ public class SRChassisObject extends AlcatelHardwareObject {
 	}
 	
 
-	
+	/*
 	class AssociationListener implements ActionListener {
 
 
@@ -109,4 +109,5 @@ public class SRChassisObject extends AlcatelHardwareObject {
 			// TODO Auto-generated method stub
 		}
 	}
+	*/
 }
