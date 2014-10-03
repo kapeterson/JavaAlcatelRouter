@@ -24,6 +24,7 @@ public class IESInterfaceParser extends ConfigurationSection {
 		super("CONFIG.SERVICE.IES.INTERFACE", router, contextChangeHandler);
 		interfaceObject = new SRServiceInterface(interfaceName);
 		interfaceObject.setParent(parentIES);
+		interfaceObject.setParentService(parentIES);
 		
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
 		this.commandHash.put(Pattern.compile("^spoke\\-sdp (.*) create"), new CommandHandler("setSpokeSDPBinding", true));
