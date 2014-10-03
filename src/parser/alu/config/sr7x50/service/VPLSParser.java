@@ -30,9 +30,6 @@ public class VPLSParser extends ConfigurationSection {
 
 		this.commandHash.put(Pattern.compile("^spoke\\-sdp (.*) create"), new CommandHandler("setSpokeSDPContext", true));
 		this.commandHash.put(Pattern.compile("^mesh\\-sdp (.*) create"), new CommandHandler("setMeshSDPContext", true));
-
-
-
 	}
 	
 	

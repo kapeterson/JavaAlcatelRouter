@@ -1,5 +1,7 @@
 package router.alcatel.router.card;
 
+import java.util.Hashtable;
+
 import router.alcatel.router.AlcatelHardwareObject;
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
@@ -83,7 +85,19 @@ public class SRMDAObject extends AlcatelHardwareObject{
 	 * @return the string value of the mda type
 	 */
 	public String getMDAType(){
-		return this.mdaType;
+		if ( !((SRIOMObject)this.getParent()).isIMM())
+			return this.mdaType;
+		else {
+			if (ImmHash.immTypes.containsKey(  ((SRIOMObject)this.parent).getCardType().trim() )) {
+				return ImmHash.immTypes.get(((SRIOMObject)this.parent).getCardType().trim());
+			} else {
+				System.out.println("Error:  No hash type for card type " + this.mdaType);
+				System.exit(1);
+			}
+	
+		
+		}
+		return "ERR";
 	}
 	
 	/**
@@ -148,5 +162,6 @@ public class SRMDAObject extends AlcatelHardwareObject{
 	public void adminDown(){
 		this.isShutdown = true;
 	}
+
 
 }
