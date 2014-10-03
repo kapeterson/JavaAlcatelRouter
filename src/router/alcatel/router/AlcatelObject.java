@@ -71,6 +71,7 @@ public abstract class AlcatelObject {
 		return false;
 	}
 	
+
 	public boolean isNetworkQOSPolicy(){
 		return ( this.getObjectType() == AlcatelObjectType.NETWORKQOSPOLICY);
 	}
@@ -114,6 +115,10 @@ public abstract class AlcatelObject {
 	
 	public boolean isNetworkInterfaceObject(){
 		return false;
+	}
+	
+	public boolean isServiceInterfaceObject(){
+		return ( this.objectType == AlcatelObjectType.SERVICEINTERFACE);
 	}
 	
 	public boolean isService(){
