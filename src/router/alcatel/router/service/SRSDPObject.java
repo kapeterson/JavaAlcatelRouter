@@ -11,7 +11,7 @@ public class SRSDPObject extends SRServiceObject implements AssociationChild {
 	
 	/** Array List containing pointer to every association (interface, vpls, etc)**/
 	protected ArrayList<AlcatelObject> associations = new ArrayList<AlcatelObject>();
-	
+	protected SRSDPDelivery delivery = SRSDPDelivery.gre;
 	
 	public SRSDPObject(Integer sdpnumber){
 		super(sdpnumber);
@@ -44,5 +44,13 @@ public class SRSDPObject extends SRServiceObject implements AssociationChild {
 	
 	public boolean isAssociationChild(){
 		return true;
+	}
+	
+	public SRSDPDelivery getDelivery(){
+		return this.delivery;
+	}
+	
+	public void setDelivery(SRSDPDelivery delivery){
+		this.delivery = delivery;
 	}
 }

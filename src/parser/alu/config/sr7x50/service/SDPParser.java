@@ -8,15 +8,17 @@ import parser.CommandHandler;
 import parser.ContextChange;
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.service.SRSDPDelivery;
 import router.alcatel.router.service.SRSDPObject;;
 
 public class SDPParser extends ConfigurationSection{
 	
 	protected SRSDPObject sdp = null;
 	
-	public SDPParser(SRChassisObject router, ContextChange contextChangeHandler, Integer sdpnumber){
+	public SDPParser(SRChassisObject router, ContextChange contextChangeHandler, Integer sdpnumber, SRSDPDelivery delivery){
 		super("CONFIG.SERVICE.SDP", router, contextChangeHandler);
 		sdp = new SRSDPObject(sdpnumber);
+		sdp.setDelivery(delivery);
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
 
 
