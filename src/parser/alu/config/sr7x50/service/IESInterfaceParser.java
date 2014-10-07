@@ -73,9 +73,12 @@ public class IESInterfaceParser extends ConfigurationSection {
 	public void addObject(AlcatelObject object){
 		
 		if ( object.isSAPObject()){
-
+			//System.out.println("Adding sap " + object.getName());
 			Pattern sapPattern = Pattern.compile(RouterRegex.PortRegex);
+			Pattern lagPattern = Pattern.compile(RouterRegex.lagSapRegex);
 			Matcher m = sapPattern.matcher(object.getName());
+			
+			boolean found = false;
 			
 			if ( m.find()){
 
@@ -88,12 +91,39 @@ public class IESInterfaceParser extends ConfigurationSection {
 				
 				try {
 					this.interfaceObject.setInterfaceBinding(binding);
+					found = true;
 				} catch ( Exception err){
 					System.out.println("Error trying to set binding of ies to a sap " + object.getName());
 					System.exit(1);
 				}
 				
 				// The SAP already adds the association
+			} 
+			
+			Matcher lmatch = lagPattern.matcher(object.getName());
+			
+			if ( lmatch.find()){
+				Integer tag = -1;
+				
+				if ( lmatch.group(3) != null){
+					tag = Integer.parseInt(lmatch.group(3));
+				}
+				
+				SRInterfaceBinding binding = new SRInterfaceBinding(object,tag);
+				
+				try {
+					this.interfaceObject.setInterfaceBinding(binding);
+					found = true;
+				} catch ( Exception err ) {
+					System.out.println("Error trying to set binding of ies to a sap " + object.getName());
+					System.exit(1);
+				}
+			}
+			
+			
+			if ( !found ) {
+				System.out.println("Error parsing sap " + object.getName());
+				System.exit(1);
 			}
 			
 			this.interfaceObject.setServiceBinding(object);
