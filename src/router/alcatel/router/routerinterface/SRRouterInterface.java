@@ -42,7 +42,7 @@ public class SRRouterInterface extends AlcatelObject implements  AssociationPare
 	
 	public void setInterfaceBinding(SRInterfaceBinding bindingObject){
 		
-		if ( !(bindingObject.getBinding() instanceof SRInterfaceBindingObject)){
+		if ( !(bindingObject.getBindingObject() instanceof SRInterfaceBindingObject)){
 			System.out.println("ERROR: Could not bind " + bindingObject.getObjectType() + " to " + this.getObjectType());
 			System.exit(1);
 		}
@@ -52,16 +52,16 @@ public class SRRouterInterface extends AlcatelObject implements  AssociationPare
 			this.binding = bindingObject;
 			
 			// Check to see if the child needs to track associations
-			if ( bindingObject.getBinding().isAssociationChild()) {
-				AssociationChild aObj = (AssociationChild)bindingObject.getBinding();
+			if ( bindingObject.getBindingObject().isAssociationChild()) {
+				AssociationChild aObj = (AssociationChild)bindingObject.getBindingObject();
 				aObj.addAssociation(this);
-			} else if (bindingObject.getBinding().isServiceSDPObject()){
-				SRSDPObject sdp = (SRSDPObject)((SRServiceSDPObject)bindingObject.getBinding()).getParent();
+			} else if (bindingObject.getBindingObject().isServiceSDPObject()){
+				SRSDPObject sdp = (SRSDPObject)((SRServiceSDPObject)bindingObject.getBindingObject()).getParent();
 				sdp.addAssociation(this);
 			}
 			
 		} else {
-			System.out.println("Could not set binding on interface to " + bindingObject.getBinding().getObjectType());
+			System.out.println("Could not set binding on interface to " + bindingObject.getBindingObject().getObjectType());
 			System.exit(1);
 		}
 	}

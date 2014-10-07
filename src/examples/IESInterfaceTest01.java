@@ -27,7 +27,7 @@ public class IESInterfaceTest01 {
 				SRRouterInterface iface = router.Router.Interfaces.getInterface(interfaceName);
 				SRInterfaceBinding binding = iface.getBinding();
 				if ( binding != null)
-					System.out.format("Interface: %-15s  Object: %-15s Binding: %-15s TAG: %-5d\n", interfaceName, binding.getObjectType(), binding.getBinding().getName(), binding.getTag());
+					System.out.format("Interface: %-15s  Object: %-15s Binding: %-15s TAG: %-5d\n", interfaceName, binding.getObjectType(), binding.getBindingObject().getName(), binding.getTag());
 				else
 					System.out.format("Interface: %-15s  Binding: %-15s \n", interfaceName, "NULL");
 			

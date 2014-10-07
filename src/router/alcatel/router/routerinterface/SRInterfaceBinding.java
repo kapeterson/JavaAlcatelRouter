@@ -17,7 +17,7 @@ public class SRInterfaceBinding {
 		
 	}
 	
-	public AlcatelObject getBinding(){
+	public AlcatelObject getBindingObject(){
 		return this.binding;
 	}
 	
