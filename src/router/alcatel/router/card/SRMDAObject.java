@@ -34,12 +34,15 @@ public class SRMDAObject extends AlcatelHardwareObject{
 	/**
 	 * Default constructor with no parameters
 	 */
+	
+	/*
 	public SRMDAObject(){
 		super(AlcatelObjectType.MDA);
 		mdaType = "";
 		this.initializeMDA();
 
 	}
+	*/
 	
 	/**
 	 * Constructor with MDA complex only

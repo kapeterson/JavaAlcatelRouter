@@ -26,6 +26,9 @@ public class SRIOMObject extends SRCardObject{
      */
     public SRIOMObject(int cardNumber){
     	super(AlcatelObjectType.IOM, cardNumber);
+		mdas = new SRMDAObject[2];
+		mdas[0] = null;
+		mdas[1] = null;
     }
     
     /**
@@ -36,6 +39,7 @@ public class SRIOMObject extends SRCardObject{
 	public SRIOMObject(int cardNumber, String ctype){
 		super(AlcatelObjectType.IOM, cardNumber, ctype);
 		this.setCardType(ctype);
+		
 		mdas = new SRMDAObject[2];
 		mdas[0] = null;
 		mdas[1] = null;
