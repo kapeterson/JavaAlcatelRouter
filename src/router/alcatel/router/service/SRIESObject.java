@@ -8,6 +8,7 @@ public class SRIESObject extends SRServiceObject {
 	
 	public SRIESObject(Integer iesnumber){
 		super(iesnumber);
+		this.setName(String.valueOf(iesnumber));
 	}
 	
 	public boolean isIESObject(){
