@@ -22,7 +22,7 @@ public class SRIPFilterEntry extends AlcatelObject {
 	protected IPv4Address dstIP = null;
 	
 	/** Protocol to match for the filter entry.  Valid FilterProtocol enum type **/
-	protected SRFilterProtocol protocol = SRFilterProtocol.none;
+	protected String protocol = "none";
 	
 	public SRIPFilterEntry(Integer filterNumber){
 		super(AlcatelObjectType.SRIPFILTERENTRY);
@@ -54,7 +54,7 @@ public class SRIPFilterEntry extends AlcatelObject {
 	
 	
 	/** Get the match protocol for the filter entry **/
-	public SRFilterProtocol getProtocol(){
+	public String getProtocol(){
 		return this.protocol;
 	}
 	
@@ -80,7 +80,7 @@ public class SRIPFilterEntry extends AlcatelObject {
 	}
 	
 	/** Set the match protocol of the filter entry.  must be valid SRFilterProtocol enum type **/
-	public void setProtocol(SRFilterProtocol protocol){
+	public void setProtocol(String protocol){
 		this.protocol = protocol;
 	}
 

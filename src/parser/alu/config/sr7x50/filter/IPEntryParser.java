@@ -1,5 +1,8 @@
 package parser.alu.config.sr7x50.filter;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,6 +17,8 @@ public class IPEntryParser extends ConfigurationSection {
 
 	protected SRIPFilterEntry entry = null;
 	
+	protected List<String> validProtocols = null;
+
 	public IPEntryParser(SRChassisObject router, ContextChange contextChangeHandler, Integer entryNumber){
 		super("CONFIG.FILTER.IP.ENTRY", router, contextChangeHandler);
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
@@ -21,6 +26,11 @@ public class IPEntryParser extends ConfigurationSection {
 		this.commandHash.put(Pattern.compile("^dst\\-ip (.*)\\/([0-9]+)"), new CommandHandler("setDstIP", true));
 		this.commandHash.put(Pattern.compile("^match protocol (.*)"), new CommandHandler("setProtocol", true));
 
+		
+		if ( this.validProtocols == null ){
+			this.validProtocols = Arrays.asList("none", "tcp", "udp", "igmp", "icmp", "rsvp", "gre", "ipv6", "ospf-igp");
+
+		}
 		this.entry = new SRIPFilterEntry(entryNumber);
 	}
 	
@@ -34,18 +44,21 @@ public class IPEntryParser extends ConfigurationSection {
 		if ( matcher.group(1).equals("*"))
 			return;
 		
+		/*
 		for ( SRFilterProtocol prot : SRFilterProtocol.values() ) {
 			if ( prot.name().equals(matcher.group(1)) )
 				validProtocol = true;
 		}
-	
-		if ( !validProtocol){
-			System.out.println("ERROR: Invalid protocol value in filter protocl match " + matcher.group(1));
+		*/
+		String protocolValue = matcher.group(1).trim();
+		if ( !this.validProtocols.contains(protocolValue)){
+		//if ( !validProtocol){
+			System.out.println("ERROR: Invalid protocoll value in filter protocl match " + matcher.group(1));
 			System.out.println("CFG: " + this.getCurrentLine());
 			System.exit(1);
 		}
 		
-		SRFilterProtocol protocolValue = SRFilterProtocol.valueOf(matcher.group(1));
+		//SRFilterProtocol protocolValue = SRFilterProtocol.valueOf(matcher.group(1));
 		this.entry.setProtocol(protocolValue);
 	}
 	
