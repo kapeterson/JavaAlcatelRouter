@@ -28,7 +28,8 @@ public class IPEntryParser extends ConfigurationSection {
 
 		
 		if ( this.validProtocols == null ){
-			this.validProtocols = Arrays.asList("none", "tcp", "udp", "igmp", "icmp", "rsvp", "gre", "ipv6", "ospf-igp");
+			this.validProtocols = Arrays.asList("none", "tcp", "udp", "igmp", "icmp", "rsvp", "gre", "ipv6", "ospf-igp", "vrrp");
+			//this.validProtocols.add("50");
 
 		}
 		this.entry = new SRIPFilterEntry(entryNumber);
@@ -51,12 +52,13 @@ public class IPEntryParser extends ConfigurationSection {
 		}
 		*/
 		String protocolValue = matcher.group(1).trim();
+		/*
 		if ( !this.validProtocols.contains(protocolValue)){
 		//if ( !validProtocol){
 			System.out.println("ERROR: Invalid protocoll value in filter protocl match " + matcher.group(1));
 			System.out.println("CFG: " + this.getCurrentLine());
 			System.exit(1);
-		}
+		}*/
 		
 		//SRFilterProtocol protocolValue = SRFilterProtocol.valueOf(matcher.group(1));
 		this.entry.setProtocol(protocolValue);
