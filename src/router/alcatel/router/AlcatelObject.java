@@ -146,7 +146,7 @@ public abstract class AlcatelObject {
 	}
 	
 	public boolean isMeshSDP(){
-		return false;
+		return (this.objectType == AlcatelObjectType.MESHSDPOBJECT);
 	}
 	
 	public boolean isSpokeSDP(){
