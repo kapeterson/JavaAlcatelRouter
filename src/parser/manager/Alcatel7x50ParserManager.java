@@ -39,7 +39,7 @@ public class Alcatel7x50ParserManager implements ContextChange {
 	protected Integer currentContext = -1;
 	protected Hashtable<String, ConfigurationSection> contextHash;
 	protected SRChassisObject router;
-
+	protected String filename = "";
 	
 	/**
 	 * Parser Manager Constructor
@@ -103,7 +103,7 @@ public class Alcatel7x50ParserManager implements ContextChange {
 	public void ParseConfig(String filelocation){
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(filelocation));
-
+			this.filename = filelocation;
 			String line;
 			while ( br.ready()) {
 				line = br.readLine();
@@ -136,7 +136,7 @@ public class Alcatel7x50ParserManager implements ContextChange {
 				
 			} else {
 			
-				activeParser.Parse(linetoparse);
+				activeParser.Parse(linetoparse, this.filename);
 			}
 		}
 		} catch ( Exception err){

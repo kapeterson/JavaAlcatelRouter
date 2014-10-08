@@ -65,12 +65,12 @@ public abstract class ConfigurationSection    {
 	
 	/**
 	 * Parse the configuration line.  The lines should be handed to this method one at a time.
-	 * The commandHash will be searched for a match.  If a match is found int eh commandHash, 
+	 * The commandHash will be searched for a match.  If a match is found in the commandHash, 
 	 * the appriate handler from CommandHandler.getMethodName() will be called to handle the 
 	 * configuration line
 	 * @param line	Single line from the configuration file
 	 */
-	public void Parse(String line){
+	public void Parse(String line, String fname){
 		this.currentLine = line;
 		//if ( this.getName() == "CONFIG.QOS")
 		//	System.out.println(line);
@@ -117,6 +117,7 @@ public abstract class ConfigurationSection    {
 					System.out.println("Error invoking method  " + mName + " in section " + this.getName() + " error = " + err.getMessage());
 					System.out.println("Parent was " + this.getParent());
 					System.out.println("Line was " + this.currentLine);
+					System.out.println("File was " + fname);
 					System.out.println("--------");
 					
 				}

@@ -14,7 +14,8 @@ public enum SRFilterProtocol {
 	icmp,
 	igmp,
 	rsvp,
-	gre
+	gre,
+	ipv6
 	
 	
 }
