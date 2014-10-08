@@ -13,7 +13,7 @@ import router.alcatel.router.impm.SRBandwidthPolicy;
 public class SRMcastPathManagement extends AlcatelObject {
 	
 	/** Bandwidth policy applied to the Multicast Path **/
-	protected SRBandwidthPolicy bwPolicy = null;
+	protected String bwPolicy = "NA";
 	
 	/** Is path management enabled **/
 	protected boolean isShutdown = true;
@@ -26,18 +26,12 @@ public class SRMcastPathManagement extends AlcatelObject {
 	 * Set the bandwidth policy for the multicast path
 	 * @param bwPolicy
 	 */
-	public void setBandwidthPolicy(SRBandwidthPolicy bwPolicy){
+	public void setBandwidthPolicyName(String bwPolicy){
 		this.bwPolicy = bwPolicy;
 	}
 	
 	
-	/**
-	 * Get the applied bandwidth policy
-	 * @return
-	 */
-	public SRBandwidthPolicy getBandwidthPolicy(){
-		return this.bwPolicy;
-	}
+
 	
 	/**
 	 * Get the name of the bandwidth policy applied to the multicast path management
@@ -45,10 +39,7 @@ public class SRMcastPathManagement extends AlcatelObject {
 	 */
 	public String getBandwidthPolicyName(){
 		
-		if ( this.bwPolicy != null)
-			return this.bwPolicy.getName();
-		else
-			return "NA";
+		return this.bwPolicy;
 	}
 	
 	

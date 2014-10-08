@@ -38,13 +38,13 @@ public class PathManagementParser extends ConfigurationSection {
 		//this.mcast.setName(matcher.group(1));
 		
 		// get the policy and add it to the mcast
-		if ( !this.router.IMPM.hasBandwidthPolicy(matcher.group(1))){
-			System.out.println("Error bw policy doesn't exist");
-			System.exit(1);
-		}
+		//if ( !this.router.IMPM.hasBandwidthPolicy(matcher.group(1))){
+		//	System.out.println("Error bw policy doesn't exist");
+		//	System.exit(1);
+		//}
 		
-		SRBandwidthPolicy bwPolicy = this.router.IMPM.getPolicy(matcher.group(1));
-		this.mcast.setBandwidthPolicy(bwPolicy);
+		//SRBandwidthPolicy bwPolicy = this.router.IMPM.getPolicy(matcher.group(1));
+		this.mcast.setBandwidthPolicyName(matcher.group(1).trim());
 	}
 	
 	
