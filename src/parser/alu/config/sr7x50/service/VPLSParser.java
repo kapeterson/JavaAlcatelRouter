@@ -27,9 +27,12 @@ public class VPLSParser extends ConfigurationSection {
 		//this.commandHash.put(Pattern.compile("^sap ([0-9]+\\/[0-9]+\\/[0-9]+(\\:)?([0-9]+)?(\\.)?([0-9]+)) create"), new CommandHandler("setSAPContext", true));
 
 		this.commandHash.put(Pattern.compile("^sap (lag\\-[0-9]+)(\\:)?([0-9]+)?(\\.)?([0-9]+)? (split\\-horizon\\-group \".*\")?.*"), new CommandHandler("setLagSapContext", true));
+		this.commandHash.put(Pattern.compile("^spoke\\-sdp ([0-9]+\\:[0-9]+) (split\\-horizon\\-group \".*\")?.*"), new CommandHandler("setSpokeSDPContext", true));
 
-		this.commandHash.put(Pattern.compile("^spoke\\-sdp (.*) create"), new CommandHandler("setSpokeSDPContext", true));
+		//this.commandHash.put(Pattern.compile("^spoke\\-sdp (.*) create"), new CommandHandler("setSpokeSDPContext", true));
 		this.commandHash.put(Pattern.compile("^mesh\\-sdp (.*) create"), new CommandHandler("setMeshSDPContext", true));
+		//( split\\-horizon\\-group \"(.*)\" )?
+
 	}
 	
 	
@@ -45,6 +48,10 @@ public class VPLSParser extends ConfigurationSection {
 		this.vpls.addSAPObject(sap);
 	}
 	
+	
+	public void setSpokeSDPSHContext(Matcher matcher){
+		System.out.println("sh match" + this.getCurrentLine());
+	}
 	public void setSpokeSDPContext(Matcher matcher){
 		//System.out.println("Spoke sdp " + matcher.group(1));
 		//SRServiceSDPObject sdp = new SRServiceSDPObject(AlcatelObjectType.SPOKESDPOBJECT, matcher.group(1));
