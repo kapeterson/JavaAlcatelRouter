@@ -150,7 +150,7 @@ public abstract class AlcatelObject {
 	}
 	
 	public boolean isSpokeSDP(){
-		return false;
+		return (this.objectType == AlcatelObjectType.SPOKESDPOBJECT);
 	}
 	
 	public boolean isAssociationChild(){
