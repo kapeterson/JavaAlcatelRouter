@@ -17,6 +17,12 @@ public abstract class AlcatelObject {
 	private AlcatelObjectType objectType;
 	protected AlcatelObject parent = null;
 	
+	/** Used to store the remark from the MSS **/
+	protected String mssRemark = "";
+	
+	/** Release tag for tracking NR etc if it becomes available **/
+	protected int mssReleaseTag = 0;
+	
 	public AlcatelObject(AlcatelObjectType objectType){
 		objectName = "";
 		this.objectType = objectType;
@@ -244,5 +250,22 @@ public abstract class AlcatelObject {
 	
 	public boolean isLDPInterface(){
 		return (this.getObjectType() == AlcatelObjectType.LDPINTERFACE) ;
+	}
+	
+	
+	public String getMSSRemark(){
+		return this.mssRemark;
+	}
+	
+	public void setMSSRemark(String remark){
+		this.mssRemark = remark;
+	}
+	
+	public void setMSSReleaseTag(int tag){
+		this.mssReleaseTag = tag;
+	}
+	
+	public int getMSSReleaseTag(){
+		return this.mssReleaseTag;
 	}
 }
