@@ -29,7 +29,7 @@ public class IGMPSSM {
 	
 			
 			for ( SRSSMTranslation ssm : router.Router.IGMP.getTranslations()){
-				System.out.println(ssm.getRangeStart() + " - " + ssm.getEndRange());
+				System.out.println(ssm.getStart() + " - " + ssm.getEnd());
 				System.out.println("\t"+ssm.getSource());
 				
 			}

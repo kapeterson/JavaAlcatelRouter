@@ -20,11 +20,11 @@ public class SRSSMTranslation extends AlcatelObject {
 		this.sourceAddress = new IPv4Address(sourceAddress, "32");
 	}
 	
-	public String getRangeStart(){
+	public String getStart(){
 		return this.startAddress.getHostAddress();
 	}
 	
-	public String getEndRange(){
+	public String getEnd(){
 		return this.endAddress.getHostAddress();
 	}
 	
