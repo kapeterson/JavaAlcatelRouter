@@ -268,4 +268,8 @@ public abstract class AlcatelObject {
 	public int getMSSReleaseTag(){
 		return this.mssReleaseTag;
 	}
+	
+	public boolean isSSMTranslation(){
+		return ( this.objectType == AlcatelObjectType.IGMPSSM);
+	}
 }

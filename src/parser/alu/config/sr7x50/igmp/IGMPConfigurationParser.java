@@ -7,6 +7,8 @@ import parser.ConfigurationSection;
 import parser.CommandHandler;
 import parser.ContextChange;
 import router.alcatel.router.*;
+import router.alcatel.router.igmp.SRSSMTranslation;
+import router.alcatel.router.impm.SRBandwidthPolicy;
 
 
 
@@ -17,8 +19,18 @@ public class IGMPConfigurationParser extends ConfigurationSection {
 		super("CONFIG.IGMP", router, contextChangeHandler);
 		//System.out.println("Instantiated port configuration parser");
 		this.commandHash.put(Pattern.compile("^interface \"(.*)\""), new CommandHandler("setInterfaceContext", true));
+		this.commandHash.put(Pattern.compile("^ssm\\-translate$"), new CommandHandler("setSSMContext", true));
 	}
 	
+	
+	public void setSSMContext(Matcher matcher){
+		//System.out.println("SSM Son");
+		SSMParser parser = new SSMParser(this.router, this.getContextNotifier());
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this,parser);
+		
+	}
 	
 	public void setInterfaceContext(Matcher matcher){
 		//ystem.out.println("PIM Interface " + matcher.group(1));
@@ -28,6 +40,13 @@ public class IGMPConfigurationParser extends ConfigurationSection {
 		parser.setSectionDepth(this.getLastCommandDepth());
 		this.getContextNotifier().contextChangeCallback(this, parser);
 		
+	}
+	
+	public void addObject(AlcatelObject obj){
+		
+		if ( obj.isSSMTranslation()){
+			this.router.Router.IGMP.addSSM((SRSSMTranslation)obj);
+		}
 	}
 	
 	/**
