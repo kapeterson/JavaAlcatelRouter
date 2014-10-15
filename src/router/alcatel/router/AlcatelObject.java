@@ -276,4 +276,8 @@ public abstract class AlcatelObject {
 	public boolean isIGMPStaticJoin(){
 		return ( this.objectType == AlcatelObjectType.IGMPSTATICJOIN);
 	}
+	
+	public boolean isIGMPSnooping(){
+		return ( this.objectType == AlcatelObjectType.IGMPSNOOPING);
+	}
 }

@@ -66,12 +66,17 @@ public class SAPParser extends ConfigurationSection{
 			this.sap.INGRESS = (SRSAPIngress)obj;
 		} else if ( obj.isSAPEgressObject()){
 			this.sap.EGRESS = (SRSAPEgress)obj;
+		} else if ( obj.isIGMPSnooping() )  {
+			this.sap.IGMPSNOOPING = (SRIGMPSnooping)obj;
 		} else {
 			System.out.println("ERROR: Could not add " + obj.getObjectType() + " : " + obj.getName() + " to sap");
 			System.exit(1);
 		}
 		
 	}
+	
+	
+	
 	/**
 	 * Custom handler
 	 */

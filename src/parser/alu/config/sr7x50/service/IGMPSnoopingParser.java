@@ -8,9 +8,13 @@ import parser.ConfigurationSection;
 import parser.ContextChange;
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.igmp.SRIGMPStaticJoin;
+import router.alcatel.router.service.SRIGMPSnooping;
 
 public class IGMPSnoopingParser extends ConfigurationSection{
 
+	protected SRIGMPSnooping snooping = new SRIGMPSnooping();
+	
 	public IGMPSnoopingParser(SRChassisObject router, ContextChange contextChangeHandler){
 		super("CONFIG.SERVICE.SAP.IGMPSNOOPING", router, contextChangeHandler);
 		this.commandHash.put(Pattern.compile("^static"), new CommandHandler("setStaticContext", true));
@@ -21,6 +25,9 @@ public class IGMPSnoopingParser extends ConfigurationSection{
 
 	public void addObject(AlcatelObject object){
 		
+		if ( object.isIGMPStaticJoin()){
+			this.snooping.addStaticJoin((SRIGMPStaticJoin)object);
+		}
 	}
 	
 	public void setStaticContext(Matcher matcher){
@@ -36,6 +43,7 @@ public class IGMPSnoopingParser extends ConfigurationSection{
 	public void exitSection(Matcher matcher){
 		
 		if ( this.getSectionDepth() == this.getLastCommandDepth()) {
+			this.getParent().addObject(this.snooping);
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
 		}
 	}

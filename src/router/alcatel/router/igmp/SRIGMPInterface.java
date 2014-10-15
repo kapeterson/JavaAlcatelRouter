@@ -13,6 +13,7 @@ import router.alcatel.router.AlcatelObjectType;
 public class SRIGMPInterface extends AlcatelObject{
 	
 	private TreeMap<String, String> staticJoins = new TreeMap<String, String>();
+	
 	public SRIGMPInterface(String interfacename){
 		super(AlcatelObjectType.IGMPINTERFACE);
 		this.setName(interfacename);
