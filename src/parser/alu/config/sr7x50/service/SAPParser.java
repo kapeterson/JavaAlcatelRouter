@@ -27,11 +27,19 @@ public class SAPParser extends ConfigurationSection{
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
 		this.commandHash.put(Pattern.compile("^ingress$"), new CommandHandler("changeIngressContext", true));
 		this.commandHash.put(Pattern.compile("^egress$"), new CommandHandler("changeEgressContext", true));
+		this.commandHash.put(Pattern.compile("^igmp\\-snooping$"), new CommandHandler("setSnoopingContext", true));
+
 
 	}
 	
 
-	
+	public void setSnoopingContext(Matcher matcher){
+		//System.out.println("SNOOP");
+		IGMPSnoopingParser parser = new IGMPSnoopingParser(this.router, this.getContextNotifier());
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
+	}
 	
 	public void changeIngressContext(Matcher matcher){
 		SAPIngressParser parser = new SAPIngressParser(this.router, this.getContextNotifier());

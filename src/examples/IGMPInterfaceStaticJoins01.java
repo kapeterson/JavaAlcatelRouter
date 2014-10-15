@@ -1,14 +1,11 @@
 package examples;
 
-import java.util.ArrayList;
-
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.igmp.SRIGMPInterface;
 import router.alcatel.router.igmp.SRSSMTranslation;
-import router.alcatel.router.routerinterface.SRRouterInterface;
-import router.alcatel.router.service.SRServiceInterface;
 
-public class IGMPSSM {
+public class IGMPInterfaceStaticJoins01 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
@@ -28,9 +25,14 @@ public class IGMPSSM {
 			SRChassisObject router = pman.getRouter();
 
 			
-			for ( SRSSMTranslation ssm : router.Router.IGMP.getTranslations()){
-				System.out.println(ssm.getStart() + " - " + ssm.getEnd());
-				System.out.println("\t"+ssm.getSource());
+			for ( String ifaceName : router.Router.IGMP.getInterfaces().keySet()){
+				SRIGMPInterface iface = router.Router.IGMP.getInterface(ifaceName);
+				System.out.println("\nIGMP INT: " + ifaceName);
+				
+				for ( String groupAddress : iface.getStaticJoins().keySet()){
+					System.out.println("\t" + groupAddress);
+				}
+				
 				
 			}
 			

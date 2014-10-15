@@ -272,4 +272,8 @@ public abstract class AlcatelObject {
 	public boolean isSSMTranslation(){
 		return ( this.objectType == AlcatelObjectType.IGMPSSM);
 	}
+	
+	public boolean isIGMPStaticJoin(){
+		return ( this.objectType == AlcatelObjectType.IGMPSTATICJOIN);
+	}
 }
