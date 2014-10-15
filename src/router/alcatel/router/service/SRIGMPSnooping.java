@@ -19,7 +19,7 @@ public class SRIGMPSnooping extends AlcatelObject {
 	}
 	
 	public void setMRouter(boolean value){
-		
+		this.isMrouter = value;
 	}
 	
 	public boolean isMrouter(){

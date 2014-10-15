@@ -27,18 +27,23 @@ public class IGMPSnoopingSDP01 {
 			
 			for ( Integer serviceNumber : router.Services.getVPLSs().keySet()){
 				SRVPLSObject vpls = router.Services.getVPLS(serviceNumber);
-				System.out.format("\n\nService Vpls:  %d  Description: %-20s\n", serviceNumber, vpls.getDescription());
 
 				for ( String sdpNumber : vpls.getSDPs().keySet()) {
 					
 					SRServiceSDPObject sdp = vpls.getSDP(sdpNumber);
 					if ( sdp.IGMPSNOOPING.getStaticJoins().size() > 0){
-						System.out.println("SDP: " + sdp.getName());
+						System.out.format("\n\n VPLS:  %d  SDP: %-12s  STATIC JOIN LISTS\n", serviceNumber, sdp.getName());
 
 						for ( String group : sdp.IGMPSNOOPING.getStaticJoins().keySet()){
 							System.out.format("\tGROUP %-15s   SOURCE: %-15s\n", group ,sdp.IGMPSNOOPING.getSource(group) );
 						}
 					} 
+					
+					if ( sdp.IGMPSNOOPING.isMrouter()){
+						System.out.format("\n\n VPLS:  %d  SDP: %-12s  MROUTER: YES\n", serviceNumber, sdp.getName());
+
+						//System.out.println("SDP : " + sdp.getName() + "   MROUTER: YES\n");
+					}
 				}
 
 				

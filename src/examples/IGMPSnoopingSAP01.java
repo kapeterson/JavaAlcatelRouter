@@ -25,19 +25,23 @@ public class IGMPSnoopingSAP01 {
 			
 			for ( Integer serviceNumber : router.Services.getVPLSs().keySet()){
 				SRVPLSObject vpls = router.Services.getVPLS(serviceNumber);
-				System.out.format("\n\nService Vpls:  %d  Description: %-20s\n", serviceNumber, vpls.getDescription());
 
 				for ( String sapnumber : vpls.getSAPs().keySet()) {
-					//SRVPLSObject vpls = router.Services.getVPLS(serviceNumber);
 					
 					SRSAPObject sap = vpls.getSAP(sapnumber);
 					if ( sap.IGMPSNOOPING.getStaticJoins().size() > 0){
-						System.out.println("SAP: " + sap.getName());
+						System.out.format("\n\n VPLS:  %d  SAP: %-12s  STATIC JOIN LISTS\n", serviceNumber, sap.getName());
+
 
 						for ( String group : sap.IGMPSNOOPING.getStaticJoins().keySet()){
 							System.out.format("\tGROUP %-15s   SOURCE: %-15s\n", group , sap.IGMPSNOOPING.getSource(group) );
 						}
 					} 
+					
+					if ( sap.IGMPSNOOPING.isMrouter()){
+						System.out.format("\n\n VPLS:  %d  SAP: %-12s  MROUTER: YES\n", serviceNumber, sap.getName());
+
+					}
 				}
 
 				

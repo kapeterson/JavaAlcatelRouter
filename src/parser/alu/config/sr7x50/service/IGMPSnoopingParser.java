@@ -19,10 +19,15 @@ public class IGMPSnoopingParser extends ConfigurationSection{
 		super("CONFIG.SERVICE.SAP.IGMPSNOOPING", router, contextChangeHandler);
 		this.commandHash.put(Pattern.compile("^static"), new CommandHandler("setStaticContext", true));
 
+		this.commandHash.put(Pattern.compile("^mrouter\\-port"), new CommandHandler("setMrouter", true));
 
 	}
 	
 
+	public void setMrouter(Matcher matcher){
+		//System.out.println("MROUTER");
+		this.snooping.setMRouter(true);
+	}
 	public void addObject(AlcatelObject object){
 		
 		if ( object.isIGMPStaticJoin()){
