@@ -9,6 +9,7 @@ import parser.ContextChange;
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.service.SRIGMPSnooping;
 import router.alcatel.router.service.SRSDPEgress;
 import router.alcatel.router.service.SRSDPIngress;
 import router.alcatel.router.service.SRServiceSDPObject;
@@ -30,11 +31,18 @@ public class ServiceSDPParser extends ConfigurationSection {
 		this.commandHash.put(Pattern.compile("^ingress$"), new CommandHandler("setIngressMode", true));
 		this.commandHash.put(Pattern.compile("^egress$"), new CommandHandler("setEgressMode", true));
 		// = new SRSAPObject(sapName);
-		//this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
+		this.commandHash.put(Pattern.compile("^igmp\\-snooping$"), new CommandHandler("setSnoopingContext", true));
 	}
 	
 	
-
+	public void setSnoopingContext(Matcher matcher){
+		//System.out.println("SNOOP");
+		IGMPSnoopingParser parser = new IGMPSnoopingParser(this.router, this.getContextNotifier());
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
+	}
+	
 	public void setIngressMode(Matcher matcher){
 		SDPIngressParser parser = new SDPIngressParser(this.router, this.getContextNotifier());
 		parser.setParent(this);
@@ -56,7 +64,13 @@ public class ServiceSDPParser extends ConfigurationSection {
 			this.sdp.EGRESS = (SRSDPEgress)obj;
 		} else if ( obj.isSDPIngress()){
 			this.sdp.INGRESS = (SRSDPIngress)obj;
+		} else if ( obj.isIGMPSnooping() ) {
+			
+		
+			this.sdp.IGMPSNOOPING = (SRIGMPSnooping)obj;
+			
 		} else { 
+		
 			System.out.println("Error could not assign obj " + obj.getObjectType() + " to service sdp");
 			System.exit(1);
 		}

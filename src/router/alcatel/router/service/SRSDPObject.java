@@ -13,6 +13,8 @@ public class SRSDPObject extends SRServiceObject implements AssociationChild {
 	protected ArrayList<AlcatelObject> associations = new ArrayList<AlcatelObject>();
 	protected SRSDPDelivery delivery = SRSDPDelivery.gre;
 	
+	
+
 	public SRSDPObject(Integer sdpnumber){
 		super(sdpnumber);
 		this.setName(sdpnumber.toString());

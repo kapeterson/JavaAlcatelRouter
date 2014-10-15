@@ -12,7 +12,8 @@ public class SRServiceSDPObject extends AlcatelObject implements SRInterfaceBind
 	public SRSDPIngress INGRESS = new SRSDPIngress();
 	public SRSDPEgress EGRESS = new SRSDPEgress();
 	
-	
+	public SRIGMPSnooping IGMPSNOOPING = new SRIGMPSnooping();
+
 	public SRServiceSDPObject(AlcatelObjectType sdpType, String sdpName, AlcatelObject parentSDP){
 		super(sdpType);
 		

@@ -3,9 +3,11 @@ package examples;
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.service.SRSAPObject;
+import router.alcatel.router.service.SRSDPObject;
+import router.alcatel.router.service.SRServiceSDPObject;
 import router.alcatel.router.service.SRVPLSObject;
 
-public class IGMPSnoopingSAP01 {
+public class IGMPSnoopingSDP01 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		if (args.length < 1){
@@ -27,15 +29,14 @@ public class IGMPSnoopingSAP01 {
 				SRVPLSObject vpls = router.Services.getVPLS(serviceNumber);
 				System.out.format("\n\nService Vpls:  %d  Description: %-20s\n", serviceNumber, vpls.getDescription());
 
-				for ( String sapnumber : vpls.getSAPs().keySet()) {
-					//SRVPLSObject vpls = router.Services.getVPLS(serviceNumber);
+				for ( String sdpNumber : vpls.getSDPs().keySet()) {
 					
-					SRSAPObject sap = vpls.getSAP(sapnumber);
-					if ( sap.IGMPSNOOPING.getStaticJoins().size() > 0){
-						System.out.println("SAP: " + sap.getName());
+					SRServiceSDPObject sdp = vpls.getSDP(sdpNumber);
+					if ( sdp.IGMPSNOOPING.getStaticJoins().size() > 0){
+						System.out.println("SDP: " + sdp.getName());
 
-						for ( String group : sap.IGMPSNOOPING.getStaticJoins().keySet()){
-							System.out.format("\tGROUP %-15s   SOURCE: %-15s\n", group , sap.IGMPSNOOPING.getSource(group) );
+						for ( String group : sdp.IGMPSNOOPING.getStaticJoins().keySet()){
+							System.out.format("\tGROUP %-15s   SOURCE: %-15s\n", group ,sdp.IGMPSNOOPING.getSource(group) );
 						}
 					} 
 				}

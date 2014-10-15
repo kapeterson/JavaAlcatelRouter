@@ -29,4 +29,6 @@ public class SRIGMPStaticJoin extends AlcatelObject {
 	public void setSource(String src){
 		this.groupSource = src;
 	}
+	
+
 }

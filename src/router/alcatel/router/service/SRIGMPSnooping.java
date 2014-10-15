@@ -38,5 +38,9 @@ public class SRIGMPSnooping extends AlcatelObject {
 	public TreeMap<String, String> getStaticJoins(){
 		return this.staticJoins;
 	}
+	
+	public String getSource(String groupAddress){
+		return this.staticJoins.get(groupAddress);
+	}
 
 }

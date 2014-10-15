@@ -8,6 +8,9 @@ import parser.CommandHandler;
 import parser.ContextChange;
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.service.SRIGMPSnooping;
+import router.alcatel.router.service.SRSAPEgress;
+import router.alcatel.router.service.SRSAPIngress;
 import router.alcatel.router.service.SRSDPDelivery;
 import router.alcatel.router.service.SRSDPObject;;
 
@@ -20,6 +23,7 @@ public class SDPParser extends ConfigurationSection{
 		sdp = new SRSDPObject(sdpnumber);
 		sdp.setDelivery(delivery);
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
+		this.commandHash.put(Pattern.compile("^igmp\\-snooping$"), new CommandHandler("setSnoopingContext", true));
 
 
 	}
