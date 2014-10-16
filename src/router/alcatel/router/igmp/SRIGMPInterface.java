@@ -40,4 +40,8 @@ public class SRIGMPInterface extends AlcatelObject{
 	}
 	
 	
+	public SRIGMPStaticJoin getStaticJoin(String groupAddress){
+		return this.staticJoins.get(groupAddress);
+	}
+	
 }
