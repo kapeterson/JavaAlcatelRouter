@@ -12,7 +12,7 @@ import router.alcatel.router.AlcatelObjectType;
  */
 public class SRIGMPInterface extends AlcatelObject{
 	
-	private TreeMap<String, String> staticJoins = new TreeMap<String, String>();
+	private TreeMap<String, SRIGMPStaticJoin> staticJoins = new TreeMap<String, SRIGMPStaticJoin>();
 	
 	public SRIGMPInterface(String interfacename){
 		super(AlcatelObjectType.IGMPINTERFACE);
@@ -20,15 +20,19 @@ public class SRIGMPInterface extends AlcatelObject{
 	}
 	
 	public void addStaticJoin(SRIGMPStaticJoin staticJoin){
-		this.staticJoins.put(staticJoin.getGroup(), staticJoin.getSource());
+		this.staticJoins.put(staticJoin.getGroup(), staticJoin);
 	}
 	
-	public void addStaticJoin(String groupAddress, String source){
-		this.staticJoins.put(groupAddress, source);
+	public void addStaticJoin(String groupAddress, SRIGMPStaticJoin join){
+		this.staticJoins.put(groupAddress, join);
 	}
 	
-	public TreeMap<String, String> getStaticJoins(){
+	public TreeMap<String, SRIGMPStaticJoin> getStaticJoins(){
 		return this.staticJoins;
+	}
+	
+	public SRIGMPStaticJoin getGroupSource(String groupAddress){
+		return this.staticJoins.get(groupAddress);
 	}
 	
 	public boolean hasStaticJoin(String groupAddress){

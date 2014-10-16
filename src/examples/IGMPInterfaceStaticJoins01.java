@@ -30,6 +30,7 @@ public class IGMPInterfaceStaticJoins01 {
 				System.out.println("\nIGMP INT: " + ifaceName);
 				
 				for ( String groupAddress : iface.getStaticJoins().keySet()){
+				
 					System.out.println("\t" + groupAddress);
 				}
 				

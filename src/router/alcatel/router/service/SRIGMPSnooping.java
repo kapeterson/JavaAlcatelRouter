@@ -10,7 +10,7 @@ public class SRIGMPSnooping extends AlcatelObject {
 	
 	
 	protected boolean isMrouter = false;
-	protected TreeMap<String, String> staticJoins = new TreeMap<String, String>();
+	protected TreeMap<String, SRIGMPStaticJoin> staticJoins = new TreeMap<String, SRIGMPStaticJoin>();
 	
 	
 	public SRIGMPSnooping(){
@@ -27,20 +27,25 @@ public class SRIGMPSnooping extends AlcatelObject {
 	}
 	
 	public void addStaticJoin(String groupAddress, String source){
-		this.staticJoins.put(groupAddress, source);
+		SRIGMPStaticJoin join = new SRIGMPStaticJoin(groupAddress, source);
+		this.staticJoins.put(groupAddress, join);
 
 	}
 	
 	public void addStaticJoin(SRIGMPStaticJoin join){
-		this.staticJoins.put(join.getGroup(), join.getSource());
+		this.staticJoins.put(join.getGroup(), join);
 	}
 	
-	public TreeMap<String, String> getStaticJoins(){
+	public TreeMap<String, SRIGMPStaticJoin> getStaticJoins(){
 		return this.staticJoins;
 	}
 	
-	public String getSource(String groupAddress){
+	public SRIGMPStaticJoin getStaticJoin(String groupAddress){
 		return this.staticJoins.get(groupAddress);
+	}
+	
+	public boolean hasStaticJoin(String groupAddress){
+		return this.staticJoins.containsKey(groupAddress);
 	}
 
 }

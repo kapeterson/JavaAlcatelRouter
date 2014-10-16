@@ -2,6 +2,7 @@ package examples;
 
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.igmp.SRIGMPStaticJoin;
 import router.alcatel.router.service.SRSAPObject;
 import router.alcatel.router.service.SRSDPObject;
 import router.alcatel.router.service.SRServiceSDPObject;
@@ -35,7 +36,8 @@ public class IGMPSnoopingSDP01 {
 						System.out.format("\n\n VPLS:  %d  SDP: %-12s  STATIC JOIN LISTS\n", serviceNumber, sdp.getName());
 
 						for ( String group : sdp.IGMPSNOOPING.getStaticJoins().keySet()){
-							System.out.format("\tGROUP %-15s   SOURCE: %-15s\n", group ,sdp.IGMPSNOOPING.getSource(group) );
+							SRIGMPStaticJoin join = sdp.IGMPSNOOPING.getStaticJoin(group);
+							System.out.format("\tGROUP %-15s   SOURCE: %-15s\n", group ,join.getSource() );
 						}
 					} 
 					
