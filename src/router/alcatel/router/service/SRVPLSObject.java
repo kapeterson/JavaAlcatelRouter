@@ -45,4 +45,8 @@ public class SRVPLSObject extends SRServiceObject {
 	public TreeMap<String, SRServiceSDPObject> getSDPs(){
 		return this.sdps;
 	}
+	
+	public int getSAPCount(){
+		return this.saps.size();
+	}
 }
