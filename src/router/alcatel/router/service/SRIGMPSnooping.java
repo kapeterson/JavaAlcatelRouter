@@ -47,5 +47,9 @@ public class SRIGMPSnooping extends AlcatelObject {
 	public boolean hasStaticJoin(String groupAddress){
 		return this.staticJoins.containsKey(groupAddress);
 	}
+	
+	public int getStaticJoinCount(){
+		return this.staticJoins.size();
+	}
 
 }
