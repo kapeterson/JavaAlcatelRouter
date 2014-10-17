@@ -22,9 +22,9 @@ public class SRIPv4IndirectStaticRoute extends SRIPv4StaticRoute{
 			cmd += " tag " + this.getTag();
 		
 		if ( this.isEnabled())
-			cmd += " enabled";
+			cmd += " enable";
 		else 
-			cmd += " disabled ";
+			cmd += " disable ";
 		return cmd;
 	}
 	
