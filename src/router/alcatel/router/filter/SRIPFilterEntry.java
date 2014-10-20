@@ -27,6 +27,8 @@ public class SRIPFilterEntry extends AlcatelObject {
 	public SRIPFilterEntry(Integer filterNumber){
 		super(AlcatelObjectType.SRIPFILTERENTRY);
 		this.setName(filterNumber.toString());
+		this.setSourceAddress("0.0.0.0", "0");
+		this.setDestAddress("0.0.0.0", "0");
 		
 	}
 	

@@ -12,7 +12,7 @@ public class SRIPv4BHStaticRoute extends SRIPv4StaticRoute{
 	}
 	
 	public String getRouteCommand(){
-		String cmd = "static-route " + this.getNetwork() + "/" + this.getMask() + " black-hole";
+		String cmd = "configure router static-route " + this.getNetwork() + "/" + this.getMask() + " black-hole";
 		cmd += " preference " + this.getPreference() + " metric " + this.getMetric(); 
 		
 		

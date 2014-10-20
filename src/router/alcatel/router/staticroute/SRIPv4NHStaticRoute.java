@@ -12,7 +12,7 @@ public class SRIPv4NHStaticRoute extends SRIPv4StaticRoute{
 	 * Returns the route command used to configure the router on the 7x50
 	 */
 	public String getRouteCommand(){
-		String cmd = "static-route " + this.getNetwork() + "/" + this.getMask() + " next-hop " + this.getNextHop();
+		String cmd = "configure router static-route " + this.getNetwork() + "/" + this.getMask() + " next-hop " + this.getNextHop();
 		cmd += " preference " + this.getPreference() + " metric " + this.getMetric(); 
 		
 		

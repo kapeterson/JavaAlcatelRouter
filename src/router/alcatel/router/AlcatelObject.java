@@ -13,8 +13,15 @@ package router.alcatel.router;
 public abstract class AlcatelObject {
 
 	
+	/** Object name that is used to store things like interface name, sapname, portname etc **/
 	private String objectName;
+	
+	/** Stores the object type value **/
 	private AlcatelObjectType objectType;
+	
+	/** Parent object - e.g  Card is parent for an mda 
+	 * or a lag can be parent to a port, vpls can beg parent to SAP.
+	 */
 	protected AlcatelObject parent = null;
 	
 	/** Used to store the remark from the MSS **/
@@ -23,15 +30,22 @@ public abstract class AlcatelObject {
 	/** Release tag for tracking NR etc if it becomes available **/
 	protected int mssReleaseTag = 0;
 	
+	
 	public AlcatelObject(AlcatelObjectType objectType){
 		objectName = "";
 		this.objectType = objectType;
 	}
 	
+	
+	/** sets the name of the object **/
 	public void setName(String oName){
 		this.objectName = oName;
 	}
 	
+	/**
+	 * returns the name of the object
+	 * @return String containing name of the object
+	 */
 	public String getName(){
 		return this.objectName;
 	}

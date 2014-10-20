@@ -33,19 +33,41 @@ import router.alcatel.router.impm.*;
 public class SRChassisObject extends AlcatelHardwareObject {
 
 	
+	/** Exposes the card configuration **/
 	public SRCardConfiguration Cards = null;
+	
+	/** Exposes the System configuration **/
 	public SRSystemConfiguration System = null;
+	
+	/** Exposes the Port Configuration **/
 	public SRPortConfiguration Ports = null;
+	
+	/** Exposes the Lag Configuration **/
 	public SRLagConfiguration Lags = null;
+	
+	/** Exposes the QOS Configuration section **/
 	public SRQOSConfiguration QOS = null;
+	
+	/** Exposes Filter Configuration section **/
 	public SRFilterConfiguration Filters = null;
+	
+	/** Exposes Service Configuration Section **/
 	public SRServiceConfiguration Services = null;
+	
+	/** Exposes the Policy configuration section **/
 	public SRPolicyConfiguration Policy = null;
+	
+	/** Exposes the IMPM Configuraiton section **/
 	public SRIMPMConfiguration IMPM = null;
 	
+	
+	/** Exposes router configuratin including MPLS, Interfaces, OSPF etc **/
 	public SRRouterConfiguration Router = null;
 	
+	/** Chassis Type **/
 	public String chassisType;
+	
+	/** Maps index to the hardware object **/
 	protected Hashtable<String, AlcatelHardwareObject> hardwareIndexMap = null;
 	
 	public SRChassisObject(){
@@ -67,16 +89,35 @@ public class SRChassisObject extends AlcatelHardwareObject {
 		hardwareIndexMap = new Hashtable<String, AlcatelHardwareObject>();
 	}
 	
+	
+	/**
+	 * Does the chassis have an object with the provided index
+	 * @param indx - SNMP Index to search
+	 * @return boolean
+	 */
     public boolean hasHardwareIndex(String indx){
     	return hardwareIndexMap.containsKey(indx);
     }
     
+    /**
+     * Returns a reference to the hardware object provided in index
+     * @param indx
+     * @return Hardware Object
+     */
     public AlcatelHardwareObject getHardwareByIndex(String indx){
     	return hardwareIndexMap.get(indx);
     }
+    
+    /**
+     * adds a hardware to index mapping
+     * @param indx
+     * @param hw
+     */
     public void addHardwareIndexMap(String indx, AlcatelHardwareObject hw){
     		hardwareIndexMap.put(indx, hw);
     }
+    
+    /** Returns the chassis type **/
 	public String getChassisType(){
 		return chassisType;
 	}
@@ -98,16 +139,5 @@ public class SRChassisObject extends AlcatelHardwareObject {
 	public boolean isChassisObject(){
 		return true;
 	}
-	
 
-	/*
-	class AssociationListener implements ActionListener {
-
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-		}
-	}
-	*/
 }
