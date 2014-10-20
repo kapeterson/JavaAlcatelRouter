@@ -11,18 +11,33 @@ import java.util.regex.Pattern;
 import router.alcatel.router.service.SRSDPObject;
 import router.alcatel.router.service.SRServiceSDPObject;
 
+/**
+ * Models a base interface object.  Network and Service interfaces will extend this class
+ * @author Kris Peterson
+ *
+ */
 public class SRRouterInterface extends AlcatelObject implements  AssociationParent   {
 	
+	
+	/** IPv4 address configured on the interface **/
 	protected IPv4Address v4Address;
-	//protected InetAddress v4Address;
+
+	/** IPv6 Address of the interface ... NOT IMPLEMENTED YET **/
 	protected InetAddress v6Address;
 	
+	/** configured interface name **/
 	protected String interfaceName = "";
+	
+	/** Configured interface description **/
 	protected String description = "";
 	
+	/** List of valid binding types for the interface **/
 	protected AlcatelObjectType[] bindingTypes = new AlcatelObjectType[] {  };
+	
+	/** Object that the interface is bound to **/
 	protected SRInterfaceBinding binding = null;
 	
+	/** Simple ipv4 address regex **/
 	protected Pattern ipv4Pattern = Pattern.compile("([0-9]+)\\.([0-9]+)\\.([0-9]+)\\.([0-9]+)");
 	
 
@@ -36,10 +51,13 @@ public class SRRouterInterface extends AlcatelObject implements  AssociationPare
 	}
 	
 	
+	/** Get the binding of the interface **/
 	public SRInterfaceBinding getBinding(){
 		return this.binding;
 	}
 	
+	
+	/** Set the binding of the itnerface to the provided object **/
 	public void setInterfaceBinding(SRInterfaceBinding bindingObject){
 		
 		if ( !(bindingObject.getBindingObject() instanceof SRInterfaceBindingObject)){
@@ -66,6 +84,8 @@ public class SRRouterInterface extends AlcatelObject implements  AssociationPare
 		}
 	}
 	
+	
+	/** Set the ipv4 address of the interface **/
 	public void setIPv4Address(String ipaddr, String netmask){
 		try {
 
@@ -99,27 +119,34 @@ public class SRRouterInterface extends AlcatelObject implements  AssociationPare
 		else
 			return "0.0.0.0";
 	}
+	
 	public SRRouterInterface(String interfaceName, AlcatelObjectType oType){
 		super(oType);
 		this.interfaceName = interfaceName;
 	}
 	
+	/** Set the description of the interface **/
 	public void setDescription(String desc){
 		this.description = desc;
 	}
 	
+	/** Get the description of the interface **/
 	public String getDescription(){
 		return this.description;
 	}
+	
 	
 	public boolean isInterfaceObject(){
 		return true;
 	}
 	
+	/** get the name of the interface **/
 	public String getName(){
 		return this.interfaceName;
 	}
 	
+	
+	/** set the name of the interface **/
 	public void setName(String ifaceName){
 		this.interfaceName = ifaceName;
 	}

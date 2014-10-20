@@ -2,8 +2,14 @@ package router.alcatel.router.routerinterface;
 
 import router.alcatel.router.AlcatelObjectType;
 
+/**
+ * MOdels a Network Interface
+ * @author Kris Peterson
+ *
+ */
 public class SRNetworkInterface extends SRRouterInterface{
-		
+	
+	/** Qos policy applied to the interface **/
 	protected Integer qos = 1;
 	
 	public SRNetworkInterface(String intName){
@@ -17,10 +23,14 @@ public class SRNetworkInterface extends SRRouterInterface{
 		return true;
 	}
 	
+	
+	/** Set the number of the qos policy applied to the interface **/
 	public void setQOS(Integer networkPolicy){
 		this.qos = networkPolicy;
 	}
 
+	
+	/** Get the number of the applied QOS Policy **/
 	public Integer getQOSPolicyNumber(){
 		return this.qos;
 	}
