@@ -10,10 +10,13 @@ public abstract class QOSPolicy extends AlcatelObject{
 		description = "";
 	}
 	
+	
+	/** set the description of the QOS policy **/
 	public void setDescription(String desc){
 		this.description = desc;
 	}
 	
+	/** get the description of the QOS Policy **/
 	public String getDescription(){
 		return this.getDescription();
 	}
