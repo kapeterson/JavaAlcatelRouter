@@ -4,7 +4,7 @@ package router.alcatel.router.system;
 /**
  * Models the Router System Configuration
  * 
- * @author pete
+ * @author Kris Peterson
  *
  */
 public class SRSystemConfiguration {
