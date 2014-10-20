@@ -41,10 +41,12 @@ public class SRIGMPConfiguration {
 		
 	}
 	
+	/** Adds an ssm translation to the IGMP configuration **/
 	public void addSSM(SRSSMTranslation ssmtranslation){
 		this.ssmList.add(ssmtranslation);
 	}
 	
+	/** get the fuls list of SSM Translations **/
 	public ArrayList<SRSSMTranslation> getTranslations(){
 		return this.ssmList;
 	}
