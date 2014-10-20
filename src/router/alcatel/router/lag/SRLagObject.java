@@ -142,6 +142,8 @@ public class SRLagObject extends AlcatelObject implements SRInterfaceBindingObje
 	}
 	
 	
+	
+	/** Set the encapsulation type on the lag **/
 	public void setEncapsulation(String encapType){
 		if ( SRData.PORT_ENCAP_TYPES.contains(encapType)){
 			this.encapsulation = encapType;
@@ -150,10 +152,14 @@ public class SRLagObject extends AlcatelObject implements SRInterfaceBindingObje
 		}
 	}
 	
+	
+	/** Get the configured encapsulation type of the lag **/
 	public String getEncapsulation(){
 		return this.encapsulation;
 	}
 	
+	
+	/** Set the ethernet mode of the lag ( access/network ) **/
 	public void setMode(String mode){
 		if ( SRData.ETHERNET_MODES.contains(mode))
 			this.mode = mode;
@@ -162,6 +168,8 @@ public class SRLagObject extends AlcatelObject implements SRInterfaceBindingObje
 		}
 	}
 	
+	
+	/** Return the configured mode of the lag **/
 	public String getMode(){
 		return this.mode;
 	}
