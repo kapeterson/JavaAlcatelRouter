@@ -1,5 +1,10 @@
 package router.alcatel.router.staticroute;
 
+/**
+ * Static route interface that all static routes must implement
+ * @author KRis Peterson
+ *
+ */
 public interface StaticRoute {
 
 	public boolean isStaticRoute();

@@ -2,6 +2,11 @@ package router.alcatel.router.staticroute;
 
 import router.alcatel.router.ip.*;
 
+/**
+ * Models an indirect static route
+ * @author KRis Peterson
+ *
+ */
 public class SRIPv4IndirectStaticRoute extends SRIPv4StaticRoute{
 	
 	public SRIPv4IndirectStaticRoute(String network, String mask, String nextHop){

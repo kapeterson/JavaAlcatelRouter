@@ -1,6 +1,11 @@
 package router.alcatel.router.staticroute;
 import router.alcatel.router.ip.*;
 
+/**
+ * MOdels a 'next-hop' static route on the 7x50
+ * @author kp109p
+ *
+ */
 public class SRIPv4NHStaticRoute extends SRIPv4StaticRoute{
 	
 	public SRIPv4NHStaticRoute(String network, String mask, String nexthop){
