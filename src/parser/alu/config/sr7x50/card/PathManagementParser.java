@@ -6,10 +6,8 @@ import java.util.regex.Pattern;
 import parser.CommandHandler;
 import parser.ConfigurationSection;
 import parser.ContextChange;
-import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.card.SRMcastPathManagement;
-import router.alcatel.router.impm.SRBandwidthPolicy;
 
 public class PathManagementParser extends ConfigurationSection {
 

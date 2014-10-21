@@ -1,12 +1,10 @@
 package examples;
 
-import java.util.ArrayList;
 
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.igmp.SRSSMTranslation;
-import router.alcatel.router.routerinterface.SRRouterInterface;
-import router.alcatel.router.service.SRServiceInterface;
+
 
 public class IGMPSSM {
 	public static void main(String[] args) {

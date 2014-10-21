@@ -2,7 +2,6 @@ package examples;
 
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.service.SRSAPObject;
 import router.alcatel.router.service.SRServiceSDPObject;
 import router.alcatel.router.service.SRVPLSObject;
 
@@ -30,7 +29,6 @@ public class VPLSTest01 {
 
 				for ( String sapnumber : vpls.getSAPs().keySet()) {
 					//SRVPLSObject vpls = router.Services.getVPLS(serviceNumber);
-					SRSAPObject sap = vpls.getSAP(sapnumber);
 					System.out.println("\tSAP: " + sapnumber);
 				}
 				

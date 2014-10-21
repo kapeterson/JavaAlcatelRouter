@@ -2,7 +2,6 @@ package router.alcatel.router.card;
 
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
-import router.alcatel.router.qos.SRNetworkQueueQOSPolicy;
 
 /**
  * Models the MDA Network Ingress Configuration

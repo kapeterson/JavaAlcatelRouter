@@ -2,9 +2,7 @@ package examples;
 
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.mpls.SRMplsHop;
 import router.alcatel.router.mpls.SRMplsLSP;
-import router.alcatel.router.mpls.SRMplsPath;
 
 public class MPLSTest03_lsp {
 	public static void main(String[] args){

@@ -1,6 +1,5 @@
 package parser.alu.config.sr7x50.filter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -10,7 +9,6 @@ import parser.CommandHandler;
 import parser.ConfigurationSection;
 import parser.ContextChange;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.filter.SRFilterProtocol;
 import router.alcatel.router.filter.SRIPFilterEntry;
 
 public class IPEntryParser extends ConfigurationSection {
@@ -40,7 +38,6 @@ public class IPEntryParser extends ConfigurationSection {
 
 		//
 		
-		boolean validProtocol = false;
 
 		if ( matcher.group(1).equals("*"))
 			return;
@@ -81,7 +78,6 @@ public class IPEntryParser extends ConfigurationSection {
 	 */
 	public void exitSection(Matcher matcher){
 		
-		Integer lastdpth = this.getSectionDepth();
 		
 		if ( this.getSectionDepth() <= this.getLastCommandDepth() && this.getLastCommandDepth() <= (this.getSectionDepth() + 3)) {
 

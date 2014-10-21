@@ -8,7 +8,6 @@ import parser.ConfigurationSection;
 import parser.ContextChange;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.port.SREthernetNetwork;
-import router.alcatel.router.qos.SRNetworkQueueQOSPolicy;
 
 public class EthernetNetworkParser extends ConfigurationSection {
 

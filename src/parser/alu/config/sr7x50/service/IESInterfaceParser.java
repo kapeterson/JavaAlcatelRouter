@@ -14,7 +14,6 @@ import router.alcatel.router.routerinterface.SRInterfaceBinding;
 import router.alcatel.router.service.SRIESObject;
 import router.alcatel.router.service.SRSDPObject;
 import router.alcatel.router.service.SRServiceInterface;
-import router.alcatel.router.service.SRServiceSDPObject;
 
 public class IESInterfaceParser extends ConfigurationSection {
 	

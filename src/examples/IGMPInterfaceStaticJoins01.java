@@ -3,7 +3,6 @@ package examples;
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.igmp.SRIGMPInterface;
-import router.alcatel.router.igmp.SRSSMTranslation;
 
 public class IGMPInterfaceStaticJoins01 {
 	public static void main(String[] args) {

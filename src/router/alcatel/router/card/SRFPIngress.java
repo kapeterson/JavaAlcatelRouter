@@ -2,8 +2,6 @@ package router.alcatel.router.card;
 
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
-import router.alcatel.router.impm.SRBandwidthPolicy;
-import router.alcatel.router.qos.SRNetworkQueueQOSPolicy;
 
 /**
  * Models the Forwarding Path Ingress for IOM and MDA. It is 
@@ -20,13 +18,14 @@ public class SRFPIngress extends AlcatelObject {
 		super(AlcatelObjectType.FPINGRESS);
 		this.parent = parent;
 		
-		SRIOMObject iom = null;
+		
+		//SRIOMObject iom = null;
 		if ( parent.isMDAObject()) {
-			iom = (SRIOMObject)parent.getParent();
+			//iom = (SRIOMObject)parent.getParent();
 		} else if ( parent.isIOMObject()){
-			iom = (SRIOMObject)parent;
+			//iom = (SRIOMObject)parent;
 		} else if ( parent.isIOMFP()){
-			iom = (SRIOMObject)parent.getParent();
+			//iom = (SRIOMObject)parent.getParent();
 		
 		} else {
 			System.out.println("Invalid parent type when assigning forwarding patch to parent " + parent.getObjectType());

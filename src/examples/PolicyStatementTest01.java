@@ -2,7 +2,6 @@ package examples;
 
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.policy.SRPolicyCommunity;
 
 public class PolicyStatementTest01 {
 	
@@ -25,7 +24,6 @@ public class PolicyStatementTest01 {
 
 		
 			for ( String statementName : router.Policy.getStatements().keySet()){
-				SRPolicyCommunity comm = router.Policy.getCommunity(statementName);
 				
 				System.out.format("Statement %s \n", statementName);
 				

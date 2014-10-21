@@ -9,7 +9,6 @@ import parser.ContextChange;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.card.SRMDANetwork;
 import router.alcatel.router.card.SRMDAObject;
-import router.alcatel.router.qos.SRNetworkQueueQOSPolicy;
 
 public class MDANetworkParser extends ConfigurationSection{
 

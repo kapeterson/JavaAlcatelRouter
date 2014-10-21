@@ -2,7 +2,6 @@ package examples;
 
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.qos.*;
 public class QOSTest01 {
 	
 	public static void main(String[] args) {

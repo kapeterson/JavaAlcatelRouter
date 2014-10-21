@@ -1,9 +1,7 @@
 package parser.alu.config.sr7x50.impm;
 
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import parser.CommandHandler;
 import parser.ConfigurationSection;
 import parser.ContextChange;
 import router.alcatel.router.SRChassisObject;

@@ -1,9 +1,7 @@
 package router.alcatel.router.igmp;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.TreeMap;
 
-import router.alcatel.router.pim.SRPIMInterface;
 
 
 /**

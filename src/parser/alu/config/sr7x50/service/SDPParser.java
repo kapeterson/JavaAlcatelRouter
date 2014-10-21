@@ -6,11 +6,8 @@ import java.util.regex.Pattern;
 import parser.ConfigurationSection;
 import parser.CommandHandler;
 import parser.ContextChange;
-import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.service.SRIGMPSnooping;
-import router.alcatel.router.service.SRSAPEgress;
-import router.alcatel.router.service.SRSAPIngress;
+
 import router.alcatel.router.service.SRSDPDelivery;
 import router.alcatel.router.service.SRSDPObject;;
 

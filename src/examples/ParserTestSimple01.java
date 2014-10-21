@@ -2,7 +2,6 @@ package examples;
 
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.port.SRPortObject;
 
 public class ParserTestSimple01 {
 	public static void main(String[] args) {
@@ -21,7 +20,7 @@ public class ParserTestSimple01 {
 		try {
 			pman.ParseConfig(cfile);
 			SRChassisObject router = pman.getRouter();
-
+			System.out.println("Router name is " + router.System.getHostName());
 			
 			
 		} catch ( Exception e) {

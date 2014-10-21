@@ -2,7 +2,6 @@ package examples;
 
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
-import router.alcatel.router.routerinterface.SRInterfaceBinding;
 import router.alcatel.router.routerinterface.SRNetworkInterface;
 import router.alcatel.router.routerinterface.SRRouterInterface;
 

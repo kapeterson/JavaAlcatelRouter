@@ -3,8 +3,6 @@ package examples;
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.igmp.SRIGMPStaticJoin;
-import router.alcatel.router.service.SRSAPObject;
-import router.alcatel.router.service.SRSDPObject;
 import router.alcatel.router.service.SRServiceSDPObject;
 import router.alcatel.router.service.SRVPLSObject;
 

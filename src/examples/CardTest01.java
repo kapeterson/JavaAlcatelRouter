@@ -1,8 +1,4 @@
 package examples;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.card.SRCardObject;

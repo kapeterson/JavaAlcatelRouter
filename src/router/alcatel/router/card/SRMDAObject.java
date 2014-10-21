@@ -1,9 +1,6 @@
 package router.alcatel.router.card;
 
-import java.util.Hashtable;
-
 import router.alcatel.router.AlcatelHardwareObject;
-import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
 /**
  * Models an Alcatel MDA 

@@ -3,7 +3,6 @@ package examples;
 import parser.manager.Alcatel7x50ParserManager;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.routerinterface.SRRouterInterface;
-import router.alcatel.router.service.SRIESObject;
 import router.alcatel.router.service.SRServiceInterface;
 
 public class IESTest02 {

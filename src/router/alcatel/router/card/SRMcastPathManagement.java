@@ -2,7 +2,6 @@ package router.alcatel.router.card;
 
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
-import router.alcatel.router.impm.SRBandwidthPolicy;
 
 /**
  * Models the Multicast Path Management configuration.  IOM3/IMM and IOMb MDA

@@ -2,7 +2,6 @@ package router.alcatel.router.port;
 
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
-import router.alcatel.router.qos.SRNetworkQueueQOSPolicy;
 
 /**
  * Models a port Ethernet Network component

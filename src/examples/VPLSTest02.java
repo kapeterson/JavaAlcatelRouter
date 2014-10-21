@@ -28,7 +28,6 @@ public class VPLSTest02 {
 
 				for ( String sapnumber : vpls.getSAPs().keySet()) {
 					//SRVPLSObject vpls = router.Services.getVPLS(serviceNumber);
-					SRSAPObject sap = vpls.getSAP(sapnumber);
 					System.out.println("\tSAP: " + sapnumber);
 				}
 				
