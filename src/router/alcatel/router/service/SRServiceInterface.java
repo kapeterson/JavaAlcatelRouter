@@ -15,7 +15,10 @@ import router.alcatel.router.routerinterface.SRRouterInterface;
 public class SRServiceInterface extends SRRouterInterface implements SRServiceChild {
 	
 	
+	/** Parent service of the Interface **/
 	protected SRServiceObject parentService = null;
+	
+	/** Binding of the interface ( SAP, spoke-sdp etc) **/
 	protected AlcatelObject serviceBinding = null;
 	
 	public SRServiceInterface(String interfaceName){
@@ -26,6 +29,7 @@ public class SRServiceInterface extends SRRouterInterface implements SRServiceCh
 		setBindingTypes();
 	}
 	
+	/** set the list of valid binding types **/
 	private void setBindingTypes(){
 		this.bindingTypes = new AlcatelObjectType[] { AlcatelObjectType.SAPOBJECT, AlcatelObjectType.MESHSDPOBJECT, AlcatelObjectType.SPOKESDPOBJECT };
 	}
@@ -41,6 +45,7 @@ public class SRServiceInterface extends SRRouterInterface implements SRServiceCh
 
 	}
 	
+	/** Set the binding of the interface to the provided object **/
 	public void setServiceBinding(AlcatelObject serviceBinding){
 		if (Arrays.asList(this.bindingTypes).contains(serviceBinding.getObjectType()) ){
 			this.serviceBinding = serviceBinding;
@@ -49,10 +54,14 @@ public class SRServiceInterface extends SRRouterInterface implements SRServiceCh
 			System.exit(1);
 		}
 	}
+	
+	/** Set the parent service for the interface to the provided service object**/
 	public void setParentService(SRServiceObject parentService){
 		this.parentService = parentService;
 	}
 	
+	
+	/** Get the parent object of the interface **/
 	public SRServiceObject getParentService(){
 		return this.parentService;
 	}

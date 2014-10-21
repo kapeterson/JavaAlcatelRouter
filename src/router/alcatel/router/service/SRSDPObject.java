@@ -6,11 +6,18 @@ import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.AssociationChild;
 
+/**
+ * Models a Service SDP Object
+ * @author KRis Peterson
+ *
+ */
 public class SRSDPObject extends SRServiceObject implements AssociationChild {
 	
 	
 	/** Array List containing pointer to every association (interface, vpls, etc)**/
 	protected ArrayList<AlcatelObject> associations = new ArrayList<AlcatelObject>();
+	
+	/** Configured Delivery of the SDP **/
 	protected SRSDPDelivery delivery = SRSDPDelivery.gre;
 	
 	
@@ -48,10 +55,13 @@ public class SRSDPObject extends SRServiceObject implements AssociationChild {
 		return true;
 	}
 	
+	/** Get the configured delivery of the SDP **/
 	public SRSDPDelivery getDelivery(){
 		return this.delivery;
 	}
 	
+	
+	/** Set the delivery method of the SDP **/
 	public void setDelivery(SRSDPDelivery delivery){
 		this.delivery = delivery;
 	}
