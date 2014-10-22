@@ -28,7 +28,7 @@ public class OSPFAreaTest01 {
 			System.out.format("AREA:  %s  \n",  areaname);
 			for ( String intName : area.getInterfaces().keySet() ){
 				SROSPFInterface iface = area.getInterface(intName);
-				System.out.format("\tInterface: %-15s Metric: %-6d  Interface-Type: %-10s\n", intName, iface.getMetric(), iface.getInterfaceType());
+				System.out.format("\tInterface: %-15s Metric: %-6d  Interface-Type: %-10b Passive: %-5s \n", intName, iface.getMetric(), iface.getInterfaceType(), iface.isPassive());
 			}
 			
 		}

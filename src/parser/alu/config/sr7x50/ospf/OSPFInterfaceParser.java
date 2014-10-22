@@ -19,9 +19,14 @@ public class OSPFInterfaceParser extends ConfigurationSection{
 		this.ospfInterface = new SROSPFInterface(intName);
 		this.commandHash.put(Pattern.compile("^metric ([0-9]+)"), new CommandHandler("setMetric", true));
 		this.commandHash.put(Pattern.compile("^interface\\-type (.*)"), new CommandHandler("setInterfaceType", true));
+		this.commandHash.put(Pattern.compile("^passive$"), new CommandHandler("setPassive", true));
 
 	}
 	
+	
+	public void setPassive(Matcher matcher ){
+		this.ospfInterface.setPassiveValue(true);
+	}
 	
 	public void setInterfaceType(Matcher matcher){
 		this.ospfInterface.setInterfaceType(matcher.group(1));
