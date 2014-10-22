@@ -294,4 +294,8 @@ public abstract class AlcatelObject {
 	public boolean isIGMPSnooping(){
 		return ( this.objectType == AlcatelObjectType.IGMPSNOOPING);
 	}
+	
+	public boolean isOSPFInterface(){
+		return ( this.objectType == AlcatelObjectType.OSPFINTERFACE);
+	}
 }

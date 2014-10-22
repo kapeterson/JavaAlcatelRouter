@@ -27,7 +27,8 @@ public class OSPFAreaTest01 {
 			//System.out.println("Areaname is of type " + areaname.getClass().toString() + " areaname ");
 			System.out.format("AREA:  %s  \n",  areaname);
 			for ( String intName : area.getInterfaces().keySet() ){
-				System.out.format("\tInterface: %-15s \n", intName);
+				SROSPFInterface iface = area.getInterface(intName);
+				System.out.format("\tInterface: %-15s Metric: %-6d  Interface-Type: %-10s\n", intName, iface.getMetric(), iface.getInterfaceType());
 			}
 			
 		}

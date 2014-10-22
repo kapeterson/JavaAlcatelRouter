@@ -34,4 +34,8 @@ public class SROSPFConfiguration {
 	public TreeMap<String, SROSPFArea> getAreas(){
 		return this.areas;
 	}
+	
+	public boolean hasArea(String areaName){
+		return this.areas.containsKey(areaName);
+	}
 }
