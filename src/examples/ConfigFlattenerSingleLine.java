@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import router.alcatel.flattener.ConfigFlattener;
 
-public class ConfigFlattenerTest {
+public class ConfigFlattenerSingleLine {
 
 	public static void main(String[] args) throws IOException{
 		
@@ -16,6 +16,18 @@ public class ConfigFlattenerTest {
 		String configfile = args[0];
 		ConfigFlattener flattener = new ConfigFlattener();
 		flattener.flattenConfig(configfile);
-		flattener.traverseTree();
+		flattener.returnToRootNode();
+		
+		String cmd = "";
+		while ( (cmd = flattener.getNextCommand()) != null){
+			System.out.println(cmd);
+
+		}
+
+		//while ( flattener.getNextCommand()){
+			
+		//}
+		//flattener.flattenConfig(configfile);
 	}
+	
 }

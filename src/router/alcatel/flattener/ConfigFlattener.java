@@ -14,10 +14,18 @@ import java.util.Queue;
 public class ConfigFlattener {
 
 	protected String fileName = "";
-	
+	protected Node rootNode = null;
 	protected PrintWriter writer = null;
+	
+	protected Node activeNode = null;
+	protected ArrayList<String> configList = null;
+	
 	public ConfigFlattener(){
 		
+	}
+	
+	public ConfigFlattener(String fname){
+		this.fileName = fname;
 	}
 	
 
@@ -30,9 +38,10 @@ public class ConfigFlattener {
 		Node rootNode = new Node(null, "root", -1);
 		rootNode.setRoot();
 		Node currentNode = rootNode;
-		
+		this.rootNode = rootNode;
 		String lastline = "";
 		String thisline = "";
+		
 		try {
 			
 			BufferedReader br = new BufferedReader(new FileReader(filename));
@@ -141,7 +150,6 @@ public class ConfigFlattener {
 		
 		System.out.println("We done");
 		
-		traverseTree(rootNode);
 	}
 	
 	public void flattenConfig(String configFile, String outputFileName) throws IOException{
@@ -242,31 +250,29 @@ public class ConfigFlattener {
 			System.out.println(line);
 	}
 	
-	public void traverseTree(Node rootNode){
+	public void traverseTree(){
 		System.out.println("Going to traverse starting at " + rootNode.getData().trim());
 		
 		boolean keepon = true;
 		
-		Node currentNode = rootNode;
+		this.activeNode = this.rootNode;
 		
-		ArrayList<String> configList = new ArrayList<String>();
-		//configList.add(currentNode.getData().trim());
+		this.configList = new ArrayList<String>();
+
+		
 		while ( keepon){
-			//System.out.print("Looking at node " + currentNode.getData().trim() + "\n");
-			
-			//System.out.println(currentNode.getData().trim());
-		
-			if ( currentNode.getChildCount() == 0) {
+
+			if ( this.activeNode.getChildCount() == 0) {
 				
-				if ( currentNode.getData().trim().equals("exit all")){
+				if ( this.activeNode.getData().trim().equals("exit all")){
 					//System.out.println("exit all");
 					String ret = configList.remove(configList.size()-1);
-					currentNode = currentNode.getParent();
+					this.activeNode = this.activeNode.getParent();
 					continue;
 				}
 				
 				
-				if ( !currentNode.getData().trim().equals("configure")) {
+				if ( !this.activeNode.getData().trim().equals("configure")) {
 					
 					String cmd = "";
 					
@@ -280,25 +286,25 @@ public class ConfigFlattener {
 				
 				String  ret = configList.remove(configList.size()-1);
 				//System.out.println("\tPopped config " + ret);
-				currentNode = currentNode.getParent();
+				this.activeNode = this.activeNode.getParent();
 				
 			} else {
 				
-				Node nextNode = getUnvisitedNode(currentNode);
+				Node nextNode = getUnvisitedNode(this.activeNode);
 				
 				if ( nextNode == null){
 					
-					if ( currentNode.isRoot()){
+					if ( this.activeNode.isRoot()){
 						System.out.println("No more unvisited for root");
 						System.exit(1);
 					}
 					
-					currentNode = currentNode.getParent();
+					this.activeNode = this.activeNode.getParent();
 					String val = configList.remove(configList.size()-1);
 					//System.out.println("\tPopped config element after getting null next node " + val);
 				} else {
 					configList.add(nextNode.getData().trim());
-					currentNode = nextNode;
+					this.activeNode = nextNode;
 				}
 			}
 			
@@ -306,6 +312,67 @@ public class ConfigFlattener {
 		}
 	}
 	
+	
+	public void returnToRootNode(){
+		this.activeNode = this.rootNode;
+		this.configList = new ArrayList<String>();
+	}
+	
+	
+	public String getNextCommand(){
+		
+		
+		while ( this.activeNode.getChildCount() > 0 ) {
+		
+	
+			
+			Node nextNode = getUnvisitedNode(this.activeNode);
+			
+			if ( nextNode == null){
+				
+				if ( this.activeNode.isRoot()){
+					//System.out.println("No more unvisited for root");
+					//System.exit(1);
+					return null;
+				}
+				
+				this.activeNode = this.activeNode.getParent();
+				String val = configList.remove(configList.size()-1);
+				//System.out.println("\tPopped config element after getting null next node " + val);
+			} else {
+				configList.add(nextNode.getData().trim());
+				this.activeNode = nextNode;
+			}
+		}
+		
+			// at this point, the node will have 0 children
+			if ( this.activeNode.getData().trim().equals("exit all")){
+				//System.out.println("exit all");
+				String ret = configList.remove(configList.size()-1);
+				this.activeNode = this.activeNode.getParent();
+				return "exit all";
+			}
+			
+			
+			if ( !this.activeNode.getData().trim().equals("configure")) {
+				
+				String cmd = "";
+				
+				for ( String newcmd : configList){
+					cmd += " " + newcmd.trim();
+				}
+				
+				String  ret = configList.remove(configList.size()-1);
+				this.activeNode = this.activeNode.getParent();
+				
+				return cmd;
+			}
+			
+
+	
+		
+		return "";
+	}
 	
 	public Node getUnvisitedNode(Node node){
 		
