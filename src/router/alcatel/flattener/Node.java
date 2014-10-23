@@ -61,8 +61,10 @@ public class Node {
 	
 	
 	public Node popChild(){
+		if ( childList.size() > 0)
+			return this.childList.remove(childList.size()-1);
 		
-		return this.childList.remove(childList.size()-1);
+		return null;
 		
 	}
 	
@@ -72,6 +74,10 @@ public class Node {
 	
 	public boolean isRoot(){
 		return this.isRoot;
+	}
+	
+	public void setData(String data){
+		this.data = data;
 	}
 	
 }

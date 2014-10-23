@@ -4,17 +4,23 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Queue;
 
 
 public class ConfigFlattener {
 
 	protected String fileName = "";
+	
+	protected PrintWriter writer = null;
 	public ConfigFlattener(){
 		
 	}
 	
+
 	public void flattenConfig(String filename) throws IOException{
 		this.fileName = filename;
 		
@@ -36,8 +42,8 @@ public class ConfigFlattener {
 				
 				thisline = line.trim();
 				
-				if ( line.trim().equals("console")){
-					System.out.println("we got us a console");
+				if ( line.trim().contains("parameters")){
+					System.out.println("OK");
 				}
 				linecount++;
 				
@@ -48,17 +54,18 @@ public class ConfigFlattener {
 				if ( line.trim().matches("^echo.*\".*\"")){
 					if ( line.contains("QoS Policy")){
 						//System.exit(1);
-						keepgoing = false;
+						//keepgoing = false;
 					}
 					continue;
 				}
 				
 				int depth = line.length() - line.replaceAll("^\\s+",  "").length();
 				
-				System.out.println("\n" + depth + "  " + line.trim());
+				//System.out.println("\n" + depth + "  " + line.trim());
 
 				if ( line.trim().equals("exit")){
 					
+		
 					if ( depth < lastDepth ) {
 						if ( !currentNode.isRoot()){
 							//System.out.println("** Received exit DEpth is less setting root to current node's parent with data = " + currentNode.getParent().getData().trim() + " **");
@@ -74,28 +81,28 @@ public class ConfigFlattener {
 						
 						//System.out.println("** Received exit DEpth is the same so not doing anything but possibly popping child**");
 
-						//if (!currentNode.getData().trim().contains("create") && !currentNode.getData().trim().contains("interface") && !currentNode.getData().trim().contains("rmon") ){
+						if (!currentNode.getData().trim().contains("create") && !currentNode.getData().trim().contains("interface ") && !currentNode.getData().trim().contains("rmon") ){
 							
 							
 							//for ( Node childNode : currentNode.getParent().getChildren()){
 								//System.out.println("Child " + childNode.getData().trim());
 							//}
-							//Node ret = currentNode.getParent().popChild();
+							Node ret = currentNode.getParent().popChild();
 							//System.out.println("Popped child " + ret.getData().trim());
 							//ret.setVisited();
-						//}
+						}
+						
+						this.checkForHacks(currentNode);
+
+						
 					}
-					
 				} else if ( depth == lastDepth ) {
 		
 					//System.out.println("***Depth is the same as the last line setting parent to current node's parent ->" + currentNode.getParent().getData().trim() + "<-  ***");
 					Node newNode = new Node(currentNode.getParent(), line.trim(), depth);
 					currentNode = newNode;
 					currentNode.getParent().addChild(newNode);
-					
-					if ( newNode.getData().trim().equals("console")){
-						System.out.println("Added console");
-					}
+
 					
 				} else if ( depth > lastDepth){
 					
@@ -107,8 +114,8 @@ public class ConfigFlattener {
 				
 						currentNode = newNode;
 					} catch ( Exception err){
-						System.out.println("Error on line " + linecount + " " + err.getMessage());
-						System.out.println("\n\n" + line + "\n\n");
+						System.out.println("# Error on line " + linecount + " " + err.getMessage());
+						System.out.println("\n\n#" + line + "\n\n");
 						System.exit(1);
 					}
 					
@@ -135,6 +142,104 @@ public class ConfigFlattener {
 		System.out.println("We done");
 		
 		traverseTree(rootNode);
+	}
+	
+	public void flattenConfig(String configFile, String outputFileName) throws IOException{
+		this.writer = new PrintWriter(outputFileName, "UTF-8");
+		this.writeLine("#  Flattening config for " + configFile);
+		//DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+		this.writeLine("# " + Calendar.getInstance().getTime().toString() );
+		this.flattenConfig(configFile);
+		writer.close();
+		
+	}
+	
+	public void checkForHacks(Node node){
+		
+		String cmdString = node.getData().trim();
+		if ( node.getData().trim().equals("rmon") && node.getChildCount() == 0){
+			
+			Node parent = node.getParent();
+			
+			parent.popChild();
+			
+			if ( parent.getChildCount() == 0){
+				parent.getParent().popChild();
+			}
+			
+			return;
+		}
+		
+		if ( cmdString.matches("^policy [0-9]+ create$") && node.getChildCount() == 0 && node.getParent().getData().trim().equals("cpu-protection")){
+			node.setData(node.getData().trim() + " no description");
+			return;
+		}
+		
+		if ( cmdString.matches("^log [0-9]+ create$") && node.getParent().getData().trim().equals("filter") && node.getChildCount() == 0){
+			node.setData(node.getData().trim() + " no description");
+			return;
+			
+		}
+		
+		
+		// sap ingress/egress hack
+		
+		if ( cmdString.matches("^queue [0-9]+ customer [0-9]+ create") || cmdString.matches("queue [0-9]+.*create$") ){
+			String parentString = node.getParent().getData().trim();
+			if ( parentString.matches("sap\\-(ingress|egress) [0-9]+.*") ) {
+				node.setData(node.getData().trim() + " rate max");
+				return;
+			}
+		}
+		
+		if ( cmdString.matches("^interface\\-parameters")){
+			
+			if ( node.getChildCount() == 0)
+				node.getParent().popChild();
+			
+			return;
+		}
+		
+		if ( cmdString.matches("^interface .* create$")){
+			
+			String parentString = node.getParent().getData().trim();
+			
+			if ( parentString.matches("ies [0-9]+ customer [0-9]+ create")){
+				node.setData(node.getData().trim() + " no shutdown");
+			}
+		}
+		
+		
+		if ( cmdString.contains("split-horizon-group \"") && node.getParent().getData().contains("vpls")){
+			node.setData(node.getData().trim() + " no description");
+			return;
+		}
+		
+		if ( cmdString.matches("^sap .* create$") ) {
+			node.setData(node.getData().trim() + " no description");
+			return;
+		}
+		
+		if ( cmdString.matches("^interface \".*\"$")){
+			
+			String parentString = node.getParent().getData().trim();
+			if ( parentString.trim().equals("interface-parameters")){
+				node.setData(node.getData().trim() + " no shutdown");
+
+			}
+			
+		}
+	}
+	
+	public void writeLine(String line){
+		
+		if ( this.writer != null) {
+			writer.println(line);
+			writer.flush();
+		}
+		else
+			System.out.println(line);
 	}
 	
 	public void traverseTree(Node rootNode){
@@ -169,7 +274,8 @@ public class ConfigFlattener {
 						cmd += " " + newcmd.trim();
 					}
 					
-					System.out.println(cmd);
+					//System.out.println(cmd);
+					this.writeLine(cmd);
 				}
 				
 				String  ret = configList.remove(configList.size()-1);
