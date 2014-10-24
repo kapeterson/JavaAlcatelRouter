@@ -16,6 +16,9 @@ public class SRInterfaceConfiguration {
 	protected TreeMap<String, SRRouterInterface> interfaces = null;
 	
 	
+	/** IP to interface Map **/
+	protected TreeMap<String, String> ipMap = new TreeMap<String, String>();
+	
 	//protected List<ConfigurationEventListener> eventListeners = new ArrayList<ConfigurationEventListener>();
 	
 	public SRInterfaceConfiguration(){
@@ -28,6 +31,10 @@ public class SRInterfaceConfiguration {
 	 */
 	public void addInterface(SRRouterInterface iface){
 		this.interfaces.put(iface.getName(), iface);
+		
+		if ( !iface.getIPv4HostAddress().equals("0.0.0.0")){
+			ipMap.put(iface.getIPv4HostAddress(), iface.getName());
+		}
 	}
 	
 	
@@ -51,6 +58,29 @@ public class SRInterfaceConfiguration {
 		return this.interfaces.get(intName);
 	}
 	
+	
+	/** Does the router have an interface with the IP configured **/
+	public boolean hasIPv4Configured(String ip){
+		
+		return this.ipMap.containsKey(ip);
+	}
+	
+	
+	/** Get the name of the interface with the ip address **/
+	public String getInterfaceNameByIPv4Address(String ip){
+		return this.ipMap.get(ip);
+	}
+	
+	
+	public SRRouterInterface getInterfaceByIPv4Address(String ip){
+		
+		if ( this.hasIPv4Configured(ip)) {
+			String intName = this.getInterfaceNameByIPv4Address(ip);
+			return this.getInterface(intName);
+		}
+		
+		return null;
+	}
 	
 	/** Does the router have a cofnigured interface with the provided name ? **/
 	public boolean hasInterface(String intName){
