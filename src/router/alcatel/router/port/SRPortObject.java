@@ -31,6 +31,11 @@ public class SRPortObject extends AlcatelObject implements AssociationChild, SRI
 		
 	}
 	
+	
+	public SRPortObject(String portName){
+		super(AlcatelObjectType.PHYSICALPORT);
+		this.setName(portName);
+	}
 	/**
 	 * Set the port to a shutdown state
 	 */
