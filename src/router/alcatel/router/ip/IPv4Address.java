@@ -45,8 +45,10 @@ public class IPv4Address extends IPAddress {
 			this.bitmask = this.bitmask << 31;
 			this.bitmask = this.bitmask >> 31;
 			//System.out.println("Full bitmask = " + Integer.toBinaryString(this.bitmask));
-			this.bitmask = (this.bitmask >> (32 - this.netmask ) ) << ( 32 - this.netmask );
-			this.bitmask = this.bitmask & 0xFF;
+			
+			int shiftamount = ( 32 - this.netmask );
+			this.bitmask = (this.bitmask >> (shiftamount ) ) << ( shiftamount );
+			this.bitmask = this.bitmask & (( 0x01 << 31) >> 31);
 		}
 		//System.out.println("init bitmask to " + Integer.toBinaryString(this.bitmask) + " for " + ipAddress + "/" + mask);
 	}
@@ -122,8 +124,8 @@ public class IPv4Address extends IPAddress {
 	public boolean isNetworkMatch(IPv4Address addr){
 		
 		long bmask = this.getBitMask();
-		long addr1 = (this.loweraddress & this.getBitMask()) & 0xFF;
-		long addr2 = (addr.loweraddress & this.getBitMask()) & 0xFF;
+		long addr1 = (this.loweraddress & this.getBitMask()) & 0xFFFFFFFF;
+		long addr2 = (addr.loweraddress & this.getBitMask()) & 0xFFFFFFFF;
 		
 		return (addr1 == addr2);
 	}

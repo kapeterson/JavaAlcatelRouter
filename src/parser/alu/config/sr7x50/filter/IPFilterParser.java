@@ -21,11 +21,22 @@ public class IPFilterParser extends ConfigurationSection {
 		
 		this.commandHash.put(Pattern.compile("^entry ([0-9]+) create"), new CommandHandler("setEntryContext", true));
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
+		this.commandHash.put(Pattern.compile("^default\\-action (forward|drop)$"), new CommandHandler("setDefaultAction", true));
 		
 		
 
 	}
 	
+	
+	public void setDefaultAction(Matcher matcher){
+		String action = matcher.group(1);
+		
+		if ( action.trim().equals("forward")){
+			this.filter.setDefaultAction(FilterAction.Forward);
+		} else {
+			this.filter.setDefaultAction(FilterAction.Drop);
+		}
+	}
 	
 	public void setEntryContext(Matcher matcher){
 		//System.out.println("OK");

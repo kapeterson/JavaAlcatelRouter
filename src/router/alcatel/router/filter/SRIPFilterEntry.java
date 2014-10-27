@@ -10,7 +10,7 @@ import router.alcatel.router.ip.IPv4Address;
  * @author Kris Peterson
  *
  */
-public class SRIPFilterEntry extends AlcatelObject {
+public class SRIPFilterEntry extends SRFilterEntryObject {
 	
 	/** Description of the filter entry **/
 	protected String description = "";
@@ -24,8 +24,20 @@ public class SRIPFilterEntry extends AlcatelObject {
 	/** Protocol to match for the filter entry.  Valid FilterProtocol enum type **/
 	protected String protocol = "none";
 	
+	/** start port for match port range **/
+	protected int startSrcPort = -1;
+	
+	/** end port for match port range **/
+	protected int endSrcPort = -1;
+	
+	/** start port for dst port range **/
+	protected int startDstPort = -1;
+	
+	/** end port for dst port range **/
+	protected int endDstPort = -1;
+	
 	public SRIPFilterEntry(Integer filterNumber){
-		super(AlcatelObjectType.SRIPFILTERENTRY);
+		super(filterNumber);
 		this.setName(filterNumber.toString());
 		this.setSourceAddress("0.0.0.0", "0");
 		this.setDestAddress("0.0.0.0", "0");
@@ -45,6 +57,9 @@ public class SRIPFilterEntry extends AlcatelObject {
 	
 	/** Set the Source Address of the IP Filter Entry **/
 	public void setSourceAddress(String ipString, String mask){
+		if ( ipString.equals("68.95.208.0")){
+			//System.out.println("Pause");
+		}
 		this.srcIP = new IPv4Address(ipString, mask);
 
 	}
@@ -86,8 +101,14 @@ public class SRIPFilterEntry extends AlcatelObject {
 		this.protocol = protocol;
 	}
 	
+	
+	/** Do the source and destination IP addresses match the entry **/
 	public boolean isIPMatch(String sourceIP, String destinationIP){
 		
+		String entry = this.getName();
+		int entryNumber = this.getNumber();
+		
+
 		IPv4Address srcIP = new IPv4Address(sourceIP, "0");
 		IPv4Address dstIP = new IPv4Address(destinationIP, "0");
 		
@@ -99,9 +120,45 @@ public class SRIPFilterEntry extends AlcatelObject {
 
 	}
 	
+	
+	/** Does the protocol match **/
 	public boolean isProtocolMatch(String packetProtocol){
-		return ( this.getProtocol().toLowerCase().equals(packetProtocol.toLowerCase()));
+		return ( this.protocol.toLowerCase().equals("none") || this.getProtocol().toLowerCase().equals(packetProtocol.toLowerCase()));
 	}
 
+	
+	/** Is the port within the configured port range **/
+	public boolean isSrcPortMatch(int port){
+		
+		if ( this.protocol.toLowerCase().equals("none"))
+			return true;
+		
+		return ( this.startSrcPort == -1 || ( port >= this.startSrcPort && port <= this.endSrcPort));
+	}
+	
+	
+	/** Is the port within the configured port range **/
+	public boolean isDstPortMatch(int port){
+		if ( this.protocol.toLowerCase().equals("none"))
+			return true;
+		
+		return ( this.startDstPort == -1 || ( port >= this.startDstPort && port <= this.endDstPort));
+	}
+	
+	
+	/** set the source port ranges **/
+	public void setSrcPorts(int startPort, int endPort){
+		this.startSrcPort = startPort;
+		this.endSrcPort = endPort;
+	}
 
+	/** set the dest port ranges **/
+	public void setDstPorts(int startPort, int dstPort){
+		
+		if ( this.getNumber() == 3656){
+			//System.out.println("Check setting");
+		}
+		this.startDstPort = startPort;
+		this.endDstPort = dstPort;
+	}
 }

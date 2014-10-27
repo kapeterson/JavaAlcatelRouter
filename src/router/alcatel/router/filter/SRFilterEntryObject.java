@@ -1,12 +1,15 @@
 package router.alcatel.router.filter;
 
+import router.alcatel.router.AlcatelObject;
+import router.alcatel.router.AlcatelObjectType;
+
 
 /**
  * Models a filter entry, ip, mac and ipv6 will extend this object
  * @author Kris Peterson
  *
  */
-public abstract class SRFilterEntryObject {
+public abstract class SRFilterEntryObject extends AlcatelObject {
 	
 	/** Number of the entry **/
 	public Integer entryNumber = 0;
@@ -18,12 +21,15 @@ public abstract class SRFilterEntryObject {
 	public FilterAction action = FilterAction.Drop;
 	
 	public SRFilterEntryObject(){
+		super(AlcatelObjectType.SRIPFILTERENTRY);
 		this.entryNumber = 0;
 		this.entryDescription = "";
 		this.action = FilterAction.Drop;
 	}
 	
 	public SRFilterEntryObject(Integer entryNumber){
+		super(AlcatelObjectType.SRIPFILTERENTRY);
+
 		this.entryNumber = entryNumber;
 		this.entryDescription = "";
 		this.action = FilterAction.Drop;
@@ -41,6 +47,10 @@ public abstract class SRFilterEntryObject {
 		this.entryNumber = num;
 	}
 	
+	
+	public int getNumber(){
+		return this.entryNumber;
+	}
 	
 	public boolean isFilterEntryObject(){
 		return true;

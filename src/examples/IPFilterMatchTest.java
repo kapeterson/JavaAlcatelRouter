@@ -20,10 +20,12 @@ public class IPFilterMatchTest {
 
 		Alcatel7x50ParserManager pman = new Alcatel7x50ParserManager();
 
-		String srcIP = "155.179.73.1";
-		String dstIP = "69.235.114.151";
-		String protocol = "tcp";
-		int portNumber = 0;
+		String srcIP = "151.164.62.106";
+		String dstIP = "69.235.114.150";
+		
+		String protocol = "udp";
+		int srcPort = 1023;
+		int dstPort = 69;
 		
 		try {
 			pman.ParseConfig(cfile);
@@ -34,17 +36,28 @@ public class IPFilterMatchTest {
 			
 			for ( Integer filterNuber : router.Filters.getIPFilters().keySet()){
 				
-				System.out.println("Filter " + filterNuber);
+				System.out.println("\n\nFilter " + filterNuber);
 				SRIPFilterObject filter = router.Filters.getIPFilter(filterNuber);
+				System.out.println("\tDefault Action = " + filter.getDefaultAction());
 				
+
 				for ( Integer entryNumber : filter.getEntries().keySet()){
-					
+					if ( entryNumber == 3656){
+						//System.out.println("Pause");
+					}
 					SRIPFilterEntry ipEntry = filter.getEntry(entryNumber);
 					
-					if ( ipEntry.isIPMatch(srcIP, dstIP) && ipEntry.isProtocolMatch(protocol)){
+					if ( ipEntry.isIPMatch(srcIP, dstIP) ){
 						
-						System.out.format("Match on Filter %-6d   Entry %-5d  Protocl: %-8s\n", filterNuber, entryNumber, protocol);
-						break;
+			
+						if ( ipEntry.isProtocolMatch(protocol) ){
+							
+							if ( ipEntry.isSrcPortMatch(srcPort) && ipEntry.isDstPortMatch(dstPort)) {
+								System.out.format("\tMatch on Filter %-6d   Entry %-5d  Protocl: %-8s\n", filterNuber, entryNumber, protocol);
+								break;
+							}
+
+						}
 					}
 					
 				}

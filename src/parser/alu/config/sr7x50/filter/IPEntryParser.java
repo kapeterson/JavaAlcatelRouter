@@ -23,6 +23,12 @@ public class IPEntryParser extends ConfigurationSection {
 		this.commandHash.put(Pattern.compile("^src\\-ip (.*)\\/([0-9]+)"), new CommandHandler("setSrcIP", true));
 		this.commandHash.put(Pattern.compile("^dst\\-ip (.*)\\/([0-9]+)"), new CommandHandler("setDstIP", true));
 		this.commandHash.put(Pattern.compile("^match protocol (.*)"), new CommandHandler("setProtocol", true));
+		
+		this.commandHash.put(Pattern.compile("^src\\-port eq ([0-9]+)"), new CommandHandler("setSourcePortSingle", true));
+		this.commandHash.put(Pattern.compile("^src\\-port range ([0-9]+) ([0-9]+)"), new CommandHandler("setSourcePortRange", true));
+		
+		this.commandHash.put(Pattern.compile("^dst\\-port eq ([0-9]+)"), new CommandHandler("setDestinationPortSingle", true));
+		this.commandHash.put(Pattern.compile("^dst\\-port range ([0-9]+) ([0-9]+)"), new CommandHandler("setDestinationPortRange", true));
 
 		
 		if ( this.validProtocols == null ){
@@ -31,6 +37,33 @@ public class IPEntryParser extends ConfigurationSection {
 
 		}
 		this.entry = new SRIPFilterEntry(entryNumber);
+	}
+	
+	public void setDestinationPortSingle(Matcher matcher){
+		
+		int port = Integer.parseInt(matcher.group(1));
+		this.entry.setDstPorts(port, port);
+	}	
+	
+	
+	public void setDestinationPortRange(Matcher matcher){
+		int startport = Integer.parseInt(matcher.group(1));
+		int endport = Integer.parseInt(matcher.group(2));
+
+		this.entry.setDstPorts(startport, endport);
+	}
+	
+	public void setSourcePortSingle(Matcher matcher){
+		
+		int port = Integer.parseInt(matcher.group(1));
+		this.entry.setSrcPorts(port, port);
+	}
+	
+	public void setSourcePortRange(Matcher matcher){
+		int startport = Integer.parseInt(matcher.group(1));
+		int endport = Integer.parseInt(matcher.group(2));
+
+		this.entry.setSrcPorts(startport, endport);
 	}
 	
 	
