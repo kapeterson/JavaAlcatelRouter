@@ -20,8 +20,8 @@ public class IPFilterMatchTest {
 
 		Alcatel7x50ParserManager pman = new Alcatel7x50ParserManager();
 
-		String srcIP = "151.164.62.106";
-		String dstIP = "69.235.114.150";
+		String srcIP = "68.94.156.1";
+		String dstIP = "0.0.0.0";
 		
 		String protocol = "udp";
 		int srcPort = 1023;
@@ -50,14 +50,14 @@ public class IPFilterMatchTest {
 					if ( ipEntry.isIPMatch(srcIP, dstIP) ){
 						
 			
-						if ( ipEntry.isProtocolMatch(protocol) ){
+						//if ( ipEntry.isProtocolMatch(protocol) ){
 							
-							if ( ipEntry.isSrcPortMatch(srcPort) && ipEntry.isDstPortMatch(dstPort)) {
+							//if ( ipEntry.isSrcPortMatch(srcPort) && ipEntry.isDstPortMatch(dstPort)) {
 								System.out.format("\tMatch on Filter %-6d   Entry %-5d  Protocl: %-8s\n", filterNuber, entryNumber, protocol);
 								break;
-							}
+							//}
 
-						}
+						//}
 					}
 					
 				}

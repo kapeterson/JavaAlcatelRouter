@@ -112,8 +112,8 @@ public class SRIPFilterEntry extends SRFilterEntryObject {
 		IPv4Address srcIP = new IPv4Address(sourceIP, "0");
 		IPv4Address dstIP = new IPv4Address(destinationIP, "0");
 		
-		boolean srcMatch = this.srcIP.isNetworkMatch(srcIP);
-		boolean dstMatch = this.dstIP.isNetworkMatch(dstIP);
+		boolean srcMatch = ( sourceIP.equals("0.0.0.0") ) ? true : this.srcIP.isNetworkMatch(srcIP);
+		boolean dstMatch = (destinationIP.equals("0.0.0.0") ) ? true : this.dstIP.isNetworkMatch(dstIP);
 		return ( srcMatch && dstMatch);
 		
 		//return ( this.srcIP.isNetworkMatch(srcIP) && this.dstIP.isNetworkMatch(dstIP));
