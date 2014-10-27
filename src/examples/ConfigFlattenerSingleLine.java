@@ -15,7 +15,8 @@ public class ConfigFlattenerSingleLine {
 		
 		String configfile = args[0];
 		ConfigFlattener flattener = new ConfigFlattener();
-		flattener.flattenConfig(configfile);
+		
+		flattener.populateConfig(configfile);
 		flattener.returnToRootNode();
 		
 		String cmd = "";
@@ -24,10 +25,7 @@ public class ConfigFlattenerSingleLine {
 
 		}
 
-		//while ( flattener.getNextCommand()){
-			
-		//}
-		//flattener.flattenConfig(configfile);
+
 	}
 	
 }

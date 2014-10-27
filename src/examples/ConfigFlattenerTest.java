@@ -16,6 +16,6 @@ public class ConfigFlattenerTest {
 		String configfile = args[0];
 		ConfigFlattener flattener = new ConfigFlattener();
 		flattener.flattenConfig(configfile);
-		flattener.traverseTree();
+		//flattener.traverseTree();
 	}
 }

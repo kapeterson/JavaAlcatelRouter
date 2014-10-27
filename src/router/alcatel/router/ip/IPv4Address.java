@@ -40,11 +40,14 @@ public class IPv4Address extends IPAddress {
 		this.netmask = Integer.parseInt(mask);
 		
 		// Conver the bitmask to binary encoded integer
-		this.bitmask = 0x01;
-		this.bitmask = this.bitmask << 31;
-		this.bitmask = this.bitmask >> 31;
-		//System.out.println("Full bitmask = " + Integer.toBinaryString(this.bitmask));
-		this.bitmask = (this.bitmask >> (32 - this.netmask ) ) << ( 32 - this.netmask );
+		if (this.netmask > 0) {
+			this.bitmask = 0x01;
+			this.bitmask = this.bitmask << 31;
+			this.bitmask = this.bitmask >> 31;
+			//System.out.println("Full bitmask = " + Integer.toBinaryString(this.bitmask));
+			this.bitmask = (this.bitmask >> (32 - this.netmask ) ) << ( 32 - this.netmask );
+			this.bitmask = this.bitmask & 0xFF;
+		}
 		//System.out.println("init bitmask to " + Integer.toBinaryString(this.bitmask) + " for " + ipAddress + "/" + mask);
 	}
 	
@@ -118,9 +121,12 @@ public class IPv4Address extends IPAddress {
 	/** is the ip address on the same network ? **/
 	public boolean isNetworkMatch(IPv4Address addr){
 		
-		long addr1 = this.loweraddress & this.getBitMask();
-		long addr2 = addr.loweraddress & this.getBitMask();
+		long bmask = this.getBitMask();
+		long addr1 = (this.loweraddress & this.getBitMask()) & 0xFF;
+		long addr2 = (addr.loweraddress & this.getBitMask()) & 0xFF;
 		
 		return (addr1 == addr2);
 	}
+	
+
 }

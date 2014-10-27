@@ -29,7 +29,7 @@ public class ConfigFlattener {
 	}
 	
 
-	public void flattenConfig(String filename) throws IOException{
+	public void populateConfig(String filename) throws IOException{
 		this.fileName = filename;
 		
 		int linecount = 0;
@@ -39,10 +39,12 @@ public class ConfigFlattener {
 		rootNode.setRoot();
 		Node currentNode = rootNode;
 		this.rootNode = rootNode;
+		
 		String lastline = "";
 		String thisline = "";
 		
 		try {
+	
 			
 			BufferedReader br = new BufferedReader(new FileReader(filename));
 			String line = "";
@@ -51,9 +53,7 @@ public class ConfigFlattener {
 				
 				thisline = line.trim();
 				
-				if ( line.trim().contains("parameters")){
-					System.out.println("OK");
-				}
+		
 				linecount++;
 				
 				if ( line.trim().length() == 0 || line.trim().charAt(0) == '#'  ){
@@ -148,7 +148,24 @@ public class ConfigFlattener {
 			e.printStackTrace();
 		}
 		
-		System.out.println("We done");
+		//System.out.println("We done");
+		this.returnToRootNode();
+	}
+	
+	
+	public void flattenConfig(String configFile) throws IOException{
+		System.out.println("About to populate");
+		this.populateConfig(configFile);
+		System.out.println("About to print commands");
+		this.returnToRootNode();
+		
+		String cmd = "";
+		
+		
+		while ( (cmd = getNextCommand()) != null){
+			System.out.println(cmd);
+
+		}
 		
 	}
 	
@@ -158,7 +175,16 @@ public class ConfigFlattener {
 		//DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
 		this.writeLine("# " + Calendar.getInstance().getTime().toString() );
-		this.flattenConfig(configFile);
+		this.populateConfig(configFile);
+		this.returnToRootNode();
+
+		String cmd = "";
+		
+		while ( (cmd = getNextCommand()) != null){
+			writer.println(cmd);
+
+		}
+		
 		writer.close();
 		
 	}
@@ -250,6 +276,8 @@ public class ConfigFlattener {
 			System.out.println(line);
 	}
 	
+	
+	/*
 	public void traverseTree(){
 		System.out.println("Going to traverse starting at " + rootNode.getData().trim());
 		
@@ -311,7 +339,7 @@ public class ConfigFlattener {
 
 		}
 	}
-	
+	*/
 	
 	public void returnToRootNode(){
 		this.activeNode = this.rootNode;

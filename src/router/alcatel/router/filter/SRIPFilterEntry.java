@@ -85,6 +85,23 @@ public class SRIPFilterEntry extends AlcatelObject {
 	public void setProtocol(String protocol){
 		this.protocol = protocol;
 	}
+	
+	public boolean isIPMatch(String sourceIP, String destinationIP){
+		
+		IPv4Address srcIP = new IPv4Address(sourceIP, "0");
+		IPv4Address dstIP = new IPv4Address(destinationIP, "0");
+		
+		boolean srcMatch = this.srcIP.isNetworkMatch(srcIP);
+		boolean dstMatch = this.dstIP.isNetworkMatch(dstIP);
+		return ( srcMatch && dstMatch);
+		
+		//return ( this.srcIP.isNetworkMatch(srcIP) && this.dstIP.isNetworkMatch(dstIP));
+
+	}
+	
+	public boolean isProtocolMatch(String packetProtocol){
+		return ( this.getProtocol().toLowerCase().equals(packetProtocol.toLowerCase()));
+	}
 
 
 }
