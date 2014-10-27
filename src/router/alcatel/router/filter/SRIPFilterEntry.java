@@ -87,7 +87,7 @@ public class SRIPFilterEntry extends SRFilterEntryObject {
 	
 	/** Get the destination IP address represented as a string **/
 	public String getDestAddress(){
-		return this.srcIP.getHostAddress();
+		return this.dstIP.getHostAddress();
 	}
 	
 	
