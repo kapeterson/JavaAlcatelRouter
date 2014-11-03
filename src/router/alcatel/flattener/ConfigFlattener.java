@@ -11,6 +11,12 @@ import java.util.Calendar;
 import java.util.Queue;
 
 
+/**
+ * Flattens the 7x50 Configuration.
+ * @author Kris Peterson
+ *
+ */
+
 public class ConfigFlattener {
 
 	protected String fileName = "";
@@ -29,6 +35,13 @@ public class ConfigFlattener {
 	}
 	
 
+	
+	/**
+	 * Populate the configuration tree.  This method populuates the tree but does not print the
+	 * flattened configuration
+	 * @param filename
+	 * @throws IOException
+	 */
 	public void populateConfig(String filename) throws IOException{
 		this.fileName = filename;
 		
@@ -153,6 +166,11 @@ public class ConfigFlattener {
 	}
 	
 	
+	/**
+	 * Flattens the configuration and prints all of the configuration lines
+	 * @param configFile
+	 * @throws IOException
+	 */
 	public void flattenConfig(String configFile) throws IOException{
 		System.out.println("About to populate");
 		this.populateConfig(configFile);
@@ -169,6 +187,13 @@ public class ConfigFlattener {
 		
 	}
 	
+	
+	/**
+	 * Flattens the configuration and writes the output to outputFileName
+	 * @param configFile
+	 * @param outputFileName
+	 * @throws IOException
+	 */
 	public void flattenConfig(String configFile, String outputFileName) throws IOException{
 		this.writer = new PrintWriter(outputFileName, "UTF-8");
 		this.writeLine("#  Flattening config for " + configFile);
@@ -189,7 +214,9 @@ public class ConfigFlattener {
 		
 	}
 	
-	public void checkForHacks(Node node){
+	
+	/** Handle the one offs **/
+	private void checkForHacks(Node node){
 		
 		String cmdString = node.getData().trim();
 		if ( node.getData().trim().equals("rmon") && node.getChildCount() == 0){
@@ -277,76 +304,19 @@ public class ConfigFlattener {
 	}
 	
 	
-	/*
-	public void traverseTree(){
-		System.out.println("Going to traverse starting at " + rootNode.getData().trim());
-		
-		boolean keepon = true;
-		
-		this.activeNode = this.rootNode;
-		
-		this.configList = new ArrayList<String>();
 
-		
-		while ( keepon){
-
-			if ( this.activeNode.getChildCount() == 0) {
-				
-				if ( this.activeNode.getData().trim().equals("exit all")){
-					//System.out.println("exit all");
-					String ret = configList.remove(configList.size()-1);
-					this.activeNode = this.activeNode.getParent();
-					continue;
-				}
-				
-				
-				if ( !this.activeNode.getData().trim().equals("configure")) {
-					
-					String cmd = "";
-					
-					for ( String newcmd : configList){
-						cmd += " " + newcmd.trim();
-					}
-					
-					//System.out.println(cmd);
-					this.writeLine(cmd);
-				}
-				
-				String  ret = configList.remove(configList.size()-1);
-				//System.out.println("\tPopped config " + ret);
-				this.activeNode = this.activeNode.getParent();
-				
-			} else {
-				
-				Node nextNode = getUnvisitedNode(this.activeNode);
-				
-				if ( nextNode == null){
-					
-					if ( this.activeNode.isRoot()){
-						System.out.println("No more unvisited for root");
-						System.exit(1);
-					}
-					
-					this.activeNode = this.activeNode.getParent();
-					String val = configList.remove(configList.size()-1);
-					//System.out.println("\tPopped config element after getting null next node " + val);
-				} else {
-					configList.add(nextNode.getData().trim());
-					this.activeNode = nextNode;
-				}
-			}
-			
-
-		}
-	}
-	*/
 	
+	/** Make the root configuration node the active node again **/
 	public void returnToRootNode(){
 		this.activeNode = this.rootNode;
 		this.configList = new ArrayList<String>();
 	}
 	
 	
+	/**
+	 * Get the next configuration command.
+	 * @return
+	 */
 	public String getNextCommand(){
 		
 		

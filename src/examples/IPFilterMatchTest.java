@@ -55,6 +55,7 @@ public class IPFilterMatchTest {
 							//if ( ipEntry.isSrcPortMatch(srcPort) && ipEntry.isDstPortMatch(dstPort)) {
 								System.out.format("\tMatch on Filter %-6d   Entry %-5d  Protocl: %-8s\n", filterNuber, entryNumber, protocol);
 								System.out.println("\tSource = " + ipEntry.getSourceAddress());
+								System.out.println("\tDest = " + ipEntry.getDestAddress());
 								break;
 							//}
 

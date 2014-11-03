@@ -9,6 +9,7 @@ import parser.CommandHandler;
 import parser.ConfigurationSection;
 import parser.ContextChange;
 import router.alcatel.router.SRChassisObject;
+import router.alcatel.router.filter.FilterAction;
 import router.alcatel.router.filter.SRIPFilterEntry;
 
 public class IPEntryParser extends ConfigurationSection {
@@ -29,6 +30,8 @@ public class IPEntryParser extends ConfigurationSection {
 		
 		this.commandHash.put(Pattern.compile("^dst\\-port eq ([0-9]+)"), new CommandHandler("setDestinationPortSingle", true));
 		this.commandHash.put(Pattern.compile("^dst\\-port range ([0-9]+) ([0-9]+)"), new CommandHandler("setDestinationPortRange", true));
+		
+		this.commandHash.put(Pattern.compile("^action (forward|drop)$"), new CommandHandler("setAction",true));
 
 		
 		if ( this.validProtocols == null ){
@@ -37,6 +40,13 @@ public class IPEntryParser extends ConfigurationSection {
 
 		}
 		this.entry = new SRIPFilterEntry(entryNumber);
+	}
+	
+	
+	public void setAction(Matcher matcher){
+		if ( matcher.group(1).trim().toLowerCase().equals("forward")){
+			this.entry.setAction(FilterAction.Forward);
+		}
 	}
 	
 	public void setDestinationPortSingle(Matcher matcher){

@@ -161,4 +161,47 @@ public class SRIPFilterEntry extends SRFilterEntryObject {
 		this.startDstPort = startPort;
 		this.endDstPort = dstPort;
 	}
+	
+	public int getStartSourcePort(){
+		return this.startSrcPort;
+	}
+	
+	
+	public int getEndSourcePort(){
+		
+		return this.endDstPort;
+	}
+	
+	public int getStartDestPort(){
+		return this.startDstPort;
+	}
+	
+	public int getEndDestPort(){
+		return this.endDstPort;
+	}
+	
+	public String getSourcePortString(){
+		
+		if ( this.startSrcPort == -1)
+			return "none";
+		
+		if ( this.startSrcPort == this.endSrcPort){
+			return String.valueOf(startSrcPort);
+		} else {
+			return ( startSrcPort + ".." + endSrcPort);
+		}
+		
+	}
+	
+	public String getDestPortString(){
+		if ( this.startDstPort == -1)
+			return "none";
+		
+		if ( this.startDstPort == this.endDstPort){
+			return String.valueOf(startDstPort);
+		} else {
+			return ( startDstPort + ".." + endDstPort);
+		}
+		
+	}
 }
