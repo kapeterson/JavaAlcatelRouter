@@ -32,4 +32,8 @@ public class SRLDPConfiguration {
 		return this.interfaces;
 		
 	}
+	
+	public boolean hasInterface(String intName){
+		return this.interfaces.containsKey(intName);
+	}
 }
