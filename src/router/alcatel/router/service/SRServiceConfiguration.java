@@ -94,4 +94,8 @@ public class SRServiceConfiguration {
 	public boolean hasSDP(Integer sdpnumber){
 		return this.sdp.containsKey(sdpnumber);
 	}
+	
+	public boolean hasIES(Integer iesNumber){
+		return this.ies.containsKey(iesNumber);
+	}
 }
