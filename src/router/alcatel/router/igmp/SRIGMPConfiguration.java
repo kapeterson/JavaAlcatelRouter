@@ -48,4 +48,8 @@ public class SRIGMPConfiguration {
 	public ArrayList<SRSSMTranslation> getTranslations(){
 		return this.ssmList;
 	}
+	
+	public boolean hasInterface(String intName){
+		return this.interfaces.containsKey(intName);
+	}
 }

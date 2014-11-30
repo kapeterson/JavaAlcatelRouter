@@ -98,4 +98,8 @@ public class SRServiceConfiguration {
 	public boolean hasIES(Integer iesNumber){
 		return this.ies.containsKey(iesNumber);
 	}
+	
+	public boolean hasVPLS(Integer vplsNumber){
+		return this.vpls.containsKey(vplsNumber);
+	}
 }
