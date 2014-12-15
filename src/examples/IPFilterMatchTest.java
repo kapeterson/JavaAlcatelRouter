@@ -49,7 +49,7 @@ public class IPFilterMatchTest {
 					
 					if ( ipEntry.isIPMatch(srcIP, dstIP) ){
 						
-			
+
 						//if ( ipEntry.isProtocolMatch(protocol) ){
 							
 							//if ( ipEntry.isSrcPortMatch(srcPort) && ipEntry.isDstPortMatch(dstPort)) {

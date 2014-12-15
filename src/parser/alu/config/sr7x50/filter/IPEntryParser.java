@@ -32,6 +32,8 @@ public class IPEntryParser extends ConfigurationSection {
 		this.commandHash.put(Pattern.compile("^dst\\-port range ([0-9]+) ([0-9]+)"), new CommandHandler("setDestinationPortRange", true));
 		
 		this.commandHash.put(Pattern.compile("^action (forward|drop)$"), new CommandHandler("setAction",true));
+		this.commandHash.put(Pattern.compile("^tcp\\-syn (true|false)$"), new CommandHandler("setTCPSYN",true));
+		this.commandHash.put(Pattern.compile("^tcp\\-ack (true|false)$"), new CommandHandler("setTCPACK",true));
 
 		
 		if ( this.validProtocols == null ){
@@ -55,6 +57,27 @@ public class IPEntryParser extends ConfigurationSection {
 		this.entry.setDstPorts(port, port);
 	}	
 	
+	public void setTCPACK(Matcher matcher){
+		
+		this.entry.setCheckTCPACK(true);
+		
+		if ( matcher.group(1).trim().toLowerCase().equals("true")){
+			this.entry.setTCPACK(true);
+		} else{
+			this.entry.setTCPACK(false);
+		}
+	}	
+	
+	public void setTCPSYN(Matcher matcher){
+		
+		this.entry.setCheckTCPSYN(true);
+		
+		if ( matcher.group(1).trim().toLowerCase().equals("true")){
+			this.entry.setTCPSYN(true);
+		} else{
+			this.entry.setTCPSYN(false);
+		}	
+	}	
 	
 	public void setDestinationPortRange(Matcher matcher){
 		int startport = Integer.parseInt(matcher.group(1));

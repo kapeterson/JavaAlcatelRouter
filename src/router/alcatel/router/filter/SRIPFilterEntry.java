@@ -36,6 +36,16 @@ public class SRIPFilterEntry extends SRFilterEntryObject {
 	/** end port for dst port range **/
 	protected int endDstPort = -1;
 	
+	
+	/** tcp syn match **/
+	protected boolean tcpSYN = false;
+	protected boolean checkTCPSYN = false;
+	
+	/** tcp ack match **/
+	protected boolean tcpACK = false;
+	protected boolean checkTCPACK = false;
+	
+	
 	public SRIPFilterEntry(Integer filterNumber){
 		super(filterNumber);
 		this.setName(filterNumber.toString());
@@ -203,5 +213,37 @@ public class SRIPFilterEntry extends SRFilterEntryObject {
 			return ( startDstPort + ".." + endDstPort);
 		}
 		
+	}
+	
+	public void setTCPSYN(boolean val){
+		this.tcpSYN = val;
+	}
+	
+	public boolean getTCPSYN(){
+		return this.tcpSYN;
+	}
+	
+	public void setTCPACK(boolean val){
+		this.tcpACK = val;
+	}
+	
+	public boolean getTCPACK(){
+		return this.tcpACK;
+	}
+	
+	public void setCheckTCPACK(boolean val){
+		this.checkTCPACK = val;
+	}
+	
+	public boolean checkTCPACK(){
+		return this.checkTCPACK;
+	}
+	
+	public void setCheckTCPSYN(boolean val){
+		this.checkTCPSYN = val;
+	}
+	
+	public boolean checkTCPSYN(){
+		return this.checkTCPSYN;
 	}
 }
