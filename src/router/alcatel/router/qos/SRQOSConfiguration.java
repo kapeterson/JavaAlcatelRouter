@@ -101,4 +101,10 @@ public class SRQOSConfiguration {
 		return this.networkQueuePolicies;
 	}
 	
+	public boolean hasSAPIngressPolicy(Integer policyNumber){
+		
+		return this.sapIngressPolicies.containsKey(policyNumber);
+	}
+
+	
 }
