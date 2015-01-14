@@ -101,10 +101,28 @@ public class SRQOSConfiguration {
 		return this.networkQueuePolicies;
 	}
 	
+	
+	/** Is the sap ingress policy configured **/
 	public boolean hasSAPIngressPolicy(Integer policyNumber){
 		
 		return this.sapIngressPolicies.containsKey(policyNumber);
 	}
+	
+	/** Is the SAP Egress Policy Configured **/
+	public boolean hasSAPEgressPolicy(Integer policyNumber){
+		return this.sapEgressPolicies.containsKey(policyNumber);
+	}
+	
+	/** Is the Network Queue Policy Configured **/
+	public boolean hasNetworkQueuePolicy(Integer policyNumber){
+		return this.networkQueuePolicies.containsKey(policyNumber);
+	}
+	
+	/** Is the network policy configured **/
+	public boolean hasNetworkPolicy(String policyName){
+		return this.networkPolicies.containsKey(policyName);
+	}
+	
 
 	
 }
