@@ -1,6 +1,7 @@
 package examples;
 
 import parser.manager.Alcatel7x50ParserManager;
+import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.routerinterface.*;
 
@@ -18,17 +19,19 @@ public class NetworkInterfaceTest03_Bindings {
 		
 
 		Alcatel7x50ParserManager pman = new Alcatel7x50ParserManager();
-
 		try {
 			pman.ParseConfig(cfile);
 			SRChassisObject router = pman.getRouter();
-
-		for ( String interfaceName : router.Router.Interfaces.getInterfaces().keySet()){
+			
+			for ( String interfaceName : router.Router.Interfaces.getInterfaces().keySet()){
 				SRRouterInterface iface = router.Router.Interfaces.getInterface(interfaceName);
 				SRInterfaceBinding binding = iface.getBinding();
-				if ( binding != null)
+				
+				if ( binding != null) {
+					//AlcatelObject tObj = binding.getBindingObject();
+					//System.out.println("Binding = " + binding.getObjectType() + " isport = " + tObj.isPortObject());
 					System.out.format("Interface: %-15s  Binding: %-15s TAG: %-5d\n", interfaceName, binding.getBindingObject().getName(), binding.getTag());
-				else
+				} else
 					System.out.format("Interface: %-15s  Binding: %-15s \n", interfaceName, "NULL");
 			
 			}
