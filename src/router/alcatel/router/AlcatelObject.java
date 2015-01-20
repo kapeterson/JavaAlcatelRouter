@@ -298,4 +298,12 @@ public abstract class AlcatelObject {
 	public boolean isOSPFInterface(){
 		return ( this.objectType == AlcatelObjectType.OSPFINTERFACE);
 	}
+	
+	public boolean isPortObject(){
+		return (this.objectType == AlcatelObjectType.PHYSICALPORT);
+	}
+	
+	public boolean isLagObject(){
+		return ( this.objectType == AlcatelObjectType.LAG);
+	}
 }
