@@ -23,7 +23,7 @@ public class VPLSParser extends ConfigurationSection {
 		vpls = new SRVPLSObject(vplsnumber);
 		
 		this.commandHash.put(Pattern.compile("^description \"(.*)\""), new CommandHandler("setDescription", true));
-		this.commandHash.put(Pattern.compile("^sap ([0-9]+\\/[0-9]+\\/[0-9]+(\\:)?([0-9]+)?(\\.)?([0-9]+)) (split\\-horizon\\-group \".*\")?.*"), new CommandHandler("setSAPContext", true));
+		this.commandHash.put(Pattern.compile("^sap ([0-9]+\\/[0-9]+\\/[0-9]+(\\:)?([0-9]+)?(\\.)?([0-9]+)?) (split\\-horizon\\-group \".*\")?.*"), new CommandHandler("setSAPContext", true));
 		//this.commandHash.put(Pattern.compile("^sap ([0-9]+\\/[0-9]+\\/[0-9]+(\\:)?([0-9]+)?(\\.)?([0-9]+)) create"), new CommandHandler("setSAPContext", true));
 
 		this.commandHash.put(Pattern.compile("^sap (lag\\-[0-9]+)(\\:)?([0-9]+)?(\\.)?([0-9]+)? (split\\-horizon\\-group \".*\")?.*"), new CommandHandler("setLagSapContext", true));
