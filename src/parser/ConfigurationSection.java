@@ -72,8 +72,7 @@ public abstract class ConfigurationSection    {
 	 */
 	public void Parse(String line, String fname){
 		this.currentLine = line;
-		//if ( this.getName() == "CONFIG.QOS")
-		//	System.out.println(line);
+
 		
 		for ( Pattern regex: commandHash.keySet()){
 
@@ -90,18 +89,11 @@ public abstract class ConfigurationSection    {
 					//System.out.println(String.valueOf(depth));
 					lastDepth = depth;
 					this.contextChange.contextDepthChange(depth);
-				}
+				} 
 
-				/*
-				if ( this.getName() == "CONFIG.FILTER" || this.getName() == "CONFIG.FILTER.IP"){
-					
-					if ( line.contains("filter"))
-						System.out.println(line + " at depth = " + this.getLastCommandDepth());
-					
-					if ( line.contains("exit") && this.getLastCommandDepth() <  12)
-						System.out.println(line + " at " + this.getLastCommandDepth());
-				}
-				*/
+				
+				//if ( this.getName().contains("CONFIG.QOS") )
+				//	System.out.println(line + " at depth = " + this.getLastCommandDepth());
 				
 				Class<? extends ConfigurationSection> c = this.getClass();
 				String mName = "";

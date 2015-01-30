@@ -18,6 +18,8 @@ public class OSPFConfigurationParser extends ConfigurationSection {
 	
 	public void setAreaContext(Matcher matcher){
 		//System.out.println("Area " + matcher.group(1));
+		//System.out.println("Going to ospf iwth last depth of " + this.getLastCommandDepth());
+		
 		OSPFAreaParser parser = new OSPFAreaParser(router, this.getContextNotifier(), matcher.group(1));
 		parser.setParent(this);
 		parser.setSectionDepth(this.getLastCommandDepth());

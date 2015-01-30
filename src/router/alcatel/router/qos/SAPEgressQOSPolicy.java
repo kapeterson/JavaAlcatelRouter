@@ -12,26 +12,30 @@ import router.alcatel.router.AlcatelObjectType;
 public class SAPEgressQOSPolicy extends SAPQOSPolicy {
 	String description = "";
 	
-	TreeMap<String, ForwardingClass> fc =  new TreeMap<String, ForwardingClass>();
+	TreeMap<String, ForwardingClass> forwardingClasses =  new TreeMap<String, ForwardingClass>();
 	
 	public SAPEgressQOSPolicy(){
 		super(AlcatelObjectType.SAPEGRESSQOSPOLICY);
 		
 	}
 	
-	public void addFC(String fcname){
-		
-		fc.put(fcname, new ForwardingClass());
+	public void addFC(ForwardingClass fc){
+		//System.out.println("Added fc");
+		forwardingClasses.put(fc.getName(), fc);
 		
 	}
 	
+	public ForwardingClass getForwardingClass(String fcname){
+		
+		return this.forwardingClasses.get(fcname);
+	}
 	
 	public boolean setForwardingClassQueue(String fcname, int queue){
-		fc.get(fcname).setQueue(queue);
+		forwardingClasses.get(fcname).setQueue(queue);
 		return true;
 	}
 	
 	public TreeMap<String, ForwardingClass> getForwardingClasses(){
-		return this.fc;
+		return this.forwardingClasses;
 	}
 }

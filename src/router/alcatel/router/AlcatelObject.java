@@ -306,4 +306,8 @@ public abstract class AlcatelObject {
 	public boolean isLagObject(){
 		return ( this.objectType == AlcatelObjectType.LAG);
 	}
+	
+	public boolean isForwardingClass(){
+		return (this.objectType == AlcatelObjectType.FORWARDINGCLASS);
+	}
 }

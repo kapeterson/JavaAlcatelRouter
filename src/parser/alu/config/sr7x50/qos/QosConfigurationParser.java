@@ -29,12 +29,8 @@ public class QosConfigurationParser extends ConfigurationSection {
 	}
 	
 	public void setSapEgressContext(Matcher matcher){
-		//System.out.println("Sap egress " + matcher.group(1));
-		//SAPEgressQOSPolicy policy = new SAPEgressQOSPolicy();
-		//policy.setPolicyNumber(Integer.parseInt(matcher.group(1)));
-		//this.router.QOS.addSAPEgressQOSPolicy(policy);
-		
-		SapEgressParser parser = new SapEgressParser(router, this.getContextNotifier(), Integer.parseInt(matcher.group(1)));
+		//System.out.println("going to sap egress with depth = " + this.getLastCommandDepth());
+		SapEgressParser parser = new SapEgressParser(router, this.getContextNotifier(), Integer.parseInt(matcher.group(1)), this.getLastCommandDepth());
 		parser.setParent(this);
 		parser.setSectionDepth(this.getLastCommandDepth());
 		this.getContextNotifier().contextChangeCallback(this, parser);
@@ -55,8 +51,8 @@ public class QosConfigurationParser extends ConfigurationSection {
 	}
 	
 	public void addObject(AlcatelObject obj){
-		
-		if ( obj.isSAPEgressObject()){
+		//System.out.println("Added objecdt of type " + obj.getObjectType());
+		if ( obj.isSAPEgressQOSPolicy()){
 			this.router.QOS.addSAPEgressQOSPolicy((SAPEgressQOSPolicy)obj);
 		}
 	}

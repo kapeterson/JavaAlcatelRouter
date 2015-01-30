@@ -41,7 +41,6 @@ public class OSPFInterfaceParser extends ConfigurationSection{
 	 * Custom handler
 	 */
 	public void exitSection(Matcher matcher){
-		
 		if ( this.getSectionDepth() == this.getLastCommandDepth()) {
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
 			this.getParent().addObject(this.ospfInterface);
