@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 import parser.CommandHandler;
 import parser.ConfigurationSection;
 import parser.ContextChange;
+import parser.alu.config.sr7x50.service.SAPEgressParser;
+import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.qos.*;
 public class QosConfigurationParser extends ConfigurationSection {
@@ -28,9 +30,14 @@ public class QosConfigurationParser extends ConfigurationSection {
 	
 	public void setSapEgressContext(Matcher matcher){
 		//System.out.println("Sap egress " + matcher.group(1));
-		SAPEgressQOSPolicy policy = new SAPEgressQOSPolicy();
-		policy.setPolicyNumber(Integer.parseInt(matcher.group(1)));
-		this.router.QOS.addSAPEgressQOSPolicy(policy);
+		//SAPEgressQOSPolicy policy = new SAPEgressQOSPolicy();
+		//policy.setPolicyNumber(Integer.parseInt(matcher.group(1)));
+		//this.router.QOS.addSAPEgressQOSPolicy(policy);
+		
+		SapEgressParser parser = new SapEgressParser(router, this.getContextNotifier(), Integer.parseInt(matcher.group(1)));
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
 	}
 	
 	public void setNetworkQosContext(Matcher matcher){
@@ -47,6 +54,12 @@ public class QosConfigurationParser extends ConfigurationSection {
 		this.router.QOS.addSAPIngressQOSPolicy(policy);
 	}
 	
+	public void addObject(AlcatelObject obj){
+		
+		if ( obj.isSAPEgressObject()){
+			this.router.QOS.addSAPEgressQOSPolicy((SAPEgressQOSPolicy)obj);
+		}
+	}
 	/**
 	 * Use default handler for exiting section
 	 */
