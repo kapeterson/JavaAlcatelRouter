@@ -19,22 +19,22 @@ public class SAPEgressQOSPolicy extends SAPQOSPolicy {
 		
 	}
 	
+	
+	/** Add a forwarding class to the policy **/
 	public void addFC(ForwardingClass fc){
 		//System.out.println("Added fc");
 		forwardingClasses.put(fc.getName(), fc);
 		
 	}
 	
+	/** Get the requsted forwarding class **/
 	public ForwardingClass getForwardingClass(String fcname){
 		
 		return this.forwardingClasses.get(fcname);
 	}
 	
-	public boolean setForwardingClassQueue(String fcname, int queue){
-		forwardingClasses.get(fcname).setQueue(queue);
-		return true;
-	}
-	
+
+	/** Get a map of all the forwarding classes **/
 	public TreeMap<String, ForwardingClass> getForwardingClasses(){
 		return this.forwardingClasses;
 	}
