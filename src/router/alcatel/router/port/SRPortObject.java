@@ -22,6 +22,8 @@ public class SRPortObject extends AlcatelObject implements AssociationChild, SRI
 	
 	protected String description = "";
 	
+	protected SRPortFarEnd fe = null;
+	
 	/**
 	 *	Instantiate an SRPortObject
 	 */
@@ -121,6 +123,14 @@ public class SRPortObject extends AlcatelObject implements AssociationChild, SRI
 	@Override
 	public boolean isBindingChild(){
 		return true;
+	}
+	
+	public void setFarEnd(SRPortFarEnd fe){
+		this.fe = fe;
+	}
+	
+	public SRPortFarEnd getFarEnd(){
+		return this.fe;
 	}
 
 }

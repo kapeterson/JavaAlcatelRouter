@@ -34,6 +34,10 @@ public class SAPEgressQOSPolicy extends SAPQOSPolicy {
 	}
 	
 
+	public boolean hasForwardingClass(String fcname){
+		
+		return this.forwardingClasses.containsKey(fcname);
+	}
 	/** Get a map of all the forwarding classes **/
 	public TreeMap<String, ForwardingClass> getForwardingClasses(){
 		return this.forwardingClasses;
