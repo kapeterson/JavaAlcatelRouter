@@ -15,7 +15,7 @@ public class CardPopulateExample01 {
 		myRouter.System.setHostName("RCSNTXLVH1005");
 		
 		
-		
+	
 		// Create an instance of an IOM for card 1 & set the card type
 		
 		SRIOMObject card1 = new SRIOMObject(1);

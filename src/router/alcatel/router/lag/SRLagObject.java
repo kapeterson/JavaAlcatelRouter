@@ -33,6 +33,8 @@ public class SRLagObject extends AlcatelObject implements SRInterfaceBindingObje
 	
 	protected String mode = "network";
 	
+	protected SRLagFarEnd farend = null;
+	
 	public SRLagObject(){
 		super(AlcatelObjectType.LAG);
 		this.ports = new Hashtable<String, SRPortObject>();
@@ -183,5 +185,13 @@ public class SRLagObject extends AlcatelObject implements SRInterfaceBindingObje
 	@Override
 	public boolean isBindingChild(){
 		return true;
+	}
+	
+	public SRLagFarEnd getFarEnd(){
+		return this.farend;
+	}
+	
+	public void setFarEnd(SRLagFarEnd farendlag){
+		this.farend = farendlag;
 	}
 }
