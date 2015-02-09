@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 import parser.ConfigurationSection;
 import parser.CommandHandler;
 import parser.ContextChange;
+import parser.alu.config.sr7x50.service.SAPParser;
+import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.routerinterface.*;
 import router.alcatel.router.lag.*;
@@ -23,15 +25,32 @@ public class InterfaceParser extends ConfigurationSection {
 		this.commandHash.put(Pattern.compile("^address ([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)\\/([0-9]+)$"), new CommandHandler("setIPv4Address", true));
 		this.commandHash.put(Pattern.compile("^port (.*)$"), new CommandHandler("setPortBinding", true));
 		this.commandHash.put(Pattern.compile("^qos ([0-9]+)$"), new CommandHandler("setQOS", true));
+		this.commandHash.put(Pattern.compile("^vrrp ([0-9]+)$"), new CommandHandler("setVRRPContext", true));
 
 
 	}
 	
 	
+	public void addObject(AlcatelObject obj){
+		
+		if ( obj.isVRRPObject()){
+			System.out.println("VRRP added");
+			this.iface.setVRRPObject((SRVRRPObject)obj);
+		}
+	}
 	
 	public void setQOS(Matcher matcher){
 		this.iface.setQOS(Integer.parseInt(matcher.group(1)));
 	}
+	
+	public void setVRRPContext(Matcher matcher ){
+		//System.out.println("Found vrrp instance " + matcher.group(1));
+		VRRPParser parser = new VRRPParser(router, this.contextChange, matcher.group(1));
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);	
+	} 
+	
 	public void setPortBinding(Matcher matcher) throws Exception {
 		
 		String bindingName = matcher.group(1);

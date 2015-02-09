@@ -11,13 +11,20 @@ public class SRVRRPObject extends AlcatelObject {
 	protected boolean pingReply = false;
 	protected boolean sshReply = false;
 	protected boolean tracerouteReply = false;
+	protected int id = -1;
 	
 	public SRVRRPObject(int instanceID){
 		super(AlcatelObjectType.VRRPOBJECT);
+		this.id = instanceID;
+	}
+	
+	
+	public int getID(){
+		return this.id;
 	}
 	
 	public void setBackup(String backup){
-		
+		this.backupAddress = backup;
 	}
 	
 	public String getBackup(){

@@ -40,6 +40,7 @@ public class SRRouterInterface extends AlcatelObject implements  AssociationPare
 	/** Simple ipv4 address regex **/
 	protected Pattern ipv4Pattern = Pattern.compile("([0-9]+)\\.([0-9]+)\\.([0-9]+)\\.([0-9]+)");
 	
+	protected SRVRRPObject vrrp = null;
 
 	public SRRouterInterface(String interfaceName){
 		super(AlcatelObjectType.ROUTERINTERFACE);
@@ -149,6 +150,14 @@ public class SRRouterInterface extends AlcatelObject implements  AssociationPare
 	/** set the name of the interface **/
 	public void setName(String ifaceName){
 		this.interfaceName = ifaceName;
+	}
+	
+	public void setVRRPObject(SRVRRPObject vrrp){
+		this.vrrp = vrrp;
+	}
+	
+	public SRVRRPObject getVRRPObject(){
+		return this.vrrp;
 	}
 	
 }

@@ -6,11 +6,13 @@ import java.util.regex.Pattern;
 import parser.CommandHandler;
 import parser.ConfigurationSection;
 import parser.ContextChange;
+import parser.alu.config.sr7x50.routerinterace.VRRPParser;
 import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.AlcatelObjectType;
 import router.alcatel.router.RouterRegex;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.routerinterface.SRInterfaceBinding;
+import router.alcatel.router.routerinterface.SRVRRPObject;
 import router.alcatel.router.service.SRIESObject;
 import router.alcatel.router.service.SRSDPObject;
 import router.alcatel.router.service.SRServiceInterface;
@@ -29,8 +31,16 @@ public class IESInterfaceParser extends ConfigurationSection {
 		this.commandHash.put(Pattern.compile("^spoke\\-sdp (.*) create"), new CommandHandler("setSpokeSDPBinding", true));
 		this.commandHash.put(Pattern.compile("^sap (.*) create"), new CommandHandler("setSAPContext", true));
 		this.commandHash.put(Pattern.compile("^address ([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)\\/([0-9]+)$"), new CommandHandler("setIPv4Address", true));
+		this.commandHash.put(Pattern.compile("^vrrp ([0-9]+)$"), new CommandHandler("setVRRPContext", true));
 
 	}
+	
+	public void setVRRPContext(Matcher matcher ){
+		VRRPParser parser = new VRRPParser(router, this.contextChange, matcher.group(1));
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);		
+	} 
 	
 	public void setIPv4Address(Matcher matcher){
 		//System.out.println("OK");
@@ -155,10 +165,16 @@ public class IESInterfaceParser extends ConfigurationSection {
 				this.interfaceObject.setServiceBinding(object);
 
 				
-			} else {
+			}  else {
+			
 				System.out.println("Error trying to set binding of ies to a sdp " + object.getName());
 				System.exit(1);
 			}
+		} else if ( object.isVRRPObject()) {
+			this.interfaceObject.setVRRPObject( (SRVRRPObject)object);
+			
+		} else {
+			System.out.println("Error adding object to IESInterface parser");
 		}
 	}
 	public void setDescription(Matcher matcher){

@@ -27,6 +27,8 @@ public class SRSAPObject extends AlcatelObject implements SRInterfaceBindingObje
 	/** Access to the IGMP Snooping component **/
 	public SRIGMPSnooping IGMPSNOOPING = new SRIGMPSnooping();
 	
+	protected SRSAPFarEnd farendsap = null;
+	
 	public SRSAPObject(String sapname, AlcatelObject parentService){
 		super(AlcatelObjectType.SAPOBJECT);
 		this.setName(sapname);
@@ -68,6 +70,12 @@ public class SRSAPObject extends AlcatelObject implements SRInterfaceBindingObje
 	}
 	
 	
-
+	public void setSAPFarEnd(SRSAPFarEnd farendSap){
+		this.farendsap = farendSap;
+	}
+	
+	public SRSAPFarEnd getSAPFarEnd(){
+		return this.farendsap;
+	}
 	
 }

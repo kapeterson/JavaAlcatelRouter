@@ -310,4 +310,8 @@ public abstract class AlcatelObject {
 	public boolean isForwardingClass(){
 		return (this.objectType == AlcatelObjectType.FORWARDINGCLASS);
 	}
+	
+	public boolean isVRRPObject(){
+		return (this.objectType == AlcatelObjectType.VRRPOBJECT);
+	}
 }
