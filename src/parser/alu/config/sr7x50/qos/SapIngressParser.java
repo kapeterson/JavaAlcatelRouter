@@ -11,6 +11,7 @@ import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.qos.ForwardingClass;
 import router.alcatel.router.qos.SAPEgressQOSPolicy;
 import router.alcatel.router.qos.SAPIngressQOSPolicy;
+import router.alcatel.router.qos.SRSAPQueue;
 
 public class SapIngressParser extends ConfigurationSection{
 	SAPIngressQOSPolicy policy; 
@@ -20,6 +21,7 @@ public class SapIngressParser extends ConfigurationSection{
 		this.policy = new SAPIngressQOSPolicy();
 		this.policy.setPolicyNumber(policyNumber);
 		this.commandHash.put(Pattern.compile("^fc \"?([a-z]+)\"? create"), new CommandHandler("setFCContext", true));
+		this.commandHash.put(Pattern.compile("^queue ([0-9]+).*"), new CommandHandler("setQueueContext", true));
 		
 		//System.out.println("Enter SAPIngress parser at depth = " + depth + " policy = " + policyNumber);
 		
@@ -33,7 +35,12 @@ public class SapIngressParser extends ConfigurationSection{
 	}
 	
 	
-
+	public void setQueueContext(Matcher matcher){
+		//System.out.println("Got queue " + matcher.group(1));
+		int queuenum = Integer.parseInt(matcher.group(1));
+		SRSAPQueue sapQueue = new SRSAPQueue(queuenum);
+		this.policy.addQueue(sapQueue);
+	}
 	public void setFCContext(Matcher matcher){
 		//System.out.println("Policy " + this.policy.getPolicyNumber() + " has a fc");
 		ForwardingClassParser parser = new ForwardingClassParser(router, this.getContextNotifier(), matcher.group(1));

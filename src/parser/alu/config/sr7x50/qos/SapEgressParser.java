@@ -10,6 +10,7 @@ import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.qos.ForwardingClass;
 import router.alcatel.router.qos.SAPEgressQOSPolicy;
+import router.alcatel.router.qos.SRSAPQueue;
 
 public class SapEgressParser  extends ConfigurationSection{
 	SAPEgressQOSPolicy policy; 
@@ -19,7 +20,7 @@ public class SapEgressParser  extends ConfigurationSection{
 		this.policy = new SAPEgressQOSPolicy();
 		this.policy.setPolicyNumber(policyNumber);
 		this.commandHash.put(Pattern.compile("^fc ([a-z]+) create"), new CommandHandler("setFCContext", true));
-		//this.commandHash.put(Pattern.compile("^queue ([0-9]+).*"), new CommandHandler("setQueueContext", true));
+		this.commandHash.put(Pattern.compile("^queue ([0-9]+).*"), new CommandHandler("setQueueContext", true));
 		//System.out.println("Enter SAPEgress parser at depth = " + depth + " policy = " + policyNumber);
 		
 		this.router = router;
@@ -27,8 +28,12 @@ public class SapEgressParser  extends ConfigurationSection{
 	
 	
 	public void setQueueContext(Matcher matcher){
-		System.out.println("Got queue " + matcher.group(1));
+		//System.out.println("Got queue " + matcher.group(1));
+		int queuenum = Integer.parseInt(matcher.group(1));
+		SRSAPQueue sapQueue = new SRSAPQueue(queuenum);
+		this.policy.addQueue(sapQueue);
 	}
+	
 	public void addObject(AlcatelObject obj){
 		
 		if ( obj.isForwardingClass()){
