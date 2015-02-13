@@ -6,7 +6,7 @@ import router.alcatel.router.AlcatelObjectType;
 public class SRSAPQueue extends AlcatelObject{
 
 	public String rate = "max";
-	public int cir = 0;
+	public String cir = "0";
 	public String mbs = "default";
 	public String cbs = "default";
 	public Integer queuenumber = 0;
@@ -20,11 +20,11 @@ public class SRSAPQueue extends AlcatelObject{
 		this.rate = rate;
 	}
 	
-	public void setCIR(int cir){
+	public void setCIR(String cir){
 		this.cir = cir;
 	}
 	
-	public int getCIR(){
+	public String getCIR(){
 		return this.cir;
 	}
 	

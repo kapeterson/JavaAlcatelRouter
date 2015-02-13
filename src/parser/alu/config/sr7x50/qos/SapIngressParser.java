@@ -31,16 +31,19 @@ public class SapIngressParser extends ConfigurationSection{
 		
 		if ( obj.isForwardingClass()){
 			this.policy.addFC( (ForwardingClass)obj);
+		} else if ( obj.isSAPQueue()){
+			this.policy.addQueue((SRSAPQueue)obj);
 		}
 	}
 	
 	
 	public void setQueueContext(Matcher matcher){
-		//System.out.println("Got queue " + matcher.group(1));
-		int queuenum = Integer.parseInt(matcher.group(1));
-		SRSAPQueue sapQueue = new SRSAPQueue(queuenum);
-		this.policy.addQueue(sapQueue);
+		SAPQueueParser parser = new SAPQueueParser(router, this.getContextNotifier(), Integer.parseInt(matcher.group(1)), "CONFIG.QOS.SAPINGRESS");
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
 	}
+	
 	public void setFCContext(Matcher matcher){
 		//System.out.println("Policy " + this.policy.getPolicyNumber() + " has a fc");
 		ForwardingClassParser parser = new ForwardingClassParser(router, this.getContextNotifier(), matcher.group(1));

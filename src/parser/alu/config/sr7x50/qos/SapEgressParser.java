@@ -28,16 +28,18 @@ public class SapEgressParser  extends ConfigurationSection{
 	
 	
 	public void setQueueContext(Matcher matcher){
-		//System.out.println("Got queue " + matcher.group(1));
-		int queuenum = Integer.parseInt(matcher.group(1));
-		SRSAPQueue sapQueue = new SRSAPQueue(queuenum);
-		this.policy.addQueue(sapQueue);
+		SAPQueueParser parser = new SAPQueueParser(router, this.getContextNotifier(), Integer.parseInt(matcher.group(1)), "CONFIG.QOS.SAPEGRESS");
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
 	}
 	
 	public void addObject(AlcatelObject obj){
 		
 		if ( obj.isForwardingClass()){
 			this.policy.addFC( (ForwardingClass)obj);
+		} else if ( obj.isSAPQueue()){
+			this.policy.addQueue((SRSAPQueue)obj);
 		}
 	}
 	
