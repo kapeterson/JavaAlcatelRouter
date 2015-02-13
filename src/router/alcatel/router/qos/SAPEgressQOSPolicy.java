@@ -13,6 +13,7 @@ public class SAPEgressQOSPolicy extends SAPQOSPolicy {
 	String description = "";
 	
 	TreeMap<String, ForwardingClass> forwardingClasses =  new TreeMap<String, ForwardingClass>();
+	TreeMap<Integer, SRSAPQueue> queues = new TreeMap<Integer, SRSAPQueue>();
 	
 	public SAPEgressQOSPolicy(){
 		super(AlcatelObjectType.SAPEGRESSQOSPOLICY);
@@ -41,5 +42,23 @@ public class SAPEgressQOSPolicy extends SAPQOSPolicy {
 	/** Get a map of all the forwarding classes **/
 	public TreeMap<String, ForwardingClass> getForwardingClasses(){
 		return this.forwardingClasses;
+	}
+	
+	/** add a queue to the sap policy **/
+	public void addQueue(SRSAPQueue queue){
+		this.queues.put(queue.getQueueNumber(), queue);
+	}
+	
+	/** get the treemap of queues **/
+	public TreeMap<Integer, SRSAPQueue> getQueues(){
+		return this.queues;
+	}
+	
+	public SRSAPQueue getQueue(Integer queueNumber){
+		return this.queues.get(queueNumber);
+	}
+	
+	public boolean hasQueue(Integer queueNumber){
+		return this.queues.containsKey(queueNumber);
 	}
 }

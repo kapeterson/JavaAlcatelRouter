@@ -314,4 +314,8 @@ public abstract class AlcatelObject {
 	public boolean isVRRPObject(){
 		return (this.objectType == AlcatelObjectType.VRRPOBJECT);
 	}
+	
+	public boolean isSAPQueue(){
+		return ( this.objectType == AlcatelObjectType.SRSAPQUEUE);
+	}
 }
