@@ -32,8 +32,13 @@ public class QosSAPEgress01Test {
 				for ( Integer qnum : tpolicy.getQueues().keySet()){
 					SRSAPQueue q = tpolicy.getQueue(qnum);
 					
-					System.out.println("    Queue: " + qnum + " rate " + q.getRate() + " cir " + q.getCIR());
+					System.out.println("    Queue: " + qnum );
+					System.out.println("       Rate: " + q.getRate() + " cir " + q.getCIR());
+					System.out.println("       MBS:  " + q.getMBS());
+					System.out.println("       CBS:  " + q.getCBS() + "\r\n\r\n");
+					
 				}
+				
 				for ( String fcname : tpolicy.getForwardingClasses().keySet()){
 					ForwardingClass myfc = tpolicy.getForwardingClass(fcname);
 					System.out.println("     FC: " + fcname  + " Queue : " + myfc.getQueue());

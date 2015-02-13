@@ -18,9 +18,18 @@ public class SAPQueueParser extends ConfigurationSection {
 		queue = new SRSAPQueue(queuenumber);
 		
 		this.commandHash.put(Pattern.compile("^rate (.*) cir (.*)"), new CommandHandler("setRate", true));
-		
+		this.commandHash.put(Pattern.compile("^mbs (.*)"), new CommandHandler("setMBS", true));
+		this.commandHash.put(Pattern.compile("^cbs (.*)"), new CommandHandler("setCBS", true));
 	}
 	
+	
+	public void setMBS(Matcher matcher){
+		this.queue.setMBS(matcher.group(1));
+	}
+	
+	public void setCBS(Matcher matcher){
+		this.queue.setCBS(matcher.group(1));
+	}
 	
 	public void setRate(Matcher matcher){
 		//System.out.println("Got us a rate = " + matcher.group(1) + " cir = " + matcher.group(2));
