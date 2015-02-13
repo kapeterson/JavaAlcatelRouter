@@ -45,15 +45,24 @@ public class QosConfigurationParser extends ConfigurationSection {
 	
 	public void setSapIngressContext(Matcher matcher){
 		//System.out.println("Sap ingress " + matcher.group(1));
+		
+		/*
 		SAPIngressQOSPolicy policy = new SAPIngressQOSPolicy();
 		policy.setPolicyNumber(Integer.parseInt(matcher.group(1)));
 		this.router.QOS.addSAPIngressQOSPolicy(policy);
+		*/
+		SapIngressParser parser = new SapIngressParser(router, this.getContextNotifier(), Integer.parseInt(matcher.group(1)), this.getLastCommandDepth());
+		parser.setParent(this);
+		parser.setSectionDepth(this.getLastCommandDepth());
+		this.getContextNotifier().contextChangeCallback(this, parser);
 	}
 	
 	public void addObject(AlcatelObject obj){
 		//System.out.println("Added objecdt of type " + obj.getObjectType());
 		if ( obj.isSAPEgressQOSPolicy()){
 			this.router.QOS.addSAPEgressQOSPolicy((SAPEgressQOSPolicy)obj);
+		} else if ( obj.isSAPIngressQOSPolicy()) {
+			this.router.QOS.addSAPIngressQOSPolicy((SAPIngressQOSPolicy)obj);
 		}
 	}
 	/**

@@ -10,24 +10,20 @@ import router.alcatel.router.AlcatelObject;
 import router.alcatel.router.SRChassisObject;
 import router.alcatel.router.qos.ForwardingClass;
 import router.alcatel.router.qos.SAPEgressQOSPolicy;
+import router.alcatel.router.qos.SAPIngressQOSPolicy;
 
-public class SapEgressParser  extends ConfigurationSection{
-	SAPEgressQOSPolicy policy; 
+public class SapIngressParser extends ConfigurationSection{
+	SAPIngressQOSPolicy policy; 
 
-	public SapEgressParser(SRChassisObject router, ContextChange contextChangeHandler, int policyNumber, int depth){
-		super("CONFIG.QOS.SAPEGRESS", router, contextChangeHandler);
-		this.policy = new SAPEgressQOSPolicy();
+	public SapIngressParser(SRChassisObject router, ContextChange contextChangeHandler, int policyNumber, int depth){
+		super("CONFIG.QOS.SAPINGRESS", router, contextChangeHandler);
+		this.policy = new SAPIngressQOSPolicy();
 		this.policy.setPolicyNumber(policyNumber);
-		this.commandHash.put(Pattern.compile("^fc ([a-z]+) create"), new CommandHandler("setFCContext", true));
-		//this.commandHash.put(Pattern.compile("^queue ([0-9]+).*"), new CommandHandler("setQueueContext", true));
-		//System.out.println("Enter SAPEgress parser at depth = " + depth + " policy = " + policyNumber);
+		this.commandHash.put(Pattern.compile("^fc \"?([a-z]+)\"? create"), new CommandHandler("setFCContext", true));
+		
+		//System.out.println("Enter SAPIngress parser at depth = " + depth + " policy = " + policyNumber);
 		
 		this.router = router;
-	}
-	
-	
-	public void setQueueContext(Matcher matcher){
-		System.out.println("Got queue " + matcher.group(1));
 	}
 	public void addObject(AlcatelObject obj){
 		
@@ -39,7 +35,7 @@ public class SapEgressParser  extends ConfigurationSection{
 	
 
 	public void setFCContext(Matcher matcher){
-		//System.out.println("Policy " + this.policy.getPolicyNumber());
+		//System.out.println("Policy " + this.policy.getPolicyNumber() + " has a fc");
 		ForwardingClassParser parser = new ForwardingClassParser(router, this.getContextNotifier(), matcher.group(1));
 		parser.setParent(this);
 		parser.setSectionDepth(this.getLastCommandDepth());
@@ -53,11 +49,10 @@ public class SapEgressParser  extends ConfigurationSection{
 		//ystem.out.println("Checking exit egress policy" + this.policy.getPolicyNumber() + " depth 1 = " + this.getSectionDepth() + " depth2 = " + this.getLastCommandDepth());
 
 		if ( this.getSectionDepth() == this.getLastCommandDepth() || this.getSectionDepth() >= this.getLastCommandDepth() ) {
-			//System.out.println("Exiting this policy bro " + this.policy.getPolicyNumber());
+			//System.out.println("Exiting this ingress policy bro " + this.policy.getPolicyNumber());
 			this.getParent().addObject(this.policy);
 
 			this.getContextNotifier().contextChangeCallback(this, this.getParent());
 		}
 	}
-	
 }
