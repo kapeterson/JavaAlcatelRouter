@@ -12,8 +12,6 @@ public class Node {
 	private ArrayList<Node> childList = new ArrayList<Node>();
 	private boolean visited = false;
 	private int depth = -1;
-	private Stack childStack = new Stack<Node>();
-	private Queue childQueue = new Queue<Node>();
 	
 	private boolean isRoot = false;
 	

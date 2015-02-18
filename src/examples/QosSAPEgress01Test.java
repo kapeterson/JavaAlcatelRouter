@@ -26,7 +26,7 @@ public class QosSAPEgress01Test {
 			System.out.println("Parsed name = "  + router.System.getHostName());
 			
 			for ( Integer policyNumber : router.QOS.getSAPEgressQOSPolicies().keySet()){
-				System.out.println("Egress SAP QOS Policy : " + policyNumber);
+				System.out.println("\nEgress SAP QOS Policy : " + policyNumber);
 				SAPEgressQOSPolicy tpolicy = router.QOS.getSAPEgressQOSPolicy(policyNumber);
 				
 				for ( Integer qnum : tpolicy.getQueues().keySet()){
@@ -35,13 +35,13 @@ public class QosSAPEgress01Test {
 					System.out.println("    Queue: " + qnum );
 					System.out.println("       Rate: " + q.getRate() + " cir " + q.getCIR());
 					System.out.println("       MBS:  " + q.getMBS());
-					System.out.println("       CBS:  " + q.getCBS() + "\r\n\r\n");
+					System.out.println("       CBS:  " + q.getCBS() + "\r\n");
 					
 				}
 				
 				for ( String fcname : tpolicy.getForwardingClasses().keySet()){
 					ForwardingClass myfc = tpolicy.getForwardingClass(fcname);
-					System.out.println("     FC: " + fcname  + " Queue : " + myfc.getQueue());
+					System.out.println("    FC: " + fcname  + " Queue : " + myfc.getQueue());
 				}
 			}
 			

@@ -76,4 +76,11 @@ public class SRVPLSObject extends SRServiceObject {
 	public int getSAPCount(){
 		return this.saps.size();
 	}
+	
+	
+	/** Does the vpls have the sap **/
+	public boolean hasSAP(String sapName){
+		
+		return this.saps.containsKey(sapName);
+	}
 }
