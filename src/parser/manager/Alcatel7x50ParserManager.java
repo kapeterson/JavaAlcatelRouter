@@ -100,7 +100,7 @@ public class Alcatel7x50ParserManager implements ContextChange {
 	 * Parse the file at the provided location
 	 * @param filelocation - Full path to the file
 	 */
-	public void ParseConfig(String filelocation){
+	public int ParseConfig(String filelocation){
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(filelocation));
 			this.filename = filelocation;
@@ -112,9 +112,11 @@ public class Alcatel7x50ParserManager implements ContextChange {
 				
 			}
 			br.close();
+			return 0;
 
 		} catch ( Exception e) {
 			System.out.println("ERROR : " + e.getMessage());
+			return -1;
 		}
 	}
 	
